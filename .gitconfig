@@ -1,0 +1,115 @@
+#-- diff/merge args: $BASE $LOCAL $REMOTE $MERGED
+#-- extrenal diff-wrapper params: $PATH $OLD-FILE $OLD-HEX $OLD-MODE $NEW-FILE $NEW-HEX $NEW-MODE
+#----------------------------------------------------------------------#
+[user]
+	email = list@box370.net
+	name = henderjon
+	signingkey = E53333CAC0FEEB416D893C315537708AAED1476D
+[core]
+	quotepath = false
+	autocrlf = input
+	fileMode = false
+	logallrefupdates = true
+	ignorecase = true
+	# editor = /bin/ed -p :  # /usr/bin/vim
+	excludesfile = /Users/henderjon/dotfiles/.gitignore
+	pager = cat
+	# editor = code --wait
+[gc]
+	auto = 0
+[color]
+	ui = true
+[help]
+	autocorrect = 100
+[push]
+	default = upstream
+[pull]
+	rebase = true
+	default = upstream
+	ff = true
+[diff]
+	 tool = bc3
+	# tool = diff
+	renameLimit = 999
+[difftool]
+	prompt = true
+[difftool "diff"]
+	cmd = diff --normal $LOCAL $REMOTE
+	# cmd = diff --side-by-side --width 220 --left-column $LOCAL $REMOTE
+	# cmd = diff -y --suppress-common-lines $LOCAL $REMOTE | cat -n | grep -v -e '($'
+	# cmd = diff --unchanged-group-format='%E %< %>\n' --old-line-format=':%dn: %L' --new-line-format=':%dn: %L' $LOCAL $REMOTE
+	trustExitCode = false
+[merge]
+	tool = bc3
+	# tool = code
+	ff = false
+	defaultToUpstream = true
+[mergetool "bc3"]
+	keepBackup = true
+	trustExitCode = true
+	keepBackup = false
+[mergetool "vimerge"]
+	cmd = vim -f -d $LOCAL $MERGED $REMOTE
+	trustExitCode = false
+	keepBackup = false
+[mergetool "code"]
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+[pretty]
+	# date formatting: https://git-scm.com/docs/git-rev-list
+	columns    = %<(32)%cd %>(16)%an (%G?) | %><(7)%h | %Cred%d%Creset %s
+	signingkey = %<(28)%cd %>(8)%an (%GK) | %><(7)%h  | %Cred%d%Creset %s
+	difflog    = %<(25)%ci %>(16)%an | %><(7)%h | %s
+	quick      = %h | %<(15)%an %<(15)%cd %s
+[alias]
+    alias       = "!git config --get-regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
+	d           = diff
+	dt          = difftool
+	cl          = log --pretty=columns -20
+	sig         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S' --pretty=signingkey -20
+	rcl         = reflog --pretty=columns -20
+	vv          = branch -vv --sort=committerdate
+	co          = checkout
+	cb          = checkout -b
+	s           = status --short --branch
+	ss          = status
+	wip         = commit -m wip
+	oops        = commit --amend --no-edit
+	rr          = "!f(){ git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name '@{u}'); }; f" # remove all commits on on remote tracking branch, for OOPSs on dev
+	# dl        = log --pretty      = difflog -200000
+	fix         = "!f(){ git fetch origin; git checkout -b fix/$1 --no-track origin/dev; }; f"
+	feature     = "!f(){ git fetch origin; git checkout -b feature/$1 --no-track origin/dev; }; f"
+	# nb        = "!f(){ git fetch origin; git checkout -b $2 --no-track origin/$1; }; f"
+	### difflog
+	dl          = "!git log --pretty=difflog -200000 $1..$2" # $EARLIER..$LATER ... show commits in $LATER that are NOT in $EARLIER
+	# dl          = "!git log --pretty=difflog -200000 $1..HEAD"
+	### release difflog
+	rl          = "!git log --merges --pretty=difflog -200000 --grep=\"pull request\" $1..$2"
+	cr          = "!f(){ git fetch origin; git checkout -B review/$1 origin/$1; }; f"
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+	publish     = "!git push -u origin $(git branch-name)"
+	unpublish   = "!git push origin :$(git branch-name)"
+	exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
+	### DONAT
+	cplog       = log --oneline --reverse -50
+	exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
+	# personal    = config user.email \"donatj@gmail.com\"
+	# pr          = "!f(){ git log --merges --ancestry-path --oneline $1..HEAD | grep \"pull request\" | tail -n1 | awk \"{print \\\\$5}\"; }; f"
+	mrb         = "!f(){ git for-each-ref --sort=-committerdate refs/heads/ | egrep -v 'refs/heads/(review/|release/|dev$)' | head -15 | awk '{print substr($1,0,10) \" \" substr($3,12)}'; };f"
+	restash     = rebase --autostash
+[fetch]
+	prune = true
+[log]
+	date = rfc
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[commit]
+	gpgsign = true
+[gpg]
+	# program = /usr/local/bin/gpg
+	program = /usr/local/MacGPG2/bin/gpg2
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[init]
+	defaultBranch = dev

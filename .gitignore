@@ -1,0 +1,6 @@
+journal/*
+.DS_Store
+.vscode
+bin/*
+!.gitkeep
+.env_zshrc

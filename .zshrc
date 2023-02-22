@@ -101,6 +101,7 @@ alias gome='cd ~/code/go/src/github.com/henderjon'
 alias iclouddrive='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
 alias topen='open -a Terminal'
 alias python='python3 '
+alias diff='diff -u --color=always '
 
 #------------------------------------------------------- these are important --#
 #--------------------------- these are off as they mess with tmux and screen --#
@@ -108,6 +109,7 @@ export EDITOR="ed -p :"
 export CLICOLOR_FORCE=true
 export VISUAL="$EDITOR"
 export PAGER=cat
+export DIFFCOLORS="33:34" # ascii color codes ... add:rm
 
 #----------------------------------------------------------------------- IRC --#
 export IRCNAME=henderjon

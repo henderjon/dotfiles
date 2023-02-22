@@ -579,6 +579,8 @@ UnitSep = rune('\037') // "\037" byte(31) || "\x1f" ...
 export GO_MYSQL_DSN="user:pass@tcp(127.0.0.1:13306)/mysql?parseTime=true&loc=UTC"
 export GO_SQLITE_DSN="file:test.sqlite3?parseTime=true&loc=UTC&cache=shared"
 
+% ssh -NL $local-port:$remote-host:$remote-port keyhole-name &
+
 ######################################################################## AWK ###
 
 The standard AWK variables are discussed below.

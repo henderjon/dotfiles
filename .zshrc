@@ -69,25 +69,34 @@ export PATH="$HOME/bin:$PATH"
 # export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 #-------------------------------------------------------------------- GO ENV --#
-# export GO111MODULE=on                # should be auto or undefined
-export GOPATH="$HOME/go"               # points to local workspace... this is necessary for legacy go code that isn't using modules
-export GOBIN="$GOPATH/bin"             # destination for bins after `go install`
-export PATH="$GOBIN:$PATH"             # adding $GOBIN to the path to use installed bins
-export GOROOT="/usr/local/go"          # this is the default location; ONLY used for custom install location
-# export GOVCS=public:git|hg,private:all # this is default
-export PATH="$GOROOT/bin:$PATH"        # adding $GOBIN to the path to use installed bins
-#export GOROOT_FINAL="/usr/local/go"   # destination after building from source
-#export GOROOT_BOOTSTRAP=$GOROOT       # to build new versions of Go, point to the old version of Go
-export PATH="$PATH:/opt/homebrew/bin"  # apple silicon use opt for brew
-
-#------------------------------------------------------------------ GO PROXY --#
-export GOPROXY=direct                      # https://proxy.golang.org
+# https://pkg.go.dev/cmd/go#hdr-Environment_variables
+# export GO111MODULE=on                   # should be auto or undefined
+export GOROOT="/usr/local/go"             # this is the default location; ONLY used for custom install location
+export GOPATH="$HOME/go"                  # points to local workspace... this is necessary for legacy go code that isn't using modules
+export GOBIN="$GOPATH/bin"                # destination for bins after `go install`
+export PATH="$GOBIN:$PATH"                # adding $GOBIN to the path to use installed bins
+export PATH="$GOROOT/bin:$PATH"           # adding $GOBIN to the path to use installed bins
+export GOPROXY=direct                     # https://proxy.golang.org
 export GOSUMDB=off
 export GOPRIVATE=
+# export GOROOT_FINAL="/usr/local/go"      # destination after building from source
+# export GOROOT_BOOTSTRAP=$GOROOT          # to build new versions of Go, point to the 1.4 bootstrap version of Go
+# export GOVCS=public:git|hg,private:all   # this is default
 
-#---------------------------------------------------------------------- subl --#
-# alias subl='/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl '
-# ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/sublime
+#---------------------------------------------------------------------- BREW --#
+# export PATH="$PATH:/usr/local/Homebrew/bin"  # intel apple
+export PATH="$PATH:/opt/homebrew/bin"        # apple silicon
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+#-------------------------------------------------------------------- VSCode --#
+export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin" #default
+
+#-------------------------------------------------------------- Sublime Text --#
+export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+
+#-------------------------------------------------------------- cleanup path --#
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:/usr/local/sbin"
 
 #------------------------------------------------- Alias [`man zshbuiltins`] --#
 alias lsl='ls -AFGTlh '  # --time-style=+'%b %e %T %Y' ## MacOS, BSD
@@ -149,8 +158,3 @@ PROMPT="[%D{%Y-%m-%d %H:%M:%S}] %?
 #RPROMPT='%?[%D{%Y-%m-%d %H:%M:%S}]'
 RPROMPT=''
 RPS1=''
-
-#-------------------------------------------------------------- cleanup path --#
-export PATH="$PATH:/usr/local/bin"
-export PATH="$PATH:/usr/local/sbin"
-# export PATH="/usr/local/nginx/sbin:$PATH"

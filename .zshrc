@@ -28,6 +28,8 @@ set -o histappend
 #------------------------------------------------------- turn on completions --#
 autoload -U compinit
 compinit
+#---------------------------------------------------------- complete aliases --#
+setopt complete_aliases
 #------------------------------------- add to history upon execution vs exit --#
 setopt inc_append_history
 

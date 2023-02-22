@@ -462,6 +462,9 @@ Delete $TEMPDIR
         be correctly interpreted by programs that process the find output. This
         option corresponds to the -0 option of xargs.
 
+### list subdir
+# % find ./sub/dir -maxdepth 1 -mindepth 1
+
 ###################################################################### XARGS ###
 
   -0

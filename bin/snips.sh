@@ -546,6 +546,7 @@ Delete $TEMPDIR
 
 # Example usage of comparing output of two ls commands
 % diff -u <(ls -l /directory/) <(ls -l /directory/) | colordiff
+% cmp $file $file
 
 ###################################################################### DATE ###
 

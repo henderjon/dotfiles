@@ -1,0 +1,31 @@
+
+# control-b
+escape ^Bb
+
+# new screens do NOT get the welcome screen
+startup_message off
+
+# fancy statusline
+hardstatus alwayslastline "%{=  G}Screen :: %-w%{+u R}[%n:%t%f]%{-}*%+w %=%d %M %Y %C%a %{-} "
+
+# save LOTS of history
+defscrollback 50000
+
+# not sure what this does
+#termcapinfo xterm* ti@:te@
+termcapinfo xterm* LP
+
+# redraw when closing vim etc
+altscreen on
+
+# when disconnected, detach to allow for quick reattaching
+autodetach on
+
+# send 256 colors to vim
+term screen-256color
+
+# window index start at 1
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10
+screen 1

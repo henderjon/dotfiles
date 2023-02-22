@@ -27,6 +27,14 @@ _cfg_ln(){
 	echo "ln -s \"$1\" \"$2\""
 }
 
+echo "please name me"
+read ENV_NAME
+if [ ! -n $ENV_NAME ]; then
+	echo "you forgot a name ... "
+	exit 1
+else
+	echo "Hello, $ENV_NAME"
+fi
 
 DOTPATH=$(pwd)
 # ------
@@ -34,7 +42,7 @@ notice "# ------ zsh"
 echo "chsh -s /bin/zsh"
 # ------
 notice "# ------ gitconfig"
-echo "git config --global --replace-all include.path \"$DOTPATH/git/.gitconfig\""
+echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/.gitconfig\""
 # ------
 notice "# ------ rc files"
 for RCFILE in $(ls -1 ./rc)
@@ -42,13 +50,21 @@ do
 	_cfg_ln "$DOTPATH/rc/$RCFILE" "$HOME/.$RCFILE"
 done
 # ------
-notice "# ------ bin dir"
+notice "# ------ zshenv"
+echo "touch \"$HOME/.zshenv\""
+echo "echo 'export _LOCAL_ENV_NAME=$ENV_NAME' >> \"$HOME/.zshenv\""
+# ------
+notice "# ------ bin files"
 _no_folder_create "$HOME/bin"
+for RCFILE in $(ls -1 ./bin)
+do
+	_cfg_ln "$DOTPATH/bin/$RCFILE" "$HOME/bin/$RCFILE"
+done
 # ------
 notice "# ------ ssh"
 _no_folder_create "$HOME/.ssh"
-echo "ssh-keygen -t ed25519"
-echo "curl -L \"https://github.com/henderjon.keys\" > \"$HOME/.ssh/authorized_keys\""
+echo "ssh-keygen -t ed25519 -C \"henderjon; $ENV_NAME; $(date '+%FT%T%z')\""
+echo "curl -L \"https://github.com/henderjon.keys\" >> \"$HOME/.ssh/authorized_keys\""
 # ------
 if [[ "$OSTYPE" == darwin* ]]; then
 	notice "# ------ macos dictionary"

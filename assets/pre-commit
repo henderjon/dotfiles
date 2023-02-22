@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+_has_changed(){
+	cmp -s "$1" "$2"
+	if [[ $? -ne 0 ]]; then
+		echo "diff; $1 has been changed"
+		exit 1
+	else
+		echo "same; $1 has not been changed"
+	fi
+}
+
+for F in $(ls -1 ./bin)
+do
+	_has_changed "./bin/$F" "$HOME/bin/$F"
+done
+
+_has_changed "./conf/nginx/conf/fastcgi_params" "$HOME/code/conf/nginx/conf/fastcgi_params"
+_has_changed "./conf/nginx/conf/nginx.conf" "$HOME/code/conf/nginx/conf/nginx.conf"
+
+_has_changed "./conf/php/php-fpm.conf" "$HOME/code/conf/php/7.4 macOS build/php-fpm.conf"
+_has_changed "./conf/php/php.ini" "$HOME/code/conf/php/7.4 macOS build/php.ini"
+
+_has_changed "./assets/pre-commit" "./.git/hooks/pre-commit"

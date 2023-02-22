@@ -65,7 +65,7 @@
 	difflog      = %<(25)%ci %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
 	quick        = %h | %<(15)%C(white bold ul)%an%Creset %<(15)%cd %s
 [alias]
-    alias       = "!git config --get -regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
+    alias       = "!git config --get-regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
 	d           = diff
 	dt          = difftool
 	cl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -20

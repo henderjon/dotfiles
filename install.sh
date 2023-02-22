@@ -42,7 +42,7 @@ notice "# ------ zsh"
 echo "chsh -s /bin/zsh"
 # ------
 notice "# ------ gitconfig"
-echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/.gitconfig\""
+echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/gitconfig\""
 # ------
 notice "# ------ rc files"
 for RCFILE in "$DOTPATH"/rc/*

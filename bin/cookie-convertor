@@ -1,0 +1,81 @@
+#!/usr/bin/env php
+<?php
+
+$keys = [
+	"name"     => 0,
+	"value"    => 1,
+	"domain"   => 2,
+	"path"     => 3,
+	"expires"  => 4,
+	"size"     => 5,
+	"httponly" => 6,
+	"secure"   => 7,
+	"samesite" => 8,
+];
+
+// https://everything.curl.dev/http/cookies/fileformat
+
+// string example.com - the domain name
+// boolean FALSE - include subdomains
+// string /foobar/ - path
+// boolean TRUE - send/receive over HTTPS only
+// number 1462299217 - expires at - seconds since Jan 1st 1970, or 0
+// string person - name of the cookie
+// string daniel - value of the cookie
+
+echo "# Netscape HTTP Cookie File\n";
+echo "# CURL REQUIRES THE UNIX TIMESTAMP\n";
+echo "# tld-sub-path-https-exp-name-value";
+while($line = fgets(STDIN) ){
+	$parts = explode("\t", $line);
+
+	if(empty($parts[$keys["name"]])){
+		continue;
+	}
+
+	$domain = $parts[$keys["domain"]];
+	if(strpos($parts[$keys["domain"]], ".") !== 0){
+    	$domain = '.' . $parts[$keys["domain"]];
+	}
+
+	$httpOnly = $parts[$keys["httponly"]] === '✓' ? 'TRUE' : 'FALSE';
+
+	if($parts[$keys["expires"]] == "Session"){
+		 $expires = (new DateTime)->add(new DateInterval("P1D"));
+	}else{
+		$expires = DateTime::createFromFormat(DATE_RFC3339_EXTENDED, $parts[$keys["expires"]]);
+	}
+
+	echo implode("\t", [
+		$domain,
+		"TRUE",
+		$parts[$keys["path"]],
+		$httpOnly,
+		// $expires->format(DATE_RFC7231), # CURL REQUIRES THE UNIX TIMESTAMP
+		$expires->format("U"), # CURL REQUIRES THE UNIX TIMESTAMP
+		$parts[$keys["name"]],
+		$parts[$keys["value"]],
+	]);
+
+	echo "\n";
+}
+echo "\n";
+
+// console.log('# Netscape HTTP Cookie File');
+
+// for (const cookie of cookies) {
+//   let [name, value, domain, path, expiration, /* size */, httpOnly] = cookie.split('\t');
+//   if (!name)
+//     continue;
+//   if (domain.charAt(0) !== '.')
+//     domain = '.' + domain;
+//   httpOnly = httpOnly === '✓' ? 'TRUE' : 'FALSE'
+//   if (expiration === 'Session')
+//     expiration = new Date(Date.now() + 86400 * 1000);
+//   expiration = Math.trunc(new Date(expiration).getTime() / 1000);
+//   console.log([domain, 'TRUE', path, httpOnly, expiration, name, value].join('\t'));
+// }
+
+
+
+

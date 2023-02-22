@@ -1,0 +1,57 @@
+#!/usr/bin/env sh
+git for-each-ref --sort=committerdate --format='%(refname:lstrip=2)%1F%(objectname:short)%1F%(upstream:lstrip=2)%1F%(upstream:track,nobracket)%1F%(subject)%1F%(HEAD)' refs/heads ^archive/ | \
+awk 'BEGIN{
+		FS="\037";
+		OFS="|";
+		max = 0;
+	}
+	!/archive\//{
+		line[NR] = $1 SUBSEP $2 SUBSEP $3 SUBSEP $4 SUBSEP $5 SUBSEP $6
+
+		if(max < length($1)){
+			max = length($1);
+		}
+	}
+	END{
+		print("  excluding archive/*");
+		ref   = "%-" max "s  "
+		hash  = "%s  "
+		extra = "[%s: %s] "
+		title = "%s\n"
+		for(k in line){
+			split(line[k], bits, SUBSEP)
+
+			remote = ""
+			if(bits[3] != ""){
+				remote = extra
+			}
+
+			pre = "  " ref
+			if(bits[6] == "*"){
+				pre = "* " green(ref)
+			}
+
+			printf(pre hash remote title, bits[1], bits[2], blue(bits[3]), blue(underline(bits[4])), bits[5])
+
+		}
+	}
+
+	function green(s){
+		return "\033[32m" s "\033[0m";
+	}
+
+	function blue(s){
+		return "\033[34m" s "\033[0m";
+	}
+
+	function underline(s){
+		return "\033[4m" s "\033[0m";
+	}'
+
+#refnam hash remoterefname relationsinp subject HEAD
+# bb = for-each-ref --sort=committerdate --format='%(refname:lstrip=2)%1F%(objectname:short)%1F%(upstream:lstrip=2)%1F%(upstream:track,nobracket)%1F%(subject)' refs/heads ^archive/
+# bb = for-each-ref --sort=committerdate --format='%(refname:lstrip=2)%1F%(objectname:short)%1F%(upstream:lstrip=2)%1F%(upstream:track,nobracket)%1F%(subject)' refs/heads ^archive/
+# bb = for-each-ref --sort=committerdate --format='%(align:50,left)%(refname:lstrip=2)%(end) %(objectname:short) %(upstream:track,nobracket) %(subject)' refs/heads ^archive/
+# bb = for-each-ref --color=always --format="%(refname:short) [%C(red)%(upstream)%Creset] %(contents:subject)" --sort=committerdate
+# bb = for-each-ref --shell --format='git log --oneline %(refname) ^origin' refs/heads/
+# bb = for-each-ref --sort=-committerdate --count=20 --shell --format='git log --format="%<(28)%d %<(28)%h %(upstream:track,nobracket)" %(objectname:short)' refs/heads/

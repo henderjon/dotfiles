@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+require "vendor/autoload.php";
+
+fprintf(STDERR, "\n");
+fprintf(STDERR, "# fetching...\n");
+fprintf(STDERR, `git fetch --all`); // NOTE THE BACKTICKS
+
+// $branches = `git branch -a`;
+// $branches = `git branch -a -l 'remotes/origin/release/*'`;
+if(!empty($argv[1])){
+	fprintf(STDERR, "\n");
+	fprintf(STDERR, str_repeat("#", 72));
+	fprintf(STDERR, "\n");
+	fprintf(STDERR, "# prefer three (3) digit version numbers\n");
+	fprintf(STDERR, "# publish a new branch\n");
+	fprintf(STDERR, "git checkout -b release/{$argv[1]} --no-track remotes/origin/dev\n");
+	// fprintf(STDERR, "git branch --unset-upstream\n"); // --no-track handles this
+	fprintf(STDERR, "git publish\n");
+	// fprintf(STDERR, "git log --pretty='tformat:%%h %%s' --grep=\"pull request\" release/%s..%s\n", $argv[1], $branches[0]);
+	return;
+}
+
+fprintf(STDERR, "\n");
+fprintf(STDERR, str_repeat("#", 72));
+fprintf(STDERR, "\n");
+$branches = shell_exec("(git branch -r -l 'origin/release/*' | sort -rV)");
+$branches = explode("\n", $branches);
+$branches = array_map(function($value){
+	return trim($value);
+}, $branches);
+
+fprintf(STDERR, "\n");
+fprintf(STDERR, "# latest published release\n");
+fprintf(STDERR, "{$branches[0]}\n");
+
+fprintf(STDERR, "\n");
+fprintf(STDERR, str_repeat("#", 72));
+fprintf(STDERR, "\n");
+// echo "git log --pretty='tformat:%h %s' --grep=\"pull request\" {$branches[0]}..remotes/origin/dev\n";
+fprintf(STDERR, "# branch cut status; check dev against latest published release; how far has dev advanced?\n");
+fprintf(STDERR, "git rl {$branches[0]} remotes/origin/dev\n");
+fprintf(STDERR, "\n");
+
+fprintf(STDERR, "# difflog; check latest published release against the previous release; how far has \"%s\" advanced\n", $branches[0]);
+fprintf(STDERR, "git rl %s %s\n", $branches[1], $branches[0]);
+fprintf(STDERR, "\n##### COMMITS #####\n\n");
+
+$commits = `git rl {$branches[1]} {$branches[0]}\n`;
+
+echo "{$commits}\n";

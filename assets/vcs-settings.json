@@ -1,0 +1,152 @@
+// Place your settings in this file to overwrite the default settings
+{
+    // EDITOR SETTINGS
+    "editor.fontFamily": "JetBrains Mono, Fira Code, monospace",
+    "editor.fontSize": 13,
+    "editor.fontLigatures": true,
+    "debug.console.fontSize": 13,
+    "editor.insertSpaces": false,
+    "editor.tabCompletion": "on",
+    "editor.rulers": [
+        {"column":72, "color":"#626262"},
+        {"column":80, "color":"#ffffff4d"},
+    ],
+    "editor.wordWrap": "off",
+    "editor.hover.enabled": false,
+    "editor.renderLineHighlight": "all",
+    "editor.selectionHighlight": false,
+    "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?",
+    "editor.minimap.showSlider": "always",
+    "editor.renderControlCharacters": false,
+    "editor.suggestSelection": "first",
+    "editor.renderWhitespace": "selection",
+
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.autoClosingOvertype": "never",
+    // "terminal.integrated.shell.osx": "/bin/zsh",
+    "editor.minimap.renderCharacters": false,
+    "terminal.integrated.inheritEnv": false,
+    // "terminal.integrated.allowChords": false,
+    "terminal.integrated.cursorBlinking": true,
+    "workbench.list.keyboardNavigation": "filter",
+    "terminal.integrated.fontSize":13,
+
+    "timeline.showView": true,
+
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "window.titleBarStyle": "native",
+    "window.title": "${activeEditorLong}${separator}${rootName}",
+
+    "workbench.colorTheme": "Monokai22",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.list.openMode": "doubleClick",
+    "workbench.activityBar.visible": true,
+    "workbench.colorCustomizations": {
+          "window.activeBorder": "#ccc",
+          "window.inactiveBorder": "#295c8a",
+          "editor.background":"#1E1E1E",
+          "tab.border": "#fff",
+          "editorLineNumber.activeForeground" : "#fff",
+          "terminal.border" : "#fff",
+          "editorWhitespace.foreground": "#ff000091",
+          "editorIndentGuide.background": "#ff000091",
+          "editorIndentGuide.activeBackground": "#ff000091",
+          "editorRuler.foreground":"#555",
+    },
+    "php.validate.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
+
+    "extensions.ignoreRecommendations": false,
+    "cSpell.language": "en,en-US",
+
+
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "go.formatTool": "goimports",
+    "[go]": {
+        "editor.snippetSuggestions": "none",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSaveTimeout": 3000,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },
+    "[gopls]": {
+        "usePlaceholders":         true, // add parameter placeholders when completing a function
+        "completionDocumentation": true, // for documentation in completion items
+        // Experimental settings
+        "completeUnimported":      true, // autocomplete unimported packages
+        "watchFileChanges":        true,  // watch file changes outside of the editor
+        "deepCompletion":          true,     // enable deep completion
+    },
+    "files.eol": "\n", // formatting only supports LF line endings
+    "python.jediEnabled": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "oneDarkPro.bold": true,
+    "update.mode": "manual",
+    "go.useLanguageServer": true,
+    "editor.lineHeight": 22,
+    "aws.profile": "profile:default",
+    "git.autofetch": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "css.hover.references": false,
+    "editor.autoSurround": "never",
+    "python.languageServer": "Default",
+    "json.schemas": [],
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.autoClosingDelete": "never",
+    "html.autoCreateQuotes": false,
+    "go.toolsManagement.autoUpdate": true,
+    "editor.suggest.showMethods": true,
+    "editor.suggest.preview": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.snippetSuggestions": "top",
+    "editor.guides.indentation": true,
+    "git.mergeEditor": true,
+    "workbench.preferredDarkColorTheme": "Monokai22",
+    "workbench.preferredHighContrastColorTheme": "Monokai",
+    "workbench.preferredHighContrastLightColorTheme": "Monokai",
+    "workbench.preferredLightColorTheme": "Monokai",
+    "editor.bracketPairColorization.enabled": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true, // enable for all themes
+        // "rules": {
+        //     "*.static": {
+        //         "foreground": "#ff0000",
+        //         "fontStyle": "bold"
+        //     },
+        //     "type": {
+        //         "foreground": "#00aa00"
+        //     }
+        // }
+    },
+    "php.debug.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
+    "settingsSync.ignoredSettings": [
+        "php.executablePath",
+        "php.debug.executablePath",
+        "php.validate.executablePath"
+    ],
+    "php.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "[markdown]": {
+        "editor.wordWrap": "off"
+    },
+    // "editor.fontLigatures": "'ss05', 'cv16', 'ss03', 'onum'",
+}

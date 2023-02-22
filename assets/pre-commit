@@ -10,6 +10,12 @@ _has_changed(){
 	fi
 }
 
+echo "did you run update.sh? (y/n)"
+read CONFIRM
+if [ $CONFIRM != "y" || $CONFIRM != "yes" ]; then
+	exit 1
+fi
+
 for F in $(ls -1 ./bin)
 do
 	_has_changed "./bin/$F" "$HOME/bin/$F"

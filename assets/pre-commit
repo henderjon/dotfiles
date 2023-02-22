@@ -1,8 +1,7 @@
 #!/usr/bin/env sh
 
 _has_changed(){
-	cmp -s "$1" "$2"
-	if [[ $? -ne 0 ]]; then
+	if ! cmp -s "$1" "$2"; then
 		echo "diff; $1 has been changed"
 		exit 1
 	else
@@ -10,21 +9,22 @@ _has_changed(){
 	fi
 }
 
-echo "did you run update.sh? (y/n)"
-read CONFIRM
-if [ $CONFIRM != "y" || $CONFIRM != "yes" ]; then
+echo "did you run update.sh? [y/n] "
+read -r CONFIRM < /dev/tty
+if [ "$CONFIRM" != "y" ] && [ "$CONFIRM" != "yes" ]; then
 	exit 1
 fi
 
-for F in $(ls -1 ./bin)
+for BIN in bin/*
 do
-	_has_changed "./bin/$F" "$HOME/bin/$F"
+	F=$(basename "$BIN")
+	_has_changed "$BIN" "$HOME/bin/$F"
 done
-
-_has_changed "./conf/nginx/conf/fastcgi_params" "$HOME/code/conf/nginx/conf/fastcgi_params"
-_has_changed "./conf/nginx/conf/nginx.conf" "$HOME/code/conf/nginx/conf/nginx.conf"
-
-_has_changed "./conf/php/php-fpm.conf" "$HOME/code/conf/php/7.4 macOS build/php-fpm.conf"
-_has_changed "./conf/php/php.ini" "$HOME/code/conf/php/7.4 macOS build/php.ini"
-
-_has_changed "./assets/pre-commit" "./.git/hooks/pre-commit"
+# -----
+_has_changed "conf/nginx/conf/fastcgi_params" "$HOME/code/conf/nginx/conf/fastcgi_params"
+_has_changed "conf/nginx/conf/nginx.conf" "$HOME/code/conf/nginx/conf/nginx.conf"
+# -----
+_has_changed "conf/php/php-fpm.conf" "$HOME/code/conf/php/7.4 macOS build/php-fpm.conf"
+_has_changed "conf/php/php.ini" "$HOME/code/conf/php/7.4 macOS build/php.ini"
+# -----
+_has_changed "assets/pre-commit" ".git/hooks/pre-commit"

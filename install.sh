@@ -27,9 +27,9 @@ _cfg_ln(){
 	echo "ln -s \"$1\" \"$2\""
 }
 
-echo "please name me"
-read ENV_NAME
-if [ ! -n $ENV_NAME ]; then
+echo "please name me:"
+read -r ENV_NAME
+if [ -z "$ENV_NAME" ]; then
 	echo "you forgot a name ... "
 	exit 1
 else
@@ -45,9 +45,10 @@ notice "# ------ gitconfig"
 echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/.gitconfig\""
 # ------
 notice "# ------ rc files"
-for RCFILE in $(ls -1 ./rc)
+for RCFILE in "$DOTPATH"/rc/*
 do
-	_cfg_ln "$DOTPATH/rc/$RCFILE" "$HOME/.$RCFILE"
+	F=$(basename "$RCFILE")
+	_cfg_ln "$RCFILE" "$HOME/.$F"
 done
 # ------
 notice "# ------ zshenv"
@@ -56,9 +57,10 @@ echo "echo 'export _LOCAL_ENV_NAME=$ENV_NAME' >> \"$HOME/.zshenv\""
 # ------
 notice "# ------ bin files"
 _no_folder_create "$HOME/bin"
-for RCFILE in $(ls -1 ./bin)
+for BINFILE in "$DOTPATH"/bin/*
 do
-	_cfg_ln "$DOTPATH/bin/$RCFILE" "$HOME/bin/$RCFILE"
+	F=$(basename "$BINFILE")
+	_cfg_ln "$BINFILE" "$HOME/bin/$F"
 done
 # ------
 notice "# ------ ssh"

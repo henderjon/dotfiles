@@ -158,3 +158,7 @@ PROMPT="[%D{%Y-%m-%d %H:%M:%S}] %?
 #RPROMPT='%?[%D{%Y-%m-%d %H:%M:%S}]'
 RPROMPT=''
 RPS1=''
+
+# -------------------------------------------------------- DB DSN for zshenv --#
+# export GO_MYSQL_DSN="user:pass@tcp(127.0.0.1:13306)/mysql?parseTime=true&loc=UTC"
+# export GO_SQLITE_DSN="file:test.sqlite3?parseTime=true&loc=UTC&cache=shared"

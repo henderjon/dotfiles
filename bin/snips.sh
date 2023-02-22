@@ -36,7 +36,7 @@ ANSI		Description
 [47m - Set background to color #7 - white
 [49m - Set default color as background color
 
-####################################################################### LINUX ##
+################################################# LINUX SETUP (digital ocean) ##
 
 % adduser --shell $PATH/zsh --group root,admin,wheel $USERNAME
 
@@ -48,102 +48,14 @@ ANSI		Description
 % cp ~/.ssh/authorized_keys /home/$username/.ssh/authorized_keys
 % chown $username /home/$username/.ssh/authorized_keys
 
-############################################################## remote-diff.sh ##
-#!/usr/bin/env sh
-
-set -e
-
-SRCDIR=$1
-DESTFILE=$2
-
-if [[ -z "$DESTFILE" ]]
-then
-echo "missing destination filename\n"
-exit 1
-fi
-
-TF1=$(mktemp)
-printf "%s\n%s\n" "$TMPDIR" "$TF1"
-
-find "$SRCDIR" -type f -exec sum {} \; | \
-### assign $1 and $2 to new vars, then blank them so $0 outputs the blanks; this will still output delims which is where `sort` comes in
-awk 'BEGIN{FS=" "}{ o=$1; t=$2; $1=$2=""; print $0,o,t; }' > "$TF1"
-
-TF2=$(mktemp)
-echo "$TF2\n"
-cat "$TF1" | sort -k 3 > "$TF2"
-
-mv "$TF2" "$DESTFILE"
-rm -f "$TF1" "$TF2"
-
-# grab path and checksum of all filesin current directory and down
-# find . -type f -exec sum {} \; | \
-# find . -type f -exec sum {} \; > $TF1
-# move the output columns around to be able to sort by path
-# awk 'BEGIN{FS=" "}{o=$1;t=$2;$1=$2=""; print $0,o,t;}' | \
-# remove blank chars at beginning of the line; sort can also be told to ignore blanks with -b, --ignore-leading-blanks
-# sort -k 3
-# sed 's/^[[:blank:]]*//'
-
-################################################################### CLI REGEX ##
-
-### https://stackoverflow.com/questions/399078/what-special-characters-must-be-escaped-in-regular-expressions
-
-Which characters you must and which you mustn't escape indeed depends on the regex flavor you're working with.
-
-For PCRE, and most other so-called Perl-compatible flavors, escape these outside character classes:
-
-.^$*+?()[{\|
-
-and these inside character classes:
-
-^-]\
-
-For POSIX extended regexes (ERE), escape these outside character classes (same as PCRE):
-
-.^$*+?()[{\|
-
-Escaping any other characters is an error with POSIX ERE.
-
-Inside character classes, the backslash is a literal character in POSIX regular expressions. You cannot use it to escape anything. You have to use "clever placement" if you want to include character class metacharacters as literals. Put the ^ anywhere except at the start, the ] at the start, and the - at the start or the end of the character class to match these literally, e.g.:
-
-[]^-]
-
-In POSIX basic regular expressions (BRE), these are metacharacters that you need to escape to suppress their meaning:
-
-.^$*[\
-
-Escaping parentheses and curly brackets in BREs gives them the special meaning their unescaped versions have in EREs. Some implementations (e.g. GNU) also give special meaning to other characters when escaped, such as \? and +. Escaping a character other than .^$*(){} is normally an error with BREs.
-
-Inside character classes, BREs follow the same rule as EREs.
-
-### OTHER
-
-Modern RegEx Flavors (PCRE)
-Includes C, C++, Delphi, EditPad, Java, JavaScript, Perl, PHP (preg), PostgreSQL, PowerGREP, PowerShell, Python, REALbasic, Real Studio, Ruby, TCL, VB.Net, VBScript, wxWidgets, XML Schema, Xojo, XRegExp.
-PCRE compatibility may vary
-
-- Anywhere: . ^ $ * + - ? ( ) [ ] { } \ |
-
-Legacy RegEx Flavors (BRE/ERE)
-Includes awk, ed, egrep, emacs, GNUlib, grep, PHP (ereg), MySQL, Oracle, R, sed.
-PCRE support may be enabled in later versions or by using extensions
-
-ERE/awk/egrep/emacs
-
-- Outside a character class: . ^ $ * + ? ( ) [ { } \ |
-- Inside a character class: ^ - [ ]
-
-BRE/ed/grep/sed
-
-- Outside a character class: . ^ $ * [ \
-- Inside a character class: ^ - [ ]
-- For literals, don't escape: + ? ( ) { } |
-- For standard regex behavior, escape: \+ \? \( \) \{ \} \|
-
 ######################################################################### SCP ##
 
 # for strange errors force legacy mode with "-O"
+
+########################################## macOS SSH Can't Connect To Client ###
+
+% eval $(ssh-agent)
+% ssh-add
 
 ###################################################################### DATE.C ##
 
@@ -169,6 +81,18 @@ BRE/ed/grep/sed
 %Y      Year with century, as decimal number
 %z, %Z  Either the time-zone name or time zone abbreviation, depending on registry settings
 %%      Percent sign
+
+###################################################################### DATE ###
+
+# TIMESTAMP=$(shell TZ=UTC date '+%FT%T %Z')
+# TIMESTAMP=$(shell date '+%Y-%m-%dT%H:%M:%S %z %Z')
+
+# Convert Unix timestamp to human readable
+% date -d 1656685875
+Fri, 01 Jul 2022 14:31:15 +0000
+
+# Current time as UNIX timestamp
+% date "+%s"
 
 ######################################################################## CRON ##
 
@@ -242,6 +166,11 @@ BRE/ed/grep/sed
 
 # $HOME should not be writeable by the group or others (at most 755 (drwxr-xr-x)).
 
+################################################################## FIX PERMS ###
+
+% find . -type d -print0 | xargs -0 -I % chmod 755 %
+% find . -type f -print0 | xargs -0 -I % chmod 644 %
+
 ###################################################################### PYTHON ##
 
 s = u'is a unicode string'
@@ -270,7 +199,6 @@ s = 'this uses {v}'.format(v='indicies')
 
 # iteration returns INDEXES
 # for dictionaries use .keys(), .values(), .items()
-
 
 ################################################################# GITHUB / GH ##
 
@@ -402,7 +330,6 @@ Edit the actual keyring using the keys from you $TEMPDIR
 
 Delete $TEMPDIR
 
-
 ####################################################################### MySQL ##
 
 % mysql -h $HOST --user $USERNAME -p
@@ -463,7 +390,7 @@ Delete $TEMPDIR
         option corresponds to the -0 option of xargs.
 
 ### list subdir
-# % find ./sub/dir -maxdepth 1 -mindepth 1
+% find ./sub/dir -maxdepth 1 -mindepth 1
 
 ###################################################################### XARGS ###
 
@@ -473,11 +400,6 @@ Delete $TEMPDIR
         -print0 function in find(1).
 
 % find . -type f | [...] | tr \\n \\0 | xargs -0 -I % rm %
-
-################################################################## FIX PERMS ###
-
-% find . -type d -print0 | xargs -0 -I % chmod 755 %
-% find . -type f -print0 | xargs -0 -I % chmod 644 %
 
 ################################################################# DISK USAGE ###
 
@@ -522,9 +444,8 @@ Delete $TEMPDIR
  --timestamping, -N
  --directory-prefix=someprefix, -P someprefix (save in this dir)
 
-####################################################################### MISC ###
+######################################################################### ln ###
 
-% curl $1 | grep -o 'href=".*"' | sed 's/href="\(.*\)"/\1/p' | xargs -I {} wget "{}"
 % ln [options] file-name link-name
 
 ################################################################ GO / GOLANG ###
@@ -551,38 +472,21 @@ Delete $TEMPDIR
 % diff -u <(ls -l /directory/) <(ls -l /directory/) | colordiff
 % cmp $file $file
 
-###################################################################### DATE ###
-
-# TIMESTAMP=$(shell TZ=UTC date '+%FT%T %Z')
-# TIMESTAMP=$(shell date '+%Y-%m-%dT%H:%M:%S %z %Z')
-
-# Convert Unix timestamp to human readable
-% date -d 1656685875
-Fri, 01 Jul 2022 14:31:15 +0000
-
-# Current time as UNIX timestamp
-% date "+%s"
-
 ###################################################################### ASCII ###
 
-// Comment is the ascii Data Link Escape (DLE) character and begins a commented record
-Comment = rune('\020') // byte(16) || "\x10" ...
-// FileSep is the ascii File Separator (FS) character and delineates collections of groups (think DBs)
-FileSep = rune('\034') // "\034" byte(28) || "\x1c" ...
-// GroupSep is the ascii Group Separator (GS) character and delineates groups of records (think DB tables)
-GroupSep = rune('\035') // "\035" byte(29) || "\x1d" ...
-// RecordSep is the ascii Record Separator (RS) character and delineates records (think DB rows in a table)
+# lammertbies.nl/comm/info/ascii-characters.html
+
+# Comment is the ascii Data Link Escape (DLE) character and begins a commented record
+# FileSep is the ascii File Separator (FS) character and delineates collections of groups (think DBs)
+# GroupSep is the ascii Group Separator (GS) character and delineates groups of records (think DB tables)
+# RecordSep is the ascii Record Separator (RS) character and delineates records (think DB rows in a table)
+# UnitSep is the ascii Unit Separator (US) character and delineates fields in a record (think DB fields in a row)
+
+Comment   = rune('\020') // byte(16)        || "\x10" ...
+FileSep   = rune('\034') // "\034" byte(28) || "\x1c" ...
+GroupSep  = rune('\035') // "\035" byte(29) || "\x1d" ...
 RecordSep = rune('\036') // "\036" byte(30) || "\x1e" ...
-// UnitSep is the ascii Unit Separator (US) character and delineates fields in a record (think DB fields in a row)
-UnitSep = rune('\037') // "\037" byte(31) || "\x1f" ...
-// lammertbies.nl/comm/info/ascii-characters.html
-
-#################################################################### DB DSNs ###
-
-export GO_MYSQL_DSN="user:pass@tcp(127.0.0.1:13306)/mysql?parseTime=true&loc=UTC"
-export GO_SQLITE_DSN="file:test.sqlite3?parseTime=true&loc=UTC&cache=shared"
-
-% ssh -NL $local-port:$remote-host:$remote-port keyhole-name &
+UnitSep   = rune('\037') // "\037" byte(31) || "\x1f" ...
 
 ######################################################################## AWK ###
 
@@ -637,11 +541,6 @@ NR == 1{
 }
 END{}
 
-########################################## macOS SSH Can't Connect To Client ###
-
-% eval $(ssh-agent)
-% ssh-add
-
 ############################################################# BIG FILE DIFFS ###
 
 % find . -type f -print0 | xargs -0 -I % sum %
@@ -675,3 +574,4 @@ curl -b cookies.txt -c cookies.txt $URL
 -L # follow redirects
 
 EOF
+

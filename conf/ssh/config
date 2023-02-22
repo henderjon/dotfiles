@@ -1,0 +1,30 @@
+AddKeysToAgent yes
+UseKeychain yes
+IdentityFile ~/.ssh/id_rsa
+
+#################################################################### regular ###
+Host staging
+	Hostname staging.host.com
+	User jhenderson
+
+#################################################################### keyhole ###
+Host keyhole-name
+  Hostname 127.0.0.1
+  User jhenderson
+
+########################################################## actual connection ###
+Host actual-name
+	Hostname 127.0.0.1
+	User henderjon
+	IdentityFile ~/.ssh/key.pem
+	ProxyCommand ssh keyhole-name nc %h 22 2> /dev/null
+
+StrictHostKeyChecking no
+# Suppresses the initial confirmation about server identity and avoids the panic/quit if the server changes. Warnings still appear.
+
+ServerAliveInterval 10
+# IT's router settings kill ssh connections that have been idle for a couple minutes or so. This will send keepalive packets every ten seconds, preventing the dreaded "Write failed: broken pipe" except for legitimate network interruptions (i.e. disconnecting from wired).
+
+Compression yes
+# CompressionLevel 6
+# Compress ssh and (I *think*) scp connections by default. Since we're dealing mostly with text, it's worth doing. Level 6 is the default for both command line and HTTP compression; it's light on computation for any modern CPU and gets around a 10:1 ratio on plain text.

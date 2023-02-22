@@ -127,6 +127,11 @@ export IRCNAME=henderjon
 export IRCNICK=henderjon
 export IRCUSER=henderjon
 
+#---------------------------------------- reload env file when we reload zsh --#
+if [ -f "$HOME/.zshenv" ]; then
+	source "$HOME/.zshenv"
+fi
+
 #-------------------------------------------- name the ENV based on env file --#
 if [ -z "$_LOCAL_ENV_NAME" ]; then
 	_LOCAL_ENV_NAME="henderjon"
@@ -139,11 +144,6 @@ elif [[ "$TERM" = "screen"* ]] && [ -n "$TMUX" ]; then
 	XTERM=" (tmux)"
 else
 	XTERM=""
-fi
-
-#---------------------------------------- reload env file when we reload zsh --#
-if [ -f "$HOME/.zshenv" ]; then
-	source "$HOME/.zshenv"
 fi
 
 #------------------------------------------------------ fancy prompt for zsh --#

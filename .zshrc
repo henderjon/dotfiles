@@ -127,14 +127,14 @@ export IRCNAME=henderjon
 export IRCNICK=henderjon
 export IRCUSER=henderjon
 
-#-------------------------------- Optional settings not commited to the repo --#
-if [ -f "$HOME/.env_zshrc" ]; then
-	source "$HOME/.env_zshrc"
+#---------------------------------------- reload env file when we reload zsh --#
+if [ -f "$HOME/.zshenv" ]; then
+	source "$HOME/.zshenv"
 fi
 
 #-------------------------------------------- name the ENV based on env file --#
-if [ -z "$ENV_NAME" ]; then
-	ENV_NAME="henderjon"
+if [ -z "$_LOCAL_ENV_NAME" ]; then
+	_LOCAL_ENV_NAME="henderjon"
 fi
 
 #------------------------------------------------------ label screened terms --#
@@ -148,7 +148,7 @@ fi
 
 #------------------------------------------------------ fancy prompt for zsh --#
 PROMPT="[%D{%Y-%m-%d %H:%M:%S}] %?
-[%U$ENV_NAME%u]$XTERM %~/
+[%U$_LOCAL_ENV_NAME%u]$XTERM %~/
 %# "
 
 #-------------------------------------------------------fancy prompt for BASH--#

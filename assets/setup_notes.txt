@@ -1,0 +1,68 @@
+% chsh -s /bin/zsh
+% git config --global --replace-all include.path "dotfiles/git/.gitconfig"
+
+######################################################################## SSH ###
+% curl -L https://github.com/henderjon.keys > .ssh/authorized_keys
+
+################################################################## macos env ###
+% xcode-select —install
+
+######################################################################## bew ###
+
+### latest
+% /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+### older
+% /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+################################################################### composer ###
+
+% curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin/
+% ln -s "$(which composer.phar)" "$HOME/bin/composer"
+
+##################################################################### bundle ###
+
+% brew bundle dump --file=path/Brewfile
+% brew bundle --file=path/Brewfile
+
+############################################################### VSCODE Theme ###
+
+### in extension root folder to create a VSIX file:
+% vsce package
+
+### For users who receive such a VSIX file, they can install the extension with
+%  code --install-extension $file.vsix
+
+################################################################# php set up ###
+
+### reqs: brew, composer, php, nginx, redis
+
+#-- PHP 7.4 --# https://github.com/shivammathur/homebrew-php
+% brew tap shivammathur/php
+% brew install shivammathur/php/php@7.4
+
+export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
+
+% brew install libmemcached zlib
+% pecl bundle memcached && cd ___ && phpize
+% pecl install redis
+
+#-- mkcert --#
+% mkcert -install
+% mkdir /tmp/crt && cd /tmp/crt
+% mkcert local.example.com
+
+########################################################### non bundled brew ###
+
+#-- pkgs --#
+# brew install \
+	# exiftool \
+	# tmux \
+	# shellcheck \
+	# gnupg \
+	# gpg-suite
+
+#-- fonts --#
+% brew tap homebrew/cask-fonts
+% brew install --cask ./assets/font-amazon-ember.rb

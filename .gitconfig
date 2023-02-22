@@ -4,7 +4,7 @@
 [user]
 	email = list@box370.net
 	name = henderjon
-	signingkey = E53333CAC0FEEB416D893C315537708AAED1476D
+	signingkey = B64029804B7D23DB!
 [core]
 	quotepath = false
 	autocrlf = input
@@ -28,10 +28,11 @@
 	default = upstream
 	ff = true
 [diff]
-	 tool = bc3
+	tool = diff
 	# tool = diff
 	renameLimit = 999
 [difftool]
+	tool = bc3
 	prompt = true
 [difftool "diff"]
 	cmd = diff --normal $LOCAL $REMOTE
@@ -56,16 +57,21 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty]
 	# date formatting: https://git-scm.com/docs/git-rev-list
-	columns    = %<(32)%cd %>(16)%an (%G?) | %><(7)%h | %Cred%d%Creset %s
-	signingkey = %<(28)%cd %>(8)%an (%GK) | %><(7)%h  | %Cred%d%Creset %s
-	difflog    = %<(25)%ci %>(16)%an | %><(7)%h | %s
-	quick      = %h | %<(15)%an %<(15)%cd %s
+	columns      = %<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %Cred%d%Creset %s
+	gpg          = %<(28)%cd %>(16)%C(white bold ul)%an%Creset (%><(16)%GK) | %><(7)%h  | %Cred%d%Creset %s
+	gpgfull      = "%<(28)%cd %>(16)%C(white bold ul)%an%Creset | %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s\n\tUser: %GS\n\tKey: %GK (%G?)\n\tPrimary: %GP\n\n"
+	branchlog    = "%n%C(yellow)%H (%h)%Creset\nAuthor: %C(white bold ul)%an%Creset <%ae> %GK (%G?)\nDate: %cD%n%n%+s%n%+b"
+	brancheslog  = "%<(28)%(refname:lstrip=2) %<(28)%(objectname:short) %<(28)%(upstream:track,nobracket)"
+	difflog      = %<(25)%ci %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
+	quick        = %h | %<(15)%C(white bold ul)%an%Creset %<(15)%cd %s
 [alias]
-    alias       = "!git config --get-regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
+    alias       = "!git config --get -regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
 	d           = diff
 	dt          = difftool
-	cl          = log --pretty=columns -20
-	sig         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S' --pretty=signingkey -20
+	cl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -20
+	kl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpg -20
+	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --ancestry-path origin/dev..HEAD
+	kll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpgfull -20
 	rcl         = reflog --pretty=columns -20
 	vv          = branch -vv --sort=committerdate
 	co          = checkout

@@ -1,6 +1,16 @@
-journal/*
+*~
 .DS_Store
-.vscode
-bin/*
+.DS_Store?
+._*
+Thumbs.db
+dump.rdb
+journal/*
 !.gitkeep
 .env_zshrc
+
+# IDEs
+.idea
+.zedstate
+*.sublime-project
+*.sublime-workspace
+.vscode/

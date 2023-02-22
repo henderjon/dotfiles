@@ -1,18 +1,33 @@
 ################ http://zsh.sourceforge.net/Guide/zshguide.html ################
 
+################################################################################
+#-------------------------------- BASH AND ZSH --------------------------------#
+################################################################################
 #-------------------------------------------------------------- history file --#
 HISTFILE=$HOME/.history
 HISTFILESIZE=151000
-
 #----------------------------------------------------- history file max size --#
 HISTSIZE=151000
-
 #----------------------------------- max number of lines to write to history --#
 SAVEHIST=150000
-
+#------------------------------------ disallow cat-ing over an existing file --#
+set -o no_clobber
 #-------------------------------------- disallow Ctrl-d from exiting windows --#
-setopt ignore_eof
-
+set -o ignore_eof
+################################################################################
+#--------------------------------- BASH ONLY ----------------------------------#
+################################################################################
+HISTTIMEFORMAT="%FT%T %Z"
+HISTCONTROL=ignoreboth # ignorespace and ignoredups
+HISTIGNORE="ls:ll:lsl:cd:pwd:history"
+#------------------------------------- add to history upon execution vs exit --#
+set -o histappend
+################################################################################
+#---------------------------------- ZSH ONLY ----------------------------------#
+################################################################################
+#------------------------------------------------------- turn on completions --#
+autoload -U compinit
+compinit
 #------------------------------------- add to history upon execution vs exit --#
 setopt inc_append_history
 
@@ -29,19 +44,12 @@ setopt hist_ignore_space
 setopt extended_history
 
 #--------------- TAB twice to see a list of completions and TAB through them --#
-unsetopt menu_complete
-setopt auto_list
-setopt auto_menu
-
-#------------------------------------ disallow cat-ing over an existing file --#
-setopt no_clobber
+unsetopt MENU_COMPLETE
+setopt AUTO_LIST
+setopt AUTO_MENU
 
 #--------------------------------- confirm corrections on incorrect commands --#
 setopt correct
-
-#------------------------------------------------------- turn on completions --#
-autoload -U compinit
-compinit
 
 #------------------------------------------ completions are case insensitive --#
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
@@ -53,10 +61,7 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' menu select
 
 #---------------------------------------------------------------- HOME LOCAL --#
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
-# export PATH="/usr/local/nginx/sbin:$PATH"
 
 #-------------------------------------------------------- APP SPECIFIC PATHS --#
 # export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -83,9 +88,8 @@ export GOPRIVATE=
 # ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/sublime
 
 #------------------------------------------------- Alias [`man zshbuiltins`] --#
-alias lsl='ls -AFGTl '  # --time-style=+'%b %e %T %Y' ## MacOS, BSD
-# alias lsl='ls -AFCl --color ' # --time-style=+'%b %e %T %Y' ## Linux
-alias lslh='lsl -h '
+alias lsl='ls -AFGTlh '  # --time-style=+'%b %e %T %Y' ## MacOS, BSD
+# alias lsl='ls -AFClh --color ' # --time-style=+'%b %e %T %Y' ## Linux
 alias less='less -S '
 alias ed='ed -p : '
 alias h='history -25'
@@ -140,4 +144,9 @@ PROMPT="[%D{%Y-%m-%d %H:%M:%S}] %?
 #-------------------------- fancy RIGHT prompt -- '%?[%D{%d %b %Y %l:%M%p}]' --#
 #RPROMPT='%?[%D{%Y-%m-%d %H:%M:%S}]'
 RPROMPT=''
-RPS1='
+RPS1=''
+
+#-------------------------------------------------------------- cleanup path --#
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:/usr/local/sbin"
+# export PATH="/usr/local/nginx/sbin:$PATH"

@@ -49,7 +49,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	_cfg_ln "$DOTPATH/LocalDictionary" "$HOME/Library/Spelling/LocalDictionary"
 
 	if [ -x "$(which brew)" ]; then
-		echo "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+		echo "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
 		echo "brew bundle --file=$DOTPATH/assets/Brewfile"
 	else
 		warn "brew is not installed"

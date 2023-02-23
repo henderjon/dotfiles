@@ -117,7 +117,7 @@ alias diff='diff -u --color=always'
 
 #------------------------------------------------------- these are important --#
 #--------------------------- these are off as they mess with tmux and screen --#
-export EDITOR="ed"
+export EDITOR="ed -p:"
 export CLICOLOR_FORCE=true
 export VISUAL="$EDITOR"
 export PAGER=cat

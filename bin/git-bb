@@ -31,7 +31,11 @@ awk 'BEGIN{
 				pre = "* " green(ref)
 			}
 
-			printf(pre hash remote title, bits[1], bits[2], blue(bits[3]), blue(underline(bits[4])), bits[5])
+			if(remote == ""){
+				printf(pre hash title, bits[1], bits[2], bits[5])
+			}else{
+				printf(pre hash remote title, bits[1], bits[2], blue(bits[3]), blue(underline(bits[4])), bits[5])
+			}
 
 		}
 	}

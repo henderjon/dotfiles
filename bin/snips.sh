@@ -36,6 +36,22 @@ ANSI		Description
 [47m - Set background to color #7 - white
 [49m - Set default color as background color
 
+[90m -  Dark grey
+[91m -  Light red
+[92m -  Light green
+[93m -  Yellow
+[94m -  Light blue
+[95m -  Light purple
+[96m -  Turquoise
+[97m -  White
+[100m - Dark grey background
+[101m - Light red background
+[102m - Light green background
+[103m - Yellow background
+[104m - Light blue background
+[105m - Light purple background
+[106m - Turquoise background
+
 ################################################# LINUX SETUP (digital ocean) ##
 
 % adduser --shell $PATH/zsh --group root,admin,wheel $USERNAME
@@ -47,6 +63,36 @@ ANSI		Description
 # assuming digital ocean root user
 % cp ~/.ssh/authorized_keys /home/$username/.ssh/authorized_keys
 % chown $username /home/$username/.ssh/authorized_keys
+
+### https://wiki.centos.org/HowTos/Network/SecuringSSH
+
+### To turn off root login, edit: /etc/ssh/sshd_config:
+
+# prevent root logins
+PermitRootLogin no
+
+# disable passwords
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+
+# limit users
+AllowUsers alice bob
+
+# disable protocol 1
+Protocol 2
+
+### restart ssh
+% service sshd restart
+
+### COMMON PORTS ###
+- http: 80, 443, 8080
+- ssh: 22
+- ftp: 21
+- mysql: 3306, 13306
+- redis: 6379
+- IRC: 6667
+- gearman: 4730
+- memcache: 11211
 
 ######################################################################### SCP ##
 
@@ -199,6 +245,13 @@ s = 'this uses {v}'.format(v='indicies')
 
 # iteration returns INDEXES
 # for dictionaries use .keys(), .values(), .items()
+
+################################################################ embeded imgs ##
+
+### transparent
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+### black
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=">
 
 ################################################################# GITHUB / GH ##
 
@@ -468,9 +521,23 @@ Delete $TEMPDIR
 
 ####################################################################### DIFF ###
 
+# http://www.computerhope.com/unix/udiff.htm
+
 # Example usage of comparing output of two ls commands
 % diff -u <(ls -l /directory/) <(ls -l /directory/) | colordiff
 % cmp $file $file
+
+### using ed
+% diff -e > diff-output
+% ed file < diff-output
+
+### understanding unified diff
+--- from-file mod-time
++++ to-file mod-time
+@@ from-file{line-number,lines} to-file{line-number,lines} @@
+- line from from-file
+  line in both files
++ line from to-file
 
 ###################################################################### ASCII ###
 

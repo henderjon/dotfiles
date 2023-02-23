@@ -53,7 +53,7 @@ done
 # ------
 notice "# ------ zshenv"
 echo "touch \"$HOME/.zshenv\""
-echo "echo 'export _LOCAL_ENV_NAME=$ENV_NAME' >> \"$HOME/.zshenv\""
+echo "echo '_LOCAL_ENV_NAME=$ENV_NAME' >> \"$HOME/.zshenv\""
 # ------
 notice "# ------ bin files"
 _no_folder_create "$HOME/bin"

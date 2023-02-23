@@ -513,6 +513,7 @@ Delete $TEMPDIR
 
 ### list STDLIB
 % tree -L 1 -d $GOROOT/src
+% find $GOROOT/src -type d -maxdepth 2 | sed "s|$GOROOT/src/||" | sort
 
 ### search STDLIB
 % grep --colour=always -Iir "$1" "$GOROOT/src"

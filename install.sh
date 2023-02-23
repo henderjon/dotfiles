@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# mercilessly copied from github.com/donatj/dotfiles
+
 set -e
 
 notice () {

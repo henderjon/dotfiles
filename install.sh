@@ -77,7 +77,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	echo "brew bundle --file=$DOTPATH/assets/Brewfile"
 	notice "# ------ vscode"
 	echo "code --install-extension \"$DOTPATH/assets/monokai22-1.0.0.vsix\""
-	echo "rm \"$HOME/Library/Application Support/Code/User/settings.json\""
+	_mv_file_rm_sym "$HOME/Library/Application Support/Code/User/settings.json"
 	echo "cp \"$DOTPATH/assets/vcs-settings.json\" \"$HOME/Library/Application Support/Code/User/settings.json\""
 fi
 # ------

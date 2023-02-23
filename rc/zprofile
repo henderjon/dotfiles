@@ -1,1 +1,5 @@
+# apple silcon
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# apple intel
+# eval "$(/usr/local/bin/brew shellenv)"

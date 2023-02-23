@@ -84,7 +84,7 @@ export GOPRIVATE=
 # export GOVCS=public:git|hg,private:all   # this is default
 
 #---------------------------------------------------------------------- BREW --#
-# export PATH="$PATH:/usr/local/Homebrew/bin"  # intel apple
+# export PATH="$PATH:/usr/local/Homebrew/bin"  # apple intel
 export PATH="$PATH:/opt/homebrew/bin"        # apple silicon
 export HOMEBREW_NO_AUTO_UPDATE=1
 

@@ -69,19 +69,20 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	notice "# ------ macos dictionary"
 	_cfg_ln "$DOTPATH/assets/LocalDictionary" "$HOME/Library/Spelling/LocalDictionary"
 
-	if [ -x "$(which brew)" ]; then
-		notice "# ------ brew bundle"
-		echo "brew bundle --file=$DOTPATH/assets/Brewfile"
-	else
+	if [ ! -x "$(which brew)" ]; then
 		notice "# ------ brew"
 		echo "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
 	fi
+	notice "# ------ brew bundle"
+	echo "brew bundle --file=$DOTPATH/assets/Brewfile"
+	notice "# ------ vscode"
+	echo "code --install-extension \"$DOTPATH/assets/monokai22-1.0.0.vsix\""
+	echo "rm \"$HOME/Library/Application Support/Code/User/settings.json\""
+	echo "cp \"$DOTPATH/assets/vcs-settings.json\" \"$HOME/Library/Application Support/Code/User/settings.json\""
 fi
 # ------
 if [ -x "$(which php)" ]; then
-	if [ -x "$(which composer)" ]; then
-		notice "# ------ composer"
-	else
+	if [ ! -x "$(which composer)" ]; then
 		notice "# ------ composer"
 		echo "curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=\"$HOME/bin/\""
 		echo "mv \"$HOME/bin/composer.phar\" \"$HOME/bin/composer\""
@@ -90,6 +91,3 @@ else
 	notice "# ------ php"
 	notice "php is not installed, skipping composer"
 fi
-
-
-

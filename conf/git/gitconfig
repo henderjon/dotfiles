@@ -24,25 +24,20 @@
 [push]
 	default = upstream
 [pull]
-	rebase = true
+	rebase = false
 	default = upstream
 	ff = true
 [diff]
 	tool = diff
-	# tool = diff
 	renameLimit = 999
 [difftool]
 	tool = bc3
 	prompt = true
 [difftool "diff"]
-	cmd = diff --normal $LOCAL $REMOTE
-	# cmd = diff --side-by-side --width 220 --left-column $LOCAL $REMOTE
-	# cmd = diff -y --suppress-common-lines $LOCAL $REMOTE | cat -n | grep -v -e '($'
-	# cmd = diff --unchanged-group-format='%E %< %>\n' --old-line-format=':%dn: %L' --new-line-format=':%dn: %L' $LOCAL $REMOTE
+	cmd = diff -u $LOCAL $REMOTE
 	trustExitCode = false
 [merge]
 	tool = bc3
-	# tool = code
 	ff = false
 	defaultToUpstream = true
 [mergetool "bc3"]
@@ -98,7 +93,6 @@
 	### DONAT
 	cplog       = log --oneline --reverse -50
 	exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
-	# personal    = config user.email \"donatj@gmail.com\"
 	# pr          = "!f(){ git log --merges --ancestry-path --oneline $1..HEAD | grep \"pull request\" | tail -n1 | awk \"{print \\\\$5}\"; }; f"
 	mrb         = "!f(){ git for-each-ref --sort=-committerdate refs/heads/ | egrep -v 'refs/heads/(review/|release/|dev$)' | head -15 | awk '{print substr($1,0,10) \" \" substr($3,12)}'; };f"
 	restash     = rebase --autostash
@@ -106,14 +100,9 @@
 	prune = true
 [log]
 	date = rfc
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
 [commit]
 	gpgsign = true
 [gpg]
-	# program = /usr/local/bin/gpg
 	program = /usr/local/MacGPG2/bin/gpg2
 [url "git@github.com:"]
 	insteadOf = https://github.com/

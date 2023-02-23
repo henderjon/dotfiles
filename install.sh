@@ -91,3 +91,7 @@ else
 	notice "# ------ php"
 	notice "php is not installed, skipping composer"
 fi
+
+notice "# ------ cleanup; avoids clobbering on fetch/pull"
+echo "git checkout -b \"$ENV_NAME\"/"
+notice "# !----- edit signing key and email in gitconfig"

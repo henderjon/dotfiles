@@ -15,11 +15,6 @@ if [ "$CONFIRM" != "y" ] && [ "$CONFIRM" != "yes" ]; then
 	exit 1
 fi
 
-for BIN in bin/*
-do
-	F=$(basename "$BIN")
-	_has_changed "$BIN" "$HOME/bin/$F"
-done
 # -----
 _has_changed "conf/nginx/conf/fastcgi_params" "$HOME/code/conf/nginx/conf/fastcgi_params"
 _has_changed "conf/nginx/conf/nginx.conf" "$HOME/code/conf/nginx/conf/nginx.conf"

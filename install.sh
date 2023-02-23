@@ -59,11 +59,6 @@ echo "echo '_LOCAL_ENV_NAME=$ENV_NAME' >> \"$HOME/.zshenv\""
 # ------
 notice "# ------ bin files"
 _no_folder_create "$HOME/bin"
-for BINFILE in "$DOTPATH"/bin/*
-do
-	F=$(basename "$BINFILE")
-	_cfg_ln "$BINFILE" "$HOME/bin/$F"
-done
 # ------
 notice "# ------ ssh"
 _no_folder_create "$HOME/.ssh"

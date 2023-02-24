@@ -1,0 +1,87 @@
+# github.com/donatj/dotfiles
+# ask for the administrator password upfront
+sudo -v
+
+#==============================================================================
+# Finder
+#==============================================================================
+
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Disable the warning when changing a file extension
+# defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Use list view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# Quick look doesn't allow text selection by default, enable it!
+defaults write com.apple.finder QLEnableTextSelection -bool TRUE
+
+
+#==============================================================================
+# Dock
+#==============================================================================
+
+# set the minimize effect to suck
+# defaults write com.apple.dock mineffect -string suck
+
+# set bottom right hot corner to screen saver and top right to never screen saver
+# defaults write com.apple.dock wvous-br-corner -int 10
+# defaults write com.apple.dock wvous-tr-corner -int 5
+
+# Set the icon size of Dock items to 48 pixels
+# defaults write com.apple.dock tilesize -int 48
+
+# Make Dock icons of hidden applications translucent
+# defaults write com.apple.dock showhidden -bool true
+
+#==============================================================================
+# System Settings
+#==============================================================================
+
+# sets hilight color to orange
+# defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.823500 0.505900"
+
+# Save to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# zoom follows mouse as it moves
+defaults write com.apple.universalaccess closeViewPanningMode -int 0
+
+# Always show scrollbars
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# Small Sidebar
+# defaults write .GlobalPreferences NSTableViewDefaultSizeMode -int 1
+
+#==============================================================================
+# App Store
+#==============================================================================
+
+# Show debug menu
+defaults write com.apple.appstore ShowDebugMenu -bool true
+
+killall Dock
+killall Finder
+
+echo "Some of these changes require a restart to take effect."

@@ -14,7 +14,6 @@
     "editor.wordWrap": "off",
     "editor.hover.enabled": false,
     "editor.renderLineHighlight": "all",
-    "editor.selectionHighlight": false,
     "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?",
     "editor.minimap.showSlider": "always",
     "editor.renderControlCharacters": false,
@@ -46,8 +45,6 @@
     },
     "window.titleBarStyle": "native",
     "window.title": "${activeEditorLong}${separator}${rootName}",
-
-    "workbench.colorTheme": "Monokai22",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.list.openMode": "doubleClick",
     "workbench.activityBar.visible": true,
@@ -148,5 +145,11 @@
     "[markdown]": {
         "editor.wordWrap": "off"
     },
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "workbench.colorTheme": "Monokai22",
+    "editor.selectionHighlight": false,
+    "editor.occurrencesHighlight": false,
     // "editor.fontLigatures": "'ss05', 'cv16', 'ss03', 'onum'",
 }

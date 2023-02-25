@@ -27,8 +27,11 @@
 
 ############################################################### VSCODE Theme ###
 
+% npm install -g @vscode/vsce
+
 ### in extension root folder to create a VSIX file:
 % vsce package
+% vsce publish
 
 ### For users who receive such a VSIX file, they can install the extension with
 %  code --install-extension $file.vsix

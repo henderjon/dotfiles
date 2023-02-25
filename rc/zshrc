@@ -124,7 +124,7 @@ export PAGER=cat
 export DIFFCOLORS="33:34" # ascii color codes ... add:rm
 
 #--------------------------------------------------------------------- SNIPS --#
-export SNIPS_FILE=$HOME/dotfiles/assets/snips.txt
+export SNIPS_FILE=$HOME/dotfiles/resources/snips.txt
 alias snips="cat \"$SNIPS_FILE\" "
 
 #----------------------------------------------------------------------- IRC --#

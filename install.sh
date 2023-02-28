@@ -45,6 +45,9 @@ echo "chsh -s /bin/zsh"
 # ------
 notice "# ------ gitconfig"
 echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/gitconfig\""
+notice "# !----- edit signing key and email in gitconfig"
+echo "git config --global user.email \"...\""
+echo "git config --global signingkey \"...\""
 # ------
 notice "# ------ rc files"
 for RCFILE in "$DOTPATH"/rc/*
@@ -94,4 +97,4 @@ fi
 
 notice "# ------ cleanup; avoids clobbering on fetch/pull"
 echo "git checkout -b \"$ENV_NAME\"/"
-notice "# !----- edit signing key and email in gitconfig"
+

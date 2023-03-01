@@ -1,21 +1,33 @@
 #!/usr/bin/env sh
-git for-each-ref --sort=committerdate --format='%(refname:lstrip=2)%1F%(objectname:short)%1F%(upstream:lstrip=2)%1F%(upstream:track,nobracket)%1F%(subject)%1F%(HEAD)' refs/heads ^archive/ | \
-awk 'BEGIN{
+
+FILTER=1
+if [ -z "$1" ]; then
+	FILTER=0
+fi
+
+git for-each-ref --sort=committerdate --format='%(refname:lstrip=2)%1F%(objectname:short)%1F%(upstream:lstrip=2)%1F%(upstream:track,nobracket)%1F%(subject)%1F%(HEAD)%1F%(committerdate:short)' refs/heads | \
+awk -v FILTER=$FILTER 'BEGIN{
 		FS="\037";
 		OFS="|";
 		max = 0;
 	}
-	!/archive\//{
-		line[NR] = $1 SUBSEP $2 SUBSEP $3 SUBSEP $4 SUBSEP $5 SUBSEP $6
+	{
+
+		if(FILTER == "1"){
+			line[NR] = $1 SUBSEP $2 SUBSEP $3 SUBSEP $4 SUBSEP $5 SUBSEP $6 SUBSEP $7
+		}else if(match($0, "^archive/") == 0){ # filter out archive branches
+			line[NR] = $1 SUBSEP $2 SUBSEP $3 SUBSEP $4 SUBSEP $5 SUBSEP $6 SUBSEP $7
+		}
 
 		if(max < length($1)){
 			max = length($1);
 		}
 	}
 	END{
-		print("  excluding archive/*");
+		# print("  excluding archive/*");
 		ref   = "%-" max "s  "
 		hash  = "%s  "
+		date  = "(%s)  "
 		extra = "[%s: %s] "
 		title = "%s\n"
 		for(k in line){
@@ -32,9 +44,9 @@ awk 'BEGIN{
 			}
 
 			if(remote == ""){
-				printf(pre hash title, bits[1], bits[2], bits[5])
+				printf(pre hash date title, bits[1], bits[2], bits[7], bits[5])
 			}else{
-				printf(pre hash remote title, bits[1], bits[2], blue(bits[3]), blue(underline(bits[4])), bits[5])
+				printf(pre hash date remote title, bits[1], bits[2], bits[7], blue(bits[3]), blue(underline(bits[4])), bits[5])
 			}
 
 		}
@@ -45,7 +57,15 @@ awk 'BEGIN{
 	}
 
 	function blue(s){
-		return "\033[34m" s "\033[0m";
+		return "\033[36m" s "\033[0m";
+	}
+
+	function red(s){
+		return "\033[31m" s "\033[0m";
+	}
+
+	function yellow(s){
+		return "\033[33m" s "\033[0m";
 	}
 
 	function underline(s){

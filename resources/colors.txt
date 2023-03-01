@@ -1,12 +1,12 @@
 [8 color monokai]
-[0] = "#272822", /* black background      */
+[0] = "#272822", /* black || background      */
 [1] = "#F92672", /* fuschia               */
 [2] = "#A6E22E", /* green                 */
 [3] = "#FFE792", /* yellow modified       */
 [4] = "#FD971F", /* orange SHOULD be BLUE */
 [5] = "#AE81FF", /* magenta               */
 [6] = "#66D9EF", /* cyan                  */
-[7] = "#F8F8F2", /* white foreground      */
+[7] = "#F8F8F2", /* white || foreground      */
 
 [8 color monokai terminal accents]
 [] = "#CFCFC2" /* dark white light grey            */

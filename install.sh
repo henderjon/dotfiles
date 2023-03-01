@@ -96,5 +96,5 @@ else
 fi
 
 notice "# ------ cleanup; avoids clobbering on fetch/pull"
-echo "git checkout -b \"$ENV_NAME\"/"
+echo "git checkout -b \"$ENV_NAME\""
 

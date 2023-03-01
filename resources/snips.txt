@@ -266,9 +266,12 @@ s = 'this uses {v}'.format(v='indicies')
 
 ### interact with PRs
 % gh label list
+% gh pr view $N
+% gh pr create
 % gh pr edit $N --add-label "label"
 % gh pr edit $N --add-assignee $name
 % gh pr comment $N -b "comment"
+% gh pr comment $N -b "@cronrunner new issue"
 % gh pr diff $N
 % gh pr review $N -a -b ":8ball:"
 

@@ -1,21 +1,22 @@
 [8 color monokai]
-[0] = "#272822", /* black || background      */
+[0] = "#272822", /* black || background   */
 [1] = "#F92672", /* fuschia               */
 [2] = "#A6E22E", /* green                 */
 [3] = "#FFE792", /* yellow modified       */
 [4] = "#FD971F", /* orange SHOULD be BLUE */
 [5] = "#AE81FF", /* magenta               */
 [6] = "#66D9EF", /* cyan                  */
-[7] = "#F8F8F2", /* white || foreground      */
+[7] = "#F8F8F2", /* white || foreground   */
 
 [8 color monokai terminal accents]
-[] = "#CFCFC2" /* dark white light grey            */
-[] = "#75715E" /* light black dark grey            */
-[] = "#191916" /* darker background                */
-[] = "#456BA5" /* blue for selections  in terminal */
-[] = "#7F7F7F" /* grey cursor in terminal          */
-[] = "#819AFF" /* blue accent blue                 */
-[] = "#F4BF75" /* tan leftover tan/yellow          */
+[] = "#CFCFC2" /* dark white light grey              */
+[] = "#75715E" /* light black dark grey              */
+[] = "#191916" /* darker background                  */
+[] = "#456BA5" /* blue for selections in terminal    */
+[] = "#6796e6" /* blue original accent blue from VSC */
+[] = "#7F7F7F" /* grey cursor in terminal            */
+[] = "#819AFF" /* blue accent blue                   */
+[] = "#F4BF75" /* tan leftover tan/yellow            */
 
 
 SECONDARY TERMINAL SCHEME [monokai 23-b]

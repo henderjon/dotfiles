@@ -1,5 +1,6 @@
 {
   "document": {
+    "source": "https://github.com/charmbracelet/glamour/blob/master/styles/dark.json",
     "block_prefix": "\n",
     "block_suffix": "\n",
     "color": "7",

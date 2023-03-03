@@ -69,7 +69,7 @@
 	blv         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --reverse -n 10
 	kll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpgfull -n 20
 	rcl         = reflog --pretty=columns -n 20
-	vv          = branch -vv --sort=committerdate
+	# vv          = branch -vv --sort=committerdate
 	co          = checkout
 	cb          = checkout -b
 	s           = status --short --branch

@@ -17,6 +17,7 @@
 [] = "#7F7F7F" /* grey cursor in terminal            */
 [] = "#819AFF" /* blue accent blue                   */
 [] = "#F4BF75" /* tan leftover tan/yellow            */
+[] = "#E6DB74" /* original yellow                    */
 
 
 SECONDARY TERMINAL SCHEME [monokai 23-b]

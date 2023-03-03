@@ -302,6 +302,9 @@ GitHub will automatically use GPG to sign commits you make using the web interfa
 ### view range ###
 % git log $OLD..$NEW
 
+### started work from the wrong branch ###
+% git fetch && git rebase --onto <where> <where I am now>
+
 ### Search commit messages ###
 % git log --all --notes -i --grep=''
 # or the same ... `g` searches the reflog

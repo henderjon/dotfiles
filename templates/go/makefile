@@ -74,3 +74,7 @@ test:
 	go mod vendor
 	go mod tidy
 	go test -mod=vendor -coverprofile=coverage.out -covermode=count ./...
+
+.PHONY: prod
+prod: check
+	GOWORK=off go build -ldflags $(LDFLAGS) -o $(BINDIR)/$(BIN)

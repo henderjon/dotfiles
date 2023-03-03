@@ -14,3 +14,4 @@ journal/*
 *.sublime-project
 *.sublime-workspace
 .vscode/
+go.work

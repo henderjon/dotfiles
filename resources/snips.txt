@@ -302,6 +302,15 @@ GitHub will automatically use GPG to sign commits you make using the web interfa
 ### view range ###
 % git log $OLD..$NEW
 
+### view specific folder/file history ###
+$ git log -- path/to/folder
+
+### include deletes:
+$ git log -- path/to/folder/*
+
+### shows diff patch
+$ git log -p -- path/to/folder/*
+
 ### started work from the wrong branch ###
 % git fetch && git rebase --onto <where> <where I am now>
 

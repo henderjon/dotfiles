@@ -153,12 +153,13 @@ else
 fi
 
 #------------------------------------------------------ fancy prompt for zsh --#
+#https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Conditional-Substrings-in-Prompts
 PROMPT="[%D{%Y-%m-%d %H:%M:%S}] %?
 [%U$_LOCAL_ENV_NAME%u]$XTERM %~/
-%# "
+%(!.#.$) " # `%#` is the default zsh prompt % or #
 
 #-------------------------------------------------------fancy prompt for BASH--#
-# export PS1="[\D{%Y-%m-%d %H:%M:%S}] $?\n[\e[;4m$ENV_NAME\e[;0m] \w/\n\$ "
+# export PS1="[\D{%Y-%m-%d %H:%M:%S}] $?\n[\e[;4m$_LOCAL_ENV_NAME\e[;0m] \w/\n\$ "
 
 #-------------------------- fancy RIGHT prompt -- '%?[%D{%d %b %Y %l:%M%p}]' --#
 #RPROMPT='%?[%D{%Y-%m-%d %H:%M:%S}]'

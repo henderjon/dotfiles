@@ -50,15 +50,15 @@ ANSI		Description
 
 ################################################# LINUX SETUP (digital ocean) ##
 
-% adduser --shell $PATH/zsh --group root,admin,wheel $USERNAME
+$ adduser --shell $PATH/zsh --group root,admin,wheel $USERNAME
 
-# if the groups get messed up
-% usermod -a -G $GROUP $USERNAME
-% ed /etc/sudoers
+// if the groups get messed up
+$ usermod -a -G $GROUP $USERNAME
+$ ed /etc/sudoers
 
-# assuming digital ocean root user
-% cp ~/.ssh/authorized_keys /home/$username/.ssh/authorized_keys
-% chown $username /home/$username/.ssh/authorized_keys
+// assuming digital ocean root user
+$ cp ~/.ssh/authorized_keys /home/$username/.ssh/authorized_keys
+$ chown $username /home/$username/.ssh/authorized_keys
 
 ### https://wiki.centos.org/HowTos/Network/SecuringSSH
 
@@ -78,7 +78,7 @@ AllowUsers alice bob
 Protocol 2
 
 ### restart ssh
-% service sshd restart
+$ service sshd restart
 
 ### COMMON PORTS ###
 - http: 80, 443, 8080
@@ -96,8 +96,8 @@ Protocol 2
 
 ########################################## macOS SSH Can't Connect To Client ###
 
-% eval $(ssh-agent)
-% ssh-add
+$ eval $(ssh-agent)
+$ ssh-add
 
 ###################################################################### DATE.C ##
 
@@ -130,11 +130,11 @@ Protocol 2
 # TIMESTAMP=$(shell date '+%Y-%m-%dT%H:%M:%S %z %Z')
 
 # Convert Unix timestamp to human readable
-% date -d 1656685875
+$ date -d 1656685875
 Fri, 01 Jul 2022 14:31:15 +0000
 
 # Current time as UNIX timestamp
-% date "+%s"
+$ date "+%s"
 
 ######################################################################## CRON ##
 
@@ -212,8 +212,8 @@ Fri, 01 Jul 2022 14:31:15 +0000
 
 ################################################################## FIX PERMS ###
 
-% find . -type d -print0 | xargs -0 -I % chmod 755 %
-% find . -type f -print0 | xargs -0 -I % chmod 644 %
+$ find . -type d -print0 | xargs -0 -I % chmod 755 %
+$ find . -type f -print0 | xargs -0 -I % chmod 644 %
 
 ###################################################################### PYTHON ##
 
@@ -265,15 +265,15 @@ s = 'this uses {v}'.format(v='indicies')
 % gh pr -R $REPO list -S "is:pr is:open -reviewed-by:@me "
 
 ### interact with PRs
-% gh label list
-% gh pr view $N
-% gh pr create
-% gh pr edit $N --add-label "label"
-% gh pr edit $N --add-assignee $name
-% gh pr comment $N -b "comment"
-% gh pr comment $N -b "@cronrunner new issue"
-% gh pr diff $N
-% gh pr review $N -a -b ":8ball:"
+$ gh label list
+$ gh pr view $N
+$ gh pr create
+$ gh pr edit $N --add-label "label"
+$ gh pr edit $N --add-assignee $name
+$ gh pr comment $N -b "comment"
+$ gh pr comment $N -b "@cronrunner new issue"
+$ gh pr diff $N
+$ gh pr review $N -a -b ":8ball:"
 
 ### https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification
 
@@ -282,25 +282,25 @@ GitHub will automatically use GPG to sign commits you make using the web interfa
 ######################################################################### GIT ##
 
 ### To revert stuff committed by accident ###
-% git revert --no-commit D
-% git revert --no-commit C
-% git revert --no-commit B
-% git commit -m \"the commit message for all of them\"
+$ git revert --no-commit D
+$ git revert --no-commit C
+$ git revert --no-commit B
+$ git commit -m \"the commit message for all of them\"
 # or
-% git revert --no-commit HEAD~3..
+$ git revert --no-commit HEAD~3..
 # or the same
-% git revert --no-commit HEAD~3..HEAD
+$ git revert --no-commit HEAD~3..HEAD
 
 ### delete remote
-% git push --delete origin tagname
-% git push --delete origin branchname
+$ git push --delete origin tagname
+$ git push --delete origin branchname
 
 ###  checkout that revision over the top of local files ###
-% git checkout -f A -- .
-% git commit -a
+$ git checkout -f A -- .
+$ git commit -a
 
 ### view range ###
-% git log $OLD..$NEW
+$ git log $OLD..$NEW
 
 ### view specific folder/file history ###
 $ git log -- path/to/folder
@@ -312,37 +312,37 @@ $ git log -- path/to/folder/*
 $ git log -p -- path/to/folder/*
 
 ### started work from the wrong branch ###
-% git fetch && git rebase --onto <where> <where I am now>
+$ git fetch && git rebase --onto <where> <where I am now>
 
 ### Search commit messages ###
-% git log --all --notes -i --grep=''
+$ git log --all --notes -i --grep=''
 # or the same ... `g` searches the reflog
-% git log --g -i --grep=''
+$ git log --g -i --grep=''
 
 ### Search source code ###
-% git grep -i \$str $(git rev-list --all)
+$ git grep -i \$str $(git rev-list --all)
 # or the same ... `g` searches the reflog
-% git grep -i \$regex $(git rev-list --all)
+$ git grep -i \$regex $(git rev-list --all)
 # or search a folder within the repo; also if too many files error
-% git grep -i \$regex $(git rev-list --all -- sub/tree) -- sub/tree
+$ git grep -i \$regex $(git rev-list --all -- sub/tree) -- sub/tree
 
 # push a subtree as a new repo
-% git subtree --prefix $dir push $remote $dest_branch
+$ git subtree --prefix $dir push $remote $dest_branch
 
 # apply a branches changes on the current branch
-% git checkout $branch && git checkout $otherBranch -- .
+$ git checkout $branch && git checkout $otherBranch -- .
 
 # show commits in $LATER that are NOT in $EARLIER
-% git log $EARLIER..$LATER
+$ git log $EARLIER..$LATER
 
 ### CLI CODE REVIEW
-% git diff $dev $release
-% git diff --name-status $dev $release
+$ git diff $dev $release
+$ git diff --name-status $dev $release
 
 ### TROUBLE WITH GPG
 # Add GIT_TRACE=1 at the beginning of the command you use. Run the command that failed
-% gpg --list-secret-keys --keyid-format=long
-% git config --global user.signingkey <your key>
+$ gpg --list-secret-keys --keyid-format=long
+$ git config --global user.signingkey <your key>
 
 ### GPG EXPLAINED
 show "G" for a good (valid) signature,
@@ -354,21 +354,9 @@ show "G" for a good (valid) signature,
 "E" if the signature cannot be checked (e.g. missing key) and
 "N" for no signature
 
-### GIT LOG COLORS (https://git-scm.com/docs/git-config#Documentation/git-config.txt-color)
-
-The value for a variable that takes a color is a list of colors (at most two, one for foreground and one for background) and attributes (as many as you want), separated by spaces.
-
-The basic colors accepted are normal, black, red, green, yellow, blue, magenta, cyan, white and default. The first color given is the foreground; the second is the background. All the basic colors except normal and default have a bright variant that can be specified by prefixing the color with bright, like brightred.
-
-The color normal makes no change to the color. It is the same as an empty string, but can be used as the foreground color when specifying a background color alone (for example, "normal red").
-
-The color default explicitly resets the color to the terminal default, for example to specify a cleared background. Although it varies between terminals, this is usually not the same as setting to "white black".
-
-Colors may also be given as numbers between 0 and 255; these use ANSI 256-color mode (but note that not all terminals may support this). If your terminal supports it, you may also specify 24-bit RGB values as hex, like #ff0ab3.
-
-The accepted attributes are bold, dim, ul, blink, reverse, italic, and strike (for crossed-out or "strikethrough" letters). The position of any attributes with respect to the colors (before, after, or in between), doesn’t matter. Specific attributes may be turned off by prefixing them with no or no- (e.g., noreverse, no-ul, etc).
-
 ### Scripts / Aliases
+
+https://git-scm.com/docs/git#Documentation/git.txt---list-cmdsgroupgroup82308203
 
 I couldn't find in documentation, but if you create a script "git-<name>" in path, you can call it with "git name" in your repo.
 
@@ -443,7 +431,7 @@ Delete $TEMPDIR
 
 ### EXAMPLE ###
 # no slash on the $src; yes slash on the $dest to copy $src AS IS into $dest
-% rsync -a -E -h  --progress --dry-run $src $dest
+$ rsync -a -E -h  --progress --dry-run $src $dest
 
 
 ####################################################################### FIND ###
@@ -456,7 +444,7 @@ Delete $TEMPDIR
         option corresponds to the -0 option of xargs.
 
 ### list subdir
-% find ./sub/dir -maxdepth 1 -mindepth 1
+$ find ./sub/dir -maxdepth 1 -mindepth 1
 
 ###################################################################### XARGS ###
 
@@ -465,22 +453,22 @@ Delete $TEMPDIR
         spaces and newlines.  This is expected to be used in concert with the
         -print0 function in find(1).
 
-% find . -type f | [...] | tr \\n \\0 | xargs -0 -I % rm %
+$ find . -type f | [...] | tr \\n \\0 | xargs -0 -I % rm %
 
 ################################################################# DISK USAGE ###
 
 # local dir
-% du -h -d 1
+$ du -h -d 1
 
 # main drives
-% df -h
+$ df -h
 
 ####################################################################### WGET ###
 
-% wget -e robots=off -m -np $1
-% wget -p -k $1
-% wget -r -np -nc -k -c $1
-% wget --content-disposition --restrict-file-names=nocontrol -e robots=off -A.pdf,.ppt,.doc -r $1
+$ wget -e robots=off -m -np $1
+$ wget -p -k $1
+$ wget -r -np -nc -k -c $1
+$ wget --content-disposition --restrict-file-names=nocontrol -e robots=off -A.pdf,.ppt,.doc -r $1
 
 ### Misc ###
  -nc --no-clobber
@@ -500,7 +488,7 @@ Delete $TEMPDIR
  --load-cookies file.txt
 
 ### Single page ### (https://gist.github.com/dannguyen/03a10e850656577cfb57)
- % wget -E -H -k -K -N -p -P $DIR $PAGEURL
+$ wget -E -H -k -K -N -p -P $DIR $PAGEURL
 
  --adjust-extension, -E
  --span-hosts, -H
@@ -512,38 +500,38 @@ Delete $TEMPDIR
 
 ######################################################################### ln ###
 
-% ln [options] file-name link-name
+$ ln [options] file-name link-name
 
 ################################################################ GO / GOLANG ###
 
 ### classic golang.org docs
-% go install golang.org/x/tools/cmd/godoc@latest
-% cd $GOROOT/pkg
-% godoc -http "localhost:6060"
-% cd -
+$ go install golang.org/x/tools/cmd/godoc@latest
+$ cd $GOROOT/pkg
+$ godoc -http "localhost:6060"
+$ cd -
 
 ### cross compile
-% go tool dist list -json
-% env GOOS=windows GOARCH=amd64 go [build ...]
+$ go tool dist list -json
+$ env GOOS=windows GOARCH=amd64 go [build ...]
 
 ### list STDLIB
-% tree -L 1 -d $GOROOT/src
-% find $GOROOT/src -type d -maxdepth 2 | sed "s|$GOROOT/src/||" | sort
+$ tree -L 1 -d $GOROOT/src
+$ find $GOROOT/src -type d -maxdepth 2 | sed "s|$GOROOT/src/||" | sort
 
 ### search STDLIB
-% grep --colour=always -Iir "$1" "$GOROOT/src"
+$ grep --colour=always -Iir "$1" "$GOROOT/src"
 
 ####################################################################### DIFF ###
 
 # http://www.computerhope.com/unix/udiff.htm
 
 # Example usage of comparing output of two ls commands
-% diff -u <(ls -l /directory/) <(ls -l /directory/) | colordiff
-% cmp $file $file
+$ diff -u <(ls -l /directory/) <(ls -l /directory/) | colordiff
+$ cmp $file $file
 
 ### using ed
-% diff -e > diff-output
-% ed file < diff-output
+$ diff -e > diff-output
+$ ed file < diff-output
 
 ### understanding unified diff
 --- from-file mod-time
@@ -624,11 +612,11 @@ END{}
 
 ################################################################## IPINFO.IO ###
 
-% curl -s ipinfo.io/ip
+$ curl -s ipinfo.io/ip
 
 ############################################################# BIG FILE DIFFS ###
 
-% find . -type f -print0 | xargs -0 -I % sum %
+$ find . -type f -print0 | xargs -0 -I % sum %
 
 ##################################################################### SQLITE ###
 
@@ -641,7 +629,7 @@ END{}
 
 ######################################################################### TR ###
 
-% tr -d "\n\r\t"
+$ tr -d "\n\r\t"
 
 ####################################################################### CURL ###
 

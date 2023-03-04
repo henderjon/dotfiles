@@ -109,11 +109,11 @@ alias hall='history 1'
 alias psp='ps -eo user,group,pid,comm,args'
 alias psa='ps aux'
 alias grep='grep --color '
-alias gome='cd "$HOME/code/go/src/github.com/henderjon'
-alias iclouddrive='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
-alias topen='open -a Terminal'
+alias gome='cd "$HOME/code/go/src/github.com/henderjon '
+alias iclouddrive='cd "$HOME/Library/Mobile\ Documents/com~apple~CloudDocs" '
+alias topen='open -a Terminal '
 alias python='python3 '
-alias diff='diff -u --color=always'
+alias diff='diff -u --color=always '
 
 #------------------------------------------------------- these are important --#
 #--------------------------- these are off as they mess with tmux and screen --#
@@ -125,7 +125,7 @@ export DIFFCOLORS="33:34" # ascii color codes ... add:rm
 export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json"
 
 #--------------------------------------------------------------------- SNIPS --#
-export SNIPS_FILE=$HOME/dotfiles/resources/snips.txt
+export SNIPS_FILE="$HOME/dotfiles/resources/snips.txt"
 alias snips="cat \"$SNIPS_FILE\" "
 
 #----------------------------------------------------------------------- IRC --#

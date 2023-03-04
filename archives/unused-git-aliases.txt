@@ -1,0 +1,14 @@
+# vv          = branch -vv --sort=committerdate
+rr          = "!f(){ git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name '@{u}'); }; f" # remove all commits on on remote tracking branch, for OOPSs on dev
+# dl        = log --pretty      = difflog -200000
+# nb        = "!f(){ git fetch origin; git checkout -b $2 --no-track origin/$1; }; f"
+### difflog
+# dl          = "!git log --pretty=difflog -200000 $1..HEAD"
+### release difflog
+cr          = "!f(){ git fetch origin; git checkout -B review/$1 origin/$1; }; f"
+exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
+### DONAT
+exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
+# pr          = "!f(){ git log --merges --ancestry-path --oneline $1..HEAD | grep \"pull request\" | tail -n1 | awk \"{print \\\\$5}\"; }; f"
+mrb         = "!f(){ git for-each-ref --sort=-committerdate refs/heads/ | egrep -v 'refs/heads/(review/|release/|dev$)' | head -15 | awk '{print substr($1,0,10) \" \" substr($3,12)}'; };f"
+restash     = rebase --autostash

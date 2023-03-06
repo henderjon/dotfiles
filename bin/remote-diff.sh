@@ -2,6 +2,17 @@
 
 set -e
 
+# given a $dir, this script generates a report that looks like:
+# $checksum $blocksize $fname
+# this is piped through awk to rearrange into
+# $fname $checksum $blocksize
+# and is written to a tmp file
+# the contents of this tmp file are then piped through sort to be put in
+# filename order in $filename
+# do this in both directores to be diffed and then diff the final text files
+# the advantage on large dir or large files is that this can be run async in
+# tmux or screen and returned to at a later time
+
 SRCDIR=$1
 DESTFILE=$2
 

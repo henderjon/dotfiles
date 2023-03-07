@@ -260,9 +260,13 @@ s = 'this uses {v}'.format(v='indicies')
 ### https://docs.github.com/en/issues/tracking-your-work-with-issues/filtering-and-searching-issues-and-pull-requests
 
 ### NEED MY REVIEW
-% gh pr status
-% gh pr -R $REPO list -S "is:pr is:open user-review-requested:@me "
-% gh pr -R $REPO list -S "is:pr is:open -reviewed-by:@me "
+# gh # https://docs.github.com/en/issues/tracking-your-work-with-issues/filtering-and-searching-issues-and-pull-requests
+$ gh pr status
+$ gh pr -R $REPO list -S "is:pr is:open user-review-requested:@me "
+$ gh pr -R $REPO list -S "is:pr is:open -reviewed-by:@me "
+$ gh pr -R $REPO list -S "is:pr is:open is:pr author:@me "
+$ gh pr -R $REPO list -S "is:pr is:open is:issue author:@me "
+$ gh pr -R $REPO list -S "is:pr is:open assignee:@me "
 
 ### interact with PRs
 $ gh label list

@@ -100,6 +100,7 @@ export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:$HOME/dotfiles/bin"
 
 #------------------------------------------------- Alias [`man zshbuiltins`] --#
+# $ man ls # will describe how to customize ls colors
 alias lsl='ls -AFGTlh '  # --time-style=+'%b %e %T %Y' ## MacOS, BSD
 # alias lsl='ls -AFClh --color ' # --time-style=+'%b %e %T %Y' ## Linux
 alias less='less -S '

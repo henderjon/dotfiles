@@ -1,0 +1,18 @@
+
+# git for-each-ref \
+# --format='%(refname) - %(objectname:short) - %(contents)' \
+# --contains=HEAD
+
+#commits on HEAD
+git rev-list
+
+#branches
+git for-each-ref
+use git-show to add data to stream
+parse in awk or other
+
+
+numstat for diff
+
+
+$ git diff-tree --numstat --line-prefix="                " HEAD

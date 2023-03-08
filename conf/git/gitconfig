@@ -52,6 +52,7 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty]
 	# date formatting: https://git-scm.com/docs/git-rev-list
+	columndiff   = %Creset%n%<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %C(brightblack)
 	columns      = %<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	gpg          = %<(28)%cd %>(16)%C(white bold ul)%an%Creset (%><(16)%GK) | %><(7)%h  | %C(red)%d%Creset %s
 	gpgfull      = "%<(28)%cd %>(16)%C(white bold ul)%an%Creset | %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s\n\tUser: %GS\n\tKey: %GK (%G?)\n\tPrimary: %GP\n\n"
@@ -64,6 +65,7 @@
 	d           = diff
 	dt          = difftool
 	cl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
+	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columndiff --numstat -n 20
 	kl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpg -n 20
 	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --ancestry-path dev..HEAD
 	blv         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --reverse -n 10

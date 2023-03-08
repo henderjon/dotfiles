@@ -134,6 +134,43 @@ findmatchhighlight: #eb5e0055; 55 is about 33% alpha
 - rgba(127, 127, 127, 1)
 - hsla(0, 0%, 50%, 1)
 
+############################################################# terminal codes ###
 
+esc                = "\u001b[" // "\033", byte(27)
+reset              = "0m"
+bold               = "1"
+dim                = "2"
+italic             = "3"
+underline          = "4"
+blink              = "5"
+reverse            = "7"
+hidden             = "8"
+strikethrough      = "9"
+boldReset          = "22"
+dimReset           = "22"
+italicReset        = "23"
+underlineReset     = "24"
+blinkReset         = "25"
+reverseReset       = "27"
+hiddenReset        = "28"
+strikethroughReset = "29"
+black              = "30"
+red                = "31"
+green              = "32"
+yellow             = "33"
+blue               = "34"
+magenta            = "35"
+cyan               = "36"
+white              = "37"
+defaultFG          = "39"
+blackBG            = "40"
+redBG              = "41"
+greenBG            = "42"
+yellowBG           = "43"
+blueBG             = "44"
+magentaBG          = "45"
+cyanBG             = "46"
+whiteBG            = "47"
+defaultBG          = "49"
 
 

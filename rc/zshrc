@@ -122,7 +122,7 @@ export EDITOR="ed -p:"
 export CLICOLOR_FORCE=true
 export VISUAL="$EDITOR"
 export PAGER=cat
-export DIFFCOLORS="33:34" # ascii color codes ... add:rm
+export DIFFCOLORS="31:32" # ascii color codes ... add:rm
 export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json"
 
 #--------------------------------------------------------------------- SNIPS --#

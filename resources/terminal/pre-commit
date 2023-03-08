@@ -22,4 +22,4 @@ _has_changed "conf/nginx/conf/nginx.conf" "$HOME/code/conf/nginx/conf/nginx.conf
 _has_changed "conf/php/php-fpm.conf" "$HOME/code/conf/php/7.4 macOS build/php-fpm.conf"
 _has_changed "conf/php/php.ini" "$HOME/code/conf/php/7.4 macOS build/php.ini"
 # -----
-_has_changed "resources/pre-commit" ".git/hooks/pre-commit"
+_has_changed "resources/terminal/pre-commit" ".git/hooks/pre-commit"

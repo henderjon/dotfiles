@@ -126,7 +126,7 @@ export DIFFCOLORS="33:34" # ascii color codes ... add:rm
 export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json"
 
 #--------------------------------------------------------------------- SNIPS --#
-export SNIPS_FILE="$HOME/dotfiles/resources/snips.txt"
+export SNIPS_FILE="$HOME/dotfiles/resources/terminal/snips.txt"
 alias snips="cat \"$SNIPS_FILE\" "
 
 #----------------------------------------------------------------------- IRC --#

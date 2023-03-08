@@ -2,9 +2,9 @@
 	"always_show_minimap_viewport": true,
 	"auto_match_enabled": false,
 	"bold_folder_labels": true,
-	"caret_style": "phase",
+	"caret_style": "blink",
 	"close_windows_when_empty": false,
-	"color_scheme": "Packages/User/monokai-NI.tmTheme",
+	"color_scheme": "Monokai22.sublime-color-scheme",
 	"create_window_at_startup": false,
 	"draw_indent_guides": true,
 	"ensure_newline_at_eof_on_save": true,
@@ -16,15 +16,22 @@
 		"CVS",
 		".sass-cache"
 	],
-	"font_face": "Source Code Pro",
-	"font_size": 12,
+	"caret_extra_top": 0,
+	"caret_extra_bottom": 0,
+	"caret_extra_width": 1,
+	"block_caret": false,
+	"caret_style": "blink",
+	"font_face": "JetBrains Mono",
+	"font_size": 13,
+	"line_padding_top": 1,
+	"line_padding_bottom": 1,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
 	"ignored_packages":
 	[
 		"Markdown",
-		"Vintage"
+		"Vintage",
 	],
 	"indent_guide_options":
 	[
@@ -45,5 +52,5 @@
 	"spell_check": false,
 	"trim_trailing_white_space_on_save": true,
 	"word_separators": "./\\()\"'-:,.;<>~!@#%^&*|+=[]{}`~?",
-	"word_wrap": false
+	"word_wrap": false,
 }

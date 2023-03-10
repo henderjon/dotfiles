@@ -47,7 +47,7 @@
     "window.title": "${activeEditorLong}${separator}${rootName}",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.list.openMode": "doubleClick",
-    "workbench.activityBar.visible": true,
+    "workbench.activityBar.visible": false,
     "workbench.colorCustomizations": {
 		// "editor.findMatchBackground": "#49483E",
 		// "editor.findMatchHighlightBorder": "#75715E",
@@ -158,5 +158,6 @@
     "editor.selectionHighlight": false,
     "editor.occurrencesHighlight": false,
     "rainbow_csv.enable_cursor_position_info": false,
+    "workbench.iconTheme": null,
     // "editor.fontLigatures": "'ss05', 'cv16', 'ss03', 'onum'",
 }

@@ -31,6 +31,10 @@
     "workbench.list.keyboardNavigation": "filter",
     "terminal.integrated.fontSize":13,
 
+    "dotfiles.repository": "henderjon/dotfiles",
+    "dotfiles.targetPath": "~/dotfiles",
+    "dotfiles.installCommand": "~/dotfiles/bootstrap.sh",
+
     "timeline.showView": true,
 
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
@@ -47,7 +51,7 @@
     "window.title": "${activeEditorLong}${separator}${rootName}",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.list.openMode": "doubleClick",
-    "workbench.activityBar.visible": false,
+    // "workbench.activityBar.visible": false,
     "workbench.colorCustomizations": {
 		// "editor.findMatchBackground": "#49483E",
 		// "editor.findMatchHighlightBorder": "#75715E",
@@ -97,7 +101,6 @@
     "update.mode": "manual",
     "go.useLanguageServer": true,
     "editor.lineHeight": 22,
-    "aws.profile": "profile:default",
     "git.autofetch": true,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"

@@ -1,10 +1,9 @@
 #-- diff/merge args: $BASE $LOCAL $REMOTE $MERGED
 #-- extrenal diff-wrapper params: $PATH $OLD-FILE $OLD-HEX $OLD-MODE $NEW-FILE $NEW-HEX $NEW-MODE
-#----------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
 [user]
 	email = list@box370.net
 	name = henderjon
-	signingkey = B64029804B7D23DB!
 [core]
 	quotepath = false
 	autocrlf = input
@@ -92,8 +91,6 @@
 	date = rfc
 [commit]
 	gpgsign = true
-[gpg]
-	program = /usr/local/MacGPG2/bin/gpg2
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [init]

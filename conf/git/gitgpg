@@ -1,0 +1,4 @@
+[user]
+	signingkey = B64029804B7D23DB!
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2

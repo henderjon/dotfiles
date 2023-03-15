@@ -44,8 +44,12 @@ notice "# ------ zsh"
 echo "chsh -s /bin/zsh"
 # ------
 notice "# ------ gitconfig"
-echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/gitconfig\""
-notice "# !----- edit signing key and email in gitconfig"
+if [ -z "$CODESPACES" ]; then #codespaces doesn't like these GPG values
+	echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/gitconfig\" \"$DOTPATH/conf/git/gitgpg\""
+else
+	echo "git config --global --replace-all include.path \"$DOTPATH/conf/git/gitconfig\""
+fi
+notice "# !----- edit signing key and email in gitconfig & gitgpg"
 echo "git config --global user.email \"...\""
 echo "git config --global signingkey \"...\""
 # ------

@@ -34,7 +34,8 @@ fi
 
 notice "# !----- edit signing key and email in gitconfig & gitgpg"
 ste "git config --global user.email \"\""
-ste "git config --global signingkey \"\""
+ste "git config --global user.signingkey \"\""
+ste "git config --global core.excludesfile = \"\""
 
 # ------
 notice "# ------ rc files"

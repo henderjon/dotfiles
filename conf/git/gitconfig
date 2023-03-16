@@ -10,10 +10,12 @@
 	fileMode = false
 	logallrefupdates = true
 	ignorecase = true
-	# editor = /bin/ed -p :  # /usr/bin/vim
 	excludesfile = /Users/henderjon/dotfiles/.gitignore
 	pager = cat
+	# editor = /bin/ed -p :  # /usr/bin/vim
 	# editor = code --wait
+[init]
+	defaultBranch = dev
 [gc]
 	auto = 0
 [color]
@@ -89,7 +91,6 @@
 	prune = true
 [log]
 	date = rfc
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-[init]
-	defaultBranch = dev
+#[url "git@github.com:"] # use this to force SSH access and use an SSH key
+# 	insteadOf = https://github.com/
+

@@ -10,5 +10,5 @@ if [ -x "$(which php)" ]; then
 	fi
 else
 	notice "# ------ php"
-	notice "php is not installed, skipping composer"
+	ste "php is not installed, skipping composer"
 fi

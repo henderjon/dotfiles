@@ -1,5 +1,13 @@
-# apple silcon
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# apple intel
-# eval "$(/usr/local/bin/brew shellenv)"
+if [[ "$OSTYPE" == darwin* ]]; then
+	# apple silcon
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+
+	# apple intel
+	# eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+if [[ "$OSTYPE" == linux* ]]; then
+	# digital ocean / ubuntu
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi

@@ -14,7 +14,7 @@ $ sudo apt-get install build-essential procps curl file git
 $ sudo yum groupinstall 'Development Tools'
 $ sudo yum install procps-ng curl file git
 
-######################################################################## bew ###
+####################################################################### brew ###
 
 ### latest
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

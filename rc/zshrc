@@ -85,7 +85,8 @@ export GOPRIVATE=
 
 #---------------------------------------------------------------------- BREW --#
 # export PATH="$PATH:/usr/local/Homebrew/bin"  # apple intel
-export PATH="$PATH:/opt/homebrew/bin"        # apple silicon
+export PATH="$PATH:/opt/homebrew/bin"              # apple silicon
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin" # ubuntu
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 #-------------------------------------------------------------------- VSCode --#

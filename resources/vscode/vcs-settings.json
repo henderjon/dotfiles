@@ -19,26 +19,83 @@
     "editor.renderControlCharacters": false,
     "editor.suggestSelection": "first",
     "editor.renderWhitespace": "selection",
-
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
     "editor.autoClosingOvertype": "never",
-    // "terminal.integrated.shell.osx": "/bin/zsh",
     "editor.minimap.renderCharacters": false,
+    "editor.lineHeight": 22,
+    "editor.autoSurround": "never",
+    "editor.autoClosingDelete": "never",
+    "editor.suggest.showMethods": true,
+    "editor.suggest.preview": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.snippetSuggestions": "top",
+    "editor.guides.indentation": true,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.selectionHighlight": false,
+    "editor.occurrencesHighlight": false,
+    // "editor.fontLigatures": "'ss05', 'cv16', 'ss03', 'onum'",
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true, // enable for all themes
+        // "rules": {
+        //     "*.static": {
+        //         "foreground": "#ff0000",
+        //         "fontStyle": "bold"
+        //     },
+        //     "type": {
+        //         "foreground": "#00aa00"
+        //     }
+        // }
+    },
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+
+    // WORKBENCH
+    "workbench.iconTheme": null,
+    // "workbench.list.keyboardNavigation": "filter",
+    "workbench.list.defaultFindMode": "highlight",
+    "workbench.list.typeNavigationMode": "automatic",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.list.openMode": "doubleClick",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.preferredDarkColorTheme": "Monokai22",
+    "workbench.preferredHighContrastColorTheme": "Monokai",
+    "workbench.preferredHighContrastLightColorTheme": "Monokai",
+    "workbench.preferredLightColorTheme": "Monokai",
+    "workbench.colorTheme": "Monokai22",
+    // "workbench.activityBar.visible": false,
+    "workbench.colorCustomizations": {
+		"editor.findMatchHighlightBackground": "#eb5e0055", // generated value
+    },
+
+    // TERMINAL
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    // "terminal.integrated.shell.linux": "/bin/zsh",
+    // "terminal.integrated.shell.osx": "/bin/zsh",
     "terminal.integrated.inheritEnv": false,
     // "terminal.integrated.allowChords": false,
-    "terminal.integrated.cursorBlinking": true,
-    "workbench.list.keyboardNavigation": "filter",
     "terminal.integrated.fontSize":13,
+    "terminal.integrated.cursorBlinking": true,
 
+    // WINDOW
+    "window.titleBarStyle": "native",
+    "window.title": "${activeEditorLong}${separator}${rootName}",
+
+    // DOTFILES & SETTINGS SYNC
     "dotfiles.repository": "henderjon/dotfiles",
     "dotfiles.targetPath": "~/dotfiles",
     "dotfiles.installCommand": "~/dotfiles/bootstrap.sh",
+    "settingsSync.ignoredSettings": [
+        "php.executablePath",
+        "php.debug.executablePath",
+        "php.validate.executablePath"
+    ],
 
-    "timeline.showView": true,
-
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-
+    // FILES
+    "files.eol": "\n", // formatting only supports LF line endings
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "files.exclude": {
@@ -47,37 +104,26 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "window.titleBarStyle": "native",
-    "window.title": "${activeEditorLong}${separator}${rootName}",
-    "workbench.editor.highlightModifiedTabs": true,
-    "workbench.list.openMode": "doubleClick",
-    // "workbench.activityBar.visible": false,
-    "workbench.colorCustomizations": {
-		// "editor.findMatchBackground": "#49483E",
-		// "editor.findMatchHighlightBorder": "#75715E",
-		"editor.findMatchHighlightBackground": "#eb5e0055", // generated value
 
-        //   "window.activeBorder": "#ccc",
-        //   "window.inactiveBorder": "#295c8a",
-        //   "editor.background":"#1E1E1E",
-        //   "tab.border": "#fff",
-        //   "editorLineNumber.activeForeground" : "#fff",
-        //   "terminal.border" : "#fff",
-        //   "editorWhitespace.foreground": "#ff000091",
-        //   "editorIndentGuide.background": "#ff000091",
-        //   "editorIndentGuide.activeBackground": "#ff000091",
-        //   "editorRuler.foreground":"#555",
-        //   "editor.findMatchBackground": "#75715E",
-        //   "editor.findMatchHighlightBorder": "#75715E",
-    },
+    // PHP
     "php.validate.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
+    "php.debug.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
+    "php.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
 
-    "extensions.ignoreRecommendations": false,
-    "cSpell.language": "en,en-US",
+    // HTML
+    "html.autoCreateQuotes": false,
 
+    // CSS
+    "css.hover.references": false,
 
-    "java.errors.incompleteClasspath.severity": "ignore",
+    // GIT
+    "git.autofetch": true,
+    "git.mergeEditor": true,
+
+    // GO
     "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "go.toolsManagement.autoUpdate": true,
     "[go]": {
         "editor.snippetSuggestions": "none",
         "editor.formatOnSave": true,
@@ -94,14 +140,21 @@
         "watchFileChanges":        true,  // watch file changes outside of the editor
         "deepCompletion":          true,     // enable deep completion
     },
-    "files.eol": "\n", // formatting only supports LF line endings
+
+    // PYTHON
     "python.jediEnabled": false,
+    "python.languageServer": "Default",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+
+    // MISC
+    "extensions.ignoreRecommendations": false,
+    "cSpell.language": "en,en-US",
+    "java.errors.incompleteClasspath.severity": "ignore",
     "vsicons.dontShowNewVersionMessage": true,
     "oneDarkPro.bold": true,
     "update.mode": "manual",
-    "go.useLanguageServer": true,
-    "editor.lineHeight": 22,
-    "git.autofetch": true,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
@@ -109,58 +162,15 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
-    "css.hover.references": false,
-    "editor.autoSurround": "never",
-    "python.languageServer": "Default",
+
     "json.schemas": [],
-    "workbench.startupEditor": "newUntitledFile",
-    "editor.autoClosingDelete": "never",
-    "html.autoCreateQuotes": false,
-    "go.toolsManagement.autoUpdate": true,
-    "editor.suggest.showMethods": true,
-    "editor.suggest.preview": true,
-    "editor.acceptSuggestionOnEnter": "on",
-    "editor.snippetSuggestions": "top",
-    "editor.guides.indentation": true,
-    "git.mergeEditor": true,
-    "workbench.preferredDarkColorTheme": "Monokai22",
-    "workbench.preferredHighContrastColorTheme": "Monokai",
-    "workbench.preferredHighContrastLightColorTheme": "Monokai",
-    "workbench.preferredLightColorTheme": "Monokai",
-    "editor.bracketPairColorization.enabled": false,
-    "editor.inlayHints.enabled": "offUnlessPressed",
-    "editor.semanticTokenColorCustomizations": {
-        "enabled": true, // enable for all themes
-        // "rules": {
-        //     "*.static": {
-        //         "foreground": "#ff0000",
-        //         "fontStyle": "bold"
-        //     },
-        //     "type": {
-        //         "foreground": "#00aa00"
-        //     }
-        // }
-    },
-    "php.debug.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
-    "settingsSync.ignoredSettings": [
-        "php.executablePath",
-        "php.debug.executablePath",
-        "php.validate.executablePath"
-    ],
-    "php.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
-    "editor.quickSuggestions": {
-        "other": "off"
-    },
+
+    "timeline.showView": true,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
     "[markdown]": {
         "editor.wordWrap": "off"
     },
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "workbench.colorTheme": "Monokai22",
-    "editor.selectionHighlight": false,
-    "editor.occurrencesHighlight": false,
+
     "rainbow_csv.enable_cursor_position_info": false,
-    "workbench.iconTheme": null,
-    // "editor.fontLigatures": "'ss05', 'cv16', 'ss03', 'onum'",
 }

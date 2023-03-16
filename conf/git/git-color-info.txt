@@ -5,10 +5,10 @@
 ################################################################################
 
 To see a config value run:
-% git config --get diff.colorMoved
+$ git config --get diff.colorMoved
 
 To see who/where it is set use:
-% git config --list --show-origin
+$ git config --list --show-origin
 
 The default colors for git-diff are hardcoded in the C source code.
 

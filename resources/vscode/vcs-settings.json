@@ -173,4 +173,5 @@
     },
 
     "rainbow_csv.enable_cursor_position_info": false,
+    "githubPullRequests.pullBranch": "never",
 }

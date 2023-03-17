@@ -4,7 +4,7 @@ set -e
 
 if [[ "$OSTYPE" == darwin* ]]; then
 	notice "# ------ macos dictionary"
-	_cfg_ln "$DOTPATH/assets/LocalDictionary" "$HOME/Library/Spelling/LocalDictionary"
+	_cfg_ln "$DOTPATH/resources/macos/LocalDictionary" "$HOME/Library/Spelling/LocalDictionary"
 
 	if [ ! -x "$(which brew)" ]; then
 		notice "# ------ brew"
@@ -12,10 +12,10 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	fi
 
 	notice "# ------ brew bundle"
-	sdo "brew bundle --file=$DOTPATH/assets/Brewfile"
+	sdo "brew bundle --file=$DOTPATH/resources/brew/Brewfile"
 
 	notice "# ------ vscode"
-	sdo "code --install-extension \"$DOTPATH/assets/monokai22-1.0.0.vsix\""
+	sdo "code --install-extension \"$DOTPATH/resources/vscode/monokai22-1.0.0.vsix\""
 	_mv_file_rm_sym "$HOME/Library/Application Support/Code/User/settings.json"
-	sdo "cp \"$DOTPATH/assets/vcs-settings.json\" \"$HOME/Library/Application Support/Code/User/settings.json\""
+	sdo "cp \"$DOTPATH/resources/vscode/vcs-settings.json\" \"$HOME/Library/Application Support/Code/User/settings.json\""
 fi

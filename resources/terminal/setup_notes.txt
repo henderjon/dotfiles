@@ -75,4 +75,4 @@ $ mkcert local.example.com
 
 #-- fonts --#
 $ brew tap homebrew/cask-fonts
-$ brew install --cask ./assets/font-amazon-ember.rb
+$ brew install --cask ./resources/brew/font-amazon-ember.rb

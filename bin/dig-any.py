@@ -2,9 +2,19 @@
 
 import os, sys
 
-types = [
-    "NS", "A", "AAAA", "CNAME", "MX", "TXT",
-]
+types = {
+    "SOA"   : "Start of Authority",
+    "NS"    : "Name Servers",
+    "A"     : "IPv4 Address",
+    "AAAA"  : "IPv6 Address",
+    "CNAME" : "Canonical Name",
+    "MX"    : "Mail Exchange",
+    "TXT"   : "Text Record",
+    # "DNSKEY": "DNS Key record (DNSSEC)",
+    # "DS"    : "Delegation signer (DNSSEC)",
+    # "RRSIG" : "DNSSEC signature (DNSSEC)",
+    # "TLSA"  : "TLS Authentication Certificate Association",
+}
 
 if len(sys.argv) <= 1 :
     domain = input("domain to query: ")

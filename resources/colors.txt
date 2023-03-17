@@ -137,7 +137,10 @@ findmatchhighlight: #eb5e0055; 55 is about 33% alpha
 
 ############################################################# terminal codes ###
 
-esc                = "\u001b[" // "\033", byte(27)
+$esc[$style;$foreground;$backgroundm -- NOTE THE 'm"
+$esc[$resetm -- NOTE THE 'm"
+
+esc                = "\u001b[", "\033", byte(27)
 reset              = "0m"
 bold               = "1"
 dim                = "2"

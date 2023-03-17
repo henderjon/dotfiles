@@ -75,7 +75,7 @@ export GOROOT="/usr/local/go"             # this is the default location; ONLY u
 export GOPATH="$HOME/go"                  # points to local workspace... this is necessary for legacy go code that isn't using modules
 export GOBIN="$GOPATH/bin"                # destination for bins after `go install`
 export PATH="$GOBIN:$PATH"                # adding $GOBIN to the path to use installed bins
-export PATH="$GOROOT/bin:$PATH"           # adding $GOBIN to the path to use installed bins
+export PATH="$GOROOT/bin:$PATH"           # adding $GOROOT to the path to use installed bins
 export GOPROXY=direct                     # https://proxy.golang.org
 export GOSUMDB=off
 export GOPRIVATE=
@@ -124,7 +124,7 @@ export CLICOLOR_FORCE=true
 export VISUAL="$EDITOR"
 export PAGER=cat
 export DIFFCOLORS="31:32" # ascii color codes ... add:rm
-export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json"
+export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json" # set gh color scheme
 
 #--------------------------------------------------------------------- SNIPS --#
 export SNIPS_FILE="$HOME/dotfiles/resources/terminal/snips.txt"

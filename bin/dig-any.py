@@ -5,6 +5,7 @@ import os, sys
 types = [
     "NS", "A", "AAAA", "CNAME", "MX", "TXT",
 ]
+
 if len(sys.argv) <= 1 :
     domain = input("domain to query: ")
 else:

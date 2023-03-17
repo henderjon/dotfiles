@@ -6,5 +6,5 @@ if [[ "$OSTYPE" == linux* ]]; then
 	notice "# ------ vscode"
 	notice "assuming this is cli, don't do anything with VSCode"
 	# _mv_file_rm_sym "$HOME/.config/Code/User/settings.json"
-	# sto "cp \"$DOTPATH/assets/vcs-settings.json\" \"$HOME/.config/Code/User/settings.json\""
+	# sdo "cp \"$DOTPATH/assets/vcs-settings.json\" \"$HOME/.config/Code/User/settings.json\""
 fi

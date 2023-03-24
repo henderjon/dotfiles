@@ -129,6 +129,9 @@ export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json" # set gh color sche
 #--------------------------------------------------------------------- SNIPS --#
 export SNIPS_FILE="$HOME/dotfiles/resources/terminal/snips.txt"
 alias snips="cat \"$SNIPS_FILE\" "
+#--------------------------------------------------------------------- ASCII --#
+export ASCII_FILE="$HOME/dotfiles/resources/terminal/ascii.tsv"
+alias ascii2="cat \"$ASCII_FILE\" "
 
 #----------------------------------------------------------------------- IRC --#
 export IRCNAME=henderjon

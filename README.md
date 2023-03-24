@@ -1,8 +1,12 @@
 # dotfiles
 
-This is my dotfiles repo.
+## about me
 
-I put stuff here so that I don't have to try to remember it all.
+Hi. My name is Jon. This is my dotfiles repo.
+
+I put stuff here so that I don't have to try to remember it all. It also helps me setup new work environments.
+
+## installation
 
 If you're going to try to install this, try running `bash bootstrap.sh`
 from the top level of this repo. This is a simple wrapper to see if

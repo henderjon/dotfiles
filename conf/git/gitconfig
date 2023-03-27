@@ -78,8 +78,8 @@
 	rcl         = reflog --pretty=columns -n 20
 	co          = checkout
 	cb          = checkout -b
-	s           = status --short --branch
-	ss          = status
+	s           = status --short --branch --untracked-files
+	ss          = status --untracked-files
 	wip         = commit -m wip
 	oops        = commit --amend --no-edit
 	arch        = "!f(){ : git branch ; BRANCH_NAME=\"$1\"; if [ -z \"$BRANCH_NAME\" ]; then BRANCH_NAME=\"$(git branch-name)\"; fi; git branch --move \"$BRANCH_NAME\" \"archive/$BRANCH_NAME\"; }; f"

@@ -4,6 +4,8 @@
 
 esc   - "\u001b[" // "\033", byte(27)
 
+\033[1;31;47m
+
 ANSI		Description
 [0m  - Reset all attributes
 [1m  - Set "bright" attribute

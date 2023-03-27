@@ -41,12 +41,9 @@
 	endif
 
 	syntax on
-	highlight ColorColumn ctermbg=DarkGray ctermfg=white
-	" colorscheme monokaish
+	" highlight ColorColumn ctermbg=DarkGray ctermfg=white
+	colorscheme bw
 	" set background=dark
 
-
-
-
-
+	" set t_Co=0
 

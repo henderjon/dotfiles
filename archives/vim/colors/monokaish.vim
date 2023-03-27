@@ -7,9 +7,9 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "monokaish"
+let g:colors_name = "monokai22"
 
-" 81  66d9ef blue
+" 81  66d9ef red
 " 197 f92672 pink
 " 148 a6e22e green
 " 186 e6db74 yellow
@@ -42,13 +42,13 @@ let g:colors_name = "monokaish"
 	highlight Directory                                                                                 guifg=yellow
 
 "For Diffing, gui colors are not monokai, but variants of named terminal colors
-	highlight DiffAdd      cterm=none ctermbg=darkblue    ctermfg=lightgray  gui=none   guibg=#457BB1   guifg=#DBDFD8
+	highlight DiffAdd      cterm=none ctermbg=darkred    ctermfg=lightgray  gui=none   guibg=#457BB1   guifg=#DBDFD8
 	highlight DiffChange   cterm=none ctermbg=brown       ctermfg=black      gui=none   guibg=#AF5F11   guifg=black
 	highlight DiffText     cterm=none ctermbg=yellow      ctermfg=black      gui=none   guibg=#FCEA6B   guifg=black
 	highlight DiffDelete   cterm=none ctermbg=none        ctermfg=darkgray   gui=none                   guifg=#6C6C6C
 
 "Groups :help group-name
-	highlight MatchParen              ctermbg=lightblue                                 guibg=#66d9ef
+	highlight MatchParen              ctermbg=lightred                                 guibg=#66d9ef
 	highlight Comment      cterm=none                     ctermfg=grey       gui=italic                 guifg=grey
 	highlight Constant                                    ctermfg=yellow                                guifg=#e6db74
 	highlight String                                      ctermfg=yellow                                guifg=#e6db74
@@ -56,12 +56,12 @@ let g:colors_name = "monokaish"
 	"highlight Special
 	highlight Identifier   cterm=none                     ctermfg=white                                 guifg=white
 	highlight Delimiter                                   ctermfg=white                                 guifg=white
-	highlight Function                                    ctermfg=blue                                  guifg=#66d9ef
+	highlight Function                                    ctermfg=red                                  guifg=#66d9ef
 	highlight Statement                                   ctermfg=red                                   guifg=#f92672
 	highlight Operator                                    ctermfg=red                                   guifg=#f92672
-	highlight PreProc                                     ctermfg=lightblue                             guifg=#66d9ef
+	highlight PreProc                                     ctermfg=lightred                             guifg=#66d9ef
 	highlight Type                                        ctermfg=red        gui=none                   guifg=#f92672
-	highlight Structure                                   ctermfg=lightblue                             guifg=#66d9ef
+	highlight Structure                                   ctermfg=lightred                             guifg=#66d9ef
 	highlight StorageClass                                ctermfg=red                                   guifg=#f92672
 	"highlight Underlined
 	"highlight Ignore
@@ -69,13 +69,13 @@ let g:colors_name = "monokaish"
 	highlight Todo                    ctermbg=red                                       guibg=#f92672
 
 "Special Groups
-	highlight Visual                  ctermbg=blue        ctermfg=white                 guibg=#66d9ef   guifg=white
+	highlight Visual                  ctermbg=red        ctermfg=white                 guibg=#66d9ef   guifg=white
 	highlight Folded                  ctermbg=none        ctermfg=darkgray
 	highlight FoldColumn                                  ctermfg=darkgray
 
 "Custom Syntax in ~/.vim/after/syntax
 
-" Goloang
+" Golang
 	highlight goDirective                                 ctermfg=red                                   guifg=#f92672
 	highlight goDeclaration                               ctermfg=red                                   guifg=#f92672
 	highlight goDeclType                                  ctermfg=red                                   guifg=#f92672
@@ -85,16 +85,16 @@ let g:colors_name = "monokaish"
 	highlight goLabel                                     ctermfg=red                                   guifg=#f92672
 	highlight goRepeat                                    ctermfg=red                                   guifg=#f92672
 
-	highlight goType                                      ctermfg=blue                                  guifg=#66d9ef
-	highlight goSignedInts                                ctermfg=blue                                  guifg=#66d9ef
-	highlight goUnsignedInts                              ctermfg=blue                                  guifg=#66d9ef
-	highlight goFloats                                    ctermfg=blue                                  guifg=#66d9ef
-	highlight goComplexes                                 ctermfg=blue                                  guifg=#66d9ef
+	highlight goType                                      ctermfg=red                                  guifg=#66d9ef
+	highlight goSignedInts                                ctermfg=red                                  guifg=#66d9ef
+	highlight goUnsignedInts                              ctermfg=red                                  guifg=#66d9ef
+	highlight goFloats                                    ctermfg=red                                  guifg=#66d9ef
+	highlight goComplexes                                 ctermfg=red                                  guifg=#66d9ef
 
-	highlight goBuiltins                                  ctermfg=blue                                  guifg=#66d9ef
+	highlight goBuiltins                                  ctermfg=red                                  guifg=#66d9ef
 	highlight goConstants                                 ctermfg=darkmagenta                           guifg=#ae81ff
 
-	highlight goFuncCall                                  ctermfg=blue                                  guifg=#66d9ef
+	highlight goFuncCall                                  ctermfg=red                                  guifg=#66d9ef
 	highlight goInitAssign                                ctermfg=red                                   guifg=#f92672
 	highlight goFuncDefine                                ctermfg=white                                 guifg=white
 	highlight goFuncDefName                               ctermfg=green                                 guifg=#a6e22e
@@ -122,7 +122,7 @@ let g:colors_name = "monokaish"
 
 " PHP Custom Syntax
 	syn match phpOperator "[-=+,;%^&|*!.~?:]" contained display
-	highlight phpType            cterm=NONE               ctermfg=blue                 gui=NONE         guifg=#66d9ef
+	highlight phpType            cterm=NONE               ctermfg=red                 gui=NONE         guifg=#66d9ef
 	highlight phpIdentifier      cterm=NONE                                            gui=NONE
 	highlight phpVarSelector                              ctermfg=white                                 guifg=white
 

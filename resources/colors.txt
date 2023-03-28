@@ -25,52 +25,52 @@
 ##################### https://code.visualstudio.com/docs/getstarted/settings ###
 ##################################################### https://hslpicker.com/ ###
 
-/* black || background */
+/* black || background */ (Co 256 - grey15 (38 38 38) (#262626))
 - #272822
 - rgba(39, 40, 34, 1)
 - hsla(70, 8%, 15%, 1)
 
-/* fuschia */
+/* fuschia */ (Co 256 - DeepPink2	(238 18 137) (#ee1289))
 - #F92672
 - rgba(249, 38, 114, 1)
 - hsla(338, 95%, 56%, 1)
 
-/* green */
+/* green */ (Co 256 - OliveDrab2	(179 238 58) (#b3ee3a))
 - #A6E22E
 - rgba(166, 226, 46, 1)
 - hsla(80, 76%, 53%, 1)
 
-/* yellow modified */
+/* yellow modified */ (Co 256 - LightGoldenrod1	(255 236 139) (#ffec8b))
 - #FFE792
 - rgba(255, 231, 146, 1)
 - hsla(47, 100%, 79%, 1)
 
-/* orange SHOULD be BLUE */
+/* orange SHOULD be BLUE */ (Co 256 - )
 - #FD971F
 - rgba(253, 151, 31, 1)
 - hsla(32, 98%, 56%, 1)
 
-/* magenta */
+/* magenta */ (Co 256 - )
 - #AE81FF
 - rgba(174, 129, 255, 1)
 - hsla(261, 100%, 75%, 1)
 
-/* cyan */
+/* cyan */ (Co 256 - )
 - #66D9EF
 - rgba(102, 217, 239, 1)
 - hsla(190, 81%, 67%, 1)
 
-/* white || foreground */
+/* white || foreground */ (Co 256 - )
 - #F8F8F2
 - rgba(248, 248, 242, 1)
 - hsla(60, 30%, 96%, 1)
 
-/* dark white light grey */
+/* dark white light grey */ (Co 256 - )
 - "#CFCFC2"
 - rgba(207, 207, 194, 1)
 - hsla(60, 12%, 79%, 1)
 
-/* light black dark grey */
+/* light black dark grey */ (Co 256 - )
 - "#75715E"
 - rgba(117, 113, 94, 1)
 - hsla(50, 11%, 41%, 1)
@@ -104,12 +104,12 @@
 - rgba(129, 154, 255, 1)
 - hsla(228, 100%, 75%, 1)
 
-/* tan leftover tan/yellow */
+/* tan leftover tan/yellow */ (Co 256 #222:ffd787)
 - "#F4BF75"
 - rgba(244, 191, 117, 1)
 - hsla(35, 85%, 71%, 1)
 
-/* original yellow from VSC */
+/* original yellow from VSC */ (Co256 - #186:d7d787)
 - "#E6DB74"
 - rgba(230, 219, 116, 1)
 - hsla(54, 70%, 68%, 1)
@@ -120,17 +120,17 @@ findmatchhighlight: #eb5e0055; 55 is about 33% alpha
 
 [env & accent colors - terminal]
 
-/* darker background terminal */
+/* darker background terminal */ (Co256 #233:121212)
 - "#191916"
 - rgba(25, 25, 22, 1)
 - hsla(60, 6%, 9%, 1)
 
-/* blue for selections in terminal */
+/* blue for selections in terminal */ (Co256 #25/005FAF)
 - "#456BA5"
 - rgba(69, 107, 165, 1)
 - hsla(216, 41%, 46%, 1)
 
-/* grey cursor in terminal */
+/* grey cursor in terminal */ (Co256 #243/767676)
 - "#7F7F7F"
 - rgba(127, 127, 127, 1)
 - hsla(0, 0%, 50%, 1)
@@ -176,5 +176,3 @@ magentaBG          = "45"
 cyanBG             = "46"
 whiteBG            = "47"
 defaultBG          = "49"
-
-

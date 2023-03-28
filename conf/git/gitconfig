@@ -68,8 +68,8 @@
 	d           = diff
 	dt          = difftool
 	cl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
+	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
 	clll        = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columndiff --numstat -n 20
-	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 20
 	cllll       = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=longcolumndiff --numstat -n 20
 	kl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpg -n 20
 	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --ancestry-path dev..HEAD

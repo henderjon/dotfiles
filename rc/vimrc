@@ -40,10 +40,12 @@
 		set colorcolumn=80,72
 	endif
 
+" set t_Co=256
+	set term=xterm-256color
 	syntax on
-	" highlight ColorColumn ctermbg=DarkGray ctermfg=white
-	colorscheme bw
+" highlight ColorColumn ctermbg=DarkGray ctermfg=white
+	colorscheme nofrils-mod
 	" set background=dark
 
-	" set t_Co=0
+
 

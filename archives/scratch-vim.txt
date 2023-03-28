@@ -1,0 +1,44 @@
+######################################################################## VIM ###
+
+https://github.com/gerw/vim-HiLinkTrace
+https://github.com/ErichDonGubler/vim-sublime-monokai
+https://shallowsky.com/colormatch/index.php?hex=3E3D32
+
+https://vimdoc.sourceforge.net/htmldoc/syntax.html?ref=linux-handbook#:highlight
+https://vim-bootstrap.com/
+https://vimcolors.org/
+https://vi.stackexchange.com/questions/24846/how-to-customize-colorschemes-without-editing-their-source-files
+http://bytefluent.com/vivify/
+https://medium.com/code-art/vim-color-control-guide-all-in-one-f30188a161c5
+$VIMRUNTIME/colors/README.txt
+https://www.vim.org/scripts/script.php?script_id=335
+https://github.com/robertmeta/nofrils
+https://vi.stackexchange.com/questions/8751/how-to-completely-turn-off-colorscheme
+
+https://stackoverflow.com/questions/6488683/how-to-change-the-cursor-between-normal-and-insert-modes-in-vim
+
+https://vim.fandom.com/wiki/Showing_syntax_highlight_group_in_statusline
+
+function! SyntaxItem()
+  echo synIDattr(synID(line("."),col("."),1),"name")
+endfunction
+
+https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
+################################################################################
+
+https://vim.fandom.com/wiki/Configuring_the_cursor
+https://stackoverflow.com/questions/2727975/how-to-correctly-highlight-cursor-line-in-vim
+:set listchars=tab:>-

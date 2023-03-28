@@ -1,4 +1,4 @@
-" Name: No Frils Dark Colorscheme
+" Name: No Frils Dark Colorscheme (MOD)
 " Author: robertmeta (on Github)
 " URL: https://github.com/robertmeta/nofrils
 " (see this url for latest release & screenshots)
@@ -9,7 +9,7 @@ if exists("syntax_on")
     syntax reset
 endif
 
-let g:colors_name = "nofrils-test"
+let g:colors_name = "nofrills-mod"
 
 if !exists("g:nofrils_strbackgrounds")
     let g:nofrils_strbackgrounds = 0
@@ -88,41 +88,41 @@ hi Cursor			term=NONE cterm=NONE ctermfg=NONE 	ctermbg=244 	gui=NONE guifg=black
 "hi Tooltip		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
 
 " Syntax Highlighting (or lack of)
-hi Boolean		term=NONE cterm=NONE ctermfg=magenta ctermbg=NONE gui=NONE guifg=#AE81FF guibg=NONE
-"hi Character	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Conceal		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Conditional	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-hi Constant		term=NONE cterm=NONE ctermfg=magenta ctermbg=NONE gui=NONE guifg=#AE81FF guibg=NONE
-"hi Debug		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-hi Define		term=NONE cterm=NONE ctermfg=green ctermbg=NONE gui=NONE guifg=#A6E22E guibg=NONE
-hi Delimiter	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Directive	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Exception	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-hi Float		term=NONE cterm=NONE ctermfg=magenta ctermbg=NONE gui=NONE guifg=#AE81FF guibg=NONE
-"hi Format		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Function		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Identifier	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Ignore		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Include		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-hi Keyword		term=NONE cterm=NONE ctermfg=red ctermbg=NONE gui=NONE guifg=#F92672 guibg=NONE
-"hi Label		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Macro		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-hi Number		term=NONE cterm=NONE ctermfg=magenta ctermbg=NONE gui=NONE guifg=#AE81FF guibg=NONE
-"hi Operator		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi PreCondit	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi PreProc		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Repeat		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi SpecialChar	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-hi Special		term=NONE cterm=NONE ctermfg=green ctermbg=NONE gui=NONE guifg=#A6E22E guibg=NONE
-hi Statement	term=NONE cterm=NONE ctermfg=red ctermbg=NONE gui=NONE guifg=#F92672 guibg=NONE
-hi StorageClass	term=NONE cterm=NONE ctermfg=red ctermbg=NONE gui=NONE guifg=#F92672 guibg=NONE
-hi String		term=NONE cterm=NONE ctermfg=yellow ctermbg=NONE gui=NONE guifg=#FFE792 guibg=NONE
-"hi Structure	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Tag			term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-"hi Title		term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
-hi Typedef		term=NONE cterm=NONE ctermfg=green ctermbg=NONE gui=NONE guifg=#A6E22E guibg=NONE
-hi Type			term=NONE cterm=NONE ctermfg=cyan ctermbg=NONE gui=NONE guifg=#66D9EF guibg=NONE
-"hi Underlined	term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Boolean      term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Character    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Conceal      term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Conditional  term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Constant     term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Debug        term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Define       term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Delimiter    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Directive    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Exception    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Float        term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Format       term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Function     term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Identifier   term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Ignore       term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Include      term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Keyword      term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Label        term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Macro        term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Number       term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Operator     term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi PreCondit    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi PreProc      term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Repeat       term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi SpecialChar  term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Special      term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Statement    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi StorageClass term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi String       term=NONE cterm=NONE ctermfg=yellow ctermbg=NONE gui=NONE guifg=#FFE792 guibg=NONE
+hi Structure    term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Tag          term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Title        term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Typedef      term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Type         term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
+hi Underlined   term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
 
 " Golang
 hi GoString		term=NONE cterm=NONE ctermfg=yellow ctermbg=NONE gui=NONE guifg=#FFE792 guibg=NONE
@@ -133,9 +133,9 @@ hi phpIdentifier  term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=
 hi phpMemberSelector  term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
 hi phpStringDouble  term=NONE cterm=NONE ctermfg=yellow ctermbg=NONE gui=NONE guifg=#FFE792 guibg=NONE
 hi phpStringSingle  term=NONE cterm=NONE ctermfg=yellow ctermbg=NONE gui=NONE guifg=#FFE792 guibg=NONE
-hi phpDefine  term=NONE cterm=NONE ctermfg=cyan ctermbg=NONE gui=NONE guifg=#66D9EF guibg=NONE
+hi phpDefine  term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
 hi phpBackslashSequences  term=NONE cterm=NONE ctermfg=magenta ctermbg=NONE gui=NONE guifg=#AE81FF guibg=NONE
-hi phpInclude  term=NONE cterm=NONE ctermfg=red ctermbg=NONE gui=NONE guifg=#F92672 guibg=NONE
+hi phpInclude  term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
 
 " Sneak
 "hi SneakLabelMask	term=NONE cterm=NONE ctermfg=black ctermbg=195 gui=NONE guifg=black guibg=#d7ffff

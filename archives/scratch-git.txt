@@ -1,0 +1,39 @@
+
+# git for-each-ref \
+# --format='%(refname) - %(objectname:short) - %(contents)' \
+# --contains=HEAD
+
+#commits on HEAD
+git rev-list
+
+#branches
+git for-each-ref
+use git-show to add data to stream
+parse in awk or other
+
+numstat for diff
+
+$ git diff-tree --numstat --line-prefix="                " HEAD
+
+################################################################################
+
+
+# "%n%C(yellow)%H (%h)%Creset\nAuthor: %C(white bold ul)%an%Creset <%ae> %GK (%G?)\nDate: %cD%n%n%+s%n%+b"
+# %<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
+# %cd %an %G? %h %d %s
+
+# git rev-list HEAD |
+# while read branch
+# do
+# 	git show --date=format:tformat'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns --numstat
+# 	git show --numstat $branch
+# done
+
+git show --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty="%<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %n %w(120,50,50)" --numstat -z HEAD~~ #| tr "\000" "|"
+
+################################################################################
+
+https://www.ditig.com/256-colors-cheat-sheet
+
+
+

@@ -26,51 +26,61 @@
 ##################################################### https://hslpicker.com/ ###
 
 /* black || background */
+- cterm 0
 - #272822
 - rgba(39, 40, 34, 1)
 - hsla(70, 8%, 15%, 1)
 
 /* fuschia */
+- cterm 1,9
 - #F92672
 - rgba(249, 38, 114, 1)
 - hsla(338, 95%, 56%, 1)
 
 /* green */
+- cterm 2, 10
 - #A6E22E
 - rgba(166, 226, 46, 1)
 - hsla(80, 76%, 53%, 1)
 
 /* yellow modified */
+- cterm 3, 11
 - #FFE792
 - rgba(255, 231, 146, 1)
 - hsla(47, 100%, 79%, 1)
 
 /* orange SHOULD be BLUE */
+- cterm 4, 12
 - #FD971F
 - rgba(253, 151, 31, 1)
 - hsla(32, 98%, 56%, 1)
 
 /* magenta */
+- cterm 5, 13
 - #AE81FF
 - rgba(174, 129, 255, 1)
 - hsla(261, 100%, 75%, 1)
 
 /* cyan */
+- cterm 6, 14
 - #66D9EF
 - rgba(102, 217, 239, 1)
 - hsla(190, 81%, 67%, 1)
 
 /* white || foreground */
+- cterm 7
 - #F8F8F2
 - rgba(248, 248, 242, 1)
 - hsla(60, 30%, 96%, 1)
 
 /* dark white light grey */
+- cterm 15
 - "#CFCFC2"
 - rgba(207, 207, 194, 1)
 - hsla(60, 12%, 79%, 1)
 
 /* light black dark grey */
+- cterm 8
 - "#75715E"
 - rgba(117, 113, 94, 1)
 - hsla(50, 11%, 41%, 1)

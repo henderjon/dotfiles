@@ -32,5 +32,3 @@ $ wget -E -H -k -K -N -p -P $DIR $PAGEURL
  --page-requisites, -p
  --timestamping, -N
  --directory-prefix=someprefix, -P someprefix (save in this dir)
-
-

@@ -50,5 +50,3 @@ $ du -h -d 1
 
 # main drives
 $ df -h
-
-

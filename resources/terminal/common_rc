@@ -77,7 +77,7 @@ export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json" # set gh color sche
 alias snips="cat \"$HOME\"/dotfiles/resources/snips/* "
 for f in "$HOME"/dotfiles/resources/snips/*; do
 	F=$(basename -s .txt "$f")
-	alias "$F"="cat \"$f\" "
+	alias "$F"="echo \"\n\" && cat \"$f\" && echo \"\n\" "
 done
 
 # output a given snip file path/name to open in an editor

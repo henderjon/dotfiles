@@ -49,4 +49,3 @@ ANSI		Description
 [104m - Light blue background
 [105m - Light purple background
 [106m - Turquoise background
-

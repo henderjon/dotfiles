@@ -44,3 +44,7 @@ rm -f "$TF1" "$TF2"
 # remove blank chars at beginning of the line; sort can also be told to ignore blanks with -b, --ignore-leading-blanks
 # sort -k 3
 # sed 's/^[[:blank:]]*//'
+
+
+############################################################# BIG FILE DIFFS ###
+# $ find . -type f -print0 | xargs -0 -I % sum %

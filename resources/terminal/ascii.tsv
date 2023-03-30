@@ -1,5 +1,16 @@
 https://www.sciencebuddies.org/science-fair-projects/references/ascii-table
 https://www.lammertbies.nl/comm/info/ascii-characters
+
+DLE	data link escape; Comment is the ascii Data Link Escape (DLE) character and begins a commented record
+
+FS	file separator; FileSep is the ascii File Separator (FS) character and delineates collections of groups (think DBs)
+
+GS	group separator; GroupSep is the ascii Group Separator (GS) character and delineates groups of records (think DB tables)
+
+RS	request to send/record separator; RecordSep is the ascii Record Separator (RS) character and delineates records (think DB rows in a table)
+
+US	unit separator; UnitSep is the ascii Unit Separator (US) character and delineates fields in a record (think DB fields in a row)
+
 ================================================================================
 DEC	OCT	HX	BINARY   	VAL	Description
 --------------------------------------------------------------------------------
@@ -19,7 +30,7 @@ DEC	OCT	HX	BINARY   	VAL	Description
 013	015	0D	0000 1101	CR	carriage return
 014	016	0E	0000 1110	SO	shift out
 015	017	0F	0000 1111	SI	shift in
-016	020	10	0001 0000	DLE	data link escape; Comment is the ascii Data Link Escape (DLE) character and begins a commented record
+016	020	10	0001 0000	DLE	data link escape
 017	021	11	0001 0001	DC1	device control 1 (XON)
 018	022	12	0001 0010	DC2	device control 2
 019	023	13	0001 0011	DC3	device control 3 (XOFF)
@@ -31,10 +42,10 @@ DEC	OCT	HX	BINARY   	VAL	Description
 025	031	19	0001 1001	EM	end of medium
 026	032	1A	0001 1010	SUB	substitute
 027	033	1B	0001 1011	ESC	escape
-028	034	1C	0001 1100	FS	file separator; FileSep is the ascii File Separator (FS) character and delineates collections of groups (think DBs)
-029	035	1D	0001 1101	GS	group separator; GroupSep is the ascii Group Separator (GS) character and delineates groups of records (think DB tables)
-030	036	1E	0001 1110	RS	request to send/record separator; RecordSep is the ascii Record Separator (RS) character and delineates records (think DB rows in a table)
-031	037	1F	0001 1111	US	unit separator; UnitSep is the ascii Unit Separator (US) character and delineates fields in a record (think DB fields in a row)
+028	034	1C	0001 1100	FS	file separator
+029	035	1D	0001 1101	GS	group separator
+030	036	1E	0001 1110	RS	request to send/record separator
+031	037	1F	0001 1111	US	unit separator
 --------------------------------------------------------------------------------
 032	040	20	0010 0000	SP	space
 033	041	21	0010 0001	!	exclamation mark

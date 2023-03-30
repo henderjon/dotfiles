@@ -1,0 +1,17 @@
+# https://www.gnu.org/software/bash/manual/html_node/index.html
+source "$HOME/dotfiles/resources/terminal/common_rc"
+#------------------------------------ disallow cat-ing over an existing file --#
+set -o noclobber
+#-------------------------------------- disallow Ctrl-d from exiting windows --#
+set -o ignoreeof
+#------------------------------------- add to history upon execution vs exit --#
+shopt -s histappend
+#-------------------------------------------------------fancy prompt for BASH--#
+export PS1="[\D{%Y-%m-%d %H:%M:%S}] $?\n[\e[;4m$_LOCAL_ENV_NAME\e[;0m] \w/\n\$ "
+#-------------------------- fancy RIGHT prompt -- '%?[%D{%d %b %Y %l:%M%p}]' --#
+#RPROMPT='%?[%D{%Y-%m-%d %H:%M:%S}]'
+RPROMPT=''
+RPS1=''
+
+# https://manpages.ubuntu.com/manpages/kinetic/en/man1/bash.1.html
+# https://www.gnu.org/software/bash/manual/html_node/index.html

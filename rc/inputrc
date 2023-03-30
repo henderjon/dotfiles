@@ -1,0 +1,13 @@
+# settings for READLINE
+# https://manpages.ubuntu.com/manpages/kinetic/en/man1/bash.1.html
+
+set show-all-if-ambiguous On
+set colored-completion-prefix On
+set completion-ignore-case On
+
+# tab through possibilities
+TAB:menu-complete
+
+# shit-tab show possibilities
+"\e[Z":complete
+

@@ -1,0 +1,15 @@
+###################################################################### DATE.C ##
+
+$ man strftime
+
+###################################################################### DATE ###
+
+# TIMESTAMP=$(shell TZ=UTC date '+%FT%T %Z')
+# TIMESTAMP=$(shell date '+%Y-%m-%dT%H:%M:%S %z %Z')
+
+# Convert Unix timestamp to human readable
+$ date -d 1656685875
+Fri, 01 Jul 2022 14:31:15 +0000
+
+# Current time as UNIX timestamp
+$ date "+%s"

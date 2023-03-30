@@ -1,0 +1,23 @@
+######################################################################### GPG ##
+
+sec => 'SECret key'
+ssb => 'Secret SuBkey'
+pub => 'PUBlic key'
+sub => 'public SUBkey'
+
+> --list-secret-keys (-K)
+> List the specified secret keys.  If no keys are specified, then all known
+> secret keys are listed.  A # after the initial tags sec or ssb means that the
+> secret key or subkey is currently not usable.  We also say that this key has
+> been taken offline (for example, a primary key can be taken offline by exporting
+> the key using the command --export-secret-subkeys).  A > after these tags
+> indicate that the key is stored on a smartcard.  See also --list-keys.
+
+### To Use an Offline Master Key
+Create a temp dir and import your master key
+% gpg --homedir ~/$TEMPDIR --import $PRIVATE_MASTER_KEY
+
+Edit the actual keyring using the keys from you $TEMPDIR
+% gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --edit-key $KEY_YOU_WANT_TO_EDIT
+
+Delete $TEMPDIR

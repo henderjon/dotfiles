@@ -1,0 +1,16 @@
+####################################################################### MySQL ##
+
+% mysql -h $HOST --user $USERNAME -p
+> use $DATABSE
+> show tables;
+> describe $TABLE;
+> quit
+
+##################################################################### SQLITE ###
+
+> PRAGMA wal_checkpoint(TRUNCATE);
+> VACUUM
+> .tables
+> .schema $TABLE
+> .quit
+> echo .dump | sqlite3 $FILENAME

@@ -1,0 +1,62 @@
+################################################################## FILE PERMS ##
+
+# http://permissions-calculator.org/
+
+#     [4 2 1][4 2 1][4 2 1]
+# d s  r w x  r w x  r w x
+# │ │  │ │ │  │ │ │  │ │ │
+# │ │  │ │ │  │ │ │  │ │ ╰─ other (o) execute
+# │ │  │ │ │  │ │ │  │ ╰─── other (o) write
+# │ │  │ │ │  │ │ │  ╰───── other (o) read
+# │ │  │ │ │  │ │ ╰──────── group (g) execute
+# │ │  │ │ │  │ ╰────────── group (g) write
+# │ │  │ │ │  ╰──────────── group (g) read
+# │ │  │ │ ╰─────────────── user  (u) execute
+# │ │  │ ╰───────────────── user  (u) write
+# │ │  ╰─────────────────── user  (u) read
+# │ ╰────────────────────── special bit**
+# ╰──────────────────────── type
+
+# 0766 - go+rw,u+rwx
+# 0755 - go+rx,u+rwx
+
+# **special bit
+# setuid = 4 (u+s, run as user; s in `ls`)
+# setgid = 2 (g+s, run as group; S in `ls`)
+# Sticky bit = 1 (+t)
+
+# In octal the special bit is "4" or "s" and will be capital "S" if lacking executable permissions
+
+# symbolic:
+# chmod [who][add/remove][perm][,[who][add/remove][perm]]
+# - [who] = u/g/o/a
+# - [add/remove] = +/-
+# - [perm] = r/w/x/s
+
+# octal:
+# chmod [special][user][group][other/world]
+# - [special] = 4/0
+# - [user] = 1/2/3/4/5/6/7/0
+# - [group] = 1/2/3/4/5/6/7/0
+# - [other/world] = 1/2/3/4/5/6/7/0
+
+################################################################# SSH / PERMS ##
+
+% ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# 700 (drwx------) - .ssh directory
+# 644 (-rw-r--r--) - public keys (.pub file)
+# 644 (-rw-r--r--) - known_hosts
+# 600 (-rw-------) - private keys (id_rsa)
+# 600 (-rw-------) - authorized_keys
+# 600 (-rw-------) - config
+
+# 644 (-rw-r--r--) - normal files
+# 755 (drwxr-xr-x) - normal dirs
+
+# $HOME should not be writeable by the group or others (at most 755 (drwxr-xr-x)).
+
+################################################################## FIX PERMS ###
+
+$ find . -type d -print0 | xargs -0 -I % chmod 755 %
+$ find . -type f -print0 | xargs -0 -I % chmod 644 %

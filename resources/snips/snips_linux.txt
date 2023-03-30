@@ -1,0 +1,43 @@
+################################################# LINUX SETUP (digital ocean) ##
+
+$ adduser --shell $PATH/zsh --group root,admin,wheel $USERNAME
+
+// if the groups get messed up
+$ usermod -a -G $GROUP $USERNAME
+$ ed /etc/sudoers
+
+// assuming digital ocean root user
+$ cp ~/.ssh/authorized_keys /home/$username/.ssh/authorized_keys
+$ chown $username /home/$username/.ssh/authorized_keys
+
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
+
+### https://wiki.centos.org/HowTos/Network/SecuringSSH
+
+### To turn off root login, edit: /etc/ssh/sshd_config:
+
+# prevent root logins
+PermitRootLogin no
+
+# disable passwords
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+
+# limit users
+AllowUsers alice bob
+
+# disable protocol 1
+Protocol 2
+
+### restart ssh
+$ service sshd restart
+
+### COMMON PORTS ###
+- http: 80, 443, 8080
+- ssh: 22
+- ftp: 21
+- mysql: 3306, 13306
+- redis: 6379
+- IRC: 6667
+- gearman: 4730
+- memcache: 11211

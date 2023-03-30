@@ -1,0 +1,36 @@
+####################################################################### WGET ###
+
+$ wget -e robots=off -m -np $1
+$ wget -p -k $1
+$ wget -r -np -nc -k -c $1
+$ wget --content-disposition --restrict-file-names=nocontrol -e robots=off -A.pdf,.ppt,.doc -r $1
+
+### Misc ###
+ -nc --no-clobber
+ -r  --recursive
+ -np --no-parent
+ -k  --convert-links
+ -c  --continue
+ -p  --page-requisites
+ -m  --mirror; It is currently equivalent to -r -N -l inf --no-remove-listing.
+ -N  --timestamping
+ -l depth --level=depth (default: 5; can use 'inf' or '0')
+ -e command --execute command
+ -H --span-hosts
+ -D domain-list --domains=domain-list
+ -O output redirection (put everything in ONE file, this file, NOT NAMED FOR THE ACTUAL FILE)
+ -o write LOGS to named file
+ --load-cookies file.txt
+
+### Single page ### (https://gist.github.com/dannguyen/03a10e850656577cfb57)
+$ wget -E -H -k -K -N -p -P $DIR $PAGEURL
+
+ --adjust-extension, -E
+ --span-hosts, -H
+ --convert-links, -k
+ --backup-converted, -K
+ --page-requisites, -p
+ --timestamping, -N
+ --directory-prefix=someprefix, -P someprefix (save in this dir)
+
+

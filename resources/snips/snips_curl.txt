@@ -1,0 +1,14 @@
+####################################################################### CURL ###
+
+### https://curl.se/docs/sslcerts.html
+### https://curl.se/docs/caextract.html -- ca cert download
+
+curl -b cookies.txt -c cookies.txt $URL
+
+-b cookies to send
+-c cookies to keep
+-o, --output <file>
+-J, --remote-header-name
+-O, --remote-name
+--remote-name-all
+-L # follow redirects

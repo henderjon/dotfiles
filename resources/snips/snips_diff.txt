@@ -1,0 +1,19 @@
+####################################################################### DIFF ###
+
+# http://www.computerhope.com/unix/udiff.htm
+
+# Example usage of comparing output of two ls commands
+$ diff -u <(ls -l /directory/) <(ls -l /directory/) | colordiff
+$ cmp $file $file
+
+### using ed
+$ diff -e > diff-output
+$ ed file < diff-output
+
+### understanding unified diff
+--- from-file mod-time
++++ to-file mod-time
+@@ from-file{line-number,lines} to-file{line-number,lines} @@
+- line from from-file
+  line in both files
++ line from to-file

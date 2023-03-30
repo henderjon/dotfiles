@@ -1,0 +1,52 @@
+################################################# TERMINAL CODES (ANSI/VT100) ##
+
+### https://wiki.bash-hackers.org/scripting/terminalcodes
+
+esc   - "\u001b[" // "\033", byte(27)
+
+\033[1;31;47m
+
+ANSI		Description
+[0m  - Reset all attributes
+[1m  - Set "bright" attribute
+[2m  - Set "dim" attribute
+[3m  - Set "standout" attribute
+[4m  - Set "underscore" (underlined text) attribute
+[5m  - Set "blink" attribute
+[7m  - Set "reverse" attribute
+[8m  - Set "hidden" attribute
+[30m - Set foreground to color #0 - black
+[31m - Set foreground to color #1 - red
+[32m - Set foreground to color #2 - green
+[33m - Set foreground to color #3 - yellow
+[34m - Set foreground to color #4 - blue
+[35m - Set foreground to color #5 - magenta
+[36m - Set foreground to color #6 - cyan
+[37m - Set foreground to color #7 - white
+[39m - Set default color as foreground color
+[40m - Set background to color #0 - black
+[41m - Set background to color #1 - red
+[42m - Set background to color #2 - green
+[43m - Set background to color #3 - yellow
+[44m - Set background to color #4 - blue
+[45m - Set background to color #5 - magenta
+[46m - Set background to color #6 - cyan
+[47m - Set background to color #7 - white
+[49m - Set default color as background color
+
+[90m -  Dark grey
+[91m -  Light red
+[92m -  Light green
+[93m -  Yellow
+[94m -  Light blue
+[95m -  Light purple
+[96m -  Turquoise
+[97m -  White
+[100m - Dark grey background
+[101m - Light red background
+[102m - Light green background
+[103m - Yellow background
+[104m - Light blue background
+[105m - Light purple background
+[106m - Turquoise background
+

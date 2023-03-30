@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import sys
+
+def stderr(*args):
+    print(*args, file=sys.stderr)
+
+
+stderr("# go install golang.org/x/tools/cmd/godoc@latest")
+print("cd $GOROOT/pkg")
+print('godoc -index -http "localhost:6060"')
+stderr('localhost:6060')
+print("cd -")
+
+

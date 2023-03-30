@@ -10,6 +10,8 @@ types = {
     "CNAME" : "Canonical Name",
     "MX"    : "Mail Exchange",
     "TXT"   : "Text Record",
+    # "PTR"   : "Pointer Record",
+    # "SRV"   : "Service Record",
     # "DNSKEY": "DNS Key record (DNSSEC)",
     # "DS"    : "Delegation signer (DNSSEC)",
     # "RRSIG" : "DNSSEC signature (DNSSEC)",

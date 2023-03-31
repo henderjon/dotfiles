@@ -1,5 +1,5 @@
 ################ http://zsh.sourceforge.net/Guide/zshguide.html ################
-source "$HOME/dotfiles/resources/terminal/common_rc"
+source "$HOME/dotfiles/rc/common_rc"
 #------------------------------------ disallow cat-ing over an existing file --#
 set -o no_clobber
 #-------------------------------------- disallow Ctrl-d from exiting windows --#

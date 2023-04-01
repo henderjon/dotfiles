@@ -98,4 +98,3 @@
 	date = rfc
 #[url "git@github.com:"] # use this to force SSH access and use an SSH key
 # 	insteadOf = https://github.com/
-

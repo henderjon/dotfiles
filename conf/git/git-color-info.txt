@@ -18,6 +18,8 @@ grep for 'GIT_COLOR_NORMAL' or 'GIT_COLOR_RED'
 
 https://git-scm.com/docs/git-config
 
+https://git-scm.com/docs/git-config#Documentation/git-config.txt-color
+
 Look for sections named `color.$feature.<slot>` for info on $feature
 
 ...git/diff.c (https://github.com/git/git/blob/d15644fe0226af7ffc874572d968598564a230dd/diff.c#L61)
@@ -83,3 +85,12 @@ Look for sections named `color.$feature.<slot>` for info on $feature
 	contextBold = normal normal bold
 	oldBold = red normal bold
 	newBol = green normal bold
+
+
+Possible Values
+
+normal, default
+[bright]black, [bright]red, [bright]green, [bright]yellow, [bright]blue,
+[bright]magenta, [bright]cyan, [bright]white
+
+[no]bold, [no]dim, [no-]ul, [no]blink, [no]reverse, [no]italic, [no]strike

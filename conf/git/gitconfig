@@ -83,7 +83,7 @@
 	ss          = status --untracked-files
 	wip         = commit -m wip
 	oops        = commit --amend --no-edit
-	arch        = "!f(){ : git branch ; BRANCH_NAME=\"$1\"; if [ -z \"$BRANCH_NAME\" ]; then BRANCH_NAME=\"$(git branch-name)\"; fi; git branch --move \"$BRANCH_NAME\" \"archive/$BRANCH_NAME\"; }; f"
+	arch        = "!f(){ : git branch ; BRANCH_NAME=\"$1\"; if [ -z \"$BRANCH_NAME\" ]; then BRANCH_NAME=\"$(git branch-name)\"; fi; git branch --move \"$BRANCH_NAME\" \"archive/$BRANCH_NAME\"; }; f" # ": git branch" sets up auto completion of branch names
 	fix         = "!f(){ git fetch origin; git checkout -b fix/$1 --no-track origin/dev; }; f"
 	feature     = "!f(){ git fetch origin; git checkout -b feature/$1 --no-track origin/dev; }; f"
 	dl          = "!git log --pretty=difflog -200000 $1..$2" # $EARLIER..$LATER ... show commits in $LATER that are NOT in $EARLIER

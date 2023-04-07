@@ -66,23 +66,24 @@ alias diff='diff -u --color=always '
 
 #------------------------------------------------------- these are important --#
 #--------------------------- these are off as they mess with tmux and screen --#
+export DOTFILES="$HOME/dotfiles"
 export EDITOR="ed -p:"
 export CLICOLOR_FORCE=true
 export VISUAL="$EDITOR"
 export PAGER=cat
 export DIFFCOLORS="31:32" # ascii color codes ... add:rm
-export GLAMOUR_STYLE="$HOME/dotfiles/conf/gh/monokai22.json" # set gh color scheme
+export GLAMOUR_STYLE="$DOTFILES/conf/gh/monokai22.json" # set gh color scheme
 
 #--------------------------------------------------------------------- SNIPS --#
-alias snips="cat \"$HOME\"/dotfiles/resources/snips/* "
-for f in "$HOME"/dotfiles/resources/snips/*; do
+alias snips='cat "$DOTFILES"/resources/snips/* '
+for f in "$DOTFILES"/resources/snips/*; do
 	F=$(basename -s .txt "$f")
 	alias "$F"="echo \"\n\" && cat \"$f\" && echo \"\n\" "
 done
 
 # output a given snip file path/name to open in an editor
 snip_file () {
-	f="$HOME/dotfiles/resources/snips/snips_$1.txt"
+	f="$DOTFILES/resources/snips/snips_$1.txt"
 	if [ -f "$f" ]; then
 		echo "$f"
 	fi
@@ -90,8 +91,8 @@ snip_file () {
 
 #--------------------------------------------------------------------- ASCII --#
 export ASCII_FILE="$HOME/dotfiles/resources/terminal/ascii.tsv"
-alias ascii="head -133 \"$ASCII_FILE\" "
-alias asciix="cat \"$ASCII_FILE\" "
+alias ascii='head -133 "$ASCII_FILE" '
+alias asciix='cat "$ASCII_FILE" '
 
 #----------------------------------------------------------------------- IRC --#
 export IRCNAME=henderjon
@@ -100,7 +101,7 @@ export IRCUSER=henderjon
 
 #---------------------------------------- reload env file when we reload zsh --#
 if [ -f "$HOME/.zshenv" ]; then
-	source "$HOME/.zshenv"
+	. "$HOME/.zshenv"
 fi
 
 #---------------------------------------- reload env file when we reload zsh --#
@@ -125,7 +126,7 @@ else
 fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
-	alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
+	alias reload='. "$HOME/.zshrc" && echo "ZSH config reloaded from ~/.zshrc"'
 	alias iclouddrive='cd "$HOME/Library/Mobile\ Documents/com~apple~CloudDocs" '
 	alias python='python3 '
 	alias py='python3 '

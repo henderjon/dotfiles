@@ -79,6 +79,9 @@ show "G" for a good (valid) signature,
 "E" if the signature cannot be checked (e.g. missing key) and
 "N" for no signature
 
+### List all commits that touched a file
+$ git log --follow -- filename
+
 ### Scripts / Aliases
 
 https://git-scm.com/docs/git#Documentation/git.txt---list-cmdsgroupgroup82308203

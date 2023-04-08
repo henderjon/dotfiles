@@ -26,3 +26,8 @@ s = 'this uses {v}'.format(v='indicies')
 
 # iteration returns INDEXES
 # for dictionaries use .keys(), .values(), .items()
+
+# if __name__ == '__main__':
+# obj = json.loads(open(i.path, "r").read())
+# os.path.dirname(i.path)
+# os.listdir(dir)

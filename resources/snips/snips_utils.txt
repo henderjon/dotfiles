@@ -33,6 +33,7 @@ $ ln [options] file-name link-name
 
 ### list subdir
 $ find ./sub/dir -maxdepth 1 -mindepth 1
+$ find . -not -path "path to exclude" -o -not -path "OR other path to exclude"
 
 ###################################################################### XARGS ###
 

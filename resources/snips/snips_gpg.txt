@@ -14,10 +14,11 @@ sub => 'public SUBkey'
 > indicate that the key is stored on a smartcard.  See also --list-keys.
 
 ### To Use an Offline Master Key
-Create a temp dir and import your master key
-% gpg --homedir ~/$TEMPDIR --import $PRIVATE_MASTER_KEY
 
-Edit the actual keyring using the keys from you $TEMPDIR
-% gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --edit-key $KEY_YOU_WANT_TO_EDIT
+###Create a temp dir and import your master key
+$ gpg --homedir ~/$TEMPDIR --import $PRIVATE_MASTER_KEY
 
-Delete $TEMPDIR
+### Edit the actual keyring using the keys from you $TEMPDIR
+$ gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --edit-key $KEY_YOU_WANT_TO_EDIT
+
+### Delete $TEMPDIR

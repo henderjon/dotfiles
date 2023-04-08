@@ -56,6 +56,7 @@
 	longcolumndiff = %Creset%n%<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %n%w(72, 0, 0)%b %C(brightblack)
 	columndiff     = %Creset%n%<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %C(brightblack)
 	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %cd%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
+	# showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nParents: %p%nDate: %cd%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
 	columns        = %<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	gpg            = %<(28)%cd %>(16)%C(white bold ul)%an%Creset (%><(16)%GK) | %><(7)%h  | %C(red)%d%Creset %s
 	gpgfull        = "%<(28)%cd %>(16)%C(white bold ul)%an%Creset | %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s\n\tUser: %GS\n\tKey: %GK (%G?)\n\tPrimary: %GP\n\n"

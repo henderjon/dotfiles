@@ -1,10 +1,14 @@
 ################################################# TERMINAL CODES (ANSI/VT100) ##
 
 ### https://wiki.bash-hackers.org/scripting/terminalcodes
+### https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+### https://en.wikipedia.org/wiki/ANSI_escape_code
 
-esc   - "\u001b[" // "\033", byte(27)
+ESC CHAR: "\u001b[", "\033", byte(27)
 
-\033[1;31;47m
+## Combine attrs like
+
+EXAMPLE: \033[1;31;47m
 
 ANSI		Description
 [0m  - Reset all attributes
@@ -15,6 +19,21 @@ ANSI		Description
 [5m  - Set "blink" attribute
 [7m  - Set "reverse" attribute
 [8m  - Set "hidden" attribute
+[9m  - Set "strike" attribute*
+
+## text attributes
+
+[21m - reset bold or Doubly underlined
+[22m - reset bold and dim
+[23m - reset italic
+[24m - rest underlined
+[25m - reset blinking
+[27m - reset reversed
+[28m - reset hidden
+[29m - reset strike
+
+## regular foreground colors
+
 [30m - Set foreground to color #0 - black
 [31m - Set foreground to color #1 - red
 [32m - Set foreground to color #2 - green
@@ -23,7 +42,10 @@ ANSI		Description
 [35m - Set foreground to color #5 - magenta
 [36m - Set foreground to color #6 - cyan
 [37m - Set foreground to color #7 - white
-[39m - Set default color as foreground color
+[39m - Reset foreground; Set default color as foreground color
+
+## regular background colors
+
 [40m - Set background to color #0 - black
 [41m - Set background to color #1 - red
 [42m - Set background to color #2 - green
@@ -32,20 +54,25 @@ ANSI		Description
 [45m - Set background to color #5 - magenta
 [46m - Set background to color #6 - cyan
 [47m - Set background to color #7 - white
-[49m - Set default color as background color
+[49m - Reset Background; Set default color as background color
 
-[90m -  Dark grey
-[91m -  Light red
-[92m -  Light green
-[93m -  Yellow
-[94m -  Light blue
-[95m -  Light purple
-[96m -  Turquoise
-[97m -  White
-[100m - Dark grey background
-[101m - Light red background
-[102m - Light green background
-[103m - Yellow background
-[104m - Light blue background
-[105m - Light purple background
-[106m - Turquoise background
+## bright foreground colors
+
+[90m -  Bright Black; Dark Grey
+[91m -  Bright Light Red
+[92m -  Bright Light Green
+[93m -  Bright Yellow
+[94m -  Bright Light Blue
+[95m -  Bright Light Purple
+[96m -  Bright Cyan
+[97m -  Bright White
+
+## bright background colors
+
+[100m - Bright Black; Dark Grey Background
+[101m - Bright Red Background
+[102m - Bright Green Background
+[103m - Bright Yellow Background
+[104m - Bright Blue Background
+[105m - Bright Magenta Background
+[106m - Bright Cyan Background

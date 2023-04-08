@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+set -e
+
+SRCFILE="$1"
+
+if [ -z "$SRCFILE" ]
+then
+	printf "missing filename\n"
+	exit 1
+fi
+
+SRCBKUP="$SRCFILE.BOMCRLF.bkup"
+mv "$SRCFILE" "$SRCBKUP"
+rm -f "$SRCFILE"
+# strip BOM and \r (CRLF to LF)
+sed $"1s/^\xef\xbb\xbf//" < "$SRCBKUP" | sed 's/\r$//' > "$SRCFILE"
+
+# BSD needs the '$' to have bash to the escaping; non-bsd doesn't require the '$'
+# BOM: U+FEFF is encoded as 3 bytes: EF BB BF
+
+printf "# rm \"%s\"\n" "$SRCBKUP"

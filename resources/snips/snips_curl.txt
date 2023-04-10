@@ -1,9 +1,13 @@
-####################################################################### CURL ###
+# CURL
+--------------------------------------------------------------------------------
 
-### https://curl.se/docs/sslcerts.html
-### https://curl.se/docs/caextract.html -- ca cert download
+- https://curl.se/docs/sslcerts.html
+- https://curl.se/docs/caextract.html -- ca cert download
 
 curl -b cookies.txt -c cookies.txt $URL
+
+ARGS
+--------------------------------------------------------------------------------
 
 -b cookies to send
 -c cookies to keep

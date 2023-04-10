@@ -1,16 +1,23 @@
-################################################# TERMINAL CODES (ANSI/VT100) ##
+# TERMINAL CODES (ANSI/VT100)
 
-### https://wiki.bash-hackers.org/scripting/terminalcodes
-### https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-### https://en.wikipedia.org/wiki/ANSI_escape_code
+- https://wiki.bash-hackers.org/scripting/terminalcodes
+- https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+- https://en.wikipedia.org/wiki/ANSI_escape_code
 
-ESC CHAR: "\u001b[", "\033", byte(27)
+ESCAPE
+--------------------------------------------------------------------------------
 
-## Combine attrs like
+ESC CHAR:
 
-EXAMPLE: \033[1;31;47m
+- \u001b
+- \033
+- byte(27)
 
-ANSI		Description
+Combine attrs like; `\033[1;31;47m`
+
+text attributes
+--------------------------------------------------------------------------------
+
 [0m  - Reset all attributes
 [1m  - Set "bright" attribute
 [2m  - Set "dim" attribute
@@ -21,7 +28,8 @@ ANSI		Description
 [8m  - Set "hidden" attribute
 [9m  - Set "strike" attribute*
 
-## text attributes
+reset text attributes
+--------------------------------------------------------------------------------
 
 [21m - reset bold or Doubly underlined
 [22m - reset bold and dim
@@ -32,7 +40,8 @@ ANSI		Description
 [28m - reset hidden
 [29m - reset strike
 
-## regular foreground colors
+regular foreground colors
+--------------------------------------------------------------------------------
 
 [30m - Set foreground to color #0 - black
 [31m - Set foreground to color #1 - red
@@ -44,7 +53,8 @@ ANSI		Description
 [37m - Set foreground to color #7 - white
 [39m - Reset foreground; Set default color as foreground color
 
-## regular background colors
+regular background colors
+--------------------------------------------------------------------------------
 
 [40m - Set background to color #0 - black
 [41m - Set background to color #1 - red
@@ -56,7 +66,8 @@ ANSI		Description
 [47m - Set background to color #7 - white
 [49m - Reset Background; Set default color as background color
 
-## bright foreground colors
+bright foreground colors
+--------------------------------------------------------------------------------
 
 [90m -  Bright Black; Dark Grey
 [91m -  Bright Light Red
@@ -67,7 +78,8 @@ ANSI		Description
 [96m -  Bright Cyan
 [97m -  Bright White
 
-## bright background colors
+bright background colors
+--------------------------------------------------------------------------------
 
 [100m - Bright Black; Dark Grey Background
 [101m - Bright Red Background

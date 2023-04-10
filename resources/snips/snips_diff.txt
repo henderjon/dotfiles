@@ -1,6 +1,7 @@
-####################################################################### DIFF ###
+# DIFF
+--------------------------------------------------------------------------------
 
-# http://www.computerhope.com/unix/udiff.htm
+- http://www.computerhope.com/unix/udiff.htm
 
 # Example usage of comparing output of two ls commands
 $ diff -u <(ls -l /directory/) <(ls -l /directory/) | colordiff

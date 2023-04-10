@@ -1,10 +1,14 @@
-######################################################################### GIT ##
+# GIT
 
-### Scripts / Aliases
+SCRIPTS / ALIASES
+--------------------------------------------------------------------------------
 
 https://git-scm.com/docs/git#Documentation/git.txt---list-cmdsgroupgroup82308203
 
-I couldn't find in documentation, but if you create a script "git-<name>" in path, you can call it with "git name" in your repo.
+I couldn't find in documentation, but if you create a script "git-<name>" in $PATH, you can call it with "git name" from within a repo.
+
+GPG
+--------------------------------------------------------------------------------
 
 ### TROUBLE WITH GPG
 # Add GIT_TRACE=1 at the beginning of the command you use. Run the command that failed
@@ -21,6 +25,9 @@ show "G" for a good (valid) signature,
 "E" if the signature cannot be checked (e.g. missing key) and
 "N" for no signature
 
+REVERT
+--------------------------------------------------------------------------------
+
 ### To revert stuff committed by accident ###
 $ git revert --no-commit D
 $ git revert --no-commit C
@@ -32,6 +39,9 @@ $ git revert --no-commit HEAD~3..
 
 ### or the same
 $ git revert --no-commit HEAD~3..HEAD
+
+REBASE / RESTORE
+--------------------------------------------------------------------------------
 
 ### reword commit messages
 $ git rebase -i $startFrom
@@ -47,17 +57,45 @@ $ git push --delete origin branchname
 $ git checkout -f A -- .
 $ git commit -a
 
-### view range; show all commits in $NEW that are absent in $OLD ###
+### Checkout a file from a rev
+$ git checkout rev:path/to/file
+
+### Show a file from a rev
+$ git show rev -- path/to/file
+
+RANGE
+--------------------------------------------------------------------------------
+
+### Traversing revs
+# ~ is the first parent ~3 is the first parent's first parent's first parent
+# ^n is the nth parent ^3 is the third parent
+# ~~~ == ^^^ == ^1^1^1
+# ^3^2 is the second parent of the third parent of the given rev
+
+### view range; show all commits in $NEW that are absent in $OLD
 $ git log $OLD..$NEW
 
-### view range; show all commits that only in EITHER $NEW or $OLD (commits they do NOT have in common) ###
+### view range; show all commits that only in EITHER $NEW or $OLD (commits they do NOT have in common)
 ### "--left-right" might be useful
 $ git log $OLD...$NEW
 
-### view range; show diff in $NEW since branching from $OLD ###
+### view range; show diff in $NEW since branching from $OLD
 $ git diff $OLD...$NEW
 
-### view specific folder/file history ###
+### CLI CODE REVIEW
+$ git diff $dev $release
+$ git diff --name-status $dev $release
+
+BRANCHING
+--------------------------------------------------------------------------------
+
+### started work from the wrong branch ###
+$ git fetch && git rebase --onto <where> <where I am now>
+
+LOG
+--------------------------------------------------------------------------------
+
+### view specific folder/file history
 $ git log -- path/to/folder
 
 ### include deletes:
@@ -66,14 +104,20 @@ $ git log -- path/to/folder/*
 ### shows diff patch
 $ git log -p -- path/to/folder/*
 
-### started work from the wrong branch ###
-$ git fetch && git rebase --onto <where> <where I am now>
-
-### Search commit messages ###
+### Search commit messages
 $ git log --all --notes -i --grep=''
 
 ### or the same ... `g` searches the reflog
 $ git log --g -i --grep=''
+
+### show commits in $LATER that are NOT in $EARLIER
+$ git log $EARLIER..$LATER
+
+### List all commits that touched a file
+$ git log --follow -- filename
+
+SEARCHING
+--------------------------------------------------------------------------------
 
 ### Search source code ###
 $ git grep -i \$str $(git rev-list --all)
@@ -89,26 +133,3 @@ $ git subtree --prefix $dir push $remote $dest_branch
 
 ### apply a branches changes on the current branch
 $ git checkout $branch && git checkout $otherBranch -- .
-
-### show commits in $LATER that are NOT in $EARLIER
-$ git log $EARLIER..$LATER
-
-### CLI CODE REVIEW
-$ git diff $dev $release
-$ git diff --name-status $dev $release
-
-### Traversing revs
-# ~ is the first parent ~3 is the first parent's first parent's first parent
-# ^n is the nth parent ^3 is the third parent
-# ~~~ == ^^^ == ^1^1^1
-# ^3^2 is the second parent of the third parent of the given rev
-
-### List all commits that touched a file
-$ git log --follow -- filename
-
-### Checkout a file from a rev
-$ git checkout rev:path/to/file
-
-### Show a file from a rev
-$ git show rev -- path/to/file
-

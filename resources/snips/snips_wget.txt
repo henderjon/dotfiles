@@ -5,7 +5,9 @@ $ wget -p -k $1
 $ wget -r -np -nc -k -c $1
 $ wget --content-disposition --restrict-file-names=nocontrol -e robots=off -A.pdf,.ppt,.doc -r $1
 
-### Misc ###
+Misc
+--------------------------------------------------------------------------------
+
  -nc --no-clobber
  -r  --recursive
  -np --no-parent
@@ -22,7 +24,11 @@ $ wget --content-disposition --restrict-file-names=nocontrol -e robots=off -A.pd
  -o write LOGS to named file
  --load-cookies file.txt
 
-### Single page ### (https://gist.github.com/dannguyen/03a10e850656577cfb57)
+Single page
+--------------------------------------------------------------------------------
+
+- https://gist.github.com/dannguyen/03a10e850656577cfb57
+
 $ wget -E -H -k -K -N -p -P $DIR $PAGEURL
 
  --adjust-extension, -E

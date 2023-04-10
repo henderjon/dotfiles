@@ -1,27 +1,35 @@
-######################################################################### SCP ##
+SCP
+--------------------------------------------------------------------------------
 
-# for strange errors force legacy mode with "-O"
+For strange errors force legacy mode with "-O" ...
 
-########################################## macOS SSH Can't Connect To Client ###
+macOS SSH Can't Connect To Client
+--------------------------------------------------------------------------------
 
 $ eval $(ssh-agent)
 $ ssh-add
 
-################################################################ embeded imgs ##
+embeded img
+--------------------------------------------------------------------------------
 
-### transparent
-<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-### black
-<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=">
+transparent: <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+black: <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=">
 
-################################################################## IPINFO.IO ###
+IPINFO.IO
+--------------------------------------------------------------------------------
 
 $ curl -s ipinfo.io/ip
 
-################################################################# REMOVE BOM ###
+REMOVE BOM
+--------------------------------------------------------------------------------
 
-sed $'1s/^\uFEFF//'
+BSD (macos)
+- sed $'1s/^\xef\xbb\xbf//'
 
-################################################################# CRLF to LF ###
+Linux
+- sed '1s/^\xef\xbb\xbf//'
+
+CRLF to LF
+--------------------------------------------------------------------------------
 
 sed 's/\r$//'

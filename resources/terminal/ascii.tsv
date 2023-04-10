@@ -16,7 +16,7 @@ DEC	OCT	HX	BINARY   	VAL	Description
 --------------------------------------------------------------------------------
 000	000	00	0000 0000	NUL	"null" character
 001	001	01	0000 0001	SOH	start of header
-002	002	02	0000 0010	STX	start of text
+002	002	02	0000 0010	STX	start of text; implied end of header
 003	003	03	0000 0011	ETX	end of text
 004	004	04	0000 0100	EOT	end of transmission
 005	005	05	0000 0101	ENQ	enquiry
@@ -30,7 +30,7 @@ DEC	OCT	HX	BINARY   	VAL	Description
 013	015	0D	0000 1101	CR	carriage return
 014	016	0E	0000 1110	SO	shift out
 015	017	0F	0000 1111	SI	shift in
-016	020	10	0001 0000	DLE	data link escape
+016	020	10	0001 0000	DLE	data link escape; escape [single] control character
 017	021	11	0001 0001	DC1	device control 1 (XON)
 018	022	12	0001 0010	DC2	device control 2
 019	023	13	0001 0011	DC3	device control 3 (XOFF)
@@ -41,7 +41,7 @@ DEC	OCT	HX	BINARY   	VAL	Description
 024	030	18	0001 1000	CAN	cancel
 025	031	19	0001 1001	EM	end of medium
 026	032	1A	0001 1010	SUB	substitute
-027	033	1B	0001 1011	ESC	escape
+027	033	1B	0001 1011	ESC	escape; escape [multi] character commands
 028	034	1C	0001 1100	FS	file separator
 029	035	1D	0001 1101	GS	group separator
 030	036	1E	0001 1110	RS	request to send/record separator

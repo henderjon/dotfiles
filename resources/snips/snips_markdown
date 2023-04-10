@@ -1,0 +1,93 @@
+# Markdown
+
+HEADINGS
+--------------------------------------------------------------------------------
+
+# Heading 1
+
+Heading 1
+=========
+
+## Heading 2
+
+Heading 2
+---------
+
+### Heading 3
+#### Heading 4
+##### Heading 5
+
+TEXT
+--------------------------------------------------------------------------------
+
+*Italic*
+_Italic_
+
+**Bold**
+__Bold__
+
+This is a\
+line break
+
+LINKS
+--------------------------------------------------------------------------------
+
+[Link](http://a.com)
+
+[Link][1]...
+[1]: http://b.org "title"
+
+IMAGES
+--------------------------------------------------------------------------------
+
+![Image](http://url/a.png)
+
+![Image][1]...
+[1]: http://url/b.jpg "title"
+
+FOOTNOTES
+--------------------------------------------------------------------------------
+
+... Footnote[^1]. ...
+[1]: Footnote text
+
+LISTS
+--------------------------------------------------------------------------------
+
+* List
+
+- List
+
+1. One
+
+1) One
+
+- List
+    - nest with 4 spaces
+
+LINES
+--------------------------------------------------------------------------------
+
+Horizontal rule:
+
+---
+
+***
+
+CODE
+--------------------------------------------------------------------------------
+
+> Blockquote
+>> Nested Blockquote
+
+`Inline code` with backticks
+
+```
+# code block
+print '3 backticks or'
+print 'indent 4 spaces'
+```
+
+····# code block
+····print '3 backticks or'
+····print 'indent 4 spaces'

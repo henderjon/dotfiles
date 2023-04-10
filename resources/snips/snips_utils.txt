@@ -1,53 +1,64 @@
-######################################################################## CRON ##
+# CRON
 
-% crontab -e
+- $ crontab -e
 
-# Numeric values can be comma seperated for step values (e.g. "0,30 6,18 2,20 3,4 * command-to-run.sh" )
+Numeric values can be comma seperated for step values (e.g. "0,30 6,18 2,20 3,4 * command-to-run.sh" )
 
-# intervals are expressed as */X where X is a number
+Intervals are expressed as */X where X is a number
 
-# * * * * * command to be executed
-# ⎢ ⎜ │ │ │
-# ⎢ ⎜ │ │ ╰───── day of week (0 - 6) (Sunday=0)
-# │ │ │ ╰─────── month (1 - 12)
-# │ │ ╰───────── day of month (1 - 31)
-# │ ╰─────────── hour (0 - 23)
-# ╰───────────── min (0 - 59)
+```
+* * * * * command to be executed
+⎢ ⎜ │ │ │
+⎢ ⎜ │ │ ╰───── day of week (0 - 6) (Sunday=0)
+│ │ │ ╰─────── month (1 - 12)
+│ │ ╰───────── day of month (1 - 31)
+│ ╰─────────── hour (0 - 23)
+╰───────────── min (0 - 59)
+```
 
-######################################################################### TR ###
+TR
+--------------------------------------------------------------------------------
 
 $ tr -d "\n\r\t"
 
-######################################################################### ln ###
+ln
+--------------------------------------------------------------------------------
 
 $ ln [options] file-name link-name
 
-####################################################################### FIND ###
+FIND
+--------------------------------------------------------------------------------
 
+```
   -print0
         True;  print  the  full file name on the standard output, followed by a
         null character (instead of the newline character that -print uses).  This
         allows file names that contain newlines or other types of white space to
         be correctly interpreted by programs that process the find output. This
         option corresponds to the -0 option of xargs.
+```
 
-### list subdir
+LIST SUBDIR
+--------------------------------------------------------------------------------
+
 $ find ./sub/dir -maxdepth 1 -mindepth 1
+
 $ find . -not -path "path to exclude" -o -not -path "OR other path to exclude"
 
-###################################################################### XARGS ###
+XARGS
+--------------------------------------------------------------------------------
 
+```
   -0
         Change xargs to expect NUL (``\0'') characters as separators, instead of
         spaces and newlines.  This is expected to be used in concert with the
         -print0 function in find(1).
+```
 
-$ find . -type f | [...] | tr \\n \\0 | xargs -0 -I % rm %
+- $ find . -type f | [...] | tr \\n \\0 | xargs -0 -I % rm %
 
-################################################################# DISK USAGE ###
+DISK USAGE
+--------------------------------------------------------------------------------
 
-# local dir
-$ du -h -d 1
-
-# main drives
-$ df -h
+- Local dir: `$ du -h -d 1`
+- Main drives: `$ df -h`

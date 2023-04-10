@@ -12,27 +12,30 @@ $ chown $username /home/$username/.ssh/authorized_keys
 
 $ ssh-keygen -t ed25519 -C "your_email@example.com"
 
-### https://wiki.centos.org/HowTos/Network/SecuringSSH
+- https://wiki.centos.org/HowTos/Network/SecuringSSH
 
-### To turn off root login, edit: /etc/ssh/sshd_config:
+To turn off root login, edit: /etc/ssh/sshd_config:
+--------------------------------------------------------------------------------
 
-# prevent root logins
-PermitRootLogin no
+Prevent root logins
+- PermitRootLogin no
 
-# disable passwords
-PasswordAuthentication no
-ChallengeResponseAuthentication no
+Disable passwords
+- PasswordAuthentication no
+- ChallengeResponseAuthentication no
 
-# limit users
-AllowUsers alice bob
+Limit users
+- AllowUsers alice bob
 
-# disable protocol 1
-Protocol 2
+Disable protocol 1
+- Protocol 2
 
-### restart ssh
-$ service sshd restart
+Restart ssh
+- $ service sshd restart
 
-### COMMON PORTS ###
+COMMON PORTS
+--------------------------------------------------------------------------------
+
 - http: 80, 443, 8080
 - ssh: 22
 - ftp: 21

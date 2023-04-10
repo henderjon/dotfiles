@@ -1,6 +1,8 @@
-######################################################################## AWK ###
+# AWK
+--------------------------------------------------------------------------------
 
 The standard AWK variables are discussed below.
+--------------------------------------------------------------------------------
 
 ARGC        - It implies the number of arguments provided at the command line.
 ARGV        - It is an array that stores the command-line arguments. The array's valid index ranges from 0 to ARGC-1.
@@ -22,6 +24,8 @@ $0          - It represents the entire input record.
 $n          - It represents the nth field in the current record where the fields are separated by FS.
 
 GNU AWK Specific Variables
+--------------------------------------------------------------------------------
+
 ARGIND      - It represents the index in ARGV of the current file being processed.
 BINMODE     - It is used to specify binary mode for all file I/O on non-POSIX systems. Numeric values of 1, 2, or 3 specify that input files, output files, or all files, respectively, should use binary I/O. String values of r or w specify that input files or output files, respectively, should use binary I/O. String values of rw or wr specify that all files should use binary I/O.
 ERRNO       - A string indicates an error when a redirection fails for getline or if close call fails.
@@ -31,14 +35,16 @@ LINT        - It provides dynamic control of the --lint option from the GAWK pro
 PROCINFO    - This is an associative array containing information about the process, such as real and effective UID numbers, process ID number, and so on.
 TEXTDOMAIN  - It represents the text domain of the AWK program. It is used to find the localized translations for the program's strings.
 
-### Multi-dimensional arrays
+Multi-dimensional arrays
+--------------------------------------------------------------------------------
 
 $arr[key1, key2] = "value"
 Test for membership: if ((key1, key2) in arr)...
 # default SUBSEP = \034
 Loop over membership: for (key in arr){ split(key, indices, SUBSEP) }
 
-### Basic Scripting
+Basic Scripting
+--------------------------------------------------------------------------------
 
 BEGIN{FS="\t"; OFS="\t";}
 NR == 1{

@@ -1,18 +1,26 @@
 ################################################################ GO / GOLANG ###
 
-### classic golang.org docs
+classic golang.org docs
+--------------------------------------------------------------------------------
+
 $ go install golang.org/x/tools/cmd/godoc@latest
 $ cd $GOROOT/pkg
 $ godoc -http "localhost:6060"
 $ cd -
 
-### cross compile
+cross compile
+--------------------------------------------------------------------------------
+
 $ go tool dist list -json
 $ env GOOS=windows GOARCH=amd64 go [build ...]
 
-### list STDLIB
+list STDLIB
+--------------------------------------------------------------------------------
+
 $ tree -L 1 -d $GOROOT/src
 $ find $GOROOT/src -type d -maxdepth 2 | sed "s|$GOROOT/src/||" | sort
 
-### search STDLIB
+search STDLIB
+--------------------------------------------------------------------------------
+
 $ grep --colour=always -Iir "$1" "$GOROOT/src"

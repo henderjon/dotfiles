@@ -10,6 +10,7 @@
     "editor.rulers": [
         {"column":72, "color":"#626262"},
         {"column":80, "color":"#ffffff4d"},
+        {"column":152, "color":"#ffffff4d"},
     ],
     "editor.wordWrap": "off",
     "editor.hover.enabled": false,

@@ -1,3 +1,6 @@
+[pretty]
+
+[alias]
 # vv          = branch -vv --sort=committerdate
 rr          = "!f(){ git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name '@{u}'); }; f" # remove all commits on on remote tracking branch, for OOPSs on dev
 # dl        = log --pretty      = difflog -200000

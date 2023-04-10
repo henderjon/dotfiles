@@ -3,7 +3,7 @@
 set -e
 
 _make_check(){
-	git add --update . # -u only updates files that are already commited
+	git add --update . # -u/--update only updates files that are already commited
 	git commit -m "WIP; √ adding a checkpoint"
 	git status --untracked-files
 }

@@ -53,23 +53,24 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty]
 	# date formatting: https://git-scm.com/docs/git-rev-list
-	longcolumndiff = %Creset%n%<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %n%w(72, 0, 0)%b %C(brightblack)
-	columndiff     = %Creset%n%<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %C(brightblack)
-	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %cd%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
-	# showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nParents: %p%nDate: %cd%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
-	columns        = %<(32)%cd %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
-	gpg            = %<(28)%cd %>(16)%C(white bold ul)%an%Creset (%><(16)%GK) | %><(7)%h  | %C(red)%d%Creset %s
-	gpgfull        = "%<(28)%cd %>(16)%C(white bold ul)%an%Creset | %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s\n\tUser: %GS\n\tKey: %GK (%G?)\n\tPrimary: %GP\n\n"
-	branchlog      = "%n%C(yellow)%H (%h)%Creset\nAuthor: %C(white bold ul)%an%Creset <%ae> %GK (%G?)\nDate: %cD%n%n%+s%n%+b"
+	longcolumndiff = %Creset%n%<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %n%w(72, 0, 0)%b %C(brightblack)
+	columndiff     = %Creset%n%<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %C(brightblack)
+	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %ad%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
+	# showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nParents: %p%nDate: %ad%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
+	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
+	gpg            = %<(28)%ad %>(16)%C(white bold ul)%an%Creset (%><(16)%GK) | %><(7)%h  | %C(red)%d%Creset %s
+	gpgfull        = "%<(28)%ad %>(16)%C(white bold ul)%an%Creset | %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s\n\tUser: %GS\n\tKey: %GK (%G?)\n\tPrimary: %GP\n\n"
+	branchlog      = "%n%C(yellow)%H (%h)%Creset\nAuthor: %C(white bold ul)%an%Creset <%ae> %GK (%G?)\nDate: %aD%n%n%+s%n%+b"
 	brancheslog    = "%<(28)%(refname:lstrip=2) %<(28)%(objectname:short) %<(28)%(upstream:track,nobracket)"
 	difflog        = %<(25)%ci %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
-	quick          = %h | %<(15)%C(white bold ul)%an%Creset %<(15)%cd %s
+	quick          = %h | %<(15)%C(white bold ul)%an%Creset %<(15)%ad %s
 [alias]
     alias       = "!git config --get-regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
 	d           = diff
 	dt          = difftool
 	cl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
 	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
+	cls         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed -n 1
 	clu         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --unified -n 10 --reverse
 	clll        = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columndiff --numstat -n 20
 	cllll       = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=longcolumndiff --numstat -n 20

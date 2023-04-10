@@ -1,0 +1,161 @@
+HTML Entities
+https://sites.psu.edu/symbolcodes/codehtml/
+
+À        &Agrave;    &#192;              Capital A Grave
+È        &Egrave;    &#200;              Capital E Grave
+Ì        &Igrave;    &#204;              Capital I Grave
+Ò        &Ograve;    &#210;              Capital O Grave
+Ù        &Ugrave;    &#217;              Capital U Grave
+Y        -
+à        &agrave;    &#224;              Lower A Grave
+è        &egrave;    &#232;              Lower E Grave
+ì        &igrave;    &#236;              Lower I Grave
+ò        &ograve;    &#242;              Lower O Grave
+ù        &ugrave;    &#249;              Lower U Grave
+Y        -
+--------------------------------------------------------------------------------
+Á        &Aacute;    &#193;              Captial A Acute
+É        &Eacute;    &#201;              Captial E Acute
+Í        &Iacute;    &#205;              Captial I Acute
+Ó        &Oacute;    &#211;              Captial O Acute
+Ú        &Uacute;    &#218;              Captial U Acute
+Ý        &Yacute;    &#221;              Captial Y Acute
+á        &aacute;    &#225;              Lower A Acute
+é        &eacute;    &#233;              Lower E Acute
+í        &iacute;    &#237;              Lower I Acute
+ó        &oacute;    &#243;              Lower O Acute
+ú        &uacute;    &#250;              Lower U Acute
+ý        &yacute;    &#253;              Lower Y Acute
+--------------------------------------------------------------------------------
+Â        &Acirc;     &#194;              Captial A Circumflex
+Ê        &Ecirc;     &#202;              Captial E Circumflex
+Î        &Icirc;     &#206;              Captial I Circumflex
+Ô        &Ocirc;     &#212;              Captial O Circumflex
+Û        &Ucirc;     &#219;              Captial U Circumflex
+Y        -
+â        &acirc;     &#226;              Lower A Circumflex
+ê        &ecirc;     &#234;              Lower E Circumflex
+î        &icirc;     &#238;              Lower I Circumflex
+ô        &ocirc;     &#244;              Lower O Circumflex
+û        &ucirc;     &#251;              Lower U Circumflex
+Y        -
+--------------------------------------------------------------------------------
+Ã        &Atilde;    &#195;              Captial A Tilde
+E        -
+Ñ        &Ntilde;    &#209;              Captial I Tilde
+Õ        &Otilde;    &#213;              Captial O Tilde
+U        -
+Y        -
+ã        &atilde;    &#227;              Captial A Tilde
+E        -
+ñ        &ntilde;    &#241;              Captial I Tilde
+õ        &otilde;    &#245;              Captial O Tilde
+U        -
+Y        -
+--------------------------------------------------------------------------------
+Ä        &Auml;      &#196;              Lower A Umlaut
+Ë        &Euml;      &#203;              Lower E Umlaut
+Ï        &Iuml;      &#207;              Lower I Umlaut
+Ö        &Ouml;      &#214;              Lower O Umlaut
+Ü        &Uuml;      &#220;              Lower U Umlaut
+Ÿ        &Yuml;      &#159;              Lower Y Umlaut
+ä        &auml;      &#228;              Lower A Umlaut
+ë        &euml;      &#235;              Lower E Umlaut
+ï        &iuml;      &#239;              Lower I Umlaut
+ö        &ouml;      &#246;              Lower O Umlaut
+ü        &uuml;      &#252;              Lower U Umlaut
+ÿ        &yuml;      &#255;              Lower Y Umlaut
+
+Non-English Punctuation
+--------------------------------------------------------------------------------
+¡        &iexcl;     &#161;              Upside-down exclamation point.
+¿        &iquest;    &#191;              Upside-down question mark.
+Ç        &Ccedil;    &#199;              French C cedille (caps)
+ç        &ccedil;    &#231;              French C cedille (lower)
+Œ        &OElig;     &#140; or &#338;    French O-E ligature (caps)
+œ        &oelig;     &#156; or &#339;    French O-E ligature (lowercase)
+º        &ordm;      &#186;              Masculine ordinal number
+ª        &ordf;      &#170;              Feminine ordinal number
+ß        &szlig;     &#223;              German double S
+Ø        &Oslash;    &#216;              O slash (caps)
+ø        &oslash;    &#248;              O slash (lowercase)
+Å        &Aring;     &#197;              A ring, Angstrom sign (caps)
+å        &aring;     &#229;              A ring, Angstrom sign (lowercase)
+Æ        &AElig;     &#198;              A-E ligature (caps)
+æ        &aelig;     &#230;              A-E ligature (lowercase)
+Þ        &THORN;     &#222;              Old English thorn (caps)
+þ        &thorn;     &#254;              Old English thorn (lowercase)
+Ð        &ETH;       &#208;              Old English eth (caps)
+ð        &eth;       &#240;              Old English eth (lowercase)
+«        &laquo;     &#171;              European/Spanish style left double angle quote mark.
+»        &raquo;     &#187;              European/Spanish style right double angle quote mark.
+‹        &lsaquo;    &#8249;             European/Spanish style left single angle quote mark.
+›        &rsaquo;    &#8250;             European/Spanish style right single angle quote mark.
+‚        &sbquo;     &#8218;             European single bottom quote
+„        &bdquo;     &#8222;             European bottom quote
+“        &ldquo;     &#147; or &#8220;   Opening Double Curly Quotes
+”        &rdquo;     &#148; or &#8221;   Closing Double Curly Quotes
+‘        &lsquo;     &#145; or &#8216;   Opening Single Single Quote Mark
+’        &rsquo;     &#146; or &#8217;   Closing Single Single Quote Mark
+
+
+Math Symbols
+--------------------------------------------------------------------------------
+>        &gt;        &#62;               Greater than
+<        &lt;        &#60;               Less than
+÷        &divide;    &#247;              Division symbol
+/                    &#47;               Forward Slash
+°        &deg;       &#176;              Degree symbol
+¬        &not;       &#172;              Not symbol
+±        &plusmn;    &#177;              Plus/minus symbol
+µ        &micro;     &#181;              Micro
+∴        &there4;    &#8756;             therefore triangle
+≠        &ne;        &#8800;             not equals
+≥        &ge;        &#8805;             greater than or equals to
+≤        &le;        &#8804;             less than or equals to
+≈        &asymp;     &#8776;             approximately
+√        &radic;     &#8730;             square root radical
+∞        &infin;     &#8734;             infinity
+∫        &int;       &#8747;             integral sign
+∂        &part;      &#8706;             partial differential
+′        &prime;     &#8242;             Single prime
+″        &Prime;     &#8243;             Double prime
+∑        &sum;       &#8721;             Sigma Sum Sign
+∏        &prod;      &#8719;             Pi Product Sign
+‰        &permil;                        Per mil (1/1000th)
+≡        &equiv;     &#8801;             equivalent to (three lines)
+
+Currency Symbols
+--------------------------------------------------------------------------------
+¢        &cent;      &#162;              cent sign
+£        &pound;     &#163;              British Pound
+¥        &yen;       &#165;              Japanese Yen
+€        &euro;      &#8364;             Euro Symbol
+¤        &curren;    &#164;              Generic currency symbol
+ƒ        &fnof;      &#402;              Dutch Florin Symbol (may not work in older browsers)
+
+Punctuation Symbols
+--------------------------------------------------------------------------------
+         &nbsp;      &#32;               Inserts a non-breaking blank space (en space)
+&        &amp;       &#38;               Ampersand
+“        &ldquo;     &#147; or &#8220;   Opening Double Quotes
+”        &rdquo;     &#148; or &#8221;   Closing Double Quotes
+‘        &lsquo;     &#145; or &#8216;   Opening Single Quote Mark
+’        &rsquo;     &#146; or &#8217;   Closing Single Quote Mark
+®        &reg;       &#174;              Registered symbol
+©        &copy;      &#169;              Copyright symbol
+™        &trade;     &#153; or &#8482;   Trademark symbol
+¶        &para;      &#182;              Paragraph symbol
+•        &bull;      &#149; or &#8226;   Big (Bullet) List Dot
+·        &middot;    &#183;              Medium (Middle) List Dot
+§        &sect;      &#167;              Section Symbol
+–        &ndash;     &#150; or &#8211;   en-dash
+—        &mdash;     &#151; or &#8212;   em-dash
+†        &dagger;    &#8224;             dagger (cross)
+‡        &Dagger;    &#8225;             double dagger
+◊        &loz;       &#9674;             open diamond, lozenge
+↑        &uarr;      &#8593;             up arrow
+↓        &darr;      &#8595;             down arrow
+←        &larr;      &#8592;             left arrow
+→        &rarr;      &#8594;             right arrow
+↔        &harr;      &#8596;             double headed arrow

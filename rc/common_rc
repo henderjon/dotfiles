@@ -38,21 +38,26 @@ export PATH="$PATH:/opt/homebrew/bin"              # apple silicon
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin" # ubuntu
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-#-------------------------------------------------------------------- VSCode --#
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin" #default
-
-#-------------------------------------------------------------- Sublime Text --#
-export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
-
 #-------------------------------------------------------------- cleanup path --#
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:$HOME/dotfiles/bin"
 
+#------------------------------------------------------- these are important --#
+export DOTFILES="$HOME/dotfiles"
+export EDITOR="ed -p:"
+export CLICOLOR_FORCE=true
+export VISUAL="$EDITOR"
+export PAGER=cat
+export DIFFCOLORS="31:32" # ascii color codes ... add:rm
+export GLAMOUR_STYLE="$DOTFILES/conf/gh/monokai22.json" # set gh color scheme
+
+#----------------------------------------------------------------------- IRC --#
+export IRCNAME=henderjon
+export IRCNICK=henderjon
+export IRCUSER=henderjon
+
 #------------------------------------------------- Alias [`man zshbuiltins`] --#
-# $ man ls # will describe how to customize ls colors
-alias lsl='ls -AFGTlh '  # --time-style=+'%b %e %T %Y' ## MacOS, BSD
-# alias lsl='ls -AFClh --color ' # --time-style=+'%b %e %T %Y' ## Linux
 alias less='less -S '
 alias ed='ed -p:'
 alias h='history -25'
@@ -63,16 +68,9 @@ alias grep='grep --color '
 alias gome='cd "$HOME/code/go/src" '
 alias topen='open -a Terminal '
 alias diff='diff -u --color=always '
-
-#------------------------------------------------------- these are important --#
-#--------------------------- these are off as they mess with tmux and screen --#
-export DOTFILES="$HOME/dotfiles"
-export EDITOR="ed -p:"
-export CLICOLOR_FORCE=true
-export VISUAL="$EDITOR"
-export PAGER=cat
-export DIFFCOLORS="31:32" # ascii color codes ... add:rm
-export GLAMOUR_STYLE="$DOTFILES/conf/gh/monokai22.json" # set gh color scheme
+alias reload='. "$HOME/.zshrc" && echo "ZSH config reloaded from ~/.zshrc"'
+alias python='python3 '
+alias py='python3 '
 
 #--------------------------------------------------------------------- SNIPS --#
 alias snips='cat "$DOTFILES"/resources/snips/* '
@@ -90,14 +88,13 @@ snip_file () {
 }
 
 #--------------------------------------------------------------------- ASCII --#
-export ASCII_FILE="$HOME/dotfiles/resources/terminal/ascii.tsv"
+export ASCII_FILE="$DOTFILES/resources/terminal/ascii.tsv"
 alias ascii='head -133 "$ASCII_FILE" '
 alias asciix='cat "$ASCII_FILE" '
 
-#----------------------------------------------------------------------- IRC --#
-export IRCNAME=henderjon
-export IRCNICK=henderjon
-export IRCUSER=henderjon
+#------------------------------------------------------------- HTML Entities --#
+export ENTITIES_FILE="$DOTFILES/resources/terminal/entities.txt"
+alias entities='cat "$ENTITIES_FILE" '
 
 #---------------------------------------- reload env file when we reload zsh --#
 if [ -f "$HOME/.zshenv" ]; then
@@ -126,8 +123,16 @@ else
 fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
-	alias reload='. "$HOME/.zshrc" && echo "ZSH config reloaded from ~/.zshrc"'
+	# $ man ls # will describe how to customize ls colors
+	alias lsl='ls -AFGTlh '  # --time-style=+'%b %e %T %Y' ## MacOS, BSD
+#-------------------------------------------------------------------- VSCode --#
+	export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin" #default
+#-------------------------------------------------------------- Sublime Text --#
+	export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 	alias iclouddrive='cd "$HOME/Library/Mobile\ Documents/com~apple~CloudDocs" '
-	alias python='python3 '
-	alias py='python3 '
+fi
+
+if [[ "$OSTYPE" == linux* ]]; then
+	# $ man ls # will describe how to customize ls colors
+	alias lsl='ls -AFClh --color ' # --time-style=+'%b %e %T %Y' ## Linux
 fi

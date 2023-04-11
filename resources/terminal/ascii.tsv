@@ -1,16 +1,3 @@
-https://www.sciencebuddies.org/science-fair-projects/references/ascii-table
-https://www.lammertbies.nl/comm/info/ascii-characters
-
-DLE	data link escape; Comment is the ascii Data Link Escape (DLE) character and begins a commented record
-
-FS	file separator; FileSep is the ascii File Separator (FS) character and delineates collections of groups (think DBs)
-
-GS	group separator; GroupSep is the ascii Group Separator (GS) character and delineates groups of records (think DB tables)
-
-RS	request to send/record separator; RecordSep is the ascii Record Separator (RS) character and delineates records (think DB rows in a table)
-
-US	unit separator; UnitSep is the ascii Unit Separator (US) character and delineates fields in a record (think DB fields in a row)
-
 ================================================================================
 DEC	OCT	HX	BINARY   	VAL	Description
 --------------------------------------------------------------------------------

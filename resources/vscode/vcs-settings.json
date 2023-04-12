@@ -175,4 +175,46 @@
 
     "rainbow_csv.enable_cursor_position_info": false,
     "githubPullRequests.pullBranch": "never",
+
+    "todohighlight.isEnable": true,
+    "todohighlight.isCaseSensitive": true,
+    "todohighlight.keywords": [
+        "// TODO:",
+        "// FIXME:",
+        "// NOTE:",
+    ],
+    "todohighlight.keywordsPattern": "// (TODO:.*|FIXME:.*|NOTE:.*)",
+    "todohighlight.defaultStyle": {
+        "color": "white",
+        "backgroundColor": "#456BA5",
+        "isWholeLine": false,
+    },
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.json",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.go",
+        "**/*.md",
+        "**/*.txt",
+        "**/*.css",
+        "**/*.scss"
+    ],
+    "todohighlight.exclude": [
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.vscode/**",
+        "**/.github/**",
+        "**/_output/**",
+        "**/*.min.*",
+        "**/*.map",
+        "**/.next/**"
+    ],
+    "todohighlight.maxFilesForSearch": 5120,
+    "todohighlight.toggleURI": false,
 }

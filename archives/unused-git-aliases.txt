@@ -24,7 +24,6 @@
 	# pr          = "!f(){ git log --merges --ancestry-path --oneline $1..HEAD | grep \"pull request\" | tail -n1 | awk \"{print \\\\$5}\"; }; f"
 	mrb         = "!f(){ git for-each-ref --sort=-committerdate refs/heads/ | egrep -v 'refs/heads/(review/|release/|dev$)' | head -15 | awk '{print substr($1,0,10) \" \" substr($3,12)}'; };f"
 	restash     = rebase --autostash
-	# checkpoint  = "!f(){ git add --update .; git commit -m 'WIP; √ adding a checkpoint'; git status --untracked-files; }; f"
 	dl          = "!git log --pretty=difflog -200000 $1..$2" # $EARLIER..$LATER ... show commits in $LATER that are NOT in $EARLIER
 	kll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpgfull -n 20
 	rcl         = reflog --pretty=columns -n 20

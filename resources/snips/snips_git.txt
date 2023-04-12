@@ -25,6 +25,13 @@ show "G" for a good (valid) signature,
 "E" if the signature cannot be checked (e.g. missing key) and
 "N" for no signature
 
+PRETTY STATUS
+--------------------------------------------------------------------------------
+
+- https://git-scm.com/docs/git-status
+
+Specifically: `$ git status --branch --porcelain=v2`
+
 REVERT
 --------------------------------------------------------------------------------
 

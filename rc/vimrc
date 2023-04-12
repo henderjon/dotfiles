@@ -37,7 +37,7 @@
 	set whichwrap=<,>,[,],h,l                                " Allows for left/right keys to wrap across lines
 	filetype plugin on                                       " allows for some extra filetype specific goodness, specifically auto comments
 	if !&diff
-		set colorcolumn=80,72
+		set colorcolumn=72,80,150
 	endif
 
 " set t_Co=256

@@ -178,12 +178,8 @@
 
     "todohighlight.isEnable": true,
     "todohighlight.isCaseSensitive": true,
-    "todohighlight.keywords": [
-        "// TODO:",
-        "// FIXME:",
-        "// NOTE:",
-    ],
-    "todohighlight.keywordsPattern": "// (TODO:.*|FIXME:.*|NOTE:.*)",
+    // "todohighlight.keywords": [], // customize the handing of certain keywords
+    "todohighlight.keywordsPattern": "(//|#) ?(TODO:.*|FIXME:.*|NOTE:.*)",
     "todohighlight.defaultStyle": {
         "color": "white",
         "backgroundColor": "#456BA5",

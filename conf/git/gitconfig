@@ -1,6 +1,4 @@
-#-- diff/merge args: $BASE $LOCAL $REMOTE $MERGED
-#-- extrenal diff-wrapper params: $PATH $OLD-FILE $OLD-HEX $OLD-MODE $NEW-FILE $NEW-HEX $NEW-MODE
-#------------------------------------------------------------------------------#
+
 [user]
 	email = list@box370.net
 	name = henderjon
@@ -32,11 +30,13 @@
 	tool = diff # use this program on 'git diff'
 	renames = true
 [difftool] # is the command 'git difftool'
-	tool = bc3
 	prompt = true
+	trustExitCode = true
+[difftool "bc3"]
+	trustExitCode = true
 [difftool "diff"] # is the config of 'diff.tool'
 	cmd = diff -u $LOCAL $REMOTE
-	trustExitCode = false
+	trustExitCode = true
 [merge]
 	tool = bc3
 	ff = false
@@ -48,11 +48,8 @@
 [mergetool "code"]
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty] # date formatting: https://git-scm.com/docs/git-rev-list
-
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
-	gpg            = %<(28)%ad %>(16)%C(white bold ul)%an%Creset (%><(16)%GK) | %><(7)%h  | %C(red)%d%Creset %s
-	branchlog      = "%n%C(yellow)%H (%h)%Creset\nAuthor: %C(white bold ul)%an%Creset <%ae> %GK (%G?)\nDate: %aD%n%n%+s%n%+b"
-	difflog        = %<(25)%ci %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
+	difflog        = %<(25)%ai %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
 	# adding "Parents: %p" will show you merge parents
 	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %ad%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
 [alias]
@@ -64,9 +61,8 @@
 	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
 	cls         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 1
 	clu         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --unified -n 10 --reverse
-	kl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpg -n 20
-	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --ancestry-path dev..HEAD
-	blv         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --reverse -n 10
+	# log viewing but with an eye to the current branch and 'dev' which is usually the main branch
+	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat --reverse --ancestry-path origin/dev..HEAD
 	# report for release
 	rl          = "!git log --merges --pretty=difflog -200000 --grep=\"pull request\" $1..$2"
 	# checkpointing
@@ -77,7 +73,7 @@
 	co          = checkout
 	s           = status --short --branch --untracked-files
 	ss          = status --untracked-files
-	wip         = commit -m "WIP; Have you consider rebasing?"
+	wip         = commit -m "WIP; Have you considered rebasing?"
 	oops        = commit --amend --no-edit
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	# archive a branch
@@ -94,3 +90,6 @@
 	date = rfc
 #[url "git@github.com:"] # use this to force SSH access and use an SSH key
 # 	insteadOf = https://github.com/
+
+# NOTE: diff/merge args: $BASE $LOCAL $REMOTE $MERGED
+# NOTE: external diff-wrapper params: $PATH $OLD-FILE $OLD-HEX $OLD-MODE $NEW-FILE $NEW-HEX $NEW-MODE

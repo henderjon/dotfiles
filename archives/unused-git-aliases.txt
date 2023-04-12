@@ -1,17 +1,32 @@
 [pretty]
-
+	#includes Parents
+	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nParents: %p%nDate: %ad%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
+	columndiff     = %Creset%n%<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %C(brightblack)
+	longcolumndiff = %Creset%n%<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %n%w(72, 0, 0)%b %C(brightblack)
+	brancheslog    = "%<(28)%(refname:lstrip=2) %<(28)%(objectname:short) %<(28)%(upstream:track,nobracket)"
+	quick          = %h | %<(15)%C(white bold ul)%an%Creset %<(15)%ad %s
+	gpgfull        = "%<(28)%ad %>(16)%C(white bold ul)%an%Creset | %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s\n\tUser: %GS\n\tKey: %GK (%G?)\n\tPrimary: %GP\n\n"
 [alias]
-# vv          = branch -vv --sort=committerdate
-rr          = "!f(){ git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name '@{u}'); }; f" # remove all commits on on remote tracking branch, for OOPSs on dev
-# dl        = log --pretty      = difflog -200000
-# nb        = "!f(){ git fetch origin; git checkout -b $2 --no-track origin/$1; }; f"
-### difflog
-# dl          = "!git log --pretty=difflog -200000 $1..HEAD"
-### release difflog
-cr          = "!f(){ git fetch origin; git checkout -B review/$1 origin/$1; }; f"
-exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
-### DONAT
-exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
-# pr          = "!f(){ git log --merges --ancestry-path --oneline $1..HEAD | grep \"pull request\" | tail -n1 | awk \"{print \\\\$5}\"; }; f"
-mrb         = "!f(){ git for-each-ref --sort=-committerdate refs/heads/ | egrep -v 'refs/heads/(review/|release/|dev$)' | head -15 | awk '{print substr($1,0,10) \" \" substr($3,12)}'; };f"
-restash     = rebase --autostash
+	d           = diff
+	dt          = difftool
+	cb          = checkout -b
+	# vv          = branch -vv --sort=committerdate
+	rr          = "!f(){ git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name '@{u}'); }; f" # remove all commits on on remote tracking branch, for OOPSs on dev
+	# dl        = log --pretty      = difflog -200000
+	# nb        = "!f(){ git fetch origin; git checkout -b $2 --no-track origin/$1; }; f"
+	### difflog
+	# dl          = "!git log --pretty=difflog -200000 $1..HEAD"
+	### release difflog
+	cr          = "!f(){ git fetch origin; git checkout -B review/$1 origin/$1; }; f"
+	exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
+	### DONAT
+	exclude     = "!f(){ echo $1 >> $(git rev-parse --git-dir)/info/exclude; }; f"
+	# pr          = "!f(){ git log --merges --ancestry-path --oneline $1..HEAD | grep \"pull request\" | tail -n1 | awk \"{print \\\\$5}\"; }; f"
+	mrb         = "!f(){ git for-each-ref --sort=-committerdate refs/heads/ | egrep -v 'refs/heads/(review/|release/|dev$)' | head -15 | awk '{print substr($1,0,10) \" \" substr($3,12)}'; };f"
+	restash     = rebase --autostash
+	# checkpoint  = "!f(){ git add --update .; git commit -m 'WIP; √ adding a checkpoint'; git status --untracked-files; }; f"
+	dl          = "!git log --pretty=difflog -200000 $1..$2" # $EARLIER..$LATER ... show commits in $LATER that are NOT in $EARLIER
+	kll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpgfull -n 20
+	rcl         = reflog --pretty=columns -n 20
+	clll        = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columndiff --numstat -n 20
+	cllll       = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=longcolumndiff --numstat -n 20

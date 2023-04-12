@@ -29,12 +29,12 @@
 	default = upstream
 	ff = true
 [diff]
-	tool = diff
-	renameLimit = 999
-[difftool]
+	tool = diff # use this program on 'git diff'
+	renames = true
+[difftool] # is the command 'git difftool'
 	tool = bc3
 	prompt = true
-[difftool "diff"]
+[difftool "diff"] # is the config of 'diff.tool'
 	cmd = diff -u $LOCAL $REMOTE
 	trustExitCode = false
 [merge]
@@ -45,42 +45,25 @@
 	keepBackup = true
 	trustExitCode = true
 	keepBackup = false
-[mergetool "vimerge"]
-	cmd = vim -f -d $LOCAL $MERGED $REMOTE
-	trustExitCode = false
-	keepBackup = false
 [mergetool "code"]
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty]
 	# date formatting: https://git-scm.com/docs/git-rev-list
-	longcolumndiff = %Creset%n%<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %n%w(72, 0, 0)%b %C(brightblack)
-	columndiff     = %Creset%n%<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s %C(brightblack)
 	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %ad%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
-	# showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nParents: %p%nDate: %ad%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	gpg            = %<(28)%ad %>(16)%C(white bold ul)%an%Creset (%><(16)%GK) | %><(7)%h  | %C(red)%d%Creset %s
-	gpgfull        = "%<(28)%ad %>(16)%C(white bold ul)%an%Creset | %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s\n\tUser: %GS\n\tKey: %GK (%G?)\n\tPrimary: %GP\n\n"
 	branchlog      = "%n%C(yellow)%H (%h)%Creset\nAuthor: %C(white bold ul)%an%Creset <%ae> %GK (%G?)\nDate: %aD%n%n%+s%n%+b"
-	brancheslog    = "%<(28)%(refname:lstrip=2) %<(28)%(objectname:short) %<(28)%(upstream:track,nobracket)"
 	difflog        = %<(25)%ci %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
-	quick          = %h | %<(15)%C(white bold ul)%an%Creset %<(15)%ad %s
 [alias]
     alias       = "!git config --get-regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
-	d           = diff
-	dt          = difftool
 	cl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
 	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
 	cls         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed -n 1
 	clu         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --unified -n 10 --reverse
-	clll        = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columndiff --numstat -n 20
-	cllll       = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=longcolumndiff --numstat -n 20
 	kl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpg -n 20
 	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --ancestry-path dev..HEAD
 	blv         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=branchlog --stat --stat-graph-width=24 --reverse -n 10
-	kll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=gpgfull -n 20
-	rcl         = reflog --pretty=columns -n 20
 	co          = checkout
-	cb          = checkout -b
 	s           = status --short --branch --untracked-files
 	ss          = status --untracked-files
 	wip         = commit -m wip
@@ -88,7 +71,6 @@
 	arch        = "!f(){ : git branch ; BRANCH_NAME=\"$1\"; if [ -z \"$BRANCH_NAME\" ]; then BRANCH_NAME=\"$(git branch-name)\"; fi; git branch --move \"$BRANCH_NAME\" \"archive/$BRANCH_NAME\"; }; f" # ": git branch" sets up auto completion of branch names
 	fix         = "!f(){ git fetch origin; git checkout -b fix/$1 --no-track origin/dev; }; f"
 	feature     = "!f(){ git fetch origin; git checkout -b feature/$1 --no-track origin/dev; }; f"
-	dl          = "!git log --pretty=difflog -200000 $1..$2" # $EARLIER..$LATER ... show commits in $LATER that are NOT in $EARLIER
 	rl          = "!git log --merges --pretty=difflog -200000 --grep=\"pull request\" $1..$2"
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	publish     = "!git push -u origin $(git branch-name)"

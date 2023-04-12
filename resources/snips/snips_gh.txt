@@ -7,13 +7,27 @@
 - https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests
 - https://docs.github.com/en/issues/tracking-your-work-with-issues/filtering-and-searching-issues-and-pull-requests
 
+GITHUB.COM & GPG
+--------------------------------------------------------------------------------
+
+- https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification
+
+GitHub will automatically use GPG to sign commits you make using the web interface. Commits signed by GitHub will have a verified status. You can verify the signature locally using the public key available at https://github.com/web-flow.gpg. The full fingerprint of the key is 5DE3 E050 9C47 EA3C F04A 42D3 4AEE 18F8 3AFD EB23.
+
+DEVELOP WEBHOOKS
+--------------------------------------------------------------------------------
+
+- https://docs.github.com/developers/webhooks-and-events/webhooks/receiving-webhooks-with-the-github-cli
+
+gh webhook forward --repo monalisa/hello-world --events issues,pull_request --url http://localhost:4000/webhooks
+
 NEED MY REVIEW
 --------------------------------------------------------------------------------
 
 - gh # https://docs.github.com/en/issues/tracking-your-work-with-issues/filtering-and-searching-issues-and-pull-requests
 
 $ gh pr status
-$ gh pr -R $REPO list -S "is:pr is:open user-review-requested:@me "
+$ gh pr -R $REPO list -S "is:pr is:open user-review -requested:@me "
 $ gh pr -R $REPO list -S "is:pr is:open -reviewed-by:@me "
 $ gh pr -R $REPO list -S "is:pr is:open is:pr author:@me "
 $ gh pr -R $REPO list -S "is:pr is:open is:issue author:@me "
@@ -31,10 +45,3 @@ $ gh pr comment $N -b "comment"
 $ gh pr comment $N -b "@cronrunner new issue"
 $ gh pr diff $N
 $ gh pr review $N -a -b ":8ball:"
-
-GITHUB.COM & GPG
---------------------------------------------------------------------------------
-
-- https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification#ssh-commit-signature-verification
-
-GitHub will automatically use GPG to sign commits you make using the web interface. Commits signed by GitHub will have a verified status. You can verify the signature locally using the public key available at https://github.com/web-flow.gpg. The full fingerprint of the key is 5DE3 E050 9C47 EA3C F04A 42D3 4AEE 18F8 3AFD EB23.

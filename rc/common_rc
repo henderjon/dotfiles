@@ -75,12 +75,12 @@ alias py='python3 '
 #--------------------------------------------------------------------- SNIPS --#
 alias snips='cat "$DOTFILES"/resources/snips/* '
 for f in "$DOTFILES"/resources/snips/*; do
-	F=$(basename -s .txt "$f")
+	F=$(basename -s .txt "$f" | tr _ -)
 	alias "$F"="echo \"\n\" && cat \"$f\" && echo \"\n\" "
 done
 
 # output a given snip file path/name to open in an editor
-snip_file () {
+snips_file () {
 	f="$DOTFILES/resources/snips/snips_$1.txt"
 	if [ -f "$f" ]; then
 		echo "$f"

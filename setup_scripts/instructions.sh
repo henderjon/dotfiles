@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 DOTPATH=$(pwd)
 
 # don't run this file from it's own dir
@@ -9,7 +11,7 @@ if [[ "$DOTPATH" == *setup_scripts* ]]; then
 fi
 
 # shellcheck source=functions.sh
-source "$DOTPATH/setup_scripts/functions.sh"
+. "$DOTPATH/setup_scripts/functions.sh"
 
 sde "please name me:"
 read -r ENV_NAME
@@ -61,15 +63,15 @@ sdo "curl -L \"https://github.com/henderjon.keys\" >> \"$HOME/.ssh/authorized_ke
 
 # ------
 # shellcheck source=macos.sh
-source "$DOTPATH/setup_scripts/macos.sh"
+. "$DOTPATH/setup_scripts/macos.sh"
 
 # ------
 # shellcheck source=linux.sh
-source "$DOTPATH/setup_scripts/linux.sh"
+. "$DOTPATH/setup_scripts/linux.sh"
 
 # ------
 # shellcheck source=php.sh
-source "$DOTPATH/setup_scripts/php.sh"
+. "$DOTPATH/setup_scripts/php.sh"
 
 # ------
 notice "# ------ cleanup; avoids clobbering on fetch/pull"

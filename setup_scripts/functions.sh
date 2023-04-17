@@ -37,3 +37,18 @@ _cfg_ln(){
 	_mv_file_rm_sym "$2"
 	sdo "ln -s \"$1\" \"$2\""
 }
+
+
+_confirm(){
+	CONT=0
+	read -r -p "$1 (y/n)? " CHOICE
+	case "$CHOICE" in
+	  y|Y ) CONT=1;;
+	  n|N ) CONT=0;;
+	  * ) CONT=0;;
+	esac
+	echo "$CONT";
+}
+
+# RESULT="$(confirm "really?")"
+# if [ "$RESULT" -gt 0 ]; then

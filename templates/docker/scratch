@@ -1,0 +1,33 @@
+# SCRATCH
+
+- https://docs.docker.com/engine/reference/builder/
+
+ALPINE
+--------------------------------------------------------------------------------
+
+Alpine Linux uses "apk" as a package manager
+
+- RUN apk add --no-cache nginx
+
+GOLANG via Makefile
+--------------------------------------------------------------------------------
+
+$ make cgo
+
+- cgo runs 'docker-cgo' that runs a docker image "golang:latest" that invokes 'make linux64-cgo' to compile the linux cgo on mac (as mac doesn't cross compile with cgo very well)
+- once compiled in a linux docker image, 'make cgo copies the binary to ssh:path/in/the/cloud'
+
+```make
+# CGO
+.PHONY: linux64-cgo
+linux64-cgo:
+    env CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -mod=vendor -a -ldflags $(LDFLAGS_STATIC) -tags $(STATIC_TAGS) -o $(BINS)/$(BIN)-linux64-cgo-$(HEAD) ./cmd/$(BIN)
+
+.PHONY: docker-cgo
+docker-cgo: clean
+    docker run --rm -v "$(PWD)":/usr/src/myapp -w /usr/src/myapp golang:latest make linux64-cgo
+
+.PHONY: cgo
+cgo: docker-cgo
+    $(info scp "$(BINS)/$(BIN)-linux64-cgo-$(HEAD)" "mymix:$(DEPLOYMENT_PATH)")
+```

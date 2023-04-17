@@ -1,0 +1,8 @@
+# DOCKER
+
+BUILD AND RUN
+--------------------------------------------------------------------------------
+- docker build -t <tag-name> .
+- docker run -d -p <local-port>:<docker-port> <tag-name>
+
+Using -p overrides the EXPOSE setting in the docker file (not a bad thing).

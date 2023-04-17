@@ -7,6 +7,18 @@
 - https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests
 - https://docs.github.com/en/issues/tracking-your-work-with-issues/filtering-and-searching-issues-and-pull-requests
 
+GITHUB ACTIONS
+--------------------------------------------------------------------------------
+
+- https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#release
+- https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+- https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onevent_nametypes
+- https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+- https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#environment-files
+- https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+- https://fabianlee.org/2022/11/20/github-automated-github-release-of-golang-binary-using-github-actions/
+- https://trstringer.com/github-actions-create-release-upload-artifacts/
+
 GITHUB.COM & GPG
 --------------------------------------------------------------------------------
 

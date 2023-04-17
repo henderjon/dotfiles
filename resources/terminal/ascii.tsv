@@ -258,4 +258,4 @@ DEC	OCT	HX	BINARY   	VAL	Description
 252	374	FC	1111 1100	ⁿ	superscript n
 253	375	FD	1111 1101	²	superscript 2
 254	376	FE	1111 1110	■	black square
-255	377	FF	1111 1111		no-break space
+255	377	FF	1111 1111	 	no-break space

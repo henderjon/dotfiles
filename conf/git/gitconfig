@@ -61,6 +61,8 @@
 	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
 	cls         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 1
 	clu         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --unified -n 10 --reverse
+	# log searching
+	fsearch     = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --follow
 	# log viewing but with an eye to the current branch and 'dev' which is usually the main branch
 	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat --reverse --ancestry-path origin/dev..HEAD
 	# report for release

@@ -25,6 +25,7 @@
 ##################### https://code.visualstudio.com/docs/getstarted/settings ###
 ############## https://vimdoc.sourceforge.net/htmldoc/syntax.html#:highlight ###
 ##################################################### https://hslpicker.com/ ###
+########################################### https://mdigi.tools/darken-color ###
 
 /* black || background */
 - cterm 0

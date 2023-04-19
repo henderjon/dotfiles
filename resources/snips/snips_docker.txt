@@ -15,3 +15,16 @@ SHARING DATA
     - 'type=bind' ues a dir on the host as a dir in the container
 
 Using -p overrides the EXPOSE setting in the docker file (not a bad thing).
+
+DOCKER BUILD
+--------------------------------------------------------------------------------
+HA!
+
+`TLDR: -j$(nproc) make build go fast.`
+
+
+DOCKERFILE
+--------------------------------------------------------------------------------
+
+`ENTRYPOINT` is for running the container as a bin itself
+`CMD` is "main" for the container

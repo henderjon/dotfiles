@@ -11,6 +11,7 @@ $ xcode-select —install
 $ sudo apt-get install build-essential procps curl file git
 
 ##################################################################### centos ###
+
 $ sudo yum groupinstall 'Development Tools'
 $ sudo yum install procps-ng curl file git
 
@@ -21,11 +22,6 @@ $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/
 
 ### older
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-################################################################### composer ###
-
-$ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin/
-$ ln -s "$(which composer.phar)" "$HOME/bin/composer"
 
 ##################################################################### bundle ###
 
@@ -42,26 +38,6 @@ $ vsce publish
 
 ### For users who receive such a VSIX file, they can install the extension with
 $  code --install-extension $file.vsix
-
-################################################################# php set up ###
-
-### reqs: brew, composer, php, nginx, redis
-
-#-- PHP 7.4 --# https://github.com/shivammathur/homebrew-php
-$ brew tap shivammathur/php
-$ brew install shivammathur/php/php@7.4
-
-export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
-
-$ brew install libmemcached zlib
-$ pecl bundle memcached && cd ___ && phpize
-$ pecl install redis
-
-#-- mkcert --#
-$ mkcert -install
-$ mkdir /tmp/crt && cd /tmp/crt
-$ mkcert local.example.com
 
 ########################################################### non bundled brew ###
 

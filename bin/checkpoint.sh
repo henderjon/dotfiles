@@ -8,7 +8,8 @@ _make_check(){
 	git status --untracked-files
 }
 
-_make_check
+# _make_check
+print "checkpoint has been replaced with a git alias: ckp"
 exit 0 # make sure the loops below don't run yet
 
 # to run the loop for a given amount of time

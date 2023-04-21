@@ -30,4 +30,4 @@ Compression yes
 ### Compress ssh and (I *think*) scp connections by default. Since we're dealing mostly with text, it's worth doing. Level 6 is the default for both command line and HTTP compression; it's light on computation for any modern CPU and gets around a 10:1 ratio on plain text.
 
 ### forward a local port to a remote machine through a keyhole
-# % ssh -NL $local-port:$remote-host:$remote-port keyhole-name &
+# $ ssh -NL $local-port:$remote-host:$remote-port keyhole-name &

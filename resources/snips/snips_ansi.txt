@@ -13,7 +13,11 @@ ESC CHAR:
 - \033
 - byte(27)
 
-Combine attrs like; `\033[1;31;47m`
+Combine attrs like:
+
+- `\033[1;31;47m`
+- `$esc[$style;$foreground;$backgroundm` -- NOTE THE 'm"
+- `$esc[$resetm` -- NOTE THE 'm"
 
 text attributes
 --------------------------------------------------------------------------------

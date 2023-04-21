@@ -90,6 +90,8 @@
 	prune = true
 [log]
 	date = rfc
+[trailer "sign"] # the label when signing a commit after the fact
+	key = Signed-off-by # default
 #[url "git@github.com:"] # use this to force SSH access and use an SSH key
 # 	insteadOf = https://github.com/
 

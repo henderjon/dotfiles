@@ -25,6 +25,12 @@ show "G" for a good (valid) signature,
 "E" if the signature cannot be checked (e.g. missing key) and
 "N" for no signature
 
+# sign/off the last commit
+$ git commit --amend --signoff
+
+# sign/off a range of commits
+$ git rebase --signoff HEAD~2
+
 PRETTY STATUS
 --------------------------------------------------------------------------------
 

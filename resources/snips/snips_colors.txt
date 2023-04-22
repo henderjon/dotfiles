@@ -7,6 +7,7 @@
 - https://vimdoc.sourceforge.net/htmldoc/syntax.html#:highlight
 - https://hslpicker.com/
 - https://mdigi.tools/darken-color
+- https://rgbacolorpicker.com/hex-to-rgba
 
 # SOLARIZED
 --------------------------------------------------------------------------------
@@ -27,25 +28,72 @@ base3    background                      n/a
 
 SOLARIZED   HEX       16/8   TERMCOL    TERM/HEX      L*A*B        RGB           HSB
 ---------   -------   ----   -------    -----------   ----------   -----------   -----------
-base03      #002b36    8/4   brblack    34  #1c1c1c   15 -12 -12     0  43  54   193 100 21  ┐
-base02      #073642    0/4   black      35  #262626   20 -12 -12     7  54  66   192  90 26  ┴ Dark Background Tones
-base01      #586e75   10/7   brgreen    40  #585858   45 -07 -07    88 110 117   194  25 46  ┐
-base00      #657b83   11/7   bryellow   41  #626262   50 -07 -07   101 123 131   195  23 51  ┤
-base0       #839496   12/6   brblue     44  #808080   60 -06 -03   131 148 150   186  13 59  ┤
-base1       #93a1a1   14/4   brcyan     45  #8a8a8a   65 -05 -02   147 161 161   180   9 63  ┴ Content Tones
-base2       #eee8d5    7/7   white      54  #e4e4e4   92 -00  10   238 232 213    44  11 93  ┐
-base3       #fdf6e3   15/7   brwhite    30  #ffffd7   97  00  10   253 246 227    44  10 99  ┴ Light Background Tones
-yellow      #b58900    3/3   yellow     36  #af8700   60  10  65   181 137   0    45 100 71  - Split Comp
-orange      #cb4b16    9/3   brred      66  #d75f00   50  50  55   203  75  22    18  89 80  - Compliment
-red         #dc322f    1/1   red        60  #d70000   50  65  45   220  50  47     1  79 86  - Triad
-magenta     #d33682    5/5   magenta    25  #af005f   50  65 -05   211  54 130   331  74 83  - Tetrad
-violet      #6c71c4   13/5   brmagenta  61  #5f5faf   50  15 -45   108 113 196   237  45 77  - Analogous
-blue        #268bd2    4/4   blue       33  #0087ff   55 -10 -45    38 139 210   205  82 82  - Monotone
-cyan        #2aa198    6/6   cyan       37  #00afaf   60 -35 -05    42 161 152   175  74 63  - Analogous
-green       #859900    2/2   green      64  #5f8700   60 -20  65   133 153   0    68 100 60  - Tetrad
+base03      #002b36    8/4   brblack    34  #1c1c1c   15 -12 -12     0  43  54   193 100 21 ┐
+base02      #073642    0/4   black      35  #262626   20 -12 -12     7  54  66   192  90 26 ┴ Dark Background Tones
+base01      #586e75   10/7   brgreen    40  #585858   45 -07 -07    88 110 117   194  25 46 ┐
+base00      #657b83   11/7   bryellow   41  #626262   50 -07 -07   101 123 131   195  23 51 ┤
+base0       #839496   12/6   brblue     44  #808080   60 -06 -03   131 148 150   186  13 59 ┤
+base1       #93a1a1   14/4   brcyan     45  #8a8a8a   65 -05 -02   147 161 161   180   9 63 ┴ Content Tones
+base2       #eee8d5    7/7   white      54  #e4e4e4   92 -00  10   238 232 213    44  11 93 ┐
+base3       #fdf6e3   15/7   brwhite    30  #ffffd7   97  00  10   253 246 227    44  10 99 ┴ Light Background Tones
+yellow      #b58900    3/3   yellow     36  #af8700   60  10  65   181 137   0    45 100 71 - Split Comp
+orange      #cb4b16    9/3   brred      66  #d75f00   50  50  55   203  75  22    18  89 80 - Compliment
+red         #dc322f    1/1   red        60  #d70000   50  65  45   220  50  47     1  79 86 - Triad
+magenta     #d33682    5/5   magenta    25  #af005f   50  65 -05   211  54 130   331  74 83 - Tetrad
+violet      #6c71c4   13/5   brmagenta  61  #5f5faf   50  15 -45   108 113 196   237  45 77 - Analogous
+blue        #268bd2    4/4   blue       33  #0087ff   55 -10 -45    38 139 210   205  82 82 - Monotone
+cyan        #2aa198    6/6   cyan       37  #00afaf   60 -35 -05    42 161 152   175  74 63 - Analogous
+green       #859900    2/2   green      64  #5f8700   60 -20  65   133 153   0    68 100 60 - Tetrad
                                         TERM/HEX                   RGB           HSLA
                                         ------------               ------------  ------------
 darker text in vscode                       #47565c                71  86  92    197  13% 32%
+
+# VSCode Original Terminal Colors (terminal._____)
+--------------------------------------------------------------------------------
+term         color        16/8    HEX        RGBA                    HSLA
+-----------  -----------  ------  -------    ----------------------  -----------------------
+Black                     0       #000000    rgba(0, 0, 0, 1)        hsla(0, 0%, 0%, 1)
+Red                       1       #cd3131    rgba(205, 49, 49, 1)    hsla(0, 61%, 50%, 1)
+Green                     2       #0dbc79    rgba(13, 188, 121, 1)   hsla(157, 87%, 39%, 1)
+Yellow                    3       #e5e510    rgba(229, 229, 16, 1)   hsla(60, 87%, 48%, 1)
+Blue                      4       #2472c8    rgba(36, 114, 200, 1)   hsla(211, 69%, 46%, 1)
+Magenta                   5       #bc3fbc    rgba(188, 63, 188, 1)   hsla(300, 50%, 49%, 1)
+Cyan                      6       #11a8cd    rgba(17, 168, 205, 1)   hsla(192, 85%, 44%, 1)
+White                     7       #e5e5e5    rgba(229, 229, 229, 1)  hsla(0, 0%, 90%, 1)
+BrightBlack               8       #666666    rgba(102, 102, 102, 1)  hsla(0, 0%, 40%, 1)
+BrightRed                 9       #f14c4c    rgba(241, 76, 76, 1)    hsla(0, 85%, 62%, 1)
+BrightGreen               10      #23d18b    rgba(35, 209, 139, 1)   hsla(156, 71%, 48%, 1)
+BrightYellow              11      #f5f543    rgba(245, 245, 67, 1)   hsla(60, 90%, 61%, 1)
+BrightBlue                12      #3b8eea    rgba(59, 142, 234, 1)   hsla(212, 81%, 57%, 1)
+BrightMagenta             13      #d670d6    rgba(214, 112, 214, 1)  hsla(300, 55%, 64%, 1)
+BrightCyan                14      #29b8db    rgba(41, 184, 219, 1)   hsla(192, 71%, 51%, 1)
+BrightWhite               15      #e5e5e5    rgba(229, 229, 229, 1)  hsla(0, 0%, 90%, 1)
+dropBackground                       #53595d80   rgba(83, 89, 93, 0.5)
+findMatchBackground                  #e6db74     rgba(230, 219, 116, 1)
+findMatchHighlightBackground         #ea5c0055   rgba(234, 92, 0, 0.33)
+foreground                           #cccccc     rgba(204, 204, 204, 1)
+inactiveSelectionBackground          #49483e80   rgba(73, 72, 62, 0.5)
+selectionBackground                  #49483e     rgba(73, 72, 62, 1)
+CommandDecoration.defaultBackground  #ffffff40   rgba(255, 255, 255, 0.25)
+CommandDecoration.errorBackground    #f14c4c     rgba(241, 76, 76, 1)
+CommandDecoration.successBackground  #1b81a8     rgba(27, 129, 168, 1)
+OverviewRuler.cursorForeground       #a0a0a0cc   rgba(160, 160, 160, 0.8)
+OverviewRuler.findMatchForeground    #d186167e   rgba(209, 134, 22, 0.49)
+
+# iterm
+--------------------------------------------------------------------------------
+term         color        16/8    HEX        RGBA                    HSLA
+-----------  -----------  ------  -------    ----------------------  -----------------------
+black                     0       #000000    rgba(0, 0, 0, 1)        hsla(0, 0%, 0%, 1)
+red                       1       #f2423d    rgba(242, 66, 61, 1)    hsla(2, 87%, 59%, 1)
+green                     2, 10   #9be14f    rgba(155, 225, 79, 1)   hsla(89, 71%, 60%, 1)
+yellow                    3, 11   #fce96b    rgba(252, 233, 107, 1)  hsla(52, 96%, 70%, 1)
+blue                      4, 12   #85b0d7    rgba(133, 176, 215, 1)  hsla(209, 51%, 68%, 1)
+magenta                   5, 13   #bb95b6    rgba(187, 149, 182, 1)  hsla(308, 22%, 66%, 1)
+cyan                      6, 14   #44e5e7    rgba(68, 229, 231, 1)   hsla(181, 77%, 59%, 1)
+white                     7, 15   #f1f1f0    rgba(241, 241, 240, 1)  hsla(60, 3%, 94%, 1)
+brblack                   8       #4d4d4d    rgba(77, 77, 77, 1)     hsla(0, 0%, 30%, 1)
+brred                     9       #f2433d    rgba(242, 67, 61, 1)    hsla(2, 87%, 59%, 1)
 
 # monokai22
 --------------------------------------------------------------------------------
@@ -85,3 +133,4 @@ selection background              #49483E    rgba(73,  72, 62,    1)  hsla( 55, 
 line highlight                    #3E3D32    rgba(62,  61, 50,    1)  hsla( 55,  11%,  22%,    1)
 find match highlight              #eb5e0055  rgba(235, 94,  0, 0.33)  hsla( 24, 100%,  46%, 0.33) * 55 is about 33% alpha
 find match highlight no alpha     #714b30    rgba(113, 75, 48,    1)  hsla( 25,  40%,  32%,    1)
+

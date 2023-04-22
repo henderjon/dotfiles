@@ -1,4 +1,4 @@
-# links
+# links 68422d
 --------------------------------------------------------------------------------
 
 - https://www.sublimetext.com/docs/color_schemes.html
@@ -80,7 +80,8 @@ a nice, unused blue               #609FD6    rgba( 96, 159, 214, 1)  hsla(208,  
 --------------------------------------------------------------------------------
 term         color        16/8    HEX        RGBA                    HSLA
 -----------  -----------  ------  -------    ----------------------  -----------------------
-black                             #1E1E1E    rgba(30, 30, 30,    1)  hsla(  0,   0%,  12%,    1)
-selection background              #49483E    rgba(73, 72, 62,    1)  hsla( 55,   8%,  26%,    1)
-line highlight                    #3E3D32    rgba(62, 61, 50,    1)  hsla( 55,  11%,  22%,    1)
-find match highlight              #eb5e0055  rgba(235, 94, 0, 0.33)  hsla( 24, 100%,  46%, 0.33) * 55 is about 33% alpha
+black                             #1E1E1E    rgba(30,  30, 30,    1)  hsla(  0,   0%,  12%,    1)
+selection background              #49483E    rgba(73,  72, 62,    1)  hsla( 55,   8%,  26%,    1)
+line highlight                    #3E3D32    rgba(62,  61, 50,    1)  hsla( 55,  11%,  22%,    1)
+find match highlight              #eb5e0055  rgba(235, 94,  0, 0.33)  hsla( 24, 100%,  46%, 0.33) * 55 is about 33% alpha
+find match highlight no alpha     #714b30    rgba(113, 75, 48,    1)  hsla( 25,  40%,  32%,    1)

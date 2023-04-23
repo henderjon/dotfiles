@@ -1,0 +1,13 @@
+## THEMES
+--------------------------------------------------------------------------------
+
+- $ npm install -g @vscode/vsce
+
+Extensions
+
+- $ vsce package
+- $ vsce publish
+
+Install VSIX extensions with
+
+- $ code --install-extension $file.vsix

@@ -44,3 +44,18 @@ Restart ssh
 - IRC: 6667
 - gearman: 4730
 - memcache: 11211
+
+## COPY SSH KEYS
+--------------------------------------------------------------------------------
+
+- $ curl -L https://github.com/henderjon.keys > .ssh/authorized_keys
+
+## DEVELOPER TOOLS
+--------------------------------------------------------------------------------
+
+debian/ubuntu
+- $ sudo apt-get install build-essential procps curl file git
+
+centos
+- $ sudo yum groupinstall 'Development Tools'
+- $ sudo yum install procps-ng curl file git

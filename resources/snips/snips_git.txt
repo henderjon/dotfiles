@@ -7,6 +7,11 @@ https://git-scm.com/docs/git#Documentation/git.txt---list-cmdsgroupgroup82308203
 
 I couldn't find in documentation, but if you create a script "git-<name>" in $PATH, you can call it with "git name" from within a repo.
 
+SETUP AN INCLUDE
+--------------------------------------------------------------------------------
+
+- $ git config --global --replace-all include.path "dotfiles/git/.gitconfig"
+
 FINDING A CONFIG VALUE
 --------------------------------------------------------------------------------
 

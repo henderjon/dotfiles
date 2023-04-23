@@ -1,0 +1,18 @@
+
+## INSTALL
+--------------------------------------------------------------------------------
+
+- $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+- $ brew bundle dump --file=path/Brewfile
+- $ brew bundle --file=path/Brewfile
+- $ brew install \
+	tmux \
+	shellcheck \
+	gnupg \
+	gpg-suite
+
+## FONTS
+--------------------------------------------------------------------------------
+
+$ brew tap homebrew/cask-fonts
+$ brew install --cask ./resources/brew/font-amazon-ember.rb

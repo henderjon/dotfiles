@@ -9,6 +9,11 @@ macOS SSH Can't Connect To Client
 $ eval $(ssh-agent)
 $ ssh-add
 
+macOS Dev tools
+--------------------------------------------------------------------------------
+
+- $ xcode-select —install
+
 embeded img
 --------------------------------------------------------------------------------
 

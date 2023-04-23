@@ -14,7 +14,7 @@ sub => 'public SUBkey'
 > the key using the command --export-secret-subkeys).  A > after these tags
 > indicate that the key is stored on a smartcard.  See also --list-keys.
 
-To Use an Offline Master Key
+## To Use an Offline Master Key
 --------------------------------------------------------------------------------
 
 - Create a temp dir and import your master key

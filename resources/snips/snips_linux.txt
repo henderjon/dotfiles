@@ -1,4 +1,4 @@
-################################################# LINUX SETUP (digital ocean) ##
+# LINUX SETUP (digital ocean)
 
 $ adduser --shell $PATH/zsh --group root,admin,wheel $USERNAME
 
@@ -14,7 +14,7 @@ $ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 - https://wiki.centos.org/HowTos/Network/SecuringSSH
 
-To turn off root login, edit: /etc/ssh/sshd_config:
+## To turn off root login, edit: /etc/ssh/sshd_config:
 --------------------------------------------------------------------------------
 
 Prevent root logins
@@ -33,7 +33,7 @@ Disable protocol 1
 Restart ssh
 - $ service sshd restart
 
-COMMON PORTS
+## COMMON PORTS
 --------------------------------------------------------------------------------
 
 - http: 80, 443, 8080

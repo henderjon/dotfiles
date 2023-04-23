@@ -1,8 +1,0 @@
-700 (drwx------) - .ssh directory
-644 (-rw-r--r--) - public keys (.pub files)
-644 (-rw-r--r--) - known_hosts
-600 (-rw-------) - private keys (id_rsa)
-600 (-rw-------) - authorized_keys
-600 (-rw-------) - config
-
-$USER home directory should not be writeable by the group or others (at most 755 (drwxr-xr-x)).

@@ -1,0 +1,114 @@
+# GIT COLOR INFO
+
+DOCUMENTATION
+--------------------------------------------------------------------------------
+
+- https://git-scm.com/docs/git-config
+- https://git-scm.com/docs/git-config#Documentation/git-config.txt-color
+- https://shallowsky.com/blog/programming/gitcolors.html
+
+FINDING W/I SOURCE CODE
+--------------------------------------------------------------------------------
+
+The default colors for git-diff are hardcoded in the C source code.
+
+grep for 'GIT_COLOR_NORMAL' or 'GIT_COLOR_RED'
+
+Look for sections named `color.$feature.<slot>` for info on $feature
+
+...git/diff.c (https://github.com/git/git/blob/d15644fe0226af7ffc874572d968598564a230dd/diff.c#L61)
+...git/wt-status.c
+...git/builtin/branch.c
+
+[color "branch"]
+--------------------------------------------------------------------------------
+
+- https://github.com/git/git/blob/d15644fe0226af7ffc874572d968598564a230dd/builtin/branch.c#L46
+
+- current = GIT_COLOR_GREEN
+- local = GIT_COLOR_NORMAL
+- remote = GIT_COLOR_RED
+- upstream = GIT_COLOR_BLUE
+- plain = GIT_COLOR_NORMAL
+- worktree = GIT_COLOR_CYAN
+
+[color "status"]
+--------------------------------------------------------------------------------
+
+- https://github.com/git/git/blob/d15644fe0226af7ffc874572d968598564a230dd/wt-status.c#L29
+
+- header = GIT_COLOR_NORMAL
+- added = GIT_COLOR_GREEN # sugar for updated
+- updated = GIT_COLOR_GREEN
+- changed = GIT_COLOR_RED
+- untracked = GIT_COLOR_RED
+- branch = GIT_COLOR_NORMAL
+- nobranch = GIT_COLOR_RED
+- unmerged = GIT_COLOR_RED
+- localBranch = GIT_COLOR_GREEN
+- remoteBranch = GIT_COLOR_RED
+- onbranch = GIT_COLOR_NIL
+
+[color "grep"]
+--------------------------------------------------------------------------------
+
+- https://github.com/git/git/blob/d15644fe0226af7ffc874572d968598564a230dd/grep.h#L186
+
+- context = ""
+- filename = GIT_COLOR_MAGENTA
+- function = ""
+- lineNumber = GIT_COLOR_GREEN
+- column = GIT_COLOR_GREEN
+- match = GIT_COLOR_NORMAL
+- matchContext = GIT_COLOR_BOLD_RED
+- matchSelected = GIT_COLOR_BOLD_RED
+- selected = ""
+- separator = GIT_COLOR_CYAN
+
+[color "interactive"]
+--------------------------------------------------------------------------------
+
+- https://github.com/git/git/blob/d15644fe0226af7ffc874572d968598564a230dd/t/t3701-add-interactive.sh#L673
+
+- prompt=yellow
+- header=red
+- help=green
+- error=blue
+
+[color.diff]
+--------------------------------------------------------------------------------
+
+- https://github.com/git/git/blob/d15644fe0226af7ffc874572d968598564a230dd/diff.c#L61
+- "foreground background attribute [attribute...]"
+
+- context = normal normal normal # (context text - plain is a historical synonym)
+- meta =  normal normal bold # (metainformation)
+- frag =  cyan normal normal # (hunk header)
+- func =  normal normal normal # (function in hunk header)
+- old =  red normal normal # (removed lines)
+- new =  green normal normal # (added lines)
+- commit =  yellow normal normal # (commit headers)
+- whitespace = normal red normal # (highlighting whitespace errors)
+- oldMoved = magenta normal bold # (deleted lines)
+- newMoved =  cyan normal bold # (added lines)
+- oldMovedDimmed = normal normal dim
+- oldMovedAlternative = blue normal bold
+- oldMovedAlternativeDimmed = normal normal dim italic
+- newMovedDimmed = normal normal dim
+- newMovedAlternative = yellow normal bold
+- newMovedAlternativeDimmed = normal normal dim italic
+- contextDimmed = normal normal dim
+- oldDimmed = red normal dim
+- newDimmed = green normal dim
+- contextBold = normal normal bold
+- oldBold = red normal bold
+- newBol = green normal bold
+
+Possible Values
+--------------------------------------------------------------------------------
+
+normal, default
+[bright]black, [bright]red, [bright]green, [bright]yellow, [bright]blue,
+[bright]magenta, [bright]cyan, [bright]white
+
+[no]bold, [no]dim, [no-]ul, [no]blink, [no]reverse, [no]italic, [no]strike

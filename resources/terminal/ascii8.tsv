@@ -1,0 +1,267 @@
+================================================================================
+DEC	OCT	HX	UTF8	BINARY   	VAL	HTML	HTML Name	Description
+--------------------------------------------------------------------------------
+128	200	80	\u20ac	10000000	€	&#8364;	&euro;  	Euro sign
+129	201	81	    	10000001	 	    	        	Unused
+130	202	82	\u201a	10000010	‚	&#130;	&sbquo; 	Single low-9 quotation mark
+131	203	83	\u0192	10000011	ƒ	&#131;	&fnof;  	Latin small letter f with hook
+132	204	84	\u201e	10000100	„	&#132;	&bdquo; 	Double low-9 quotation mark
+133	205	85	\u2026	10000101	…	&#133;	&hellip;	Horizontal ellipsis
+134	206	86	\u2020	10000110	†	&#134;	&dagger;	Dagger
+135	207	87	\u2021	10000111	‡	&#135;	&Dagger;	Double dagger
+136	210	88	\u02c6	10001000	ˆ	&#136;	&circ;  	Modifier letter circumflex accent
+137	211	89	\u2030	10001001	‰	&#137;	&permil;	Per mille sign
+138	212	8A	\u0160	10001010	Š	&#138;	&Scaron;	Latin capital letter S with caron
+139	213	8B	\u2039	10001011	‹	&#139;	&lsaquo;	Single left-pointing angle quotation
+140	214	8C	\u0152	10001100	Œ	&#140;	&OElig; 	Latin capital ligature OE
+141	215	8D	    	10001101	 	    	        	Unused
+142	216	8E	\u017d	10001110	Ž	&#142;	&Zcaron;	Latin capital letter Z with caron
+143	217	8F	    	10001111	 	    	        	Unused
+144	220	90	    	10010000	 	    	        	Unused
+145	221	91	\u2018	10010001	‘	&#145;	&lsquo; 	Left single quotation mark
+146	222	92	\u2019	10010010	’	&#146;	&rsquo; 	Right single quotation mark
+147	223	93	\u201c	10010011	“	&#147;	&ldquo; 	Left double quotation mark
+148	224	94	\u201d	10010100	”	&#148;	&rdquo; 	Right double quotation mark
+149	225	95	\u2022	10010101	•	&#149;	&bull;  	Bullet
+150	226	96	\u2013	10010110	–	&#150;	&ndash; 	En dash
+151	227	97	\u2014	10010111	—	&#151;	&mdash; 	Em dash
+152	230	98	\u02dc	10011000	˜	&#152;	&tilde; 	Small tilde
+153	231	99	\u2122	10011001	™	&#153;	&trade; 	Trade mark sign
+154	232	9A	\u0161	10011010	š	&#154;	&scaron;	Latin small letter S with caron
+155	233	9B	\u203a	10011011	›	&#155;	&rsaquo;	Single right-pointing angle quotation mark
+156	234	9C	\u0153	10011100	œ	&#156;	&oelig; 	Latin small ligature oe
+157	235	9D	    	10011101	 	    	        	Unused
+158	236	9E	\u017e	10011110	ž	&#158;	&zcaron;	Latin small letter z with caron
+159	237	9F	\u0178	10011111	Ÿ	&#159;	&Yuml;  	Latin capital letter Y with diaeresis
+160	240	A0	    	10100000	 	&#160;	&nbsp;  	Non-breaking space
+161	241	A1	\u00a1	10100001	¡	&#161;	&iexcl; 	Inverted exclamation mark
+162	242	A2	\u00a2	10100010	¢	&#162;	&cent;  	Cent sign
+163	243	A3	\u00a3	10100011	£	&#163;	&pound; 	Pound sign
+164	244	A4	\u00a4	10100100	¤	&#164;	&curren;	Currency sign
+165	245	A5	\u00a5	10100101	¥	&#165;	&yen;   	Yen sign
+166	246	A6	\u00a6	10100110	¦	&#166;	&brvbar;	Pipe, broken vertical bar
+167	247	A7	\u00a7	10100111	§	&#167;	&sect;  	Section sign
+168	250	A8	\u00a8	10101000	¨	&#168;	&uml;   	Spacing diaeresis - umlaut
+169	251	A9	\u00a9	10101001	©	&#169;	&copy;  	Copyright sign
+170	252	AA	\u00aa	10101010	ª	&#170;	&ordf;  	Feminine ordinal indicator
+171	253	AB	\u00ab	10101011	«	&#171;	&laquo; 	Left double angle quotes
+172	254	AC	\u00ac	10101100	¬	&#172;	&not;   	Negation
+173	255	AD	\u00ad	10101101	­SHY	&#173;	&shy;	Soft hyphen
+174	256	AE	\u00ae	10101110	®	&#174;	&reg;   	Registered trade mark sign
+175	257	AF	\u00af	10101111	¯	&#175;	&macr;  	Spacing macron - overline
+176	260	B0	\u00b0	10110000	°	&#176;	&deg;   	Degree sign
+177	261	B1	\u00b1	10110001	±	&#177;	&plusmn;	Plus-or-minus sign
+178	262	B2	\u00b2	10110010	²	&#178;	&sup2;  	Superscript two - squared
+179	263	B3	\u00b3	10110011	³	&#179;	&sup3;  	Superscript three - cubed
+180	264	B4	\u00b4	10110100	´	&#180;	&acute; 	Acute accent - spacing acute
+181	265	B5	\u00b5	10110101	µ	&#181;	&micro; 	Micro sign
+182	266	B6	\u00b6	10110110	¶	&#182;	&para;  	Pilcrow sign - paragraph sign
+183	267	B7	\u00b7	10110111	·	&#183;	&middot;	Middle dot - Georgian comma
+184	270	B8	\u00b8	10111000	¸	&#184;	&cedil; 	Spacing cedilla
+185	271	B9	\u00b9	10111001	¹	&#185;	&sup1;  	Superscript one
+186	272	BA	\u00ba	10111010	º	&#186;	&ordm;  	Masculine ordinal indicator
+187	273	BB	\u00bb	10111011	»	&#187;	&raquo; 	Right double angle quotes
+188	274	BC	\u00bc	10111100	¼	&#188;	&frac14;	Fraction one quarter
+189	275	BD	\u00bd	10111101	½	&#189;	&frac12;	Fraction one half
+190	276	BE	\u00be	10111110	¾	&#190;	&frac34;	Fraction three quarters
+191	277	BF	\u00bf	10111111	¿	&#191;	&iquest;	Inverted question mark
+192	300	C0	\u00c0	11000000	À	&#192;	&Agrave;	Latin capital letter A with grave
+193	301	C1	\u00c1	11000001	Á	&#193;	&Aacute;	Latin capital letter A with acute
+194	302	C2	\u00c2	11000010	Â	&#194;	&Acirc; 	Latin capital letter A with circumflex
+195	303	C3	\u00c3	11000011	Ã	&#195;	&Atilde;	Latin capital letter A with tilde
+196	304	C4	\u00c4	11000100	Ä	&#196;	&Auml;  	Latin capital letter A with diaeresis
+197	305	C5	\u00c5	11000101	Å	&#197;	&Aring; 	Latin capital letter A with ring above
+198	306	C6	\u00c6	11000110	Æ	&#198;	&AElig; 	Latin capital letter AE
+199	307	C7	\u00c7	11000111	Ç	&#199;	&Ccedil;	Latin capital letter C with cedilla
+200	310	C8	\u00c8	11001000	È	&#200;	&Egrave;	Latin capital letter E with grave
+201	311	C9	\u00c9	11001001	É	&#201;	&Eacute;	Latin capital letter E with acute
+202	312	CA	\u00ca	11001010	Ê	&#202;	&Ecirc; 	Latin capital letter E with circumflex
+203	313	CB	\u00cb	11001011	Ë	&#203;	&Euml;  	Latin capital letter E with diaeresis
+204	314	CC	\u00cc	11001100	Ì	&#204;	&Igrave;	Latin capital letter I with grave
+205	315	CD	\u00cd	11001101	Í	&#205;	&Iacute;	Latin capital letter I with acute
+206	316	CE	\u00ce	11001110	Î	&#206;	&Icirc; 	Latin capital letter I with circumflex
+207	317	CF	\u00cf	11001111	Ï	&#207;	&Iuml;  	Latin capital letter I with diaeresis
+208	320	D0	\u00d0	11010000	Ð	&#208;	&ETH;   	Latin capital letter ETH
+209	321	D1	\u00d1	11010001	Ñ	&#209;	&Ntilde;	Latin capital letter N with tilde
+210	322	D2	\u00d2	11010010	Ò	&#210;	&Ograve;	Latin capital letter O with grave
+211	323	D3	\u00d3	11010011	Ó	&#211;	&Oacute;	Latin capital letter O with acute
+212	324	D4	\u00d4	11010100	Ô	&#212;	&Ocirc; 	Latin capital letter O with circumflex
+213	325	D5	\u00d5	11010101	Õ	&#213;	&Otilde;	Latin capital letter O with tilde
+214	326	D6	\u00d6	11010110	Ö	&#214;	&Ouml;  	Latin capital letter O with diaeresis
+215	327	D7	\u00d7	11010111	×	&#215;	&times; 	Multiplication sign
+216	330	D8	\u00d8	11011000	Ø	&#216;	&Oslash;	Latin capital letter O with slash
+217	331	D9	\u00d9	11011001	Ù	&#217;	&Ugrave;	Latin capital letter U with grave
+218	332	DA	\u00da	11011010	Ú	&#218;	&Uacute;	Latin capital letter U with acute
+219	333	DB	\u00db	11011011	Û	&#219;	&Ucirc; 	Latin capital letter U with circumflex
+220	334	DC	\u00dc	11011100	Ü	&#220;	&Uuml;  	Latin capital letter U with diaeresis
+221	335	DD	\u00dd	11011101	Ý	&#221;	&Yacute;	Latin capital letter Y with acute
+222	336	DE	\u00de	11011110	Þ	&#222;	&THORN; 	Latin capital letter THORN
+223	337	DF	\u00df	11011111	ß	&#223;	&szlig; 	Latin small letter sharp s - ess-zed
+224	340	E0	\u00e0	11100000	à	&#224;	&agrave;	Latin small letter a with grave
+225	341	E1	\u00e1	11100001	á	&#225;	&aacute;	Latin small letter a with acute
+226	342	E2	\u00e2	11100010	â	&#226;	&acirc; 	Latin small letter a with circumflex
+227	343	E3	\u00e3	11100011	ã	&#227;	&atilde;	Latin small letter a with tilde
+228	344	E4	\u00e4	11100100	ä	&#228;	&auml;  	Latin small letter a with diaeresis
+229	345	E5	\u00e5	11100101	å	&#229;	&aring; 	Latin small letter a with ring above
+230	346	E6	\u00e6	11100110	æ	&#230;	&aelig; 	Latin small letter ae
+231	347	E7	\u00e7	11100111	ç	&#231;	&ccedil;	Latin small letter c with cedilla
+232	350	E8	\u00e8	11101000	è	&#232;	&egrave;	Latin small letter e with grave
+233	351	E9	\u00e9	11101001	é	&#233;	&eacute;	Latin small letter e with acute
+234	352	EA	\u00ea	11101010	ê	&#234;	&ecirc; 	Latin small letter e with circumflex
+235	353	EB	\u00eb	11101011	ë	&#235;	&euml;  	Latin small letter e with diaeresis
+236	354	EC	\u00ec	11101100	ì	&#236;	&igrave;	Latin small letter i with grave
+237	355	ED	\u00ed	11101101	í	&#237;	&iacute;	Latin small letter i with acute
+238	356	EE	\u00ee	11101110	î	&#238;	&icirc; 	Latin small letter i with circumflex
+239	357	EF	\u00ef	11101111	ï	&#239;	&iuml;  	Latin small letter i with diaeresis
+240	360	F0	\u00f0	11110000	ð	&#240;	&eth;   	Latin small letter eth
+241	361	F1	\u00f1	11110001	ñ	&#241;	&ntilde;	Latin small letter n with tilde
+242	362	F2	\u00f2	11110010	ò	&#242;	&ograve;	Latin small letter o with grave
+243	363	F3	\u00f3	11110011	ó	&#243;	&oacute;	Latin small letter o with acute
+244	364	F4	\u00f4	11110100	ô	&#244;	&ocirc; 	Latin small letter o with circumflex
+245	365	F5	\u00f5	11110101	õ	&#245;	&otilde;	Latin small letter o with tilde
+246	366	F6	\u00f6	11110110	ö	&#246;	&ouml;  	Latin small letter o with diaeresis
+247	367	F7	\u00f7	11110111	÷	&#247;	&divide;	Division sign
+248	370	F8	\u00f8	11111000	ø	&#248;	&oslash;	Latin small letter o with slash
+249	371	F9	\u00f9	11111001	ù	&#249;	&ugrave;	Latin small letter u with grave
+250	372	FA	\u00fa	11111010	ú	&#250;	&uacute;	Latin small letter u with acute
+251	373	FB	\u00fb	11111011	û	&#251;	&ucirc; 	Latin small letter u with circumflex
+252	374	FC	\u00fc	11111100	ü	&#252;	&uuml;  	Latin small letter u with diaeresis
+253	375	FD	\u00fd	11111101	ý	&#253;	&yacute;	Latin small letter y with acute
+254	376	FE	\u00fe	11111110	þ	&#254;	&thorn; 	Latin small letter thorn
+255	377	FF	\u00ff	11111111	ÿ	&#255;	&yuml;  	Latin small letter y with diaeresis
+--------------------------------------------------------------------------------
+880	---	  	\u0370	        	Ͱ	&#x370;	   	Greek Capital Letter Heta
+881	---	  	\u0371	        	ͱ	&#x371;	   	Greek Small Letter Heta
+882	---	  	\u0372	        	Ͳ	&#x372;	   	Greek Capital Letter Archaic Sampi
+883	---	  	\u0373	        	ͳ	&#x373;	   	Greek Small Letter Archaic Sampi
+884	---	  	\u0374	        	ʹ	&#x374;	   	Greek Numeral Sign
+885	---	  	\u0375	        	͵	&#x375;	   	Greek Lower Numeral Sign
+886	---	  	\u0376	        	Ͷ	&#x376;	   	Greek Capital Letter Pamphylian Digamma
+887	---	  	\u0377	        	ͷ	&#x377;	   	Greek Small Letter Pamphylian Digamma
+890	---	  	\u037A	        	ͺ	&#x37A;	   	Greek Ypogegrammeni
+891	---	  	\u037B	        	ͻ	&#x37B;	   	Greek Small Reversed Lunate Sigma Symbol
+892	---	  	\u037C	        	ͼ	&#x37C;	   	Greek Small Dotted Lunate Sigma Symbol
+893	---	  	\u037D	        	ͽ	&#x37D;	   	Greek Small Reversed Dotted Lunate Sigma Symbol
+894	---	  	\u037E	        	;	&#x37E;	   	Greek Question Mark
+895	---	  	\u037F	        	Ϳ	&#x37F;	   	Greek Capital Letter Yot
+900	---	  	\u0384	        	΄	&#x384;		Greek Tonos
+901	---	  	\u0385	        	΅	&#x385;		Greek Dialytika Tonos
+902	---	  	\u0386	        	Ά	&#x386;		Greek Capital Letter Alpha with Tonos
+903	---	  	\u0387	        	·	&#x387;		Greek Ano Teleia
+904	---	  	\u0388	        	Έ	&#x388;		Greek Capital Letter Epsilon with Tonos
+905	---	  	\u0389	        	Ή	&#x389;		Greek Capital Letter Eta with Tonos
+906	---	  	\u038A	        	Ί	&#x38A;		Greek Capital Letter Iota with Tonos
+908	---	  	\u038C	        	Ό	&#x38C;		Greek Capital Letter Omicron with Tonos
+910	---	  	\u038E	        	Ύ	&#x38E;		Greek Capital Letter Upsilon with Tonos
+911	---	  	\u038F	        	Ώ	&#x38F;		Greek Capital Letter Omega with Tonos
+912	---	  	\u0390	        	ΐ	&#x390;		Greek Small Letter Iota with Dialytika and Tonos
+913	---	  	\u0391	        	Α	&#x391;	&Alpha;	Greek Capital Letter Alpha
+914	---	  	\u0392	        	Β	&#x392;	&Beta;	Greek Capital Letter Beta
+915	---	  	\u0393	        	Γ	&#x393;	&Gamma;	Greek Capital Letter Gamma
+916	---	  	\u0394	        	Δ	&#x394;	&Delta;	Greek Capital Letter Delta
+917	---	  	\u0395	        	Ε	&#x395;	&Epsilon;	Greek Capital Letter Epsilon
+918	---	  	\u0396	        	Ζ	&#x396;	&Zeta;	Greek Capital Letter Zeta
+919	---	  	\u0397	        	Η	&#x397;	&Eta;	Greek Capital Letter Eta
+920	---	  	\u0398	        	Θ	&#x398;	&Theta;	Greek Capital Letter Theta
+921	---	  	\u0399	        	Ι	&#x399;	&Iota;	Greek Capital Letter Iota
+922	---	  	\u039A	        	Κ	&#x39A;	&Kappa;	Greek Capital Letter Kappa
+923	---	  	\u039B	        	Λ	&#x39B;	&Lambda;	Greek Capital Letter Lamda
+924	---	  	\u039C	        	Μ	&#x39C;	&Mu;	Greek Capital Letter Mu
+925	---	  	\u039D	        	Ν	&#x39D;	&Nu;	Greek Capital Letter Nu
+926	---	  	\u039E	        	Ξ	&#x39E;	&Xi;	Greek Capital Letter Xi
+927	---	  	\u039F	        	Ο	&#x39F;	&Omicron;	Greek Capital Letter Omicron
+928	---	  	\u03A0	        	Π	&#x3A0;	&Pi;	Greek Capital Letter Pi
+929	---	  	\u03A1	        	Ρ	&#x3A1;	&Rho;	Greek Capital Letter Rho
+931	---	  	\u03A3	        	Σ	&#x3A3;	&Sigma;	Greek Capital Letter Sigma
+932	---	  	\u03A4	        	Τ	&#x3A4;	&Tau;	Greek Capital Letter Tau
+933	---	  	\u03A5	        	Υ	&#x3A5;	&Upsilon;	Greek Capital Letter Upsilon
+934	---	  	\u03A6	        	Φ	&#x3A6;	&Phi;	Greek Capital Letter Phi
+935	---	  	\u03A7	        	Χ	&#x3A7;	&Chi;	Greek Capital Letter Chi
+936	---	  	\u03A8	        	Ψ	&#x3A8;	&Psi;	Greek Capital Letter Psi
+937	---	  	\u03A9	        	Ω	&#x3A9;	&Omega;	Greek Capital Letter Omega
+938	---	  	\u03AA	        	Ϊ	&#x3AA;		Greek Capital Letter Iota with Dialytika
+939	---	  	\u03AB	        	Ϋ	&#x3AB;		Greek Capital Letter Upsilon with Dialytika
+940	---	  	\u03AC	        	ά	&#x3AC;		Greek Small Letter Alpha with Tonos
+941	---	  	\u03AD	        	έ	&#x3AD;		Greek Small Letter Epsilon with Tonos
+942	---	  	\u03AE	        	ή	&#x3AE;		Greek Small Letter Eta with Tonos
+943	---	  	\u03AF	        	ί	&#x3AF;		Greek Small Letter Iota with Tonos
+944	---	  	\u03B0	        	ΰ	&#x3B0;		Greek Small Letter Upsilon with Dialytika and Tonos
+945	---	  	\u03B1	        	α	&#x3B1;	&alpha;	Greek Small Letter Alpha
+946	---	  	\u03B2	        	β	&#x3B2;	&beta;	Greek Small Letter Beta
+947	---	  	\u03B3	        	γ	&#x3B3;	&gamma;	Greek Small Letter Gamma
+948	---	  	\u03B4	        	δ	&#x3B4;	&delta;	Greek Small Letter Delta
+949	---	  	\u03B5	        	ε	&#x3B5;	&epsilon;	Greek Small Letter Epsilon
+950	---	  	\u03B6	        	ζ	&#x3B6;	&zeta;	Greek Small Letter Zeta
+951	---	  	\u03B7	        	η	&#x3B7;	&eta;	Greek Small Letter Eta
+952	---	  	\u03B8	        	θ	&#x3B8;	&theta;	Greek Small Letter Theta
+953	---	  	\u03B9	        	ι	&#x3B9;	&iota;	Greek Small Letter Iota
+954	---	  	\u03BA	        	κ	&#x3BA;	&kappa;	Greek Small Letter Kappa
+955	---	  	\u03BB	        	λ	&#x3BB;	&lambda;	Greek Small Letter Lamda
+956	---	  	\u03BC	        	μ	&#x3BC;	&mu;	Greek Small Letter Mu
+957	---	  	\u03BD	        	ν	&#x3BD;	&nu;	Greek Small Letter Nu
+958	---	  	\u03BE	        	ξ	&#x3BE;	&xi;	Greek Small Letter Xi
+959	---	  	\u03BF	        	ο	&#x3BF;	&omicron;	Greek Small Letter Omicron
+960	---	  	\u03C0	        	π	&#x3C0;	&pi;	Greek Small Letter Pi
+961	---	  	\u03C1	        	ρ	&#x3C1;	&rho;	Greek Small Letter Rho
+962	---	  	\u03C2	        	ς	&#x3C2;	&sigmaf;	Greek Small Letter Final Sigma
+963	---	  	\u03C3	        	σ	&#x3C3;	&sigma;	Greek Small Letter Sigma
+964	---	  	\u03C4	        	τ	&#x3C4;	&tau;	Greek Small Letter Tau
+965	---	  	\u03C5	        	υ	&#x3C5;	&upsilon;	Greek Small Letter Upsilon
+966	---	  	\u03C6	        	φ	&#x3C6;	&phi;	Greek Small Letter Phi
+967	---	  	\u03C7	        	χ	&#x3C7;	&chi;	Greek Small Letter Chi
+968	---	  	\u03C8	        	ψ	&#x3C8;	&psi;	Greek Small Letter Psi
+969	---	  	\u03C9	        	ω	&#x3C9;	&omega;	Greek Small Letter Omega
+970	---	  	\u03CA	        	ϊ	&#x3CA;		Greek Small Letter Iota with Dialytika
+971	---	  	\u03CB	        	ϋ	&#x3CB;		Greek Small Letter Upsilon with Dialytika
+972	---	  	\u03CC	        	ό	&#x3CC;		Greek Small Letter Omicron with Tonos
+973	---	  	\u03CD	        	ύ	&#x3CD;		Greek Small Letter Upsilon with Tonos
+974	---	  	\u03CE	        	ώ	&#x3CE;		Greek Small Letter Omega with Tonos
+975	---	  	\u03CF	        	Ϗ	&#x3CF;		Greek Capital Kai Symbol
+976	---	  	\u03D0	        	ϐ	&#x3D0;		Greek Beta Symbol
+977	---	  	\u03D1	        	ϑ	&#x3D1;	&thetasym;	Greek Theta Symbol
+978	---	  	\u03D2	        	ϒ	&#x3D2;	&upsih;	Greek Upsilon with Hook Symbol
+979	---	  	\u03D3	        	ϓ	&#x3D3;		Greek Upsilon with Acute and Hook Symbol
+980	---	  	\u03D4	        	ϔ	&#x3D4;		Greek Upsilon with Diaeresis and Hook Symbol
+981	---	  	\u03D5	        	ϕ	&#x3D5;	&straightphi;	Greek Phi Symbol
+982	---	  	\u03D6	        	ϖ	&#x3D6;	&piv;	Greek Pi Symbol
+983	---	  	\u03D7	        	ϗ	&#x3D7;		Greek Kai Symbol
+984	---	  	\u03D8	        	Ϙ	&#x3D8;		Greek Letter Archaic Koppa
+985	---	  	\u03D9	        	ϙ	&#x3D9;		Greek Small Letter Archaic Koppa
+986	---	  	\u03DA	        	Ϛ	&#x3DA;		Greek Letter Stigma
+987	---	  	\u03DB	        	ϛ	&#x3DB;		Greek Small Letter Stigma
+988	---	  	\u03DC	        	Ϝ	&#x3DC;	&Gammad;	Greek Letter Digamma
+989	---	  	\u03DD	        	ϝ	&#x3DD;	&gammad;	Greek Small Letter Digamma
+990	---	  	\u03DE	        	Ϟ	&#x3DE;		Greek Letter Koppa
+991	---	  	\u03DF	        	ϟ	&#x3DF;		Greek Small Letter Koppa
+992	---	  	\u03E0	        	Ϡ	&#x3E0;		Greek Letter Sampi
+993	---	  	\u03E1	        	ϡ	&#x3E1;		Greek Small Letter Sampi
+994	---	  	\u03E2	        	Ϣ	&#x3E2;		Coptic Capital Letter Shei
+995	---	  	\u03E3	        	ϣ	&#x3E3;		Coptic Small Letter Shei
+996	---	  	\u03E4	        	Ϥ	&#x3E4;		Coptic Capital Letter Fei
+997	---	  	\u03E5	        	ϥ	&#x3E5;		Coptic Small Letter Fei
+998	---	  	\u03E6	        	Ϧ	&#x3E6;		Coptic Capital Letter Khei
+999	---	  	\u03E7	        	ϧ	&#x3E7;		Coptic Small Letter Khei
+1000	   	   	\u03E8	        	Ϩ	&#x3E8;		Coptic Capital Letter Hori
+1001	   	   	\u03E9	        	ϩ	&#x3E9;		Coptic Small Letter Hori
+1002	   	   	\u03EA	        	Ϫ	&#x3EA;		Coptic Capital Letter Gangia
+1003	   	   	\u03EB	        	ϫ	&#x3EB;		Coptic Small Letter Gangia
+1004	   	   	\u03EC	        	Ϭ	&#x3EC;		Coptic Capital Letter Shima
+1005	   	   	\u03ED	        	ϭ	&#x3ED;		Coptic Small Letter Shima
+1006	   	   	\u03EE	        	Ϯ	&#x3EE;		Coptic Capital Letter Dei
+1007	   	   	\u03EF	        	ϯ	&#x3EF;		Coptic Small Letter Dei
+1008	   	   	\u03F0	        	ϰ	&#x3F0;	& varkappa;	Greek Kappa Symbol
+1009	   	   	\u03F1	        	ϱ	&#x3F1;	& varrho;	Greek Rho Symbol
+1010	   	   	\u03F2	        	ϲ	&#x3F2;		Greek Lunate Sigma Symbol
+1011	   	   	\u03F3	        	ϳ	&#x3F3;		Greek Letter Yot
+1012	   	   	\u03F4	        	ϴ	&#x3F4;		Greek Capital Theta Symbol
+1013	   	   	\u03F5	        	ϵ	&#x3F5;	& straightepsilon;	Greek Lunate Epsilon Symbol
+1014	   	   	\u03F6	        	϶	&#x3F6;	& backepsilon;	Greek Reversed Lunate Epsilon Symbol
+1015	   	   	\u03F7	        	Ϸ	&#x3F7;		Greek Capital Letter Sho
+1016	   	   	\u03F8	        	ϸ	&#x3F8;		Greek Small Letter Sho
+1017	   	   	\u03F9	        	Ϲ	&#x3F9;		Greek Capital Lunate Sigma Symbol
+1018	   	   	\u03FA	        	Ϻ	&#x3FA;		Greek Capital Letter San
+1019	   	   	\u03FB	        	ϻ	&#x3FB;		Greek Small Letter San
+1020	   	   	\u03FC	        	ϼ	&#x3FC;		Greek Rho with Stroke Symbol
+1021	   	   	\u03FD	        	Ͻ	&#x3FD;		Greek Capital Reversed Lunate Sigma Symbol
+1022	   	   	\u03FE	        	Ͼ	&#x3FE;		Greek Capital Dotted Lunate Sigma Symbol
+1023	   	   	\u03FF	        	Ͽ	&#x3FF;		Greek Capital Reversed Dotted Lunate Sigma Symbol

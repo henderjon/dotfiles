@@ -7,6 +7,12 @@
 > describe $TABLE;
 > quit
 
+# MYSQL QUOTES
+--------------------------------------------------------------------------------
+
+'keyword'		A keyword in single quotes is a string literal.
+`keyword`		A keyword in backticks is an identifier.
+
 # SQLITE
 --------------------------------------------------------------------------------
 
@@ -16,3 +22,10 @@
 > .schema $TABLE
 > .quit
 > echo .dump | sqlite3 $FILENAME
+
+# SQLITE QUOTES
+--------------------------------------------------------------------------------
+
+'keyword'		A keyword in single quotes is a string literal.
+"keyword"		A keyword in double-quotes is an identifier.
+

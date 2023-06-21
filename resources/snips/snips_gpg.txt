@@ -1,3 +1,46 @@
+## Offline primary Key w/ subkeys
+--------------------------------------------------------------------------------
+
+https://wiki.debian.org/Subkeys?action=show&redirect=subkeys
+
+At any time, use -k or -K to list keys
+
+Create a keyring, choosing the best algo and length
+
+$ gpg --gen-key
+$ gpg gpg --full-generate-key
+
+Add identities to the keyring (UID/Email)
+
+$ gpg --edit-key $key
+
+When done, use the `save` command
+
+### SUBKEYS
+
+$ gpg --edit-key $key
+> addkey
+
+Choose RSA and length; follow prompts; `save`
+
+Repeat for as many keys as desired.
+
+### Removing Primary Key
+
+Back up `$HOME/.gnupg` somewhere (this is your _for realz_ primary backup)
+
+$ gpg -k --with-keygrip
+
+Delete `$HOME/.gnupg/private-keys-v1.d/KEYGRIP.key` and delete `$HOME/.gnupg/secring.gpg`
+
+`$ gpg -K` should show 'sec#"
+
+Change the password for the subkeys
+
+$ gpg --edit-key $key passwd
+
+Remember the password for the private key and store it encrypted/offline/protected.
+
 # GPG
 --------------------------------------------------------------------------------
 
@@ -14,6 +57,22 @@ sub => 'public SUBkey'
 > the key using the command --export-secret-subkeys).  A > after these tags
 > indicate that the key is stored on a smartcard.  See also --list-keys.
 
+## Usage Abbrev.
+--------------------------------------------------------------------------------
+(S)ign: sign some data (like a file)
+(C)ertify: sign a key (this is called certification)
+(A)uthenticate: authenticate yourself to a computer (for example, logging in)
+(E)ncrypt: encrypt data
+
+## Key Identification
+--------------------------------------------------------------------------------
+fingerprint (80 bit): 0D69 E11F 12BD BA07 7B37  26AB 4E1F 799A A4FF 2279
+long id (64 bit):                                    4E1F 799A A4FF 2279
+short id (32 bit):                                             A4FF 2279
+--
+'key grip' is an internal hash of the public data of a key and used in filenames
+internally
+
 ## To Use an Offline Master Key
 --------------------------------------------------------------------------------
 
@@ -24,3 +83,4 @@ sub => 'public SUBkey'
     - $ gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --edit-key $KEY_YOU_WANT_TO_EDIT
 
 - Delete $TEMPDIR
+

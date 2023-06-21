@@ -70,6 +70,7 @@
 	# checkpointing
 	ckp         = "!f(){ git add --update .; git commit -m 'WIP; √ adding a checkpoint'; git status --untracked-files; }; f"
 	ckpa        = "!f(){ git add --update .; git commit --amend --no-edit; git status --untracked-files; }; f"
+	ckpm        = "!f(){ git add --update .; git commit; }; f"
 	back        = reset HEAD~ # --mixed mode is default
 	# basics
 	co          = checkout

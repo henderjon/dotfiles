@@ -9,4 +9,8 @@ eval "function go-all {
 	$GOCROSSSOURCE
 }"
 
+function go-cross {
+	go tool dist list | awk 'BEGIN { FS = "/" }{ print("GOOS="$1" GOARCH="$2) }'
+}
+
 unset GOCROSSSOURCE

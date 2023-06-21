@@ -130,9 +130,13 @@ if [[ "$OSTYPE" == darwin* ]]; then
 #-------------------------------------------------------------- Sublime Text --#
 	export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 	alias iclouddrive='cd "$HOME/Library/Mobile\ Documents/com~apple~CloudDocs" '
+
 fi
 
 if [[ "$OSTYPE" == linux* ]]; then
 	# $ man ls # will describe how to customize ls colors
 	alias lsl='ls -AFClh --color ' # --time-style=+'%b %e %T %Y' ## Linux
 fi
+
+# load golang cross compile
+. "$HOME/dotfiles/resources/terminal/go-cross-compile.sh"

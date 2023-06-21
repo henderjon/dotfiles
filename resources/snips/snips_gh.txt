@@ -26,6 +26,33 @@ GITHUB.COM & GPG
 
 GitHub will automatically use GPG to sign commits you make using the web interface. Commits signed by GitHub will have a verified status. You can verify the signature locally using the public key available at https://github.com/web-flow.gpg. The full fingerprint of the key is 5DE3 E050 9C47 EA3C F04A 42D3 4AEE 18F8 3AFD EB23.
 
+GITHUB.COM PAGES DSN
+--------------------------------------------------------------------------------
+
+For A records:
+
+$ dig EXAMPLE.COM +noall +answer -t A
+> EXAMPLE.COM    3600    IN A     185.199.108.153
+> EXAMPLE.COM    3600    IN A     185.199.109.153
+> EXAMPLE.COM    3600    IN A     185.199.110.153
+> EXAMPLE.COM    3600    IN A     185.199.111.153
+
+For AAAA records:
+
+$ dig EXAMPLE.COM +noall +answer -t AAAA
+> EXAMPLE.COM     3600    IN AAAA     2606:50c0:8000::153
+> EXAMPLE.COM     3600    IN AAAA     2606:50c0:8001::153
+> EXAMPLE.COM     3600    IN AAAA     2606:50c0:8002::153
+> EXAMPLE.COM     3600    IN AAAA     2606:50c0:8003::153
+
+For CNAME records / WWW:
+
+$ dig WWW.EXAMPLE.COM +nostats +nocomments +nocmd
+> ;WWW.EXAMPLE.COM                     IN      A
+> WWW.EXAMPLE.COM.              3592    IN      CNAME   YOUR-USERNAME.github.io.
+> YOUR-USERNAME.github.io.      43192   IN      CNAME   GITHUB-PAGES-SERVER.
+> GITHUB-PAGES-SERVER.         22      IN      A       192.0.2.1
+
 DEVELOP WEBHOOKS
 --------------------------------------------------------------------------------
 

@@ -1,0 +1,21 @@
+ITERATION
+--------------------------------------------------------------------------------
+
+for...of yields VALUES (use most often; implicitly uses iterator internally)
+for (let idx = 0; index < arr.length; ++idx)
+
+for...in yields KEYS (not for arrays)
+When for...in is used for arrays, checks should be used to prevent traversing the prototype hierarchy.
+- N.hasOwnProperty(prop) where N is the array/object and prop is the property
+- Object.hasOwn(N, prop) where N is the array/object and prop is the property
+
+`Array.from` creates a "true" array from array-like objects;
+```
+var divs = Array.from(Obj [, (el, idx):el => {} ]);
+```
+
+TYPESCRIPT
+--------------------------------------------------------------------------------
+
+Type? is _optionall_ / _optionally_ defined
+Type! is _asserted_ to not be null

@@ -96,6 +96,9 @@ alias asciix='cat "$ASCII_FILE" '
 export ENTITIES_FILE="$DOTFILES/resources/terminal/entities.txt"
 alias entities='cat "$ENTITIES_FILE" '
 
+#---------------------------------------- when you forget what bins you have --#
+alias bins='lsl $DOTFILES/bin $HOME/bin'
+
 #---------------------------------------- reload env file when we reload zsh --#
 if [ -f "$HOME/.zshenv" ]; then
 	. "$HOME/.zshenv"

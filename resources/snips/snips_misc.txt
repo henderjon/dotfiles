@@ -12,6 +12,19 @@ $ ssh-add
 macOS Dev tools
 --------------------------------------------------------------------------------
 
+Notes are stored in:
+
+- ~/Library/Group Containers/group.com.apple.notes/
+
+iCLoud stuff:
+
+- ~/Library/Containers/com.apple.Notes/
+- ~/Library/Containers/com.apple.Notes/Data/CloudKit/
+- ~/Library/Containers/com.apple.Notes/Data/Library/Notes/
+
+macOS Dev tools
+--------------------------------------------------------------------------------
+
 - $ xcode-select —install
 
 embeded img

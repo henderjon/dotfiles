@@ -7,19 +7,20 @@ At any time, use -k or -K to list keys
 
 Create a keyring, choosing the best algo and length
 
-$ gpg --gen-key
-$ gpg gpg --full-generate-key
+`$ gpg --gen-key` or `$ gpg --full-generate-key`
 
 Add identities to the keyring (UID/Email)
 
-$ gpg --edit-key $key
+`$ gpg --edit-key $key`
 
 When done, use the `save` command
 
 ### SUBKEYS
 
+```
 $ gpg --edit-key $key
 > addkey
+```
 
 Choose RSA and length; follow prompts; `save`
 
@@ -29,7 +30,7 @@ Repeat for as many keys as desired.
 
 Back up `$HOME/.gnupg` somewhere (this is your _for realz_ primary backup)
 
-$ gpg -k --with-keygrip
+`$ gpg -k --with-keygrip`
 
 Delete `$HOME/.gnupg/private-keys-v1.d/KEYGRIP.key` and delete `$HOME/.gnupg/secring.gpg`
 
@@ -37,9 +38,21 @@ Delete `$HOME/.gnupg/private-keys-v1.d/KEYGRIP.key` and delete `$HOME/.gnupg/sec
 
 Change the password for the subkeys
 
-$ gpg --edit-key $key passwd
+`$ gpg --edit-key $key passwd`
 
 Remember the password for the private key and store it encrypted/offline/protected.
+
+### EXPORT
+
+- `$ gpg --export --export-options backup --output public.gpg [$UID]`
+- `$ gpg --export-secret-keys --export-options backup --output private.gpg`
+- `$ gpg --export-ownertrust > trust.gpg`
+
+### IMPORT
+
+- `$ gpg --import public.gpg`
+- `$ gpg --import private.gpg`
+- `$ gpg --import-ownertrust trust.gpg`
 
 # GPG
 --------------------------------------------------------------------------------

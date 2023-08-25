@@ -1,5 +1,7 @@
 [commit]
 	gpgsign = true
+[tag]
+	gpgsign = true
 [user]
 	signingkey = B64029804B7D23DB!
 [gpg]

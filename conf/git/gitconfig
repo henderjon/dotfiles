@@ -51,7 +51,7 @@
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	difflog        = %<(25)%ai %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
 	# adding "Parents: %p" will show you merge parents
-	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %ad%nParents: %p%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
+	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%C(red)%n%-D%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %ad%nParents: %p%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
 [alias]
 	# list aliases
     alias       = "!git config --get-regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"

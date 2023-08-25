@@ -15,3 +15,11 @@ processed as a case-insensitive RE match.
 
 ^~ Assuming this block is the best non-RE match, a carat followed by a tilde
 modifier means that RE matching will not take place.
+
+
+mkcert
+--------------------------------------------------------------------------------
+
+$ mkcert -install
+$ mkdir /tmp/crt && cd /tmp/crt
+$ mkcert local.example.com

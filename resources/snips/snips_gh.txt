@@ -26,6 +26,16 @@ GITHUB.COM & GPG
 
 GitHub will automatically use GPG to sign commits you make using the web interface. Commits signed by GitHub will have a verified status. You can verify the signature locally using the public key available at https://github.com/web-flow.gpg. The full fingerprint of the key is 5DE3 E050 9C47 EA3C F04A 42D3 4AEE 18F8 3AFD EB23.
 
+Github Packages Registry
+--------------------------------------------------------------------------------
+
+- https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry
+
+Save your personal access token (classic). We recommend saving your token as an environment variable. Token should have read:packages permission
+
+- $ export CR_PAT=YOUR_TOKEN
+- $ echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+
 GITHUB.COM PAGES DSN
 --------------------------------------------------------------------------------
 

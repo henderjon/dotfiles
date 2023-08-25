@@ -38,7 +38,7 @@ reset text attributes
 [21m - reset bold or Doubly underlined
 [22m - reset bold and dim
 [23m - reset italic
-[24m - rest underlined
+[24m - reset underlined
 [25m - reset blinking
 [27m - reset reversed
 [28m - reset hidden

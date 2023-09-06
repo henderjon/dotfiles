@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+from sys import argv
+import subprocess, re
+
+s = subprocess.check_output(["go", "version"])
+print("current verion: %s" % s.decode().strip())
+
+if len(argv) < 2:
+	print("\ninstall-go requires a version (*.darwin-arm64.tar.gz)\n")
+	exit
+else:
+	script, version = argv
+	s = re.sub(r"\W", "_", s.decode().strip())
+	print(f"tar -czvf \"/usr/local/go-archive-{s}-archive.tgz\" \"/usr/local/go\"")
+	print("rm -r \"/usr/local/go\"")
+	print(f"tar -C \"/usr/local\" -xzf \"./go{version}.darwin-arm64.tar.gz\"")

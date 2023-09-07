@@ -11,6 +11,17 @@ s = 'fpri%t' % 'n'
 s = 'this uses {0}'.format('indicies')
 s = 'this uses {v}'.format(v='indicies')
 
+ARRAYS
+--------------------------------------------------------------------------------
+
+- List is a collection which is ordered and changeable. Allows duplicate members.
+- Tuple is a collection which is ordered and unchangeable. Allows duplicate members.
+- Set is a collection which is unordered, unchangeable*, and unindexed. No duplicate members.
+- Dictionary is a collection which is ordered** and changeable. No duplicate members.
+
+*Set items are unchangeable, but you can remove and/or add items whenever you like.
+**As of Python version 3.7, dictionaries are ordered. In Python 3.6 and earlier, dictionaries are unordered.
+
 TYPES
 --------------------------------------------------------------------------------
 
@@ -24,6 +35,19 @@ User `type()` to see a vars type.
 - Boolean Type:   bool (True, False)
 - Binary Types:   bytes, bytearray, memoryview
 - None Type:      NoneType (None)
+
+SHELL
+--------------------------------------------------------------------------------
+
+- import subprocess
+  - subprocess.call(['sh', './test.sh'])
+  - subprocess.run(['sh', './test.sh'])
+
+LOOPS
+--------------------------------------------------------------------------------
+
+- while expression:
+- for X in Y:
 
 IMPORTS
 --------------------------------------------------------------------------------

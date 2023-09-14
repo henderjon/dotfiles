@@ -49,7 +49,7 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty] # date formatting: https://git-scm.com/docs/git-rev-list
 	# tiny           = %><(7)%C(yellow)%h%C(reset):%C(red)%d%Creset %s
-	reflog         = %>(12)%an (%G?)  %><(7)%h %C(red)%d%Creset %s
+	reflog         = %an (%G?)  %C(yellow)%><(7)%h%Creset %C(red)%d%Creset %s
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	difflog        = %<(25)%ai %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s

@@ -48,6 +48,9 @@
 [mergetool "code"]
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty] # date formatting: https://git-scm.com/docs/git-rev-list
+	# tiny           = %><(7)%C(yellow)%h%C(reset):%C(red)%d%Creset %s
+	reflog         = %>(12)%an (%G?)  %><(7)%h %C(red)%d%Creset %s
+	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	difflog        = %<(25)%ai %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
 	# adding "Parents: %p" will show you merge parents
@@ -57,7 +60,9 @@
     alias       = "!git config --get-regexp '^alias.' | sed -e 's/^alias.//' -e 's/ /\t\t= /'"
 	# log viewing
 	sl          = log --oneline --reverse -35
-	cl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
+	#refl        = reflog --format='%C(auto)%h %gd: %gs' # default format
+	cl          = log --pretty=reflog -n 20
+	cld         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
 	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
 	cls         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 1
 	clu         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --unified -n 10 --reverse

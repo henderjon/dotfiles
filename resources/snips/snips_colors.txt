@@ -110,7 +110,6 @@ brwhite      white        7, 15   #F8F8F2    rgba(248, 248, 242, 1)  hsla( 60,  
 brlack       light black  8       #75715E    rgba(117, 113,  94, 1)  hsla( 50,  11%, 41%, 1)
 dark white   dark white   7       #CFCFC2    rgba(207, 207, 194, 1)  hsla( 60,  12%, 79%, 1) * unused
 
-
 # accent colors
 --------------------------------------------------------------------------------
 term         color        16/8    HEX        RGBA                    HSLA

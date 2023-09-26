@@ -34,3 +34,12 @@ $ find $GOROOT/src -type d -maxdepth 2 | sed "s|$GOROOT/src/||" | sort
 --------------------------------------------------------------------------------
 
 $ grep --colour=always -Iir "$1" "$GOROOT/src"
+
+## using forks
+--------------------------------------------------------------------------------
+
+`$ go mod edit -replace github.com/someuser/repo=github.com/yourusername/repo@branch`
+
+adds "replace github.com/someuser/repo => github.com/yourusername/repo branch" to go.mod
+
+then run `$ go mod download`

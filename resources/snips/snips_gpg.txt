@@ -32,9 +32,13 @@ Back up `$HOME/.gnupg` somewhere (this is your _for realz_ primary backup)
 
 `$ gpg -k --with-keygrip`
 
-Delete `$HOME/.gnupg/private-keys-v1.d/KEYGRIP.key` and delete `$HOME/.gnupg/secring.gpg`
+Delete `$HOME/.gnupg/private-keys-v1.d/KEYGRIP.key` and delete `$HOME/.gnupg/secring.gpg` (this file was deprecated, you might not have it)
+
+`$ gpg --delete-secret-key [keyID]`
 
 `$ gpg -K` should show 'sec#"
+
+Try to `adduid` to ensure that the private key is gone.
 
 Change the password for the subkeys
 
@@ -43,6 +47,8 @@ Change the password for the subkeys
 Remember the password for the private key and store it encrypted/offline/protected.
 
 ### EXPORT
+
+Using `--armor` will give you ASCII data
 
 - `$ gpg --export --export-options backup --output public.gpg [$UID]`
 - `$ gpg --export-secret-keys --export-options backup --output private.gpg`
@@ -82,6 +88,7 @@ sub => 'public SUBkey'
 fingerprint (80 bit): 0D69 E11F 12BD BA07 7B37  26AB 4E1F 799A A4FF 2279
 long id (64 bit):                                    4E1F 799A A4FF 2279
 short id (32 bit):                                             A4FF 2279
+
 --
 'key grip' is an internal hash of the public data of a key and used in filenames
 internally
@@ -89,11 +96,20 @@ internally
 ## To Use an Offline Master Key
 --------------------------------------------------------------------------------
 
+- You have the option of mounting a temp folder
+    - `$ sudo mount -t tmpfs -o size=64M tmpfs ~/ram`
+
 - Create a temp dir and import your master key
-    -$ gpg --homedir ~/$TEMPDIR --import $PRIVATE_MASTER_KEY
+    -$` gpg --homedir ~/$TEMPDIR --import $PRIVATE_MASTER_KEY`
 
 - Edit the actual keyring using the keys from you $TEMPDIR
-    - $ gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --edit-key $KEY_YOU_WANT_TO_EDIT
+    - `$ gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --edit-key $KEY_YOU_WANT_TO_EDIT`
+    - `$ gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --no-default-keyring --edit-key $KEY_YOU_WANT_TO_EDIT`
 
 - Delete $TEMPDIR
 
+## RESTART Daemon
+--------------------------------------------------------------------------------
+
+`$ gpgconf --kill gpg-agent`
+`$ gpgconf --launch gpg-agent`

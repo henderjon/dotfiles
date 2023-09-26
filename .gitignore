@@ -15,3 +15,4 @@ journal/*
 *.sublime-workspace
 .vscode/
 go.work
+go.work.sum

@@ -31,6 +31,6 @@ for build in builds:
 
 hash = subprocess.check_output(["git", "rev-list", "-n", "1", tag])
 hash = hash[:7]
-print(f"gh release create {tag}")
+print(f"gh release create --notes-from-tag {tag}")
 print(f"gh release upload {tag} ./release/*-{str(hash, 'utf-8')}-*.tgz")
 #$(RELEASEDIR)/$(BIN)-$(COHASH)-$(GOOS)-$(GOARCH).tgz

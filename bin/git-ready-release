@@ -41,12 +41,20 @@ fprintf(STDERR, "\n");
 // echo "git log --pretty='tformat:%h %s' --grep=\"pull request\" {$branches[0]}..remotes/origin/dev\n";
 fprintf(STDERR, "# branch cut status; check dev against latest published release; how far has dev advanced?\n");
 fprintf(STDERR, "git rl {$branches[0]} remotes/origin/dev\n");
+fprintf(STDERR, "git prl {$branches[0]} remotes/origin/dev\n");
 fprintf(STDERR, "\n");
 
 fprintf(STDERR, "# difflog; check latest published release against the previous release; how far has \"%s\" advanced\n", $branches[0]);
 fprintf(STDERR, "git rl %s %s\n", $branches[1], $branches[0]);
+fprintf(STDERR, "git prl %s %s\n", $branches[1], $branches[0]);
 fprintf(STDERR, "\n##### COMMITS #####\n\n");
 
-$commits = `git rl {$branches[1]} {$branches[0]}\n`;
+$commits = `git prl {$branches[1]} {$branches[0]}\n`;
 
 echo "{$commits}\n";
+
+fprintf(STDERR, "\n##### REMOTE DIFF #####\n\n");
+// $url = parse_url(trim(`git config --get remote.origin.url`));
+$urlJSON = `gh repo view --json "url" --jq ".url"`;
+fprintf(STDERR, "%s/compare/%s...%s\n\n", trim($urlJSON), substr($branches[1], 7), substr($branches[0], 7));
+

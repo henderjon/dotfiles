@@ -72,7 +72,8 @@
 	# log viewing but with an eye to the current branch and 'dev' which is usually the main branch
 	bl          = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat --reverse --ancestry-path origin/dev..HEAD
 	# report for release
-	rl          = "!git log --merges --pretty=difflog -200000 --grep=\"pull request\" $1..$2"
+	rl          = "!git log --pretty=difflog -200000 $1..$2"
+	prl          = "!git log --merges --pretty=difflog -200000 --grep=\"pull request\" $1..$2"
 	# checkpointing
 	ckp         = "!f(){ git add --update .; git commit -m 'WIP; √ adding a checkpoint'; git status --untracked-files; }; f"
 	ckpa        = "!f(){ git add --update .; git commit --amend --no-edit; git status --untracked-files; }; f"

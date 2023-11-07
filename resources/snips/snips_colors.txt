@@ -122,6 +122,7 @@ tan leftover tan/yellow           #F4BF75    rgba(244, 191, 117, 1)  hsla( 35,  
 monokai original yellow           #E6DB74    rgba(230, 219, 116, 1)  hsla( 54,  70%, 68%, 1)
 accent blue                       #819AFF    rgba(129, 154, 255, 1)  hsla(228, 100%, 75%, 1)
 a nice, unused blue               #609FD6    rgba( 96, 159, 214, 1)  hsla(208,  59%, 61%, 1)
+first lite dry earth              #785f45    rgba(120, 95,  69,  1)  hsla(31,   27%, 37%, 1) CMYK (0,21,43,53)
 
 # VSCode Colors
 --------------------------------------------------------------------------------

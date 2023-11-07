@@ -67,6 +67,15 @@ $ git revert --no-commit HEAD~3..
 ### or the same
 $ git revert --no-commit HEAD~3..HEAD
 
+DELETE
+--------------------------------------------------------------------------------
+
+$ git tag -d tagname
+$ git push --delete origin tagname
+
+$ git branch -d tagname
+$ git push --delete origin branchname
+
 REBASE / RESTORE
 --------------------------------------------------------------------------------
 
@@ -75,10 +84,6 @@ $ git rebase -i $startFrom
 
 ### reword ALL commit messages
 $ git rebase -i --root
-
-### delete remote
-$ git push --delete origin tagname
-$ git push --delete origin branchname
 
 ###  checkout that revision over the top of local files ###
 $ git checkout -f A -- .

@@ -18,9 +18,9 @@ export PATH="$HOME/bin:$PATH"
 # export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 #---------------------------------------------------------------------- BREW --#
-export BREWROOT=$(brew --prefix)
+# export BREWROOT=$(brew --prefix)
 # export PATH="$PATH:/usr/local/Homebrew/bin"      # apple intel: /usr/local/Homebrew/bin
-export PATH="$PATH:$BREWROOT/bin"                  # apple silicon: /opt/homebrew
+# export PATH="$PATH:$BREWROOT/bin"                  # apple silicon: /opt/homebrew
 # export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin" # ubuntu
 export HOMEBREW_NO_AUTO_UPDATE=1
 

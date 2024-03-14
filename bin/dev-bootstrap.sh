@@ -12,7 +12,7 @@ fi
 
 if [ "$1" == "up" ]; then
 	sudo nginx -c "$HOME/code/conf/nginx/conf/nginx.conf"
-	sudo php-fpm --fpm-config "$HOME/code/conf/php/7.4 macOS build/php-fpm.conf" -c "$HOME/code/conf/php/7.4 macOS build/php.ini"
+	sudo php-fpm --fpm-config "$HOME/code/conf/php/8.3 brew/php-fpm.conf" -c "$HOME/code/conf/php/8.3 brew/php.ini"
 	# redis-server "$HOME/code/conf/redis/7.0.4/redis.conf"
 fi
 

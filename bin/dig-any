@@ -12,7 +12,7 @@ types = {
     "TXT"   : "Text Record",
     # "PTR"   : "Pointer Record",
     # "SRV"   : "Service Record",
-    # "DNSKEY": "DNS Key record (DNSSEC)",
+    "DNSKEY": "DNS Key record (DNSSEC)",
     # "DS"    : "Delegation signer (DNSSEC)",
     # "RRSIG" : "DNSSEC signature (DNSSEC)",
     # "TLSA"  : "TLS Authentication Certificate Association",
@@ -30,6 +30,7 @@ for type in types:
         continue
 
     print(f"# ------ {type}")
+    # os.system(f"dig +nocmd +dnssec {domain} +noall +answer {type}")
     os.system(f"dig +nocmd {domain} +noall +answer {type}")
     # os.system(f"dig {domain} +nocomments +noall +answer -t {type}")
 

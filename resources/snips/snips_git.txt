@@ -148,6 +148,9 @@ $ git log $EARLIER..$LATER
 ### List all commits that touched a file
 $ git log --follow -- filename
 
+### List remote tags
+$ git ls-remote --tags origin
+
 SEARCHING
 --------------------------------------------------------------------------------
 

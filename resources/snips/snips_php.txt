@@ -1,0 +1,16 @@
+Composer
+--------------------------------------------------------------------------------
+
+Recreate composer.lock without updating dependencies
+
+`composer update --lock`
+
+Installation
+--------------------------------------------------------------------------------
+
+REDIS
+pecl install redis
+
+MEMCACHED
+brew install libmemcached zlib
+pecl install memcached --with-zlib-dir=/opt/homebrew/opt/zlib

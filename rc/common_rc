@@ -46,7 +46,7 @@ export PATH="$PATH:$HOME/dotfiles/bin"
 
 #------------------------------------------------------- these are important --#
 export DOTFILES="$HOME/dotfiles"
-export EDITOR="ed -p:"
+export EDITOR="fred "
 export CLICOLOR_FORCE=true
 export VISUAL="$EDITOR"
 export PAGER=cat

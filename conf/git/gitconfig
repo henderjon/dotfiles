@@ -83,6 +83,7 @@
 	co          = checkout
 	s           = status --short --branch --untracked-files
 	ss          = status --untracked-files
+	vva         = branch -vva
 	wip         = commit -m "WIP; Have you considered rebasing?"
 	oops        = commit --amend --no-edit
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
@@ -91,6 +92,7 @@
 	# doing work based on a main branch
 	fix         = "!f(){ git fetch origin; git checkout -b fix/$1 --no-track origin/dev; }; f"
 	feature     = "!f(){ git fetch origin; git checkout -b feature/$1 --no-track origin/dev; }; f"
+	release     = "!f(){ git fetch origin; git checkout -b release/$1 --no-track origin/dev; }; f"
 	# do remote things
 	publish     = "!git push -u origin $(git branch-name)"
 	unpublish   = "!git push origin :$(git branch-name)"

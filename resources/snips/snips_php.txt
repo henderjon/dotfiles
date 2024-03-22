@@ -5,6 +5,21 @@ Recreate composer.lock without updating dependencies
 
 `composer update --lock`
 
+VERIFY INI
+--------------------------------------------------------------------------------
+
+$ php --ini
+
+PHPIZE
+--------------------------------------------------------------------------------
+
+If xcode is being stupid
+
+xcode-select -install
+xcode-select -s[witch] /Library/Developer/CommandLineTools
+xcode-select -s[witch] /Applications/Xcode.app/Contents/Developer
+xcodebuild -runFirstLaunch
+
 Installation
 --------------------------------------------------------------------------------
 

@@ -5,6 +5,8 @@ Recreate composer.lock without updating dependencies
 
 `composer update --lock`
 
+```"sort-packages": true```
+
 VERIFY INI
 --------------------------------------------------------------------------------
 

@@ -3,7 +3,9 @@ Composer
 
 Recreate composer.lock without updating dependencies
 
-`composer update --lock`
+- `composer update --lock`
+- `compose update specific/dep` only updates that dep
+- `composer update -W specific/dep` updates that dep and anything else that needs to be updated to update it
 
 ```"sort-packages": true```
 

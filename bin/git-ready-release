@@ -40,12 +40,12 @@ fprintf(STDERR, str_repeat("#", 72));
 fprintf(STDERR, "\n");
 // echo "git log --pretty='tformat:%h %s' --grep=\"pull request\" {$branches[0]}..remotes/origin/dev\n";
 fprintf(STDERR, "# branch cut status; check dev against latest published release; how far has dev advanced?\n");
-fprintf(STDERR, "git rl {$branches[0]} remotes/origin/dev\n");
+fprintf(STDERR, "git releaselog {$branches[0]} remotes/origin/dev\n");
 fprintf(STDERR, "git prl {$branches[0]} remotes/origin/dev\n");
 fprintf(STDERR, "\n");
 
 fprintf(STDERR, "# difflog; check latest published release against the previous release; how far has \"%s\" advanced\n", $branches[0]);
-fprintf(STDERR, "git rl %s %s\n", $branches[1], $branches[0]);
+fprintf(STDERR, "git releaselog %s %s\n", $branches[1], $branches[0]);
 fprintf(STDERR, "git prl %s %s\n", $branches[1], $branches[0]);
 fprintf(STDERR, "\n##### COMMITS #####\n\n");
 

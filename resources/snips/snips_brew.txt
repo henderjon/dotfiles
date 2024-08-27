@@ -16,3 +16,19 @@
 
 $ brew tap homebrew/cask-fonts
 $ brew install --cask ./resources/brew/font-amazon-ember.rb
+
+## GETTING INSTALL INFO
+--------------------------------------------------------------------------------
+
+$ brew info $bin
+
+## GETTING A LIST OF INSTALLED BREWS
+--------------------------------------------------------------------------------
+
+$ brew leaves
+
+## UPDATE/UPGRADE
+--------------------------------------------------------------------------------
+
+update pulls the latest changes
+upgrade install the latest changes

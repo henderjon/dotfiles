@@ -151,6 +151,10 @@ $ git log --follow -- filename
 ### List remote tags
 $ git ls-remote --tags origin
 
+### REFLOG restore where A is before (you want set as HEAD) and B is after (your oops) and you want to keep the changes between the two
+$ git reset --hard {hash-A}
+$ git checkout {hash-B} -- .
+
 SEARCHING
 --------------------------------------------------------------------------------
 
@@ -162,6 +166,10 @@ $ git grep -i \$regex $(git rev-list --all)
 
 ### or search a folder within the repo; also if too many files error
 $ git grep -i \$regex $(git rev-list --all -- sub/tree) -- sub/tree
+
+### others ...
+$ git log -G $regex
+$ git log -S "string"
 
 ### push a subtree as a new repo
 $ git subtree --prefix $dir push $remote $dest_branch

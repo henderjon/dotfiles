@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 goimports -w ./
-go vet
+go vet -mod=mod

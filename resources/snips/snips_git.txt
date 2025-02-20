@@ -95,6 +95,13 @@ $ git checkout rev:path/to/file
 ### Show a file from a rev
 $ git show rev -- path/to/file
 
+### git rebase $REF
+HEAD is always "ours"
+$REF is always "theirs"
+
+Note that rebase checks out $REF, then acts. So for rebase, it is the reverse of what you think.
+
+
 RANGE
 --------------------------------------------------------------------------------
 

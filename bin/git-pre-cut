@@ -71,8 +71,12 @@ if(is_null($older)){
 }
 
 $lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
-$baseRef = substr($dev["ref"], strlen("refs/heads/"));
+$lastReleaseSha = substr($lastRelease["object"]["sha"], 0, 8);
 
+$baseRef = substr($dev["ref"], strlen("refs/heads/"));
+$baseSha = substr($dev["object"]["sha"], 0, 8);
+
+fprintf(STDERR, "\n{$lastReleaseRef} ({$lastReleaseSha}) .. {$baseRef} ({$baseSha})\n");
 fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%<(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s | sort", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
 fprintf(STDERR, "\n\n");
 

@@ -7,6 +7,12 @@
 > describe $TABLE;
 > quit
 
+% mysql_config_editor set --login-path=$name -h$hostPath -u$userName -p
+% mysql --login-path=$name
+
+### slow query log
+`show full processlist;`
+
 # MYSQL QUOTES
 --------------------------------------------------------------------------------
 

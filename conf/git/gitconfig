@@ -27,10 +27,14 @@
 	default = upstream
 	ff = true
 [diff]
-	tool = diff # use this program on 'git diff'
+	tool = bc # use this program on 'git diff'
 	renames = true
-[difftool] # is the command 'git difftool'
-	prompt = true
+[difftool]
+	prompt = false
+[difftool "bc"]
+	path = /usr/local/bin/bcomp
+	trustExitCode = true
+[difftool "bcompare"]
 	trustExitCode = true
 [difftool "bc3"]
 	trustExitCode = true
@@ -41,6 +45,10 @@
 	tool = bc3
 	ff = false
 	defaultToUpstream = true
+[mergetool "bcomp"]
+	keepBackup = true
+	trustExitCode = true
+	keepBackup = false
 [mergetool "bc3"]
 	keepBackup = true
 	trustExitCode = true

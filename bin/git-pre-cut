@@ -62,13 +62,18 @@ if(is_null($older)){
 		};
 	}, $prevReleases[0]);
 }else{
-	$lastRelease = ["ref" => $older];
+	// get dev branch; https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#get-a-reference
+	$older = get("repos/{$owner}/{$repo}/git/ref/heads/{$older}", $headers);
+	if(!array_key_exists("ref", $older)){
+		fprintf(STDERR, "Error: %s\n", $dev["message"]);
+		die(1);
+	}
 }
 
 $lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
 $baseRef = substr($dev["ref"], strlen("refs/heads/"));
 
-fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%><(7)%%h | %%<(20)%%an | %%s\" --grep=\"pull request\" %s..%s | sort", $lastReleaseRef, $baseRef);
+fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%<(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s | sort", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
 fprintf(STDERR, "\n\n");
 
 function get(string $path, array $headers) : array{

@@ -59,3 +59,15 @@ $ sips -r $rotate
 $ for file in *.heic; do sips -s format jpeg "$file" --out "${file%.*}.jpg"; done
 $ dwebp
 $ ewebp
+
+FFMPEG
+--------------------------------------------------------------------------------
+
+## Cut a section out of a video
+$ ffmpeg -i infile.mp4 -ss 00:00:47 -to 00:00:53 outfile.mp4
+
+## Join images into a MOV video (time lapse style); framerate is how many images/frames per second
+$ cat *.jpg | ffmpeg -f image2pipe -framerate 6 -i - -pix_fmt yuv420p -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -c:v libx264 -crf 28 -preset veryslow out.mp4
+
+## Convert video formats
+$ ffmpeg -i "infile.3gp" -c:v copy -c:a copy "out.mov"

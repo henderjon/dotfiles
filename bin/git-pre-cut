@@ -61,13 +61,13 @@ $lastRelease = array_reduce($prevReleases, function($carry, $release){
 
 $lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
 
-if($oldBranch = cliInput("Do you want to provide a older branch (name or sha)?") && !empty($oldBranch)){
+if($oldBranch = cliInput("Do you want to provide a older branch name/sha? ({$lastRelease["ref"]})") && !empty($oldBranch)){
 	$first = $oldBranch;
 }else{
 	$first = $lastRelease["object"]["sha"];
 }
 
-if($newBranch = cliInput("Do you want to provide a older branch (name or sha)?") && !empty($newBranch)){
+if($newBranch = cliInput("Do you want to provide a newer branch name/sha? ({$dev["ref"]})") && !empty($newBranch)){
 	$second = $newBranch;
 }else{
 	$second = $dev["object"]["sha"];

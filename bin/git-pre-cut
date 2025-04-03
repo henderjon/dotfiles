@@ -66,10 +66,9 @@ if(is_null($older)){
 }
 
 $lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
+$baseRef = substr($dev["ref"], strlen("refs/heads/"));
 
-fprintf(STDERR, "https://github.com/%s/%s/compare/%s...%s\n\n", $owner, $repo, $first, $second);
-
-fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%><(7)%%h | %%<(20)%%an | %%s\" --grep=\"pull request\" %s..%s | sort", $first, $second);
+fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%><(7)%%h | %%<(20)%%an | %%s\" --grep=\"pull request\" %s..%s | sort", $lastReleaseRef, $baseRef);
 fprintf(STDERR, "\n\n");
 
 function get(string $path, array $headers) : array{

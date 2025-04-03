@@ -63,9 +63,9 @@ if(is_null($older)){
 	}, $prevReleases[0]);
 }else{
 	// get dev branch; https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#get-a-reference
-	$older = get("repos/{$owner}/{$repo}/git/ref/heads/{$older}", $headers);
-	if(!array_key_exists("ref", $older)){
-		fprintf(STDERR, "Error: %s\n", $dev["message"]);
+	$lastRelease = get("repos/{$owner}/{$repo}/git/ref/heads/{$older}", $headers);
+	if(!array_key_exists("ref", $lastRelease)){
+		fprintf(STDERR, "Error: %s\n", $lastRelease["message"]);
 		die(1);
 	}
 }

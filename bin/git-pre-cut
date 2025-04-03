@@ -3,7 +3,6 @@
 
 $owner       = $argv[1] ?? null;
 $repo        = $argv[2] ?? null;
-$nextVersion = $argv[3] ?? null;
 $base        = $argv[4] ?? "dev";
 
 $token = getenv("GITHUB_TOKEN");
@@ -16,21 +15,11 @@ if(!$token){
 	die(1);
 }
 
-if(!$repo || !$nextVersion || !$owner){
+if(!$repo || !$owner){
 	fprintf(STDERR, "Usage: %s <owner/org> <repo> <version> [<base = dev>]\n", pathinfo($argv[0], PATHINFO_BASENAME));
 	fprintf(STDERR, "  - <version> should contain only numbers and dot (`.`).\n");
 	fprintf(STDERR, "    The `release` prefix is added automatically.\n");
 	die(1);
-}
-
-if(!preg_match("/^[\d.]+$/", $nextVersion)){
-	fprintf(STDERR, "Error: Branch names should contain only numbers and dot (`.`).\n");
-	die(1);
-}
-
-if(!cliConfirm("Does this branch need a new name?")){
-	printf("pick a name bro" . PHP_EOL);
-	return 1;
 }
 
 $token = trim($token);
@@ -55,14 +44,6 @@ if(!is_array($prevReleases)){
 	die(1);
 }
 
-// create release branch
-$newRelease = post("repos/{$owner}/{$repo}/git/refs", [
-	"ref" => "refs/heads/release/{$nextVersion}",
-	"sha" => $dev["object"]["sha"],
-], $headers);
-
-fprintf(STDERR, "I've cut a new branch `release/%s` from dev.\n\n", $nextVersion);
-
 if(empty($prevReleases)){
 	fprintf(STDERR, "There are no previous releases to compare against.\n");
 	die(0);
@@ -79,16 +60,23 @@ $lastRelease = array_reduce($prevReleases, function($carry, $release){
 }, $prevReleases[0]);
 
 $lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
-$nextReleaseRef = substr("refs/heads/release/{$nextVersion}", strlen("refs/heads/"));
 
-fprintf(STDERR, "Here is a link to a list of all commits in `%s` that are not in the previous release `%s`:\n", $nextReleaseRef, $lastReleaseRef);
-fprintf(STDERR, "https://github.com/%s/%s/compare/%s...%s\n\n", $owner, $repo, $lastReleaseRef, $nextReleaseRef);
-fprintf(STDERR, "If you're looking for a list of all the merged PRs, run this command in terminal (or pipe the output of this script to `sh`):\n");
-// --merges only shows merge commits; --grep="pull request" only shows PR merges ... perhaps redundant?
-// %an is author name; %h is short hash; %s is subject; %>(20) and %<(7) are padding
-// $old..$new
-// fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%>(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
-fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%><(7)%%h | %%<(20)%%an | %%s\" --grep=\"pull request\" %s..%s | sort", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
+if($oldBranch = cliInput("Do you want to provide a older branch (name or sha)?") && !empty($oldBranch)){
+	$first = $oldBranch;
+}else{
+	$first = $lastRelease["object"]["sha"];
+}
+
+if($newBranch = cliInput("Do you want to provide a older branch (name or sha)?") && !empty($newBranch)){
+	$second = $newBranch;
+}else{
+	$second = $dev["object"]["sha"];
+}
+
+
+fprintf(STDERR, "https://github.com/%s/%s/compare/%s...%s\n\n", $owner, $repo, $first, $second);
+
+fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%><(7)%%h | %%<(20)%%an | %%s\" --grep=\"pull request\" %s..%s | sort", $first, $second);
 fprintf(STDERR, "\n\n");
 
 function get(string $path, array $headers) : array{
@@ -98,30 +86,6 @@ function get(string $path, array $headers) : array{
 		CURLOPT_CUSTOMREQUEST  => "GET",
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_HTTPHEADER     => $headers,
-	]);
-
-	$response = curl_exec($ch);
-	try{
-		checkcURL($ch);
-	}catch(\Exception $e){
-		fprintf(STDERR, "Error: %s\n", $e->getMessage());
-		fprintf(STDERR, "Response: %s\n", $response);
-		die(1);
-	}
-
-	curl_close($ch);
-	return json_decode($response, true);
-}
-
-function post(string $path, array $data, array $headers) : array{
-	$url = sprintf("https://api.github.com/%s", $path);
-	$ch = curl_init($url);
-	curl_setopt_array($ch, [
-		  // CURLOPT_URL => $url,
-		CURLOPT_CUSTOMREQUEST  => "POST",
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_HTTPHEADER     => $headers,
-		CURLOPT_POSTFIELDS     => json_encode($data),
 	]);
 
 	$response = curl_exec($ch);
@@ -154,3 +118,12 @@ function cliConfirm( string $msg = "" ) : bool {
 
 	return trim( fgets( STDIN ) ) == "y";
 }
+
+function cliInput( string $msg = "" ) : string {
+	$msg = $msg ?: "I'm waiting...";
+	printf("\n%s ", $msg);
+
+	return trim( fgets( STDIN ) );
+}
+
+

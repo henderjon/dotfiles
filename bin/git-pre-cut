@@ -3,6 +3,7 @@
 
 $owner       = $argv[1] ?? null;
 $repo        = $argv[2] ?? null;
+$older       = $argv[3] ?? null;
 $base        = $argv[4] ?? "dev";
 
 $token = getenv("GITHUB_TOKEN");
@@ -16,9 +17,10 @@ if(!$token){
 }
 
 if(!$repo || !$owner){
-	fprintf(STDERR, "Usage: %s <owner/org> <repo> <version> [<base = dev>]\n", pathinfo($argv[0], PATHINFO_BASENAME));
-	fprintf(STDERR, "  - <version> should contain only numbers and dot (`.`).\n");
-	fprintf(STDERR, "    The `release` prefix is added automatically.\n");
+	fprintf(STDERR, "Usage: %s <owner/org> <repo> [<older = \$lastRelease> [<newer = dev>]\n", pathinfo($argv[0], PATHINFO_BASENAME));
+	fprintf(STDERR, "  - <older> a ref or sha for the older branch in the comparison; defaults to the last release.\n");
+	fprintf(STDERR, "  - <newer> a ref or sha for the newer branch in the comparison; defaults to `dev`.\n");
+	fprintf(STDERR, "    \$older should have fewer commits.\n");
 	die(1);
 }
 
@@ -37,42 +39,33 @@ if(!array_key_exists("ref", $dev)){
 	die(1);
 }
 
-// get previous releases; before creating new release branch to avoid counting it
-$prevReleases = get("repos/{$owner}/{$repo}/git/matching-refs/heads/release", $headers);
-if(!is_array($prevReleases)){
-	fprintf(STDERR, "Error: %s\n", $prevReleases["message"]);
-	die(1);
-}
+if(is_null($older)){
+	// get previous releases; before creating new release branch to avoid counting it
+	$prevReleases = get("repos/{$owner}/{$repo}/git/matching-refs/heads/release", $headers);
+	if(!is_array($prevReleases)){
+		fprintf(STDERR, "Error: %s\n", $prevReleases["message"]);
+		die(1);
+	}
 
-if(empty($prevReleases)){
-	fprintf(STDERR, "There are no previous releases to compare against.\n");
-	die(0);
-}
+	if(empty($prevReleases)){
+		fprintf(STDERR, "There are no previous releases to compare against.\n");
+		die(0);
+	}
 
-// get last release for comparison
-$lastRelease = array_reduce($prevReleases, function($carry, $release){
-	$i = strnatcmp($carry["ref"], $release["ref"]);
-	return match($i){
-		1       => $carry,
-		-1      => $release,
-		default => $carry,
-	};
-}, $prevReleases[0]);
+	// get last release for comparison
+	$lastRelease = array_reduce($prevReleases, function($carry, $release){
+		$i = strnatcmp($carry["ref"], $release["ref"]);
+		return match($i){
+			1       => $carry,
+			-1      => $release,
+			default => $carry,
+		};
+	}, $prevReleases[0]);
+}else{
+	$lastRelease = ["ref" => $older];
+}
 
 $lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
-
-if($oldBranch = cliInput("Do you want to provide a older branch name/sha? ({$lastRelease["ref"]})") && !empty($oldBranch)){
-	$first = $oldBranch;
-}else{
-	$first = $lastRelease["object"]["sha"];
-}
-
-if($newBranch = cliInput("Do you want to provide a newer branch name/sha? ({$dev["ref"]})") && !empty($newBranch)){
-	$second = $newBranch;
-}else{
-	$second = $dev["object"]["sha"];
-}
-
 
 fprintf(STDERR, "https://github.com/%s/%s/compare/%s...%s\n\n", $owner, $repo, $first, $second);
 

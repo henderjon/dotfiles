@@ -88,7 +88,7 @@ fprintf(STDERR, "If you're looking for a list of all the merged PRs, run this co
 // %an is author name; %h is short hash; %s is subject; %>(20) and %<(7) are padding
 // $old..$new
 // fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%>(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
-fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%><(7)%%h | %%<(20)%%an | %%s\" --grep=\"pull request\" %s..%s | sort", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
+fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%<(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s | sort", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
 fprintf(STDERR, "\n\n");
 
 function get(string $path, array $headers) : array{

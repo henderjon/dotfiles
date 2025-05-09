@@ -113,3 +113,13 @@ internally
 
 `$ gpgconf --kill gpg-agent`
 `$ gpgconf --launch gpg-agent`
+
+## Encrypt a file/message
+--------------------------------------------------------------------------------
+
+### Add more -r for each person you want to be able to read the file, including yourself
+`$ gpg --encrypt --sign --armor -r person@email.com name_of_file`
+`$ gpg --encrypt --sign --armor -r person@email.com --output -` will give you STDOUT
+
+`$ gpg file_name.asc`
+`$ gpg --decrypt file_name.asc` will give you STDOUT

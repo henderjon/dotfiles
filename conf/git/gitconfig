@@ -94,6 +94,9 @@
 	fix         = "!f(){ git fetch origin; git checkout -b fix/$1 --no-track origin/dev; }; f"
 	feature     = "!f(){ git fetch origin; git checkout -b feature/$1 --no-track origin/dev; }; f"
 	release     = "!f(){ git fetch origin; git checkout -b release/$1 --no-track origin/dev; }; f"
+	# merge conflicts
+	resolve-ours   = "!f(){ git checkout --ours \"$1\"; git add \"$1\"; }; f"
+	resolve-theirs = "!f(){ git checkout --theirs \"$1\"; git add \"$1\"; }; f"
 	# do remote things
 	publish     = "!git push -u origin $(git branch-name)"
 	unpublish   = "!git push origin :$(git branch-name)"

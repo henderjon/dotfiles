@@ -28,7 +28,7 @@ if(!preg_match("/^[\d.]+$/", $nextVersion)){
 	die(1);
 }
 
-if(!cliConfirm("Does this branch need a new name?")){
+if(cliConfirm("Does this branch need a new name?")){
 	printf("pick a name bro" . PHP_EOL);
 	return 1;
 }

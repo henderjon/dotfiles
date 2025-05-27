@@ -84,3 +84,11 @@ FILES / JSON
 - os.path.dirname(i.path)
 - os.listdir(dir)
 - os.scandir(dir)
+
+VENV
+--------------------------------------------------------------------------------
+
+$ python -m venv .
+$ source ./bin/activate
+$ python -m pip install _____
+$ deactivate

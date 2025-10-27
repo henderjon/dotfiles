@@ -4,7 +4,7 @@
 $owner       = $argv[1] ?? null;
 $repo        = $argv[2] ?? null;
 $nextVersion = $argv[3] ?? null;
-$base        = $argv[4] ?? "dev";
+// LOOK DOWN A BIT ... $base = $argv[4] ?? "dev";
 
 $token = getenv("GITHUB_TOKEN");
 if(!$token){ // fall back to gh cli
@@ -15,6 +15,7 @@ if(!$token){
 	fprintf(STDERR, "Error: No GitHub token found. Please set the GITHUB_TOKEN environment variable or authorize `gh`.\n");
 	die(1);
 }
+
 
 if(!$repo || !$nextVersion || !$owner){
 	fprintf(STDERR, "Usage: %s <owner/org> <repo> <version> [<base = dev>]\n", pathinfo($argv[0], PATHINFO_BASENAME));
@@ -40,6 +41,10 @@ $headers = [
 	"X-GitHub-Api-Version: 2022-11-28",
 	"User-Agent: cURL; git-cut",
 ];
+
+// !!! SHELL COMMAND !!!
+$defaultBranch = trim(`git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'`);
+$base        = $argv[4] ?? $defaultBranch;
 
 // get dev branch; https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#get-a-reference
 $dev = get("repos/{$owner}/{$repo}/git/ref/heads/{$base}", $headers);

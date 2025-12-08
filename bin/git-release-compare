@@ -43,6 +43,14 @@ if(!preg_match('#github\.com/([^/]+)/([^/]+)#', $repoUrl, $matches)){
 $owner = $matches[1];
 $repo = $matches[2];
 
+// Get short SHAs for display
+$previousReleaseShortSha = trim(`git rev-parse --short origin/{$previousRelease}` ?? "");
+$latestReleaseShortSha = trim(`git rev-parse --short origin/{$latestRelease}` ?? "");
+
+fprintf(STDERR, "Comparing releases:\n");
+fprintf(STDERR, "  Previous: %s (%s)\n", $previousRelease, $previousReleaseShortSha);
+fprintf(STDERR, "  Latest:   %s (%s)\n\n", $latestRelease, $latestReleaseShortSha);
+
 fprintf(STDERR, "Here is a link to a list of all commits in `%s` that are not in the previous release `%s`:\n", $latestRelease, $previousRelease);
 fprintf(STDERR, "%s/compare/%s...%s\n\n", $repoUrl, $previousRelease, $latestRelease);
 fprintf(STDERR, "If you're looking for a list of all the merged PRs, run this command in terminal (or pipe the output of this script to `sh`):\n");

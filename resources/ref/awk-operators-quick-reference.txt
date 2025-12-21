@@ -1,0 +1,155 @@
+AWK OPERATORS QUICK REFERENCE
+==============================
+
+ARITHMETIC OPERATORS
+--------------------
++          Addition                      x = a + b
+-          Subtraction / unary minus     x = a - b, x = -5
+*          Multiplication                x = a * b
+/          Division                      x = a / b
+%          Modulo (remainder)            x = a % b
+^          Exponentiation                x = 2 ^ 3  (or ** in some AWK)
+++         Increment (prefix/postfix)    ++i, i++
+--         Decrement (prefix/postfix)    --i, i--
+
+ASSIGNMENT OPERATORS
+--------------------
+=          Assign                        x = 5
++=         Add and assign                x += 5    (same as x = x + 5)
+-=         Subtract and assign           x -= 5    (same as x = x - 5)
+*=         Multiply and assign           x *= 2    (same as x = x * 2)
+/=         Divide and assign             x /= 2    (same as x = x / 2)
+%=         Modulo and assign             x %= 10   (same as x = x % 10)
+^=         Power and assign              x ^= 2    (same as x = x ^ 2)
+
+COMPARISON OPERATORS
+--------------------
+==         Equal to                      if (x == 5)
+!=         Not equal to                  if (x != 0)
+<          Less than                     if (x < 10)
+<=         Less than or equal            if (x <= 10)
+>          Greater than                  if (x > 0)
+>=         Greater than or equal         if (x >= 0)
+
+LOGICAL OPERATORS
+-----------------
+&&         Logical AND                   if (x > 0 && x < 10)
+||         Logical OR                    if (x < 0 || x > 10)
+!          Logical NOT                   if (!found)
+
+PATTERN MATCHING OPERATORS
+--------------------------
+~          Matches regex                 if ($0 ~ /error/)
+!~         Does not match regex          if ($0 !~ /^#/)
+
+TERNARY OPERATOR
+----------------
+?:         Conditional expression        max = (a > b) ? a : b
+                                         abs = (x < 0) ? -x : x
+
+STRING CONCATENATION
+--------------------
+(space)    Implicit concatenation        fullname = first " " last
+                                         path = dir "/" file
+
+FIELD REFERENCE OPERATOR
+------------------------
+$          Field reference               $1, $2, $NF, $(NF-1), $0
+
+ARRAY MEMBERSHIP OPERATOR
+-------------------------
+in         Test if key exists            if (key in array)
+
+GROUPING
+--------
+()         Grouping/function calls       result = (a + b) * c
+                                         length(str)
+
+OPERATOR PRECEDENCE (highest to lowest)
+========================================
+1.  ()                  Grouping
+2.  $                   Field reference
+3.  ++ --               Increment/decrement (postfix)
+4.  ++ -- - !           Increment/decrement (prefix), unary minus, NOT
+5.  ^                   Exponentiation
+6.  * / %               Multiplication, division, modulo
+7.  + -                 Addition, subtraction
+8.  (space)             String concatenation
+9.  < <= > >= == != ~ !~ Comparisons and pattern matching
+10. in                  Array membership
+11. &&                  Logical AND
+12. ||                  Logical OR
+13. ?:                  Ternary conditional
+14. = += -= *= /= %= ^= Assignment
+
+COMMON PATTERNS
+===============
+
+# Arithmetic
+sum = a + b + c
+avg = (a + b + c) / 3
+squared = x ^ 2
+remainder = n % 10
+
+# Increment/decrement
+count++                      # increment after use
+++count                      # increment before use
+total += price               # accumulate
+balance -= withdrawal        # deduct
+
+# Comparisons
+if (age >= 18) print "Adult"
+if (score == 100) print "Perfect!"
+max = (a > b) ? a : b
+
+# Logical operations
+if (x > 0 && x < 10) print "Single digit positive"
+if (role == "admin" || role == "owner") allow = 1
+if (!found) print "Not found"
+
+# Pattern matching
+if ($1 ~ /^[0-9]+$/) print "Numeric field"
+if (email ~ /@/) print "Has @ sign"
+if ($0 !~ /^#/) print "Not a comment"
+
+# String concatenation
+fullname = first " " last
+greeting = "Hello, " name "!"
+path = dir "/" file
+
+# Field references
+print $1, $2, $3              # first three fields
+last = $NF                    # last field
+secondlast = $(NF-1)          # second-to-last
+$1 = toupper($1)              # modify field
+
+# Array membership
+if (key in cache) {
+    value = cache[key]
+} else {
+    cache[key] = compute(key)
+}
+
+# Complex expressions
+price = base * (1 + tax) - discount
+valid = (len >= 8) && (str ~ /[A-Z]/) && (str ~ /[0-9]/)
+grade = (score >= 90) ? "A" : (score >= 80) ? "B" : "C"
+
+IMPORTANT NOTES
+===============
+
+1. Uninitialized variables are 0 (numeric context) or "" (string context)
+2. Comparison is numeric if both operands look like numbers
+3. String comparison is lexicographic (ASCII order)
+4. Short-circuit evaluation: && and || stop when result is determined
+5. Division by zero produces inf or nan (not an error)
+6. Modulo result has same sign as first operand
+7. Pattern matching operators ~ and !~ are AWK-specific
+8. String concatenation (space) has higher precedence than comparisons
+9. Use parentheses for clarity in complex expressions
+10. Field references can use expressions: $(i+1), $(NF-2)
+11. Increment/decrement only work on variables, not expressions
+12. The in operator tests key existence, not value
+13. Assignment can be chained: a = b = c = 0
+14. Most operators are left-associative (left to right)
+15. Assignment and exponentiation are right-associative

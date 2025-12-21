@@ -1,0 +1,280 @@
+AWK CONTROL FLOW QUICK REFERENCE
+=================================
+
+CONDITIONAL STATEMENTS
+----------------------
+
+if statement:
+    if (condition) statement
+
+if-else:
+    if (condition)
+        statement1
+    else
+        statement2
+
+if-else if-else chain:
+    if (condition1) {
+        statements
+    } else if (condition2) {
+        statements
+    } else if (condition3) {
+        statements
+    } else {
+        statements
+    }
+
+Ternary operator:
+    result = (condition) ? true_value : false_value
+    max = (a > b) ? a : b
+    min = (a < b) ? a : b
+    abs = (x < 0) ? -x : x
+
+LOOP STATEMENTS
+---------------
+
+while loop:
+    while (condition) {
+        statements
+    }
+
+    Example:
+        i = 1
+        while (i <= 10) {
+            print i
+            i++
+        }
+
+do-while loop:
+    do {
+        statements
+    } while (condition)
+
+    Example:
+        i = 1
+        do {
+            print i
+            i++
+        } while (i <= 10)
+
+for loop (C-style):
+    for (initialization; condition; increment) {
+        statements
+    }
+
+    Example:
+        for (i = 1; i <= 10; i++) {
+            print i
+        }
+
+    Multiple variables:
+        for (i = 0, j = 10; i < j; i++, j--) {
+            print i, j
+        }
+
+for-in loop (array iteration):
+    for (variable in array) {
+        statements
+    }
+
+    Example:
+        for (key in myarray) {
+            print key, myarray[key]
+        }
+
+    Note: Iteration order is NOT guaranteed!
+
+LOOP CONTROL
+------------
+
+break:
+    Exit from innermost loop immediately
+
+    for (i = 1; i <= 10; i++) {
+        if (i == 5) break
+        print i
+    }
+    # Prints: 1 2 3 4
+
+continue:
+    Skip to next iteration of innermost loop
+
+    for (i = 1; i <= 10; i++) {
+        if (i % 2 == 0) continue
+        print i
+    }
+    # Prints: 1 3 5 7 9 (odd numbers only)
+
+RECORD CONTROL
+--------------
+
+next:
+    Skip to next input record (line)
+    Only works in pattern-action blocks (not in BEGIN/END)
+
+    /^#/ { next }           # Skip comment lines
+    /^$/ { next }           # Skip empty lines
+    { process_line($0) }    # Process all other lines
+
+exit [exit_code]:
+    Terminate AWK program
+    Executes END blocks before exiting
+    Default exit code is 0
+
+    /FATAL/ {
+        print "Fatal error found"
+        exit 1
+    }
+
+    END {
+        print "Cleanup in END block runs even after exit"
+    }
+
+TRUTH VALUES
+------------
+
+True:  Non-zero numbers, non-empty strings
+False: 0, empty string ""
+
+Examples:
+    if (5)           # true
+    if ("hello")     # true
+    if (0)           # false
+    if ("")          # false
+    if (x)           # true if x is non-zero or non-empty
+
+LOGICAL OPERATORS
+-----------------
+
+&&   AND     if (x > 0 && x < 10)
+||   OR      if (x < 0 || x > 10)
+!    NOT     if (!found)
+
+Comparison:
+==   equal           if (x == 5)
+!=   not equal       if (x != 5)
+<    less than       if (x < 5)
+<=   less or equal   if (x <= 5)
+>    greater than    if (x > 5)
+>=   greater/equal   if (x >= 5)
+~    matches regex   if ($0 ~ /pattern/)
+!~   doesn't match   if ($0 !~ /pattern/)
+
+COMMON PATTERNS
+---------------
+
+# Check if variable is defined/set
+if (var != "")
+
+# Check if array key exists
+if (key in array)
+
+# Check if array key doesn't exist
+if (!(key in array))
+
+# Default value pattern
+value = (value != "") ? value : "default"
+
+# Clamp value between min and max
+value = (value < min) ? min : (value > max) ? max : value
+
+# Find max of two values
+max = (a > b) ? a : b
+
+# Find min of two values
+min = (a < b) ? a : b
+
+# Absolute value
+abs = (x < 0) ? -x : x
+
+# Sign function (-1, 0, or 1)
+sign = (x > 0) ? 1 : (x < 0) ? -1 : 0
+
+NESTED LOOPS
+------------
+
+# Break only exits innermost loop
+for (i = 1; i <= 3; i++) {
+    for (j = 1; j <= 3; j++) {
+        if (j == 2) break  # Only exits inner loop
+        print i, j
+    }
+}
+
+# Continue only affects innermost loop
+for (i = 1; i <= 3; i++) {
+    for (j = 1; j <= 3; j++) {
+        if (j == 2) continue  # Only skips inner iteration
+        print i, j
+    }
+}
+
+IMPORTANT NOTES
+---------------
+
+1. Braces {} are optional for single statements but recommended
+2. for-in loop order is undefined (don't rely on it)
+3. break and continue only work inside loops
+4. next only works in pattern-action blocks (not BEGIN/END)
+5. exit runs END blocks before terminating
+6. Uninitialized variables are 0 and "" (both false)
+7. Conditions are evaluated left to right with short-circuit evaluation
+8. Use parentheses for clarity: if ((x > 0) && (y > 0))
+
+EXAMPLES
+--------
+
+# Example 1: Count lines by category
+{
+    if ($1 == "ERROR") {
+        error_count++
+    } else if ($1 == "WARNING") {
+        warning_count++
+    } else if ($1 == "INFO") {
+        info_count++
+    } else {
+        other_count++
+    }
+}
+END {
+    print "Errors:", error_count
+    print "Warnings:", warning_count
+    print "Info:", info_count
+    print "Other:", other_count
+}
+
+# Example 2: Sum positive numbers only
+{
+    for (i = 1; i <= NF; i++) {
+        if ($i < 0) continue
+        sum += $i
+    }
+}
+END { print "Sum of positives:", sum }
+
+# Example 3: Find first occurrence
+{
+    found = 0
+    for (i = 1; i <= NF; i++) {
+        if ($i == search_term) {
+            print "Found at field", i, "in line", NR
+            found = 1
+            break
+        }
+    }
+    if (!found) print "Not found in line", NR
+}
+
+# Example 4: Skip comment and empty lines
+/^#/ { next }
+/^$/ { next }
+{ print "Processing:", $0 }
+
+# Example 5: Process until keyword found
+{
+    if ($1 == "END") {
+        print "Found END keyword, stopping"
+        exit 0
+    }
+    print "Processing:", $0
+}

@@ -472,6 +472,171 @@ BEGIN {
 #     # ... normal processing ...
 # }
 
+# ============================================================================
+# PROCESSING COMMAND OUTPUT LINE-BY-LINE
+# ============================================================================
+
+# Example 13: Shell-level piping (preferred method)
+# The most common and efficient way to process command output is to pipe
+# the command's output directly to awk at the shell level (not in awk):
+#
+# $ ls -la | awk '{print "File:", $9}'
+# $ ps aux | awk '$3 > 50 {print $2, $11}'
+# $ git log --oneline | awk '{print NR, $0}'
+#
+# This approach:
+# - Is simple and efficient
+# - Uses awk's standard input processing
+# - Allows full use of awk's pattern-action model
+# - Is the recommended approach for most use cases
+
+# Example 14: Process command output in BEGIN block
+# If you need to run a command from within awk and process its output,
+# use getline in a loop within BEGIN or END blocks:
+# BEGIN {
+#     print "Files modified today:"
+#     cmd = "find . -mtime 0 -type f"
+#     while ((cmd | getline file) > 0) {
+#         print "  -", file
+#     }
+#     close(cmd)
+# }
+
+# Example 15: Store command output for processing with input
+# Run command once in BEGIN, store results, then process with input:
+# BEGIN {
+#     # Get list of all users
+#     i = 0
+#     while (("cut -d: -f1 /etc/passwd" | getline user) > 0) {
+#         users[++i] = user
+#     }
+#     close("cut -d: -f1 /etc/passwd")
+#     print "Found", i, "users"
+# }
+# {
+#     # Now process input file and check against users list
+#     for (u = 1; u <= i; u++) {
+#         if ($1 == users[u]) {
+#             print $0, "- valid user"
+#             next
+#         }
+#     }
+#     print $0, "- unknown user"
+# }
+
+# Example 16: Store in associative array for fast lookup
+# BEGIN {
+#     # Build lookup table from command output
+#     while (("ls /tmp" | getline fname) > 0) {
+#         tmp_files[fname] = 1
+#     }
+#     close("ls /tmp")
+# }
+# {
+#     # Check if filename in field 1 exists in /tmp
+#     if ($1 in tmp_files) {
+#         print $1, "exists in /tmp"
+#     } else {
+#         print $1, "not found in /tmp"
+#     }
+# }
+
+# Example 17: Run command per input line (use with caution)
+# You CAN run commands in main {} blocks, but be aware of performance:
+# {
+#     # Run a command for each input line (SLOW for many lines!)
+#     cmd = "file -b " $1
+#     cmd | getline filetype
+#     close(cmd)
+#     print $1 ":", filetype
+# }
+#
+# Better approach - collect filenames, process once in END:
+# {
+#     files[NR] = $1
+# }
+# END {
+#     for (i = 1; i <= NR; i++) {
+#         cmd = "file -b " files[i]
+#         cmd | getline filetype
+#         close(cmd)
+#         print files[i] ":", filetype
+#     }
+# }
+
+# Example 18: Combine multiple command outputs
+# BEGIN {
+#     # Get current user
+#     "whoami" | getline current_user
+#     close("whoami")
+#
+#     # Get current directory
+#     "pwd" | getline current_dir
+#     close("pwd")
+#
+#     # Get current date
+#     "date +%Y-%m-%d" | getline today
+#     close("date +%Y-%m-%d")
+#
+#     print "Report for", current_user
+#     print "Directory:", current_dir
+#     print "Date:", today
+#     print "---"
+# }
+# {
+#     # Process input with context from commands
+#     print $0
+# }
+
+# Example 19: Dynamic command based on input (advanced)
+# {
+#     # Build command based on input field
+#     if ($1 == "git") {
+#         cmd = "git status --short"
+#     } else if ($1 == "disk") {
+#         cmd = "df -h ."
+#     } else {
+#         next
+#     }
+#
+#     print "Output of", $1, "command:"
+#     while ((cmd | getline line) > 0) {
+#         print "  ", line
+#     }
+#     close(cmd)
+# }
+
+# Example 20: Error handling for command execution
+# BEGIN {
+#     cmd = "ls /nonexistent/directory 2>&1"
+#     has_output = 0
+#
+#     while ((cmd | getline line) > 0) {
+#         print "Output:", line
+#         has_output = 1
+#     }
+#
+#     exit_status = close(cmd)
+#     if (exit_status != 0) {
+#         print "Command failed with exit status:", exit_status
+#         if (!has_output) {
+#             print "No output produced"
+#         }
+#     }
+# }
+
+# Important Notes about Processing Command Output:
+# 1. Shell piping (command | awk) is usually better than awk running commands
+# 2. Running commands in {} blocks is inefficient - prefer BEGIN/END
+# 3. Always close() command pipes to prevent resource leaks
+# 4. Check close() return value to detect command failures
+# 5. Use 2>&1 to capture stderr, or 2>/dev/null to suppress it
+# 6. Be very careful with shell injection - sanitize any user input
+# 7. Each getline reads one line - use while loops for multiple lines
+# 8. Command pipes are opened once and persist until close()
+# 9. Cannot use pattern-action syntax with command pipes directly
+# 10. For heavy command usage, consider shell scripts instead of awk
+
 # Important Notes:
 # 1. system() returns exit status (0 = success, non-zero = error/signal)
 # 2. Always close() pipes to avoid resource leaks

@@ -309,6 +309,115 @@ Important notes:
     - SUBSEP method works in all POSIX-compliant awk implementations
 
 
+STATEMENTS
+----------
+
+AWK has several built-in statements (not functions) for control flow and
+data manipulation. These do not return values and cannot be used in expressions.
+
+delete array[key]
+delete array
+    Remove array element(s)
+    Single element: delete array[key]
+    Entire array: delete array
+    Safe to delete non-existent keys (no error)
+    Works with multi-dimensional arrays: delete arr[i, j]
+    Cannot delete fields - delete $1 is not valid (use $1 = "" instead)
+    Example:
+        arr[1] = "a"
+        arr[2] = "b"
+        delete arr[1]        # remove single element
+        delete arr           # remove all elements
+
+    Common pattern - remove while iterating:
+        # Collect keys to delete first
+        for (key in data) {
+            if (data[key] < 10) {
+                to_delete[key] = 1
+            }
+        }
+        for (key in to_delete) {
+            delete data[key]
+        }
+
+next
+    Skip to next input record (line)
+    Stops processing current record, reads next line
+    Only works in pattern-action blocks (not BEGIN/END)
+    Example: /^#/ { next }  # skip comment lines
+    Example: NF == 0 { next }  # skip empty lines
+    Example:
+        /^#/ { next }         # skip comments
+        /^$/ { next }         # skip blank lines
+        { process($0) }       # process all other lines
+
+exit [exit_code]
+    Terminate AWK program
+    Executes END blocks before exiting
+    exit_code: optional exit status (default: 0)
+    Can be called from anywhere (BEGIN, main, END, functions)
+    If called from END block, skips remaining END code
+    Example: exit 0  # success
+    Example: exit 1  # error
+    Example:
+        /FATAL/ {
+            print "Fatal error on line", NR > "/dev/stderr"
+            exit 1
+        }
+        END {
+            print "Cleanup runs even after exit"
+        }
+
+return [expression]
+    Return from user-defined function
+    expression: optional return value (default: empty string "")
+    Can only be used inside functions
+    Example:
+        function square(n) {
+            return n * n
+        }
+        function print_msg(msg) {
+            print msg
+            return  # no value, returns ""
+        }
+
+break
+    Exit innermost loop immediately
+    Only works inside loops (while, do-while, for, for-in)
+    Continues execution after the loop
+    Example:
+        for (i = 1; i <= 10; i++) {
+            if (i == 5) break
+            print i
+        }
+        # Prints: 1 2 3 4
+
+    Example - find first match:
+        for (i = 1; i <= NF; i++) {
+            if ($i == target) {
+                print "Found at field", i
+                break
+            }
+        }
+
+continue
+    Skip to next iteration of innermost loop
+    Only works inside loops (while, do-while, for, for-in)
+    Skips remaining code in loop body, continues with next iteration
+    Example:
+        for (i = 1; i <= 10; i++) {
+            if (i % 2 == 0) continue  # skip even numbers
+            print i
+        }
+        # Prints: 1 3 5 7 9
+
+    Example - skip empty fields:
+        for (i = 1; i <= NF; i++) {
+            if ($i == "") continue
+            process($i)
+        }
+
+
 IMPORTANT NOTES
 ---------------
 

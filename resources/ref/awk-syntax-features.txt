@@ -368,3 +368,118 @@ Important notes:
     6. break/continue only work in loops
     7. next only works in pattern-action blocks
     8. exit runs END blocks before terminating
+
+
+VARIABLE SCOPE
+--------------
+
+In AWK, variable scope works quite differently from many modern programming languages:
+
+Global Scope (Default)
+
+All variables in AWK are global by default, including across BEGIN, END, and main pattern-action blocks:
+
+    BEGIN {
+        count = 0
+        prefix = "Line: "
+    }
+
+    {
+        count++
+        print prefix count, $0
+    }
+
+    END {
+        print "Total lines:", count  # Same 'count' from main block
+    }
+
+BEGIN and END Sections
+
+- BEGIN, END, and main pattern-action blocks share the same global namespace
+- Variables set in BEGIN are accessible everywhere
+- Variables modified in the main loop persist to END
+- Common pattern: initialize in BEGIN, accumulate in main, report in END
+
+    BEGIN { sum = 0; max = 0 }
+    { sum += $1; if ($1 > max) max = $1 }
+    END { print "Sum:", sum, "Max:", max }
+
+User-Defined Functions
+
+Functions have a hybrid scope model:
+
+1. Function parameters are local (by convention)
+2. All other variables are global unless you use a special trick
+3. To create local variables: Add extra parameters that aren't passed
+
+    # Global variable used inside function
+    BEGIN { global_var = 10 }
+
+    function uses_global() {
+        print global_var  # Accesses global directly
+        global_var = 20   # Modifies global
+    }
+
+    # Local variables via extra parameters
+    function with_locals(param1, param2,    local1, local2) {
+        #                                   ^^^^^^^^^^^^^^
+        #                                   Local variables (extra whitespace is convention)
+        local1 = param1 * 2
+        local2 = param2 + 5
+        return local1 + local2
+    }
+
+Key Points
+
+- No block-level scoping - variables don't have limited scope within if/while/for blocks
+- Arrays are global unless made local via the function parameter trick
+- Built-in variables (NR, NF, ARGV, etc.) are always global
+- Convention: Use extra whitespace before local function parameters to visually separate them
+
+This global-by-default design reflects AWK's origins as a quick text-processing tool where most programs are short and simple.
+
+The "special trick" is to declare extra parameters in the function definition that you never pass when calling the function. These extra parameters become local variables.
+
+The Trick Explained
+
+    function my_function(arg1, arg2,    local1, local2, local3) {
+        #                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        #                    real params  |  fake params (locals)
+        #                                 |
+        #                          extra whitespace marks the boundary
+
+        local1 = arg1 * 2      # local1 is "local" to this function
+        local2 = arg2 + 10     # local2 is "local" to this function
+        local3 = local1 + local2
+        return local3
+    }
+
+    BEGIN {
+        result = my_function(5, 3)  # Only pass 2 args, not 5!
+        print result
+    }
+
+How It Works
+
+1. When you call my_function(5, 3), only arg1 and arg2 get values
+2. local1, local2, local3 are initialized to empty/zero automatically
+3. These "extra" parameters are scoped to the function - they don't affect global variables with the same name
+4. Convention: Add extra whitespace (spaces/tabs) before the local variables to visually separate them from real parameters
+
+Example Showing the Difference
+
+    BEGIN {
+        x = 100  # Global x
+
+        function test(param,    x) {  # 'x' as local via trick
+            x = 50
+            print "Inside function:", x
+        }
+
+        test(1)
+        print "After function:", x  # Still 100, not 50!
+    }
+
+Without this trick, the function would modify the global x. With it, the function's x is isolated.
+
+This is AWK's only mechanism for local variables - there's no local keyword or block scoping.

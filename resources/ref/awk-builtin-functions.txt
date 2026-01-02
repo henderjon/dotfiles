@@ -1,0 +1,324 @@
+POSIX AWK BUILT-IN FUNCTIONS REFERENCE
+======================================
+
+STRING FUNCTIONS
+----------------
+
+gsub(regexp, replacement [, target])
+    Globally substitute regexp with replacement in target (or $0 if omitted)
+    Returns: number of substitutions made
+    Example: gsub(/foo/, "bar", str)
+    Example: gsub(/[0-9]/, "X", $1)  # replace all digits in field 1
+
+sub(regexp, replacement [, target])
+    Substitute first occurrence of regexp with replacement
+    Returns: number of substitutions made (0 or 1)
+    Example: sub(/foo/, "bar", str)
+    Example: sub(/^[ \t]+/, "", $0)  # trim leading whitespace
+
+index(string, substring)
+    Find position of substring in string
+    1-indexed, returns 0 if not found
+    Returns: position of first occurrence
+    Example: pos = index("hello", "ll")  # returns 3
+    Example: if (index($0, "@") > 0) print "Contains @"
+
+length([string])
+    Get length of string (or $0 if omitted)
+    Returns: number of characters
+    Example: len = length("hello")  # returns 5
+    Example: if (length($1) > 10) print "Long field"
+
+match(string, regexp)
+    Match regexp against string
+    Sets RSTART (start position) and RLENGTH (match length)
+    Returns: position of match, or 0 if no match
+    Example:
+        if (match(str, /[0-9]+/)) {
+            print "found at", RSTART
+            num = substr(str, RSTART, RLENGTH)
+        }
+
+split(string, array [, fieldsep])
+    Split string into array using fieldsep (or FS if omitted)
+    Array is indexed starting at 1
+    Returns: number of elements in array
+    Example: n = split("a:b:c", arr, ":")
+             # arr[1]="a", arr[2]="b", arr[3]="c", returns 3
+    Example: split($0, fields)  # split current line using FS
+
+sprintf(format, expression1, expression2, ...)
+    Format expressions according to format string (like C printf)
+    Returns: formatted string (does not print)
+    Example: str = sprintf("%s is %d years old", name, age)
+    Example: padded = sprintf("%05d", num)  # "00042"
+    See SPRINTF section below for complete format specification
+
+substr(string, start [, length])
+    Extract substring starting at position start (1-indexed)
+    If length omitted, extracts to end of string
+    Returns: substring
+    Example: substr("hello", 2, 3)  # returns "ell"
+    Example: substr("hello", 2)  # returns "ello"
+    Example: last3 = substr($1, length($1)-2)
+
+tolower(string)
+    Convert string to lowercase
+    Returns: lowercase string
+    Example: tolower("HELLO")  # returns "hello"
+    Example: { print tolower($0) }
+
+toupper(string)
+    Convert string to uppercase
+    Returns: uppercase string
+    Example: toupper("hello")  # returns "HELLO"
+    Example: { $1 = toupper($1); print }
+
+
+SPRINTF FORMAT SPECIFICATION
+-----------------------------
+
+Format: %[flags][width][.precision]conversion
+
+CONVERSION SPECIFIERS:
+    %d, %i   Signed decimal integer
+    %u       Unsigned decimal integer
+    %o       Unsigned octal integer
+    %x       Unsigned hexadecimal (lowercase: a-f)
+    %X       Unsigned hexadecimal (uppercase: A-F)
+    %f       Floating point (decimal notation)
+    %e       Floating point (scientific notation, lowercase e)
+    %E       Floating point (scientific notation, uppercase E)
+    %g       Use %e or %f, whichever is shorter (lowercase)
+    %G       Use %E or %f, whichever is shorter (uppercase)
+    %c       Single character
+    %s       String
+    %%       Literal percent sign
+
+FLAGS (optional, can be combined):
+    -        Left-align within field width (default: right-align)
+    +        Always show sign (+ or -) for numbers
+    (space)  Prefix positive numbers with space
+    0        Pad with zeros instead of spaces (for numbers)
+    #        Alternative form (0 prefix for octal, 0x for hex, etc.)
+
+WIDTH (optional):
+    number   Minimum field width (pad with spaces or zeros)
+    *        Width taken from next argument
+
+PRECISION (optional):
+    .number  For %f: digits after decimal (default: 6)
+             For %g: significant digits
+             For %s: maximum characters to print
+             For %d: minimum digits to print (zero-pad)
+    .*       Precision taken from next argument
+
+SPRINTF EXAMPLES:
+    sprintf("%d", 42)              # "42"
+    sprintf("%5d", 42)             # "   42" (width 5)
+    sprintf("%05d", 42)            # "00042" (zero-padded)
+    sprintf("%.2f", 3.14159)       # "3.14" (2 decimals)
+    sprintf("%8.2f", 3.14)         # "    3.14" (width 8, 2 decimals)
+    sprintf("%-8.2f", 3.14)        # "3.14    " (left-aligned)
+    sprintf("%+d", 42)             # "+42" (show sign)
+    sprintf("%x", 255)             # "ff" (hex)
+    sprintf("%#x", 255)            # "0xff" (hex with prefix)
+    sprintf("%s: %d", "Count", 5)  # "Count: 5"
+    sprintf("%*.*f", 8, 2, 3.14)   # "    3.14" (dynamic width/precision)
+
+
+NUMERIC FUNCTIONS
+-----------------
+
+atan2(y, x)
+    Arctangent of y/x in radians
+    Returns: angle in radians [-π, π]
+    Example: angle = atan2(1, 1)  # returns π/4
+
+cos(x)
+    Cosine of x (x in radians)
+    Returns: cosine value [-1, 1]
+    Example: cos(0)  # returns 1
+
+sin(x)
+    Sine of x (x in radians)
+    Returns: sine value [-1, 1]
+    Example: sin(0)  # returns 0
+
+exp(x)
+    Exponential function (e^x)
+    Returns: e raised to power x
+    Example: exp(1)  # returns e (2.71828...)
+
+log(x)
+    Natural logarithm of x (base e)
+    Returns: ln(x)
+    Example: log(2.71828)  # returns ~1
+
+sqrt(x)
+    Square root of x
+    Returns: √x
+    Example: sqrt(16)  # returns 4
+    Example: sqrt(2)  # returns 1.41421...
+
+int(x)
+    Truncate x to integer (towards zero)
+    Returns: integer portion
+    Example: int(3.7)   # returns 3
+    Example: int(-3.7)  # returns -3
+
+rand()
+    Generate random number
+    Returns: random float in [0, 1)
+    Example: r = rand()
+    Example: die = int(rand() * 6) + 1  # random 1-6
+
+srand([seed])
+    Set random number seed
+    If seed omitted, uses current time
+    Returns: previous seed value
+    Example: srand(42)  # reproducible random sequence
+    Example: srand()    # seed with current time
+
+
+I/O FUNCTIONS
+-------------
+
+close(filename_or_command)
+    Close file or pipe
+    Returns: 0 on success, non-zero on error
+    Example: close("output.txt")
+    Example: close(cmd)
+    Note: Always close pipes to avoid resource leaks
+
+fflush([filename])
+    Flush output buffer for filename (or all files if omitted)
+    Returns: 0 on success, non-zero on error
+    Example: fflush()
+    Example: fflush("output.txt")
+
+system(command)
+    Execute shell command and wait for completion
+    Returns: exit status of command (0 = success)
+    Example: system("ls -l")
+    Example: if (system("test -f file.txt") == 0) print "File exists"
+
+getline [var] [< file]
+getline [var] [| command]
+command | getline [var]
+    Read next line into var (or $0 if var omitted)
+    Returns: 1 on success, 0 on EOF, -1 on error
+    Example: while ((getline line < "file.txt") > 0) print line
+    Example: "date" | getline today
+    Example: getline  # read next line from current input
+
+print [expression-list] [> file]
+print [expression-list] [>> file]
+print [expression-list] [| command]
+    Print expressions separated by OFS, terminated by ORS
+    Example: print "hello", "world"
+    Example: print $1, $2 > "output.txt"
+    Example: print $0 | "sort"
+
+printf format [, expression-list] [> file]
+printf format [, expression-list] [>> file]
+printf format [, expression-list] [| command]
+    Formatted print (like C printf)
+    Does not add newline automatically (use \n)
+    Example: printf "%s: %d\n", name, count
+    Example: printf "%.2f\n", value > "output.txt"
+
+
+MULTI-DIMENSIONAL ARRAYS AND SUBSEP
+------------------------------------
+
+AWK emulates multi-dimensional arrays using SUBSEP to concatenate indices.
+SUBSEP default: "\034" (ASCII 28, non-printing character)
+
+Basic syntax:
+    arr[i, j] = value
+    # Internally stored as: arr[i SUBSEP j] = value
+
+Creating multi-dimensional arrays:
+    matrix[1, 1] = "a"
+    matrix[1, 2] = "b"
+    matrix[2, 1] = "c"
+    matrix[2, 2] = "d"
+    print matrix[1, 2]  # prints "b"
+
+Testing if key exists:
+    if ((1, 2) in matrix) {
+        print "Found!"
+    }
+
+Iterating over multi-dimensional arrays:
+    for (key in arr) {
+        print key, "=", arr[key]
+        # key will be like "1\0342" for arr[1,2]
+    }
+
+Splitting composite keys to extract individual indices:
+    BEGIN {
+        data[1, "name"] = "Alice"
+        data[1, "age"] = 30
+        data[2, "name"] = "Bob"
+        data[2, "age"] = 25
+
+        for (composite_key in data) {
+            n = split(composite_key, indices, SUBSEP)
+            id = indices[1]
+            field = indices[2]
+            printf "ID: %s, Field: %s, Value: %s\n", id, field, data[composite_key]
+        }
+    }
+
+Custom separator:
+    BEGIN {
+        SUBSEP = ":"
+        arr[1, 2] = "value"
+        # Now stored as arr["1:2"]
+    }
+
+3D arrays (and beyond):
+    cube[1, 2, 3] = "value"
+    print cube[1, 2, 3]
+
+Matrix example:
+    BEGIN {
+        # Create 3x3 matrix
+        for (i = 1; i <= 3; i++) {
+            for (j = 1; j <= 3; j++) {
+                matrix[i, j] = i * j
+            }
+        }
+
+        # Print matrix
+        for (i = 1; i <= 3; i++) {
+            for (j = 1; j <= 3; j++) {
+                printf "%3d ", matrix[i, j]
+            }
+            print ""
+        }
+    }
+
+Important notes:
+    - Multi-dimensional syntax arr[i,j] is sugar for arr[i SUBSEP j]
+    - Use split(key, array, SUBSEP) to extract individual indices
+    - The "in" operator works: if ((i, j) in arr)
+    - Can change SUBSEP for readable keys, but default works well
+    - SUBSEP method works in all POSIX-compliant awk implementations
+
+
+IMPORTANT NOTES
+---------------
+
+1. Always close() pipes and files to prevent resource leaks
+2. Check getline return value: 1=success, 0=EOF, -1=error
+3. sprintf() returns string; printf() prints directly
+4. match() sets RSTART and RLENGTH for extracting matched text
+5. split() creates 1-indexed arrays
+6. substr() uses 1-based indexing
+7. rand() requires srand() for predictable sequences
+8. system() returns command exit status (0 = success)
+9. Use 2>&1 or 2>/dev/null in system() to handle stderr
+10. Fields modified by gsub/sub change $0 automatically

@@ -430,4 +430,44 @@ IMPORTANT NOTES
 7. rand() requires srand() for predictable sequences
 8. system() returns command exit status (0 = success)
 9. Use 2>&1 or 2>/dev/null in system() to handle stderr
-10. Fields modified by gsub/sub change $0 automatically
+10. Use >/dev/null or >output.txt in system() to handle stdout
+11. Fields modified by gsub/sub change $0 automatically
+
+
+FILE DESCRIPTORS
+----------------
+  File descriptors:
+  - 0 = stdin
+  - 1 = stdout
+  - 2 = stderr
+
+Common redirections:
+
+  command 2>&1          # redirect stderr to stdout
+  command 1>&2          # redirect stdout to stderr
+  command >/dev/null    # redirect stdout to /dev/null (same as 1>/dev/null)
+  command 2>/dev/null   # redirect stderr to /dev/null
+  command >/dev/null 2>&1   # redirect both stdout and stderr to /dev/null
+  command &>/dev/null       # bash shortcut for both (not POSIX)
+
+In AWK system() calls:
+
+  # Suppress stdout
+  system("ls >/dev/null")
+
+  # Suppress stderr
+  system("ls 2>/dev/null")
+
+  # Suppress both
+  system("ls >/dev/null 2>&1")
+  system("ls 2>&1 >/dev/null")  # also works
+
+  # Redirect stderr to stdout (capture both together)
+  system("ls 2>&1")
+
+  # Redirect stdout to stderr
+  system("echo 'error message' 1>&2")
+
+  Order matters:
+  command >file 2>&1    # Correct: stderr goes to file (follows stdout)
+  command 2>&1 >file    # Wrong: stderr to original stdout, stdout to file

@@ -1,0 +1,584 @@
+POSIX AWK COMMON PATTERNS AND SOLUTIONS
+=======================================
+
+FILE PROCESSING
+---------------
+
+Print specific lines:
+    awk 'NR == 5'                        # print line 5
+    awk 'NR >= 10 && NR <= 20'           # print lines 10-20
+    awk 'NR % 2 == 0'                    # print even-numbered lines
+
+Print specific fields:
+    awk '{print $1}'                     # print first field
+    awk '{print $NF}'                    # print last field
+    awk '{print $(NF-1)}'                # print second-to-last field
+    awk '{print $1, $3}'                 # print fields 1 and 3
+
+Skip lines:
+    awk 'NR > 1'                         # skip first line (header)
+    awk '/^#/ {next} {print}'            # skip comment lines
+    awk '/^$/ {next} {print}'            # skip empty lines
+    awk 'NF > 0'                         # skip empty lines (simpler)
+
+Number lines:
+    awk '{print NR, $0}'                 # number all lines
+    awk '{print NR ":", $0}'             # with colon
+    awk '{printf "%4d: %s\n", NR, $0}'   # formatted width
+
+
+TEXT FILTERING
+--------------
+
+Pattern matching:
+    awk '/error/'                        # lines containing "error"
+    awk '/^error/'                       # lines starting with "error"
+    awk '/error$/'                       # lines ending with "error"
+    awk '!/error/'                       # lines NOT containing "error"
+    awk '/error|warning/'                # lines with "error" or "warning"
+
+Field matching:
+    awk '$1 == "error"'                  # first field equals "error"
+    awk '$1 ~ /^[0-9]+$/'                # first field is all digits
+    awk '$NF ~ /\.txt$/'                 # last field ends with .txt
+    awk '$2 > 100'                       # second field > 100
+    awk '$3 >= 50 && $3 <= 100'          # third field in range
+
+Case-insensitive (workaround):
+    awk 'tolower($0) ~ /error/'          # case-insensitive search
+
+
+FIELD MANIPULATION
+------------------
+
+Reorder fields:
+    awk '{print $2, $1}'                 # swap first two fields
+    awk '{print $3, $2, $1}'             # reverse first three fields
+
+Modify fields:
+    awk '{$1 = toupper($1); print}'      # uppercase first field
+    awk '{$2 = $2 * 2; print}'           # double second field
+    awk '{$1 = ""; print}'               # remove first field
+
+Remove fields:
+    awk '{$1 = $2 = ""; print}'          # remove first two fields
+    awk '{for(i=3;i<=NF;i++)printf "%s ",$i; print ""}' # print from field 3 on
+
+Add fields:
+    awk '{print $0, "extra"}'            # append new field
+    awk '{$(NF+1) = "new"; print}'       # add field via NF
+
+
+SEPARATOR HANDLING
+------------------
+
+Change separators:
+    awk -F: '{print $1}'                 # colon separator
+    awk -F, '{print $1, $2}'             # comma separator (CSV)
+    awk 'BEGIN{FS=","} {print $1}'       # set in BEGIN block
+
+Output separators:
+    awk 'BEGIN{OFS=","} {print $1,$2}'   # CSV output
+    awk 'BEGIN{OFS="\t"} {print}'        # TSV output
+    awk 'BEGIN{OFS=" | "} {print}'       # pipe-separated
+
+CSV to TSV:
+    awk 'BEGIN{FS=","; OFS="\t"} {print}'
+    awk 'BEGIN{FS=","; OFS="\t"} {$1=$1; print}'  # force rebuild
+
+Fixed-width to delimited:
+    # Field widths: 10, 15, 5
+    awk 'BEGIN{OFS=","} {
+        print substr($0,1,10), substr($0,11,15), substr($0,26,5)
+    }'
+
+
+COUNTING AND SUMMING
+--------------------
+
+Count lines:
+    awk 'END {print NR}'                 # total lines
+    awk '/error/ {count++} END {print count}'  # count matches
+
+Sum values:
+    awk '{sum += $1} END {print sum}'    # sum first field
+    awk '{for(i=1;i<=NF;i++) sum+=$i} END {print sum}'  # sum all fields
+
+Average:
+    awk '{sum += $1; count++} END {print sum/count}'
+    awk '{sum += $1} END {print sum/NR}'  # simpler
+
+Min/Max:
+    awk 'NR==1 {min=$1; max=$1}
+         {if($1<min)min=$1; if($1>max)max=$1}
+         END {print "Min:",min,"Max:",max}'
+
+Count occurrences:
+    awk '{count[$1]++} END {for(k in count) print k, count[k]}'
+
+
+STATISTICS
+----------
+
+Word frequency:
+    awk '{for(i=1;i<=NF;i++) words[$i]++}
+         END {for(w in words) print w, words[w]}'
+
+Histogram:
+    awk '{count[$1]++}
+         END {for(k in count) printf "%s: %s\n", k, count[k]}'
+
+Group and sum:
+    awk '{sum[$1] += $2}
+         END {for(k in sum) print k, sum[k]}'
+
+Running total:
+    awk '{sum += $1; print $0, sum}'
+
+
+TEXT PROCESSING
+---------------
+
+Extract columns:
+    awk '{print $2, $5, $7}'             # specific columns
+    awk 'NR==1 {next} {print $2, $5}'    # skip header
+
+Remove duplicates (consecutive):
+    awk 'prev != $0 {print; prev=$0}'
+
+Remove all duplicates:
+    awk '!seen[$0]++'                    # print first occurrence only
+
+Join lines:
+    awk '{printf "%s ", $0} END {print ""}'  # all on one line
+    awk 'ORS=" "' file                   # simpler
+
+Reverse lines:
+    awk '{lines[NR]=$0} END {for(i=NR;i>0;i--) print lines[i]}'
+
+Transpose:
+    awk '{for(i=1;i<=NF;i++) a[NR,i]=$i}
+         END {for(i=1;i<=NF;i++){for(j=1;j<=NR;j++)
+              printf "%s%s", a[j,i], (j<NR?OFS:ORS)}}'
+
+
+DATA VALIDATION
+---------------
+
+Check field count:
+    awk 'NF != 5 {print "Bad record:", NR, $0}'
+    awk 'NF < 3 {print "Too few fields:", NR}'
+
+Check numeric fields:
+    awk '$2 !~ /^[0-9]+$/ {print "Non-numeric:", NR, $2}'
+
+Check for empty fields:
+    awk '{for(i=1;i<=NF;i++) if($i=="") print "Empty field",i,"in line",NR}'
+
+Find long lines:
+    awk 'length > 80 {print NR, length($0), $0}'
+
+Check ranges:
+    awk '$2 < 0 || $2 > 100 {print "Out of range:", NR, $2}'
+
+
+ERROR HANDLING AND DEBUGGING
+-----------------------------
+
+NOTE: AWK does not have a "set -e" equivalent. Most operations silently
+continue on errors. You must explicitly check return values and exit.
+
+Check getline errors:
+    # Bad - silent failure
+    while ((getline line < "file.txt") > 0) {
+        print line
+    }
+
+    # Good - check for errors
+    while ((ret = getline line < "file.txt") > 0) {
+        print line
+    }
+    if (ret < 0) {
+        print "ERROR: Failed to read file.txt" > "/dev/stderr"
+        exit 1
+    }
+
+Check close() status:
+    "command" | getline output
+    status = close("command")
+    if (status != 0) {
+        print "ERROR: Command failed with status", status > "/dev/stderr"
+        exit 1
+    }
+
+Pipe to getline with return value checking:
+    # IMPORTANT: Wrap pipe expression in parentheses to check return value
+
+    # Method 1: Check in while loop
+    while ((ret = ("ls -1" | getline file)) > 0) {
+        print "Found:", file
+    }
+    if (ret < 0) {
+        print "ERROR: getline failed" > "/dev/stderr"
+        exit 1
+    }
+    close("ls -1")
+
+    # Method 2: Single line read with full checking
+    cmd = "date +%Y-%m-%d"
+    ret = (cmd | getline today)
+
+    if (ret < 0) {
+        print "ERROR: Failed to read from command" > "/dev/stderr"
+        exit 1
+    } else if (ret == 0) {
+        print "ERROR: No output from command" > "/dev/stderr"
+        exit 1
+    }
+
+    if (close(cmd) != 0) {
+        print "ERROR: Command failed" > "/dev/stderr"
+        exit 1
+    }
+
+    print "Today:", today
+
+    # Method 3: Helper function for safe command execution
+    function safe_cmd(cmd, result,    ret, status) {
+        ret = (cmd | getline result)
+        status = close(cmd)
+
+        if (ret < 0) {
+            print "ERROR: getline failed for: " cmd > "/dev/stderr"
+            exit 1
+        }
+        if (ret == 0) {
+            print "ERROR: No output from: " cmd > "/dev/stderr"
+            exit 1
+        }
+        if (status != 0) {
+            print "ERROR: Command failed (status " status "): " cmd > "/dev/stderr"
+            exit 1
+        }
+
+        return result
+    }
+
+    BEGIN {
+        date = safe_cmd("date +%Y-%m-%d", date)
+        print "Date:", date
+    }
+
+    # getline returns: 1 (success), 0 (EOF), -1 (error)
+    # close() returns: 0 (success), non-zero (command exit status)
+
+Check system() calls:
+    if (system("test -f file.txt") != 0) {
+        print "ERROR: file.txt does not exist" > "/dev/stderr"
+        exit 1
+    }
+
+    # Suppress output but check status
+    if (system("command > /dev/null 2>&1") != 0) {
+        print "ERROR: command failed" > "/dev/stderr"
+        exit 1
+    }
+
+Error helper functions:
+    function error(msg) {
+        print "ERROR [line " NR "]: " msg > "/dev/stderr"
+        exit 1
+    }
+
+    function warn(msg) {
+        print "WARNING [line " NR "]: " msg > "/dev/stderr"
+    }
+
+    # Usage
+    NF < 3 { error("Expected at least 3 fields, got " NF) }
+    $2 !~ /^[0-9]+$/ { error("Field 2 must be numeric: " $2) }
+    length($1) > 100 { warn("Field 1 unusually long: " length($1) " chars") }
+
+Strict mode pattern:
+    BEGIN {
+        STRICT = 1  # Set to 0 to disable strict mode
+    }
+
+    function check_error(condition, msg) {
+        if (condition && STRICT) {
+            print "ERROR [" FILENAME ":" FNR "]: " msg > "/dev/stderr"
+            exit 1
+        }
+    }
+
+    {
+        check_error(NF < 3, "Expected 3 fields, got " NF)
+        check_error($2 !~ /^[0-9]+$/, "Field 2 not numeric: " $2)
+        check_error($2 < 0 || $2 > 100, "Field 2 out of range: " $2)
+    }
+
+Debug mode with environment variable:
+    BEGIN {
+        DEBUG = (ENVIRON["DEBUG"] == "1")
+    }
+
+    function debug(msg) {
+        if (DEBUG) print "DEBUG: " msg > "/dev/stderr"
+    }
+
+    {
+        debug("Processing line " NR ": " $0)
+        debug("Field count: " NF)
+        # ... processing
+    }
+
+    # Usage: DEBUG=1 awk -f script.awk file.txt
+
+Verbose error with context:
+    function error_context(msg,    i) {
+        print "ERROR at " FILENAME ":" FNR > "/dev/stderr"
+        print "  Message: " msg > "/dev/stderr"
+        print "  Line: " $0 > "/dev/stderr"
+        print "  Fields:" > "/dev/stderr"
+        for (i = 1; i <= NF; i++) {
+            printf "    $%d = [%s]\n", i, $i > "/dev/stderr"
+        }
+        exit 1
+    }
+
+    # Usage
+    $2 !~ /^[0-9]+$/ { error_context("Field 2 must be numeric") }
+
+Combined error and debug framework:
+    BEGIN {
+        STRICT = 1
+        DEBUG = (ENVIRON["DEBUG"] == "1")
+        ERROR_COUNT = 0
+        WARN_COUNT = 0
+    }
+
+    function debug(msg) {
+        if (DEBUG) print "DEBUG [" FNR "]: " msg > "/dev/stderr"
+    }
+
+    function warn(msg) {
+        print "WARNING [" FILENAME ":" FNR "]: " msg > "/dev/stderr"
+        WARN_COUNT++
+    }
+
+    function error(msg) {
+        print "ERROR [" FILENAME ":" FNR "]: " msg > "/dev/stderr"
+        ERROR_COUNT++
+        if (STRICT) exit 1
+    }
+
+    {
+        debug("Processing: " $0)
+
+        if (NF < 3) {
+            error("Expected at least 3 fields, got " NF)
+        }
+
+        if ($2 !~ /^[0-9]+$/) {
+            error("Field 2 must be numeric: " $2)
+        }
+
+        if ($2 > 1000) {
+            warn("Field 2 unusually large: " $2)
+        }
+
+        # ... normal processing
+    }
+
+    END {
+        if (ERROR_COUNT > 0 || WARN_COUNT > 0) {
+            print "" > "/dev/stderr"
+            print "Summary: " ERROR_COUNT " errors, " WARN_COUNT " warnings" > "/dev/stderr"
+            if (ERROR_COUNT > 0 && !STRICT) exit 1
+        }
+    }
+
+Key differences from bash "set -e":
+    - Division by zero produces inf/nan, not an error
+    - Missing files in getline return -1 (must check manually)
+    - Failed regex matches return 0 (not an error)
+    - Array access of non-existent keys returns "" or 0 (not an error)
+    - You must explicitly check return values and call exit 1
+
+
+FILE COMPARISON
+---------------
+
+Common lines:
+    awk 'NR==FNR {a[$0]; next} $0 in a' file1 file2
+
+Unique to first file:
+    awk 'NR==FNR {a[$0]; next} !($0 in a)' file2 file1
+
+Unique to second file:
+    awk 'NR==FNR {a[$0]; next} !($0 in a)' file1 file2
+
+Join files by key:
+    awk 'NR==FNR {a[$1]=$2; next} {print $0, a[$1]}' file1 file2
+
+
+FORMATTING OUTPUT
+-----------------
+
+Aligned columns:
+    awk '{printf "%-10s %8.2f %5d\n", $1, $2, $3}'
+
+Table with header:
+    awk 'BEGIN {printf "%-10s %10s\n", "Name", "Value"; print "--------------------"}
+         {printf "%-10s %10.2f\n", $1, $2}'
+
+Add separators:
+    awk '{print "---"; print $0}'        # line before each record
+    awk 'NR > 1 {print "---"} {print}'   # between records
+
+Indent output:
+    awk '{print "  " $0}'                # indent 2 spaces
+    awk '{printf "    %s\n", $0}'        # indent 4 spaces
+
+
+DATA TRANSFORMATION
+-------------------
+
+Uppercase/lowercase:
+    awk '{print toupper($0)}'            # all uppercase
+    awk '{print tolower($0)}'            # all lowercase
+    awk '{$1=toupper($1); print}'        # first field uppercase
+
+Add prefix/suffix:
+    awk '{print "PREFIX_" $1}'
+    awk '{print $1 "_SUFFIX"}'
+
+Calculate percentage:
+    awk '{print $1, ($1/total)*100 "%"}'
+
+Convert units:
+    awk '{print $1, $2*2.54 "cm"}'       # inches to cm
+    awk '{print $1, ($2-32)*5/9 "C"}'    # Fahrenheit to Celsius
+
+
+RANGE PATTERNS
+--------------
+
+Extract sections:
+    awk '/START/,/END/'                  # print from START to END
+    awk '/START/,/END/ {if(!/START|END/)print}'  # exclude delimiters
+
+Between line numbers:
+    awk 'NR==10,NR==20'                  # lines 10-20
+
+Toggle printing:
+    awk '/START/ {p=1} p {print} /END/ {p=0}'
+
+
+ADVANCED PATTERNS
+-----------------
+
+Multi-file processing:
+    awk '{print FILENAME, NR, FNR, $0}' file1 file2
+
+Per-file processing:
+    awk 'FNR==1 {print "File:", FILENAME} {print}' file1 file2
+
+Running commands:
+    awk 'BEGIN {"date" | getline d; print "Date:", d}'
+
+Reading multiple inputs:
+    awk 'BEGIN {while((getline<"lookup.txt")>0) a[$1]=$2}
+         {print $0, a[$1]}' data.txt
+
+Generate reports:
+    BEGIN {
+        print "REPORT"
+        print "======"
+    }
+    {
+        count++
+        sum += $2
+    }
+    END {
+        print ""
+        print "Count:", count
+        print "Sum:", sum
+        print "Average:", sum/count
+    }
+
+
+ONE-LINERS
+----------
+
+Print line 5:
+    awk 'NR==5' file
+
+Count non-empty lines:
+    awk 'NF' file | wc -l
+
+Sum column:
+    awk '{s+=$1} END {print s}' file
+
+Find max value in column:
+    awk 'max<$1 {max=$1} END {print max}' file
+
+Print unique lines:
+    awk '!seen[$0]++' file
+
+Print duplicates:
+    awk 'seen[$0]++' file
+
+Replace text:
+    awk '{gsub(/old/, "new"); print}' file
+
+Extract email addresses:
+    awk 'match($0, /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/) {
+        print substr($0, RSTART, RLENGTH)
+    }' file
+
+CSV field extraction:
+    awk -F, '{print $1, $3}' file.csv
+
+Add line numbers:
+    awk '{print NR, $0}' file
+
+Remove whitespace:
+    awk '{gsub(/^[ \t]+|[ \t]+$/, ""); print}' file
+
+Print every nth line:
+    awk 'NR % 5 == 0' file              # every 5th line
+
+
+TIPS AND TRICKS
+---------------
+
+1. Force field recomputation:
+    awk '{$1=$1; print}'                 # rebuild $0 with current OFS
+
+2. Print without newline:
+    awk '{printf "%s", $0}'
+
+3. Debug with print to stderr:
+    awk '{print "Debug:", $0 > "/dev/stderr"; print}'
+
+4. Use arrays as sets:
+    awk '{seen[$1]=1} END {for(k in seen) print k}'
+
+5. Multiple separators:
+    awk -F'[,:]' '{print $1, $2}'        # split on comma or colon
+
+6. Empty array check:
+    awk 'BEGIN {if(length(a)==0) print "empty"}'
+
+7. Inline computation:
+    awk '{print $1, $2, $1+$2}'
+
+8. Conditional assignment:
+    awk '{max = ($1 > max ? $1 : max)} END {print max}'
+
+9. Format numbers:
+    awk '{printf "%08d\n", $1}'          # zero-padded to 8 digits
+
+10. Read from stdin and file:
+    command | awk 'script' - file.txt

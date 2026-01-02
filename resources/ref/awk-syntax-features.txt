@@ -1,0 +1,370 @@
+POSIX AWK SYNTAX AND FEATURES REFERENCE
+=======================================
+
+PROGRAM STRUCTURE
+-----------------
+
+AWK programs consist of pattern-action statements:
+    pattern { action }
+
+Three special patterns:
+    BEGIN { action }     # executed before reading input
+    END { action }       # executed after all input processed
+    pattern { action }   # executed for each matching line
+
+Complete structure:
+    BEGIN {
+        # initialization
+    }
+    pattern1 { action1 }
+    pattern2 { action2 }
+    END {
+        # cleanup and final output
+    }
+
+Examples:
+    BEGIN { FS = ":" }                    # set field separator
+    /error/ { count++ }                   # count lines with "error"
+    NR > 10 { print $1 }                  # print field 1 after line 10
+    END { print "Total errors:", count }  # final summary
+
+
+PATTERNS
+--------
+
+Types of patterns:
+
+1. Regular expression:
+    /regex/              # matches lines containing regex
+    $1 ~ /regex/         # field 1 matches regex
+    $0 !~ /regex/        # line doesn't match regex
+
+2. Relational expression:
+    NR == 5              # line number equals 5
+    $1 > 100             # field 1 greater than 100
+    length($0) < 80      # line length less than 80
+
+3. Pattern combinations:
+    /start/, /end/       # range pattern (start to end)
+    pattern1 && pattern2 # both patterns match
+    pattern1 || pattern2 # either pattern matches
+    !pattern             # pattern doesn't match
+
+4. Special patterns:
+    BEGIN                # before any input
+    END                  # after all input
+    (no pattern)         # matches every line
+
+Examples:
+    /^#/                 # lines starting with #
+    $3 > 100             # where field 3 > 100
+    NR == 1              # first line only
+    NR >= 10 && NR <= 20 # lines 10-20
+    /START/, /END/       # from START to END line
+
+
+OPERATORS
+---------
+
+Arithmetic:
+    +    addition                x = a + b
+    -    subtraction             x = a - b
+    *    multiplication          x = a * b
+    /    division                x = a / b
+    %    modulo                  x = a % b
+    ^    exponentiation          x = 2 ^ 3
+    ++   increment               i++, ++i
+    --   decrement               i--, --i
+
+Assignment:
+    =    assign                  x = 5
+    +=   add and assign          x += 5
+    -=   subtract and assign     x -= 5
+    *=   multiply and assign     x *= 2
+    /=   divide and assign       x /= 2
+    %=   modulo and assign       x %= 10
+    ^=   power and assign        x ^= 2
+
+Comparison:
+    ==   equal                   if (x == 5)
+    !=   not equal               if (x != 0)
+    <    less than               if (x < 10)
+    <=   less or equal           if (x <= 10)
+    >    greater than            if (x > 0)
+    >=   greater or equal        if (x >= 0)
+
+Logical:
+    &&   AND                     if (x > 0 && x < 10)
+    ||   OR                      if (x < 0 || x > 10)
+    !    NOT                     if (!found)
+
+Pattern matching:
+    ~    matches                 if ($1 ~ /^[0-9]+$/)
+    !~   doesn't match           if ($0 !~ /^#/)
+
+Other:
+    ?:   ternary                 max = (a > b) ? a : b
+    in   array membership        if (key in array)
+    $    field reference         $1, $NF, $0
+
+String concatenation (implicit):
+    fullname = first " " last
+    path = dir "/" file
+
+Operator precedence (high to low):
+    ()  $  ++--  ^  */%  +-  (concat)  <><=>===!=~!~  in  &&  ||  ?:  =+=-=
+
+
+CONTROL FLOW
+------------
+
+if statement:
+    if (condition) statement
+    if (condition) statement1 else statement2
+
+    if (x > 0) {
+        print "positive"
+    } else if (x < 0) {
+        print "negative"
+    } else {
+        print "zero"
+    }
+
+while loop:
+    while (condition) statement
+
+    i = 1
+    while (i <= 10) {
+        print i
+        i++
+    }
+
+do-while loop:
+    do statement while (condition)
+
+    i = 1
+    do {
+        print i
+        i++
+    } while (i <= 10)
+
+for loop:
+    for (init; condition; increment) statement
+
+    for (i = 1; i <= 10; i++) {
+        print i
+    }
+
+for-in loop (arrays):
+    for (variable in array) statement
+
+    for (key in myarray) {
+        print key, myarray[key]
+    }
+    Note: iteration order is NOT guaranteed
+
+Loop control:
+    break      # exit innermost loop
+    continue   # skip to next iteration
+    next       # skip to next input record (not in BEGIN/END)
+    exit [n]   # terminate program (runs END blocks)
+
+
+ARRAYS
+------
+
+Creating arrays:
+    arr[key] = value
+    count[$1]++
+    names[NR] = $1
+
+Arrays are associative (hash maps):
+    score["Alice"] = 95
+    score["Bob"] = 87
+
+Checking if key exists:
+    if (key in array) {
+        print array[key]
+    }
+
+Iterating over arrays:
+    for (key in array) {
+        print key, array[key]
+    }
+    Note: iteration order is undefined
+
+Deleting array elements:
+    delete array[key]
+    delete array         # delete entire array
+
+Multi-dimensional arrays:
+    arr[i, j] = value
+    # Uses SUBSEP internally: arr[i SUBSEP j]
+    See awk-builtin-functions.txt for details
+
+
+USER-DEFINED FUNCTIONS
+----------------------
+
+Function syntax:
+    function name(param1, param2, ...) {
+        # function body
+        return value
+    }
+
+Parameters and local variables:
+    - Scalars passed by value
+    - Arrays passed by reference
+    - Extra parameters are local variables (convention: separate with spaces)
+
+    function sum_range(start, end,    i, total) {
+        #                            ^^^^^^^^^^^ local vars
+        total = 0
+        for (i = start; i <= end; i++) {
+            total += i
+        }
+        return total
+    }
+
+Examples:
+
+    function square(n) {
+        return n * n
+    }
+
+    function max(a, b) {
+        return (a > b) ? a : b
+    }
+
+    function factorial(n) {
+        if (n <= 1) return 1
+        return n * factorial(n - 1)
+    }
+
+    function init_array(arr, size,    i) {
+        for (i = 1; i <= size; i++) {
+            arr[i] = i * i
+        }
+    }
+
+Usage:
+    BEGIN {
+        print square(5)                  # 25
+        print max(10, 20)                # 20
+        init_array(nums, 5)
+    }
+
+
+REGULAR EXPRESSIONS
+-------------------
+
+Basic regex syntax:
+    .        any character
+    ^        start of line
+    $        end of line
+    *        zero or more
+    +        one or more
+    ?        zero or one
+    [abc]    character class
+    [^abc]   negated character class
+    [a-z]    character range
+    |        alternation
+    ()       grouping
+    \        escape special character
+
+Special sequences:
+    \t       tab
+    \n       newline
+    \.       literal dot
+    \\       literal backslash
+
+Examples:
+    /^#/                   # starts with #
+    /error|warning/        # contains error or warning
+    /^[0-9]+$/             # entire line is digits
+    /[A-Z][a-z]+/          # capitalized word
+    /\.txt$/               # ends with .txt
+    /^$/                   # empty line
+
+Using with operators:
+    if ($1 ~ /^[0-9]+$/)   # field 1 is all digits
+    if ($0 !~ /^#/)        # line doesn't start with #
+
+
+INPUT/OUTPUT REDIRECTION
+------------------------
+
+Output to file:
+    print $0 > "output.txt"      # overwrite
+    print $0 >> "output.txt"     # append
+
+Output to command:
+    print $0 | "sort"
+    print $0 | "wc -l"
+
+Input from file:
+    while ((getline line < "input.txt") > 0) {
+        print line
+    }
+
+Input from command:
+    "date" | getline today
+    "ls -1" | getline filename
+
+Important:
+    - Always close() pipes and files
+    - Check getline return value (1=success, 0=EOF, -1=error)
+
+
+COMMAND LINE USAGE
+------------------
+
+Basic syntax:
+    awk 'program' file1 file2 ...
+    awk -f script.awk file1 file2 ...
+
+Set field separator:
+    awk -F: 'program' file
+    awk -F'[ \t]+' 'program' file
+
+Set variables:
+    awk -v var=value 'program' file
+    awk -v OFS=, 'program' file
+
+Examples:
+    awk '{print $1}' file.txt
+    awk -F: '{print $1}' /etc/passwd
+    awk 'NR > 10' file.txt
+    awk -v threshold=100 '$1 > threshold' data.txt
+
+
+SPECIAL CONSIDERATIONS
+----------------------
+
+Truth values:
+    True:  non-zero numbers, non-empty strings
+    False: 0, empty string ""
+
+Type coercion:
+    - Numbers and strings are automatically converted as needed
+    - Comparison is numeric if both operands look like numbers
+    - Otherwise comparison is lexicographic (string)
+
+Uninitialized variables:
+    - Numeric context: 0
+    - String context: ""
+
+Field modification:
+    - Modifying $1, $2, etc. rebuilds $0
+    - Modifying $0 recalculates $1, $2, ... $NF
+    - Modifying NF adds/removes fields
+
+Important notes:
+    1. Fields are 1-indexed ($1 is first field, not $0)
+    2. $0 is the entire line
+    3. Arrays are always associative (no numeric-only arrays)
+    4. No explicit type declarations
+    5. Functions must be defined before use
+    6. break/continue only work in loops
+    7. next only works in pattern-action blocks
+    8. exit runs END blocks before terminating

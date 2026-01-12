@@ -39,25 +39,25 @@ fi
 # Get list of merge commits
 git fetch --all >&2
 
-# Extract PR numbers and author names from merge commits
-git log --merges --format="%an|%s" --grep="pull request" "$FROM_REF..$TO_REF" | \
-while IFS='|' read -r author message; do
+# Extract PR numbers, author names, and commit hashes from merge commits
+git log --merges --format="%an|%h|%s" --grep="pull request" "$FROM_REF..$TO_REF" | \
+while IFS='|' read -r author short_ref message; do
     pr_number=$(echo "$message" | grep -oE '#[0-9]+' | sed 's/#//')
     if [ -n "$pr_number" ]; then
         # Extract last name (last word of author name)
         last_name=$(echo "$author" | awk '{print $NF}')
-        echo "$last_name|$pr_number"
+        echo "$last_name|$short_ref|$pr_number"
     fi
 done | \
-sort -u -t'|' -k2,2n | \
-while IFS='|' read -r last_name pr_number; do
+sort -u -t'|' -k3,3n | \
+while IFS='|' read -r last_name short_ref pr_number; do
     # Fetch the PR title from GitHub
     pr_title=$(gh pr view "$pr_number" --json title --jq '.title' 2>/dev/null)
 
     if [ -n "$pr_title" ]; then
-        printf "%-12s #%-6s %s\n" "$last_name" "$pr_number" "$pr_title"
+        printf "%-12s %-11s #%-6s %s\n" "$last_name" "$short_ref" "$pr_number" "$pr_title"
     else
-        printf "%-12s #%-6s (unable to fetch title)\n" "$last_name" "$pr_number"
+        printf "%-12s %-11s #%-6s (unable to fetch title)\n" "$last_name" "$short_ref" "$pr_number"
     fi
 done | \
 sort

@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+# This script lists all merged pull requests between two commits/branches
+# with their actual GitHub PR titles
+
+if [ $# -eq 0 ]; then
+    # No arguments provided - find the latest two release branches
+    git fetch --all >&2
+
+    releases_output=$(git branch -r -l 'origin/release/*' | sed 's|origin/||' | sed 's|^[[:space:]]*||' | sort -V -r)
+    releases=($releases_output)
+
+    if [ ${#releases[@]} -lt 2 ]; then
+        echo "Error: Need at least 2 release branches to compare." >&2
+        [ ${#releases[@]} -eq 1 ] && echo "Found only: ${releases[0]}" >&2
+        exit 1
+    fi
+
+    FROM_REF="origin/${releases[1]}"
+    TO_REF="origin/${releases[0]}"
+
+    FROM_SHA=$(git rev-parse --short "$FROM_REF")
+    TO_SHA=$(git rev-parse --short "$TO_REF")
+
+    echo "Comparing releases:" >&2
+    echo "  From: ${releases[1]} ($FROM_SHA)" >&2
+    echo "  To:   ${releases[0]} ($TO_SHA)" >&2
+    echo "" >&2
+elif [ $# -lt 2 ]; then
+    echo "Usage: git-pr-list [<from-ref> <to-ref>]" >&2
+    echo "Example: git-pr-list origin/release/1.0 origin/release/2.0" >&2
+    echo "If no arguments provided, compares the latest two release branches." >&2
+    exit 1
+else
+    FROM_REF="$1"
+    TO_REF="$2"
+fi
+
+# Get list of merge commits
+git fetch --all >&2
+
+# Extract PR numbers and author names from merge commits
+git log --merges --format="%an|%s" --grep="pull request" "$FROM_REF..$TO_REF" | \
+while IFS='|' read -r author message; do
+    pr_number=$(echo "$message" | grep -oE '#[0-9]+' | sed 's/#//')
+    if [ -n "$pr_number" ]; then
+        # Extract last name (last word of author name)
+        last_name=$(echo "$author" | awk '{print $NF}')
+        echo "$last_name|$pr_number"
+    fi
+done | \
+sort -u -t'|' -k2,2n | \
+while IFS='|' read -r last_name pr_number; do
+    # Fetch the PR title from GitHub
+    pr_title=$(gh pr view "$pr_number" --json title --jq '.title' 2>/dev/null)
+
+    if [ -n "$pr_title" ]; then
+        printf "%-12s #%-6s %s\n" "$last_name" "$pr_number" "$pr_title"
+    else
+        printf "%-12s #%-6s (unable to fetch title)\n" "$last_name" "$pr_number"
+    fi
+done | \
+sort

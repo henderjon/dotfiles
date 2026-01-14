@@ -8,7 +8,7 @@ $nextVersion = $argv[3] ?? null;
 
 $token = getenv("GITHUB_TOKEN");
 if(!$token){ // fall back to gh cli
-	$token = `gh auth token`;
+	$token = `gh auth token` ?? "";
 }
 
 if(!$token){
@@ -21,6 +21,8 @@ if(!$repo || !$nextVersion || !$owner){
 	fprintf(STDERR, "Usage: %s <owner/org> <repo> <version> [<base = dev>]\n", pathinfo($argv[0], PATHINFO_BASENAME));
 	fprintf(STDERR, "  - <version> should contain only numbers and dot (`.`).\n");
 	fprintf(STDERR, "    The `release` prefix is added automatically.\n");
+	fprintf(STDERR, "  - <base> should be just the branch name (e.g., 'dev', not 'origin/dev').\n");
+	fprintf(STDERR, "    The `origin/` prefix is added automatically.\n");
 	die(1);
 }
 
@@ -29,129 +31,121 @@ if(!preg_match("/^[\d.]+$/", $nextVersion)){
 	die(1);
 }
 
-if(cliConfirm("Does this branch need a new name?")){
-	printf("pick a name bro" . PHP_EOL);
-	return 1;
-}
-
-$token = trim($token);
+$token = trim($token ?? "");
 $headers = [
 	"Accept: application/vnd.github+json",
 	"Authorization: Bearer {$token}",
 	"X-GitHub-Api-Version: 2022-11-28",
-	"User-Agent: cURL; git-cut",
+	"User-Agent: cURL; git-cut-2",
 ];
 
 // !!! SHELL COMMAND !!!
-$defaultBranch = trim(`git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'`);
+$defaultBranch = trim(`git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'` ?? "");
 $base        = $argv[4] ?? $defaultBranch;
 
-// get dev branch; https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#get-a-reference
-$dev = get("repos/{$owner}/{$repo}/git/ref/heads/{$base}", $headers);
-if(!array_key_exists("ref", $dev)){
-	fprintf(STDERR, "Error: %s\n", $dev["message"]);
+if(empty($base)){
+	fprintf(STDERR, "Error: Could not determine base branch. Please specify one as the 4th argument.\n");
 	die(1);
 }
 
-// get previous releases; before creating new release branch to avoid counting it
-$prevReleases = get("repos/{$owner}/{$repo}/git/matching-refs/heads/release", $headers);
-if(!is_array($prevReleases)){
-	fprintf(STDERR, "Error: %s\n", $prevReleases["message"]);
+fprintf(STDERR, "Fetching from remote...\n");
+`git fetch --all`;
+
+// Check for uncommitted changes
+$statusOutput = trim(`git status --porcelain` ?? "");
+if(!empty($statusOutput)){
+	fprintf(STDERR, "\nError: You have uncommitted changes in your working directory.\n");
+	fprintf(STDERR, "Please commit or stash your changes before creating a release branch.\n\n");
+	fprintf(STDERR, "Uncommitted changes:\n%s\n", $statusOutput);
 	die(1);
 }
 
-// create release branch
-$newRelease = post("repos/{$owner}/{$repo}/git/refs", [
-	"ref" => "refs/heads/release/{$nextVersion}",
-	"sha" => $dev["object"]["sha"],
-], $headers);
+// Check if the release branch already exists locally
+$existingLocal = trim(`git rev-parse --verify release/{$nextVersion} 2>/dev/null` ?? "");
+if($existingLocal){
+	fprintf(STDERR, "Error: Branch release/%s already exists locally.\n", $nextVersion);
+	die(1);
+}
 
-fprintf(STDERR, "I've cut a new branch `release/%s` from dev.\n\n", $nextVersion);
+// Check if the release branch already exists remotely
+$existingRemote = trim(`git ls-remote --heads origin release/{$nextVersion}` ?? "");
+if($existingRemote){
+	fprintf(STDERR, "Error: Branch release/%s already exists on remote.\n", $nextVersion);
+	die(1);
+}
+
+// get previous releases using git commands
+fprintf(STDERR, "Getting previous releases...\n");
+$prevReleasesOutput = `git branch -r -l 'origin/release/*' | sed 's|origin/||' | sed 's|^[[:space:]]*||'` ?? "";
+$prevReleases = array_filter(explode("\n", trim($prevReleasesOutput)));
+
+// Create local release branch from base
+fprintf(STDERR, "Creating local branch release/%s from origin/%s...\n", $nextVersion, $base);
+$output = `git checkout -b release/{$nextVersion} --no-track origin/{$base} 2>&1` ?? "";
+$exitCode = 0;
+exec("git rev-parse --verify release/{$nextVersion} 2>/dev/null", $checkOutput, $exitCode);
+
+if($exitCode !== 0){
+	fprintf(STDERR, "Error: Failed to create branch release/%s\n", $nextVersion);
+	fprintf(STDERR, "%s\n", $output);
+	die(1);
+}
+
+fprintf(STDERR, "\n");
+fprintf(STDERR, str_repeat("=", 72));
+fprintf(STDERR, "\n");
+fprintf(STDERR, "SUCCESS: Local branch `release/%s` has been created from `%s`.\n\n", $nextVersion, $base);
+fprintf(STDERR, "You can now add commits to this branch before publishing.\n");
+fprintf(STDERR, "When you're ready to publish, run:\n");
+fprintf(STDERR, "  git push -u origin release/%s\n\n", $nextVersion);
+fprintf(STDERR, str_repeat("=", 72));
+fprintf(STDERR, "\n\n");
+
+if(cliConfirm("Push this branch to remote now?")){
+	fprintf(STDERR, "Pushing release/%s to origin...\n", $nextVersion);
+	$pushOutput = `git push -u origin release/{$nextVersion} 2>&1` ?? "";
+	fprintf(STDERR, "%s\n", $pushOutput);
+
+	// Check if push was successful
+	exec("git ls-remote --heads origin release/{$nextVersion} 2>/dev/null", $verifyPush, $pushExitCode);
+	if($pushExitCode !== 0 || empty($verifyPush)){
+		fprintf(STDERR, "Error: Failed to push branch to remote.\n");
+		die(1);
+	}
+
+	fprintf(STDERR, "\nBranch successfully published to remote!\n\n");
+}
 
 if(empty($prevReleases)){
 	fprintf(STDERR, "There are no previous releases to compare against.\n");
 	die(0);
 }
 
-// get last release for comparison
-$lastRelease = array_reduce($prevReleases, function($carry, $release){
-	$i = strnatcmp($carry["ref"], $release["ref"]);
-	return match($i){
-		1       => $carry,
-		-1      => $release,
-		default => $carry,
-	};
-}, $prevReleases[0]);
+// Sort releases naturally (version numbers)
+usort($prevReleases, function($a, $b){
+	return strnatcmp($b, $a); // descending order
+});
 
-$lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
-$nextReleaseRef = substr("refs/heads/release/{$nextVersion}", strlen("refs/heads/"));
+$lastRelease = $prevReleases[0];
+$nextReleaseRef = "release/{$nextVersion}";
 
-fprintf(STDERR, "Here is a link to a list of all commits in `%s` that are not in the previous release `%s`:\n", $nextReleaseRef, $lastReleaseRef);
-fprintf(STDERR, "https://github.com/%s/%s/compare/%s...%s\n\n", $owner, $repo, $lastReleaseRef, $nextReleaseRef);
+fprintf(STDERR, "Here is a link to a list of all commits in `%s` that are not in the previous release `%s`:\n", $nextReleaseRef, $lastRelease);
+fprintf(STDERR, "https://github.com/%s/%s/compare/%s...%s\n\n", $owner, $repo, $lastRelease, $nextReleaseRef);
 fprintf(STDERR, "If you're looking for a list of all the merged PRs, run this command in terminal (or pipe the output of this script to `sh`):\n");
+
+// Get the SHA for the last release and current branch
+$lastReleaseSha = trim(`git rev-parse origin/{$lastRelease}` ?? "");
+$currentSha = trim(`git rev-parse release/{$nextVersion}` ?? "");
+
+if(empty($lastReleaseSha) || empty($currentSha)){
+	fprintf(STDERR, "Error: Could not retrieve commit SHAs for comparison.\n");
+	die(1);
+}
+
 // --merges only shows merge commits; --grep="pull request" only shows PR merges ... perhaps redundant?
 // %an is author name; %h is short hash; %s is subject; %>(20) and %<(7) are padding
-// $old..$new
-// fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%>(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
-fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%<(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s | sort", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
+fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%<(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s | sort", $lastReleaseSha, $currentSha);
 fprintf(STDERR, "\n\n");
-
-function get(string $path, array $headers) : array{
-	$url = sprintf("https://api.github.com/%s", $path); // , urlencode(implode(" ", $query))
-	$ch = curl_init($url);
-	curl_setopt_array($ch, [
-		CURLOPT_CUSTOMREQUEST  => "GET",
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_HTTPHEADER     => $headers,
-	]);
-
-	$response = curl_exec($ch);
-	try{
-		checkcURL($ch);
-	}catch(\Exception $e){
-		fprintf(STDERR, "Error: %s\n", $e->getMessage());
-		fprintf(STDERR, "Response: %s\n", $response);
-		die(1);
-	}
-
-	curl_close($ch);
-	return json_decode($response, true);
-}
-
-function post(string $path, array $data, array $headers) : array{
-	$url = sprintf("https://api.github.com/%s", $path);
-	$ch = curl_init($url);
-	curl_setopt_array($ch, [
-		  // CURLOPT_URL => $url,
-		CURLOPT_CUSTOMREQUEST  => "POST",
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_HTTPHEADER     => $headers,
-		CURLOPT_POSTFIELDS     => json_encode($data),
-	]);
-
-	$response = curl_exec($ch);
-	try{
-		checkcURL($ch);
-	}catch(\Exception $e){
-		fprintf(STDERR, "Error: %s\n", $e->getMessage());
-		fprintf(STDERR, "Response: %s\n", $response);
-		die(1);
-	}
-
-	curl_close($ch);
-	return json_decode($response, true);
-}
-
-function checkcURL(\Curlhandle $handle) : void {
-	if(curl_errno($handle)){
-		throw new \Exception(curl_error($handle), curl_errno($handle));
-	}
-
-	$status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-	if($status < 200 || $status > 299){
-		throw new Exception("HTTP Error: {$status}; ");
-	}
-}
 
 function cliConfirm( string $msg = "" ) : bool {
 	$msg = $msg ?: "Is this what you want to do? ";

@@ -20,6 +20,15 @@ INSERT INTO table1 (col1, col2)
 SELECT col1, col2 FROM table2
 ON DUPLICATE KEY UPDATE col2 = VALUES(col2);
 
+# SQL ORDER BY
+--------------------------------------------------------------------------------
+
+ORDER BY CASE column
+	WHEN "string1" THEN 1
+	WHEN "string2" THEN 2
+	ELSE 3
+	END
+
 # MYSQL QUOTES
 --------------------------------------------------------------------------------
 

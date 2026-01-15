@@ -1,0 +1,138 @@
+# Creating an SSH Key
+
+## 1. Pick the Key Type
+
+Use **Ed25519** unless you absolutely need RSA.
+
+Recommended: ed25519
+
+Alternative (older / compatibility): rsa with `-b 4096`
+
+## 2. Create the Key (macOS / Linux / Windows OpenSSH)
+
+Ed25519:
+
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+
+RSA:
+
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+Notes:
+    - `-C` adds a comment (helpful to identify the key).
+    When prompted:
+        - Save location: press Enter to accept ~/.ssh/id_ed25519 (or id_rsa).
+        - Enter passphrase: choose a strong passphrase (recommended). You can leave blank but passphrase = better security.
+
+## 3. Verify the Files
+
+    ls -l ~/.ssh/id_*.pub ~/.ssh/id_*
+    # typical output:
+    # ~/.ssh/id_ed25519         (private — keep secret)
+    # ~/.ssh/id_ed25519.pub     (public — what you share)
+
+Never share the private key file (id_ed25519) with anyone.
+
+## 4. Add the Key to the Agent
+
+Linux/macOS:
+
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519
+
+macOS Keychain:
+
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+
+Windows PowerShell:
+
+    Start-Service ssh-agent
+    ssh-add C:\Users\<You>\.ssh\id_ed25519
+
+## 5. Copy Public Key to Server
+
+Simple (preferred):
+
+    ssh-copy-id user@remote.host
+
+This appends your ~/.ssh/id_*.pub to the remote ~/.ssh/authorized_keys with correct permissions.
+
+Manual method (if ssh-copy-id not available):
+
+    cat ~/.ssh/id_ed25519.pub | ssh user@remote.host 'mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys'
+
+Or copy-paste: open ~/.ssh/id_ed25519.pub, copy the line, then on the server append to ~/.ssh/authorized_keys.
+
+## 6. Test Connection
+
+    ssh -v user@remote.host
+    -v shows debugging output — useful if it falls back to password authentication.
+
+If using the default key names and agent, ssh user@remote.host should log in with no password (or only the passphrase you entered earlier, handled by agent).
+
+## 7. Permissions Checklist
+
+On the remote server:
+
+    # ~/.ssh must be 700
+    chmod 700 ~/.ssh
+    # authorized_keys must be 600
+    chmod 600 ~/.ssh/authorized_keys
+    # home directory should not be writable by others (e.g. 755 is typical)
+    ls -ld ~
+
+## 8. Fingerprint
+
+Locally
+
+    ssh-keygen -lf ~/.ssh/id_ed25519.pub
+    # or for private-key-derived fingerprint
+    ssh-keygen -lf ~/.ssh/id_ed25519
+
+On remote server, ssh -v will show which key was offered and its fingerprint.
+
+## 9. GitHub/GitLab Usage
+
+Paste contents of `.pub` file into SSH keys section.
+Copy the contents of ~/.ssh/id_ed25519.pub.
+Paste into GitHub/GitLab → Settings → SSH keys → New SSH key.
+
+Test:
+
+    ssh -T git@github.com
+    ssh -T git@gitlab.com
+
+## 10. PuTTY (Optional)
+
+If you use PuTTY / Pageant:
+
+Generate with PuTTYgen (GUI) or convert:
+
+# convert OpenSSH private key to PuTTY PPK
+    puttygen ~/.ssh/id_ed25519 -o ~/.ssh/id_ed25519.ppk
+
+
+Load the .ppk into Pageant (PuTTY's agent).
+
+(If you only use Windows OpenSSH in PowerShell, you can skip PuTTY entirely; ssh-keygen works the same.)
+
+## 11. Change Passphrase
+
+    ssh-keygen -p -f ~/.ssh/id_ed25519
+
+## 12. Troubleshooting
+
+12) If something breaks — quick troubleshooting
+
+- Agent not running: eval "$(ssh-agent -s)" then ssh-add.
+- Key being ignored: increase verbosity: ssh -vvv user@host and check which keys are offered.
+- Permissions wrong on server (~/.ssh/authorized_keys).
+- Wrong username/host: confirm with ssh user@host.
+- SELinux edge cases: ensure restorecon -R -v ~/.ssh on SELinux systems.
+
+## Quick Recipe
+
+    ssh-keygen -t ed25519 -C "you@example.com"
+    eval "$(ssh-agent -s)"; ssh-add ~/.ssh/id_ed25519
+    ssh-copy-id user@server.example.com
+    ssh user@server.example.com

@@ -56,3 +56,11 @@ NR == 1{
 	exit;
 }
 END{}
+
+
+getline line
+--------------------------------------------------------------------------------
+
+- 1 when it successfully reads a line
+- 0 at EOF
+- -1 on error

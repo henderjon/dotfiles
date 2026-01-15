@@ -76,3 +76,4 @@ FIX PERMS
 
 - $ find . -type d -print0 | xargs -0 -I % chmod 755 %
 - $ find . -type f -print0 | xargs -0 -I % chmod 644 %
+- $ find . -type f | grep -e "\.\_[a-zA-Z0-9.]" | xargs -I % rm % && find . -type d -print0 | xargs -0 -I % chmod 755 % && find . -type f -print0 | xargs -0 -I % chmod 644 %

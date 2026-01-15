@@ -13,6 +13,13 @@
 ### slow query log
 `show full processlist;`
 
+# MySQL ON DUPLICATE KEY
+--------------------------------------------------------------------------------
+
+INSERT INTO table1 (col1, col2)
+SELECT col1, col2 FROM table2
+ON DUPLICATE KEY UPDATE col2 = VALUES(col2);
+
 # MYSQL QUOTES
 --------------------------------------------------------------------------------
 

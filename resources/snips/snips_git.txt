@@ -101,6 +101,8 @@ $REF is always "theirs"
 
 Note that rebase checks out $REF, then acts. So for rebase, it is the reverse of what you think.
 
+### join two unrelated histories; useful for when a repo is created in two places
+$ git merge --allow-unrelated-histories -s ours $remoteDefaultBranch
 
 RANGE
 --------------------------------------------------------------------------------

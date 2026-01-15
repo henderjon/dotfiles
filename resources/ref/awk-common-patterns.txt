@@ -582,3 +582,61 @@ TIPS AND TRICKS
 
 10. Read from stdin and file:
     command | awk 'script' - file.txt
+
+TIPS AND TRICKS Pt 2
+---------------
+
+FNR == NR is an awk idiom for detecting "we're processing the first file."
+
+The variables
+
+- NR = "Number of Records" - Total line count across all files
+- FNR = "File Number of Records" - Line count in the current file (resets for each file)
+
+How it works with multiple files
+
+awk 'script' file1.txt file2.txt
+
+While reading file1.txt:
+Line 1: FNR=1, NR=1  → FNR == NR is TRUE
+Line 2: FNR=2, NR=2  → FNR == NR is TRUE
+Line 3: FNR=3, NR=3  → FNR == NR is TRUE
+
+While reading file2.txt:
+Line 1: FNR=1, NR=4  → FNR == NR is FALSE
+Line 2: FNR=2, NR=5  → FNR == NR is FALSE
+Line 3: FNR=3, NR=6  → FNR == NR is FALSE
+
+Common pattern
+
+FNR == NR {
+    # This block only runs for the FIRST file
+    arr[NR] = $0
+    next  # Skip to next line (don't process remaining blocks)
+}
+
+# This block runs for ALL OTHER files (file2, file3, etc.)
+{
+    print "File2 line:", $0
+    print "Matching File1 line:", arr[FNR]
+}
+
+Example use case
+
+Load a lookup table from file1, then process file2:
+
+# users.txt (file1):
+# 1 Alice
+# 2 Bob
+
+# transactions.txt (file2):
+# 1 100
+# 2 50
+
+awk 'FNR==NR {users[$1]=$2; next} {print users[$1], "spent", $2}' users.txt transactions.txt
+
+Output:
+Alice spent 100
+Bob spent 50
+
+The key insight: FNR == NR is only true when reading the first file.

@@ -88,6 +88,9 @@ snips_file () {
 	fi
 }
 
+# output a given snip file path/name to open in an editor
+alias docawk='cat "$DOTFILES"/resources/snips/snips_awk-*'
+
 #--------------------------------------------------------------------- ASCII --#
 export ASCII_FILE="$DOTFILES/resources/terminal/ascii.tsv"
 alias ascii='head -133 "$ASCII_FILE" '

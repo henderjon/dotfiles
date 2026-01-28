@@ -1,0 +1,11 @@
+#!/usr/bin/awk -f
+
+BEGIN{
+    cmd = "ls -1 \"$DOTFILES\"/bin | grep '^git-' | sort"
+    while ((cmd | getline line) > 0) {
+        if (line !~ /git-dothelp/) {
+            print line
+        }
+    }
+    close(cmd)
+}

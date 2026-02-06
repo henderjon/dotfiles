@@ -1,0 +1,145 @@
+#!/usr/bin/awk -f
+
+# This script lists all merged pull requests between two commits/branches
+# with their actual GitHub PR titles (Pure POSIX awk version)
+
+BEGIN {
+    # Parse command line arguments
+    if (ARGC == 1) {
+        # No arguments - find latest two release branches
+        print "Fetching branches..." > "/dev/stderr"
+        system("git fetch --all >&2")
+
+        cmd = "git branch -r -l 'origin/release/*' | sort -V -r"
+        idx = 0
+        while ((cmd | getline line) > 0) {
+            gsub(/^[[:space:]]+/, "", line)
+            gsub(/origin\//, "", line)
+            if (line != "") {
+                releases[idx++] = line
+            }
+        }
+        close(cmd)
+
+        if (idx < 2) {
+            print "Error: Need at least 2 release branches to compare." > "/dev/stderr"
+            if (idx == 1) {
+                print "Found only: " releases[0] > "/dev/stderr"
+            }
+            exit 1
+        }
+
+        FROM_REF = "origin/" releases[1]
+        TO_REF = "origin/" releases[0]
+
+        cmd = "git rev-parse --short " FROM_REF
+        cmd | getline FROM_SHA
+        close(cmd)
+
+        cmd = "git rev-parse --short " TO_REF
+        cmd | getline TO_SHA
+        close(cmd)
+
+        print "Comparing releases:" > "/dev/stderr"
+        print "  From: " releases[1] " (" FROM_SHA ")" > "/dev/stderr"
+        print "  To:   " releases[0] " (" TO_SHA ")" > "/dev/stderr"
+        print "" > "/dev/stderr"
+
+    } else if (ARGC == 3) {
+        FROM_REF = ARGV[1]
+        TO_REF = ARGV[2]
+    } else {
+        print "Usage: git-pr-list-awk [<from-ref> <to-ref>]" > "/dev/stderr"
+        print "Example: git-pr-list-awk origin/release/1.0 origin/release/2.0" > "/dev/stderr"
+        print "If no arguments provided, compares the latest two release branches." > "/dev/stderr"
+        exit 1
+    }
+
+    # Fetch all branches
+    system("git fetch --all >&2")
+
+    # Get merge commits and extract PR info
+    git_cmd = "git log --merges --format=\"%an|%h|%s\" --grep=\"pull request\" " FROM_REF ".." TO_REF
+
+    while ((git_cmd | getline line) > 0) {
+        split(line, parts, "|")
+        author = parts[1]
+        short_ref = parts[2]
+        message = parts[3]
+
+        # Extract PR number
+        if (match(message, /#[0-9]+/)) {
+            pr_match = substr(message, RSTART, RLENGTH)
+            gsub(/#/, "", pr_match)
+            pr_number = pr_match
+
+            # Extract last name (last word of author)
+            n = split(author, words, / /)
+            last_name = words[n]
+
+            # Store unique PRs (deduplicate by PR number)
+            if (!(pr_number in pr_data)) {
+                pr_data[pr_number] = last_name "|" short_ref
+                pr_numbers[pr_count++] = pr_number
+            }
+        }
+    }
+    close(git_cmd)
+
+    # Sort PR numbers numerically
+    for (i = 0; i < pr_count; i++) {
+        for (j = i + 1; j < pr_count; j++) {
+            if (pr_numbers[i] + 0 > pr_numbers[j] + 0) {
+                temp = pr_numbers[i]
+                pr_numbers[i] = pr_numbers[j]
+                pr_numbers[j] = temp
+            }
+        }
+    }
+
+    # Fetch PR titles and collect output
+    output_count = 0
+    for (i = 0; i < pr_count; i++) {
+        pr_num = pr_numbers[i]
+        split(pr_data[pr_num], pr_parts, "|")
+        last_name = pr_parts[1]
+        short_ref = pr_parts[2]
+
+        # Fetch PR title from GitHub
+        gh_cmd = "gh pr view " pr_num " --json title --jq '.title' 2>/dev/null"
+        pr_title = ""
+        if ((gh_cmd | getline pr_title) > 0) {
+            # Successfully got title
+        } else {
+            pr_title = "(unable to fetch title)"
+        }
+        close(gh_cmd)
+
+        # Store formatted output for final sorting
+        if(ARGV[1] == "jira"){
+            output_lines[output_count++] = sprintf("[] %-12s %-11s [#%-6s](https://github.com/capdig/myon/pull/%s) %s", last_name, short_ref, pr_num, pr_num, pr_title)
+        }else if(ARGV[1] == "list"){
+            output_lines[output_count++] = sprintf("- %-12s %-11s [#%-6s](https://github.com/capdig/myon/pull/%s) %s", last_name, short_ref, pr_num, pr_num, pr_title)
+        }else{
+            output_lines[output_count++] = sprintf("%-12s %-11s #%-6s %s", last_name, short_ref, pr_num, pr_title)
+        }
+    }
+
+    # Sort output lines alphabetically and print
+    for (i = 0; i < output_count; i++) {
+        for (j = i + 1; j < output_count; j++) {
+            if (output_lines[i] > output_lines[j]) {
+                temp = output_lines[i]
+                output_lines[i] = output_lines[j]
+                output_lines[j] = temp
+            }
+        }
+    }
+
+    # Print final output
+    for (i = 0; i < output_count; i++) {
+        print output_lines[i]
+    }
+
+    exit 0
+}

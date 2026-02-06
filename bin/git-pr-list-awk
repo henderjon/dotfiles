@@ -116,7 +116,13 @@ BEGIN {
         close(gh_cmd)
 
         # Store formatted output for final sorting
-        output_lines[output_count++] = sprintf("%-12s %-11s #%-6s %s", last_name, short_ref, pr_num, pr_title)
+        if(ARGV[1] == "jira"){
+            output_lines[output_count++] = sprintf("[] %-12s %-11s [#%-6s](https://github.com/capdig/myon/pull/%s) %s", last_name, short_ref, pr_num, pr_num, pr_title)
+        }else if(ARGV[1] == "list"){
+            output_lines[output_count++] = sprintf("- %-12s %-11s [#%-6s](https://github.com/capdig/myon/pull/%s) %s", last_name, short_ref, pr_num, pr_num, pr_title)
+        }else{
+            output_lines[output_count++] = sprintf("%-12s %-11s #%-6s %s", last_name, short_ref, pr_num, pr_title)
+        }
     }
 
     # Sort output lines alphabetically and print

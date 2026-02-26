@@ -203,17 +203,9 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 
 ### Dependency Changes
 
-<details>
-<summary>View dependency changes</summary>
-
 [Dependency version changes]
 
-</details>
-
 ### Other Notable Changes
-
-<details>
-<summary>View notable changes</summary>
 
 #### [Category Name]
 
@@ -225,17 +217,10 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 
 ...
 
-</details>
-
 ### Commits
-
-<details>
-<summary>View all commits</summary>
 
 [For each merge commit only, format as:]
 - Author      (short-hash) [#PR](github-link) PR title (not merge commit message)
-
-</details>
 ```
 
 ### 7. Format Guidelines
@@ -248,20 +233,14 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 - **Use the actual PR title** (fetched via `gh pr view`), NOT the merge commit message
 - Include "Auto-compiled" merge commits (no PR title for these)
 - Sort alphabetically by author's last name
-- Wrap entire commit list in `<details><summary>View all commits</summary>` tags
 
 **Author Formatting (Merge Commits Only):**
 ```
-<details>
-<summary>View all commits</summary>
-
 - Donat        (abc123def4) [#14624](link) Actual PR title from GitHub
 - Henderson    (def456abc7) [#14625](link) Actual PR title from GitHub
 - Roeming      (ghi789jkl0) [#14626](link) Actual PR title from GitHub
 - dependabot   (mno012pqr3) [#12345] Actual PR title from GitHub
 - Runner       (stu345vwx6) Auto-compiled release/4.28.2
-
-</details>
 ```
 
 **PR Number and Title Extraction:**
@@ -318,10 +297,6 @@ After generating the release notes:
   - **Time-Sensitive:** Database migrations during deployment (most DB changes - default placement)
   - **Post-Deploy:** Database changes after deployment (data migrations, cleanup)
   - When in doubt, place DB changes in Time-Sensitive
-- **Wrap sections in `<details><summary>` tags** for clean, scannable release notes:
-  - Dependency Changes: `<details><summary>View dependency changes</summary>`
-  - Other Notable Changes: `<details><summary>View notable changes</summary>`
-  - Commits: `<details><summary>View all commits</summary>`
 - Respect the established formatting patterns exactly
 - Preserve the tone and style of existing release notes
 - Default base branch is automatically detected from `git symbolic-ref refs/remotes/origin/HEAD` (typically `dev`, `main`, `master`, or `develop`)

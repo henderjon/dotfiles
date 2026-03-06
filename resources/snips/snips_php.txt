@@ -39,3 +39,4 @@ pecl install redis-5.7.3
 MEMCACHED
 brew install libmemcached zlib
 pecl install memcached --with-zlib-dir=/opt/homebrew/opt/zlib
+pecl install -D 'with-zlib-dir="/opt/homebrew/opt/zlib"' memcached

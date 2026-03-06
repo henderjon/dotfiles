@@ -1,0 +1,78 @@
+### Claude
+
+PHP 8.2 Migration Summary
+
+Here's a step-by-step summary of everything done to migrate from Homebrew PHP 8.5 to PHP 8.2 with Redis and Memcached extensions:
+
+1. Remove Homebrew PHP 8.5
+
+brew uninstall --ignore-dependencies --force php
+
+2. Add shivammathur/php Tap
+
+brew tap shivammathur/php
+
+3. Install PHP 8.2 from shivammathur
+
+brew install shivammathur/php/php@8.2
+
+4. Link PHP 8.2 as Default
+
+brew link --force --overwrite php@8.2
+
+5. Verify PHP Installation
+
+php --version
+# Should show: PHP 8.2.30
+
+php-config --extension-dir
+# Should show: /opt/homebrew/Cellar/php@8.2/8.2.30/pecl/20220829
+
+6. Install Redis Extension
+
+pecl install redis
+
+7. Install Memcached Extension
+
+pecl install -D 'with-zlib-dir="/opt/homebrew/opt/zlib" enable-memcached-igbinary="no" enable-memcached-msgpack="no" enable-memcached-json="no" enable-memcached-protocol="no"' memcached
+
+8. Clean Up Old PHP 8.1 Configuration
+
+perl -i.bak -pe 's/^extension="(redis|memcached|opentelemetry)\.so"/;extension="$1.so" ; Disabled - using PHP 8.2/' /opt/homebrew/etc/php/8.1/php.ini
+
+9. Verify Extensions Loaded
+
+php -m | grep -E "(redis|memcached)"
+# Should show:
+# memcached
+# redis
+
+php -r "echo class_exists('RedisCluster') ? 'RedisCluster: OK' : 'RedisCluster: MISSING'; echo PHP_EOL;"
+php -r "echo class_exists('Memcached') ? 'Memcached: OK' : 'Memcached: MISSING'; echo PHP_EOL;"
+# Should show both as OK
+
+10. Verify No Startup Errors
+
+php -v 2>&1 | grep -i warning
+# Should return nothing (no warnings)
+
+---
+Final Configuration
+
+PHP Version: 8.2.30
+Module API: 20220829
+Extension Directory: /opt/homebrew/Cellar/php@8.2/8.2.30/pecl/20220829/
+Configuration: /opt/homebrew/etc/php/8.2/php.ini
+
+Installed Extensions:
+- Redis 6.3.0
+- Memcached 3.4.0
+- Opcache 8.2.30
+- Intl
+
+Optional: Start PHP-FPM Service
+brew services start shivammathur/php/php@8.2
+- PHP binary: /opt/homebrew/opt/php@8.2/bin/php
+- PHP-FPM: /opt/homebrew/opt/php@8.2/sbin/php-fpm
+- php.ini: /opt/homebrew/etc/php/8.2/php.ini
+- Extensions: /opt/homebrew/Cellar/php@8.2/8.2.30/pecl/20220829/

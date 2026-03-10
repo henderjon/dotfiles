@@ -52,3 +52,14 @@ theme = monokai22b.ghostty
 font-family = JetBrains Mono
 cursor-style = block
 shell-integration-features = no-cursor,ssh-terminfo,ssh-env
+macos-icon = xray
+macos-icon-frame =
+
+# sets the default starting directory for new instances to your home directory.
+working-directory = home
+
+# ensures new windows do not inherit the working directory of the process that launched them.
+window-inherit-working-directory = false
+
+# specifically prevents new tabs from inheriting the working directory of the current tab. This option was introduced in Ghostty 1.3.0 to provide independent control.
+tab-inherit-working-directory = false

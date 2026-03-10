@@ -144,3 +144,8 @@ fi
 
 # load golang cross compile
 . "$HOME/dotfiles/resources/terminal/go-cross-compile.sh"
+
+# general config directory path
+if [ -z "${XDG_CONFIG_HOME+x}" ]; then
+	export XDG_CONFIG_HOME="$HOME/.config"
+fi

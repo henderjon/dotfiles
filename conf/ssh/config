@@ -4,16 +4,19 @@ IdentityFile ~/.ssh/id_rsa
 
 #################################################################### regular ###
 Host staging
+	SetEnv TERM=xterm-256color
 	Hostname staging.host.com
 	User jhenderson
 
 #################################################################### keyhole ###
 Host keyhole-name
-  Hostname 127.0.0.1
-  User jhenderson
+	SetEnv TERM=xterm-256color
+	Hostname 127.0.0.1
+	User jhenderson
 
 ########################################################## actual connection ###
 Host actual-name
+	SetEnv TERM=xterm-256color
 	Hostname 127.0.0.1
 	User henderjon
 	IdentityFile ~/.ssh/key.pem

@@ -48,6 +48,11 @@ do
 done
 
 # ------
+notice "# ------ ghostty"
+notice "\$XDG_CONFIG_HOME is in your common_rc file"
+sdo "ln -s \"$DOTPATH/rc/ghostty\" $HOME/config/ghostty"
+
+# ------
 notice "# ------ zshenv"
 sdo "touch \"$HOME/.zshenv\""
 sdo "echo 'export _LOCAL_ENV_NAME=$ENV_NAME' >> \"$HOME/.zshenv\""

@@ -1,0 +1,50 @@
+# Monokai22b Theme for Ghostty
+# Converted from Monokai22.terminal
+
+# Background and foreground colors
+background = #272823
+foreground = #F8F8F2
+
+# Cursor colors
+cursor-color = #7F7F7F
+cursor-text = #F8F8F2
+
+# Selection colors
+selection-background = #456BA5
+selection-foreground = #F8F8F2
+
+# ANSI colors (0-7)
+palette = 0=#272822
+palette = 1=#F92672
+palette = 2=#A6E22E
+palette = 3=#FFE792
+palette = 4=#FD971F
+palette = 5=#AE81FF
+palette = 6=#66D9EF
+palette = 7=#f1f1f0
+
+# Bright ANSI colors (8-15)
+palette = 8=#75715E
+palette = 9=#F92672
+palette = 10=#A6E22E
+palette = 11=#FFE792
+palette = 12=#FD971F
+palette = 13=#AE81FF
+palette = 14=#66D9EF
+palette = 15=#f1f1f0
+
+
+# black                     0       #000000    rgba(0, 0, 0, 1)        hsla(0, 0%, 0%, 1) 272822
+# red                       1       #f2423d    rgba(242, 66, 61, 1)    hsla(2, 87%, 59%, 1) F92672
+# green                     2, 10   #9be14f    rgba(155, 225, 79, 1)   hsla(89, 71%, 60%, 1) A6E22E
+# yellow                    3, 11   #fce96b    rgba(252, 233, 107, 1)  hsla(52, 96%, 70%, 1) FFE792
+# blue                      4, 12   #85b0d7    rgba(133, 176, 215, 1)  hsla(209, 51%, 68%, 1) FD971F (orange)
+# magenta                   5, 13   #bb95b6    rgba(187, 149, 182, 1)  hsla(308, 22%, 66%, 1) AE81FF
+# cyan                      6, 14   #44e5e7    rgba(68, 229, 231, 1)   hsla(181, 77%, 59%, 1) 66D9EF
+# white                     7, 15   #f1f1f0    rgba(241, 241, 240, 1)  hsla(60, 3%, 94%, 1)
+# brblack                   8       #4d4d4d    rgba(77, 77, 77, 1)     hsla(0, 0%, 30%, 1) 75715E
+# brred                     9       #f2433d    rgba(242, 67, 61, 1)    hsla(2, 87%, 59%, 1)
+# background #1D1E1A
+# foreground #F8F8F2
+# selection #456BA5
+# cursor #7F7F7F

@@ -12,4 +12,6 @@ BEGIN{
 
 	stderr("ssh-keygen -t ed25519 -C 'henderjon; " envName "; " dtstamp "'")
 
+	notice("# ------ install GPG")
+
 }

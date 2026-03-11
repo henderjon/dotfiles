@@ -1,0 +1,47 @@
+
+## TEST
+--------------------------------------------------------------------------------
+
+The test command is a standard POSIX utility that evaluates conditional expressions. It's the same functionality you're using with the square brackets [ ] in bash.
+
+  These are equivalent:
+
+  test -f "$1"
+  [ -f "$1" ]
+
+  The square brackets are actually just syntactic sugar - they're an alias for the test command!
+
+  Common test operators:
+
+  File tests:
+  - test -e path - true if path exists (file or directory)
+  - test -f path - true if path exists and is a regular file
+  - test -d path - true if path exists and is a directory
+  - test -r path - true if path is readable
+  - test -w path - true if path is writable
+  - test -x path - true if path is executable
+  - test -L path - true if path is a symbolic link
+
+  String tests:
+  - test -z string - true if string is empty
+  - test -n string - true if string is not empty
+  - test str1 = str2 - true if strings are equal
+
+  Numeric tests:
+  - test num1 -eq num2 - equal
+  - test num1 -ne num2 - not equal
+  - test num1 -lt num2 - less than
+  - test num1 -gt num2 - greater than
+
+  -h  # Is symbolic link
+  -f  # Is regular file
+  -d  # Is directory
+  -e  # Exists (any type)
+  -r  # Is readable
+  -w  # Is writable
+  -x  # Is executable
+
+  Exit status:
+
+  - Returns 0 (success) if the condition is true
+  - Returns 1 (failure) if the condition is false

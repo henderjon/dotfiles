@@ -1,0 +1,306 @@
+// Place your settings in this file to overwrite the default settings
+{
+    // EDITOR SETTINGS
+    "editor.fontFamily": "JetBrains Mono, Berkeley Mono, monospace, IBM Plex Mono",
+    "editor.fontSize": 13,
+    // "editor.fontLigatures": true,
+    "editor.fontLigatures": "'ss01', 'ss05'",
+    "editor.fontWeight": "450",
+    "debug.console.fontSize": 14,
+    "editor.insertSpaces": false,
+    "editor.tabCompletion": "on",
+    "editor.rulers": [
+        {"column":72, "color":"#626262"},
+        {"column":80, "color":"#626262"},
+        {"column":152, "color":"#f7e8b8"},
+    ],
+    "editor.wordWrap": "off",
+    "editor.hover.enabled": "off",
+    "editor.renderLineHighlight": "all",
+    "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?",
+    "editor.minimap.showSlider": "always",
+    "editor.renderControlCharacters": false,
+    "editor.suggestSelection": "first",
+    "editor.renderWhitespace": "selection",
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.autoClosingOvertype": "never",
+    "editor.copyWithSyntaxHighlighting": false,
+    "editor.minimap.renderCharacters": false,
+    "editor.lineHeight": 22,
+    "editor.autoSurround": "never",
+    "editor.autoClosingDelete": "never",
+    "editor.suggest.showMethods": true,
+    "editor.suggest.preview": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    // "editor.snippetSuggestions": "top",
+    "editor.guides.indentation": true,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.selectionHighlight": false,
+    "editor.occurrencesHighlight": "off",
+    "explorer.sortOrderLexicographicOptions": "unicode",
+    // "editor.stickyScroll.enabled": true,
+    // "editor.fontLigatures": "'ss05', 'cv16', 'ss03', 'onum'",
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true, // enable for all themes
+        // "rules": {
+        //     "*.static": {
+        //         "foreground": "#ff0000",
+        //         "fontStyle": "bold"
+        //     },
+        //     "type": {
+        //         "foreground": "#00aa00"
+        //     }
+        // }
+    },
+    "editor.tokenColorCustomizations": {
+        "[*]": {
+            "comments": {"foreground": "#a4a08e"}
+        },
+    },
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "editor.parameterHints.enabled": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "html.suggest.html5": false,
+    "editor.snippetSuggestions": "none",
+
+    // WORKBENCH
+    // "window.titleBarStyle": "native",
+    // "window.title": "${activeEditorLong}${separator}${rootName}",
+    "workbench.iconTheme": null,
+    // "workbench.list.keyboardNavigation": "filter",
+    "workbench.list.defaultFindMode": "highlight",
+    "workbench.list.typeNavigationMode": "automatic",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.list.openMode": "doubleClick",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.preferredDarkColorTheme": "Monokai22",
+    "workbench.preferredHighContrastColorTheme": "Monokai",
+    "workbench.preferredHighContrastLightColorTheme": "Monokai",
+    "workbench.preferredLightColorTheme": "Monokai",
+    "workbench.colorTheme": "Monokai22",
+    // "workbench.activityBar.visible": false,
+    "workbench.colorCustomizations": {
+        // "editor.background":"#FCF6E3",
+		// "editor.findMatchHighlightBackground": "#eb5e0055", // generated value
+		// "editor.findMatchHighlightBackground": "#6b3719", // generated value
+        // "editor.foreground": "#47565c", // for darker text in soloraized
+        "editor.commend":"",
+        // "editor.selectionBackground": "#c0c3b5", // for darker text in soloraized
+        // "tab.activeBackground":"#FD971F",
+        // "tab.activeForeground":"#000",
+        // "tab.inactiveForeground":"#CFCFC2",
+        // "tab.activeBorder":"#eb5e00",
+        // "tab.activeModifiedBorder":"#CFCFC2",
+        // "tab.inactiveModifiedBorder":"#F92672",
+        // "list.inactiveSelectionBackground":"#4f4d40",
+    },
+
+    // TERMINAL
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    // "terminal.integrated.shell.linux": "/bin/zsh",
+    // "terminal.integrated.shell.osx": "/bin/zsh",
+    "terminal.integrated.inheritEnv": false,
+    // "terminal.integrated.allowChords": false,
+    "terminal.integrated.fontSize":13,
+    "terminal.integrated.cursorBlinking": true,
+    "window.title": "${activeEditorLong}${separator}${rootName}",
+    "dotfiles.repository": "henderjon/dotfiles",
+    "dotfiles.targetPath": "~/dotfiles",
+    "dotfiles.installCommand": "~/dotfiles/bootstrap.sh",
+    "settingsSync.ignoredSettings": [
+        "php.executablePath",
+        "php.debug.executablePath",
+        "php.validate.executablePath"
+    ],
+
+    // FILES
+    "files.eol": "\n", // formatting only supports LF line endings
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "php.executablePath": "/opt/homebrew/opt/php@7.4/bin/php",
+    "html.autoCreateQuotes": false,
+
+    // CSS
+    "css.hover.references": false,
+
+    // GIT
+    "git.autofetch": true,
+    "git.mergeEditor": true,
+
+    // SHUT UP!!
+    "editor.inlineSuggest.enabled": false,
+    // "editor.parameterHints.enabled": false,
+    // "[go]": {
+    // "editor.quickSuggestions": false,
+    // "editor.suggest.showWords": false,
+    // "editor.suggest.showSnippets": false
+    // },
+    "typescript.suggest.enabled": false,
+    "javascript.suggest.enabled": false,
+
+    // GO
+    // "go.goroot": "/opt/homebrew/Cellar/go/1.21.3/libexec",
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "go.toolsManagement.autoUpdate": true,
+    "[go]": {
+        "editor.snippetSuggestions": "none",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSaveTimeout": 3000,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "editor.suggest.showWords": false,
+        "editor.suggest.showSnippets": false
+    },
+    "go.alternateTools": {
+        "go": "/opt/homebrew/bin/go"
+    },
+    "[gopls]": {
+        "usePlaceholders":         true, // add parameter placeholders when completing a function
+        "completionDocumentation": true, // for documentation in completion items
+        // Experimental settings
+        "completeUnimported":      true, // autocomplete unimported packages
+        "watchFileChanges":        true,  // watch file changes outside of the editor
+        "deepCompletion":          true,     // enable deep completion
+    },
+
+    // PYTHON
+    "python.jediEnabled": false,
+    "python.languageServer": "Default",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+
+    // MISC
+    "extensions.ignoreRecommendations": false,
+    "cSpell.language": "en,en-US",
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "vsicons.dontShowNewVersionMessage": true,
+    "oneDarkPro.bold": true,
+    "update.mode": "manual",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+
+    "json.schemas": [],
+
+    "timeline.showView": true,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+    "[markdown]": {
+        // "editor.wordWrap": "bounded",
+        "editor.wordWrap": "off",
+        // "rewrap.wrappingColumn": 80
+    },
+
+    "rainbow_csv.enable_cursor_position_info": false,
+    "githubPullRequests.pullBranch": "never",
+
+    "todohighlight.isEnable": true,
+    "todohighlight.isCaseSensitive": true,
+    // "todohighlight.keywords": [], // customize the handing of certain keywords
+    "todohighlight.keywordsPattern": "(//|#) ?(TODO:.*|FIXME:.*|NOTE:.*)",
+    "todohighlight.defaultStyle": {
+        "color": "white",
+        "backgroundColor": "#456BA5",
+        "isWholeLine": false,
+    },
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.json",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.go",
+        "**/*.md",
+        "**/*.txt",
+        "**/*.css",
+        "**/*.scss"
+    ],
+    "todohighlight.exclude": [
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.vscode/**",
+        "**/.github/**",
+        "**/_output/**",
+        "**/*.min.*",
+        "**/*.map",
+        "**/.next/**"
+    ],
+    "todohighlight.maxFilesForSearch": 5120,
+    "todohighlight.toggleURI": false,
+    "aws.suppressPrompts": {
+        "regionAddAutomatically": true
+    },
+    "workbench.editor.decorations.colors": false,
+    "workbench.editor.decorations.badges": false,
+
+    // DIFF EXPERIMENTAL
+    "diffEditor.experimental.showMoves": true,
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "InsertLineNumber.formats": [
+        {
+            "start": 1,
+            "align": "left",
+            "padding": "zero",
+            "width": "normal",
+            "prefix": "",
+            "suffix": ". "
+        },
+        {
+            "start": "current",
+            "align": "right",
+            "padding": "space",
+            "width": 2,
+            "prefix": "",
+            "suffix": ": "
+        }
+    ],
+    "github.copilot.editor.enableAutoCompletions": true,
+    "php.validate.executablePath": "/opt/homebrew/bin/php",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "makefile.configureOnOpen": false,
+    "claudeCode.preferredLocation": "panel",
+    "aws.cloudformation.telemetry.enabled": false,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+        "*.sqlite": "${capture}.${extname}-*",
+        "*.db": "${capture}.${extname}-*",
+        "*.sqlite3": "${capture}.${extname}-*",
+        "*.db3": "${capture}.${extname}-*",
+        "*.sdb": "${capture}.${extname}-*",
+        "*.s3db": "${capture}.${extname}-*"
+    },
+    "chat.viewSessions.orientation": "stacked",
+
+}

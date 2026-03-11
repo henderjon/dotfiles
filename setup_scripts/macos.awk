@@ -4,10 +4,8 @@ BEGIN{
 
  	"uname" | getline ostype
 	close("uname")
-print ostype "  ."
-	if(ostype ~ /^[Dd]arwin/){
-		notice("# ------ macos")
 
+	if(ostype ~ /^[Dd]arwin/){
 		notice("# ------ macos dictionary")
 		fpath = dotpath "/resources/macos/LocalDictionary"
 		lpath = homedir "/Library/Spelling/LocalDictionary"

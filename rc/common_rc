@@ -45,13 +45,13 @@ export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:$HOME/dotfiles/bin"
 
 #------------------------------------------------------- these are important --#
-export DOTFILES="$HOME/dotfiles"
+export DOTFILES_DIR="$HOME/dotfiles"
 export EDITOR="fred "
 export CLICOLOR_FORCE=true
 export VISUAL="$EDITOR"
 export PAGER=cat
 export DIFFCOLORS="31:32" # ascii color codes ... add:rm
-export GLAMOUR_STYLE="$DOTFILES/conf/gh/monokai22.json" # set gh color scheme
+export GLAMOUR_STYLE="$DOTFILES_DIR/conf/gh/monokai22.json" # set gh color scheme
 
 #----------------------------------------------------------------------- IRC --#
 export IRCNAME=henderjon
@@ -74,31 +74,31 @@ alias python='python3 '
 alias py='python3 '
 
 #--------------------------------------------------------------------- SNIPS --#
-alias snips='cat "$DOTFILES"/resources/snips/* '
-for f in "$DOTFILES"/resources/snips/*; do
+alias snips='cat "$DOTFILES_DIR"/resources/snips/* '
+for f in "$DOTFILES_DIR"/resources/snips/*; do
 	F=$(basename -s .txt "$f" | tr _ -)
 	alias "$F"="echo \"\n\" && cat \"$f\" && echo \"\n\" "
 done
 
 # output a given snip file path/name to open in an editor
 snips_file () {
-	f="$DOTFILES/resources/snips/snips_$1.txt"
+	f="$DOTFILES_DIR/resources/snips/snips_$1.txt"
 	if [ -f "$f" ]; then
 		echo "$f"
 	fi
 }
 
 #--------------------------------------------------------------------- ASCII --#
-export ASCII_FILE="$DOTFILES/resources/terminal/ascii.tsv"
+export ASCII_FILE="$DOTFILES_DIR/resources/terminal/ascii.tsv"
 alias ascii='head -133 "$ASCII_FILE" '
 alias asciix='cat "$ASCII_FILE" '
 
 #------------------------------------------------------------- HTML Entities --#
-export ENTITIES_FILE="$DOTFILES/resources/terminal/entities.txt"
+export ENTITIES_FILE="$DOTFILES_DIR/resources/terminal/entities.txt"
 alias entities='cat "$ENTITIES_FILE" '
 
 #---------------------------------------- when you forget what bins you have --#
-alias bins='lsl $DOTFILES/bin $HOME/bin'
+alias bins='lsl $DOTFILES_DIR/bin $HOME/bin'
 
 #---------------------------------------- reload env file when we reload zsh --#
 if [ -f "$HOME/.zshenv" ]; then
@@ -149,3 +149,5 @@ fi
 if [ -z "${XDG_CONFIG_HOME+x}" ]; then
 	export XDG_CONFIG_HOME="$HOME/.config"
 fi
+
+alias dotfiles='code "$HOME/dotfiles" '

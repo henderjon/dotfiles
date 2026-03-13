@@ -1,0 +1,74 @@
+#!/usr/bin/env php
+<?php
+
+$owner       = $argv[1] ?? null;
+$repo        = $argv[2] ?? null;
+
+$token = getenv("GITHUB_TOKEN");
+if(!$token){ // fall back to gh cli
+	$token = `gh auth token`;
+}
+
+if(!$token){
+	fprintf(STDERR, "Error: No GitHub token found. Please set the GITHUB_TOKEN environment variable or authorize `gh`.\n");
+	die(1);
+}
+
+if(!$repo || !$owner){
+	fprintf(STDERR, "Usage: %s <owner/org> <repo>\n", $argv[0]);
+	die(1);
+}
+
+$token = trim($token);
+$headers = [
+	"Accept: application/vnd.github+json",
+	"Authorization: Bearer {$token}",
+	"X-GitHub-Api-Version: 2022-11-28",
+	"User-Agent: cURL; git-cut",
+];
+
+// get previous releases; before creating new release branch to avoid counting it
+$prevReleases = get("repos/{$owner}/{$repo}/git/matching-refs/heads/release", $headers);
+if(!is_array($prevReleases)){
+	fprintf(STDERR, "Error: %s\n", $prevReleases["message"]);
+	die(1);
+}
+usort($prevReleases, function($carry, $release){
+	return strnatcmp($carry["ref"], $release["ref"]);
+});
+
+foreach($prevReleases as $release){
+	fprintf(STDERR, "%s\n", substr($release["ref"], strlen("refs/heads/")));
+}
+
+function get(string $path, array $headers) : array{
+	$url = sprintf("https://api.github.com/%s", $path); // , urlencode(implode(" ", $query))
+	$ch = curl_init($url);
+	curl_setopt_array($ch, [
+		CURLOPT_CUSTOMREQUEST  => "GET",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_HTTPHEADER     => $headers,
+	]);
+
+	$response = curl_exec($ch);
+	try{
+		checkcURL($ch);
+	}catch(\Exception $e){
+		fprintf(STDERR, "Error: %s\n", $e->getMessage());
+		fprintf(STDERR, "Response: %s\n", $response);
+		die(1);
+	}
+
+	return json_decode($response, true);
+}
+
+function checkcURL(\Curlhandle $handle) : void {
+	if(curl_errno($handle)){
+		throw new \Exception(curl_error($handle), curl_errno($handle));
+	}
+
+	$status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+	if($status < 200 || $status > 299){
+		throw new Exception("HTTP Error: {$status}; ");
+	}
+}

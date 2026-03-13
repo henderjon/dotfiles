@@ -1,0 +1,130 @@
+#!/usr/bin/env php
+<?php
+
+$owner       = $argv[1] ?? null;
+$repo        = $argv[2] ?? null;
+$older       = $argv[3] ?? null;
+$base        = $argv[4] ?? "dev";
+
+$token = getenv("GITHUB_TOKEN");
+if(!$token){ // fall back to gh cli
+	$token = `gh auth token`;
+}
+
+if(!$token){
+	fprintf(STDERR, "Error: No GitHub token found. Please set the GITHUB_TOKEN environment variable or authorize `gh`.\n");
+	die(1);
+}
+
+if(!$repo || !$owner){
+	fprintf(STDERR, "Usage: %s <owner/org> <repo> [<older = \$lastRelease> [<newer = dev>]\n", pathinfo($argv[0], PATHINFO_BASENAME));
+	fprintf(STDERR, "  - <older> a ref or sha for the older branch in the comparison; defaults to the last release.\n");
+	fprintf(STDERR, "  - <newer> a ref or sha for the newer branch in the comparison; defaults to `dev`.\n");
+	fprintf(STDERR, "    \$older should have fewer commits.\n");
+	die(1);
+}
+
+$token = trim($token);
+$headers = [
+	"Accept: application/vnd.github+json",
+	"Authorization: Bearer {$token}",
+	"X-GitHub-Api-Version: 2022-11-28",
+	"User-Agent: cURL; git-cut",
+];
+
+// get dev branch; https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#get-a-reference
+$dev = get("repos/{$owner}/{$repo}/git/ref/heads/{$base}", $headers);
+if(!array_key_exists("ref", $dev)){
+	fprintf(STDERR, "Error: %s\n", $dev["message"]);
+	die(1);
+}
+
+if(is_null($older)){
+	// get previous releases; before creating new release branch to avoid counting it
+	$prevReleases = get("repos/{$owner}/{$repo}/git/matching-refs/heads/release", $headers);
+	if(!is_array($prevReleases)){
+		fprintf(STDERR, "Error: %s\n", $prevReleases["message"]);
+		die(1);
+	}
+
+	if(empty($prevReleases)){
+		fprintf(STDERR, "There are no previous releases to compare against.\n");
+		die(0);
+	}
+
+	// get last release for comparison
+	$lastRelease = array_reduce($prevReleases, function($carry, $release){
+		$i = strnatcmp($carry["ref"], $release["ref"]);
+		return match($i){
+			1       => $carry,
+			-1      => $release,
+			default => $carry,
+		};
+	}, $prevReleases[0]);
+}else{
+	// get dev branch; https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#get-a-reference
+	$lastRelease = get("repos/{$owner}/{$repo}/git/ref/heads/{$older}", $headers);
+	if(!array_key_exists("ref", $lastRelease)){
+		fprintf(STDERR, "Error: %s\n", $lastRelease["message"]);
+		die(1);
+	}
+}
+
+$lastReleaseRef = substr($lastRelease["ref"], strlen("refs/heads/"));
+$lastReleaseSha = substr($lastRelease["object"]["sha"], 0, 8);
+
+$baseRef = substr($dev["ref"], strlen("refs/heads/"));
+$baseSha = substr($dev["object"]["sha"], 0, 8);
+
+fprintf(STDERR, "\n{$lastReleaseRef} ({$lastReleaseSha}) .. {$baseRef} ({$baseSha})\n");
+fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%<(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s | sort", $lastRelease["object"]["sha"], $dev["object"]["sha"]);
+fprintf(STDERR, "\n\n");
+
+function get(string $path, array $headers) : array{
+	$url = sprintf("https://api.github.com/%s", $path); // , urlencode(implode(" ", $query))
+	$ch = curl_init($url);
+	curl_setopt_array($ch, [
+		CURLOPT_CUSTOMREQUEST  => "GET",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_HTTPHEADER     => $headers,
+	]);
+
+	$response = curl_exec($ch);
+	try{
+		checkcURL($ch);
+	}catch(\Exception $e){
+		fprintf(STDERR, "Error: %s\n", $e->getMessage());
+		fprintf(STDERR, "Response: %s\n", $response);
+		die(1);
+	}
+
+	curl_close($ch);
+	return json_decode($response, true);
+}
+
+function checkcURL(\Curlhandle $handle) : void {
+	if(curl_errno($handle)){
+		throw new \Exception(curl_error($handle), curl_errno($handle));
+	}
+
+	$status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+	if($status < 200 || $status > 299){
+		throw new Exception("HTTP Error: {$status}; ");
+	}
+}
+
+function cliConfirm( string $msg = "" ) : bool {
+	$msg = $msg ?: "Is this what you want to do? ";
+	printf("\n%s (y/n) ", $msg);
+
+	return trim( fgets( STDIN ) ) == "y";
+}
+
+function cliInput( string $msg = "" ) : string {
+	$msg = $msg ?: "I'm waiting...";
+	printf("\n%s ", $msg);
+
+	return trim( fgets( STDIN ) );
+}
+
+

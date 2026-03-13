@@ -41,3 +41,31 @@ MEMCACHED
 brew install libmemcached zlib
 pecl install memcached --with-zlib-dir=/opt/homebrew/opt/zlib
 pecl install -D 'with-zlib-dir="/opt/homebrew/opt/zlib"' memcached
+
+
+Quick Local Development Without Docker
+--------------------------------------------------------------------------------
+
+# Basic usage (from project root)
+php -S localhost:8000 -t public/
+
+# With custom php.ini
+php -S localhost:8000 -t public/ -c docker/php/php.ini
+
+# With router script (if needed)
+php -S localhost:8000 -t public/ public/index.php
+
+The built-in server:
+- Runs single-threaded (not for production)
+- Serves from public/ directory
+- Routes all PHP requests through public/index.php (the front controller)
+
+Option 3: Run PHP-FPM locally with nginx
+
+If you want to run PHP-FPM outside Docker, you'd need to:
+
+1. Install PHP-FPM locally (brew install php on macOS includes php-fpm)
+2. Install nginx (brew install nginx)
+3. Adapt the configurations from docker/nginx/vhost.conf and docker/php/php-fpm-www.conf
+4. Start php-fpm: php-fpm -y docker/php/php-fpm-www.conf -c docker/php/php.ini
+5. Start nginx with your adapted config

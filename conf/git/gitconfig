@@ -29,8 +29,12 @@
 [diff]
 	tool = diff # use this program on 'git diff'
 	renames = true
-[difftool] # is the command 'git difftool'
-	prompt = true
+[difftool]
+	prompt = false
+[difftool "bc"]
+	path = /usr/local/bin/bcomp
+	trustExitCode = true
+[difftool "bcompare"]
 	trustExitCode = true
 [difftool "bc3"]
 	trustExitCode = true
@@ -41,6 +45,10 @@
 	tool = bc3
 	ff = false
 	defaultToUpstream = true
+[mergetool "bcomp"]
+	keepBackup = true
+	trustExitCode = true
+	keepBackup = false
 [mergetool "bc3"]
 	keepBackup = true
 	trustExitCode = true
@@ -49,7 +57,8 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty] # date formatting: https://git-scm.com/docs/git-rev-list
 	# tiny           = %><(7)%C(yellow)%h%C(reset):%C(red)%d%Creset %s
-	reflog         = %C(yellow)%><(7)%h%Creset %C(blue)%an (%G?)%Creset%C(red)%d%Creset %s
+	reflogpg       = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an (%G?)%Creset%C(red)%d%Creset %s
+	reflog         = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an %Creset%C(red)%d%Creset %s
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
 	difflog        = %<(25)%ai %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
@@ -62,7 +71,7 @@
 	sl          = log --oneline --reverse -35
 	#refl        = reflog --format='%C(auto)%h %gd: %gs' # default format
 	#refl        = reflog --format='%C(auto)%h%d %gD: %gs' # default format
-	cl          = log --pretty=reflog -n 20
+	cl          = log --pretty=reflogpg -n 20
 	rl          = reflog -n 25
 	cld         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
 	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
@@ -91,9 +100,9 @@
 	# archive a branch
 	arch        = "!f(){ : git branch ; BRANCH_NAME=\"$1\"; if [ -z \"$BRANCH_NAME\" ]; then BRANCH_NAME=\"$(git branch-name)\"; fi; git branch --move \"$BRANCH_NAME\" \"archive/$BRANCH_NAME\"; }; f" # ": git branch" sets up auto completion of branch names
 	# doing work based on a main branch
-	fix         = "!f(){ git fetch origin; git checkout -b fix/$1 --no-track origin/dev; }; f"
-	feature     = "!f(){ git fetch origin; git checkout -b feature/$1 --no-track origin/dev; }; f"
-	release     = "!f(){ git fetch origin; git checkout -b release/$1 --no-track origin/dev; }; f"
+	fix         = "!f(){ git fetch origin; git checkout -b fix/$1 --no-track $(git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/||'); }; f"
+	feature     = "!f(){ git fetch origin; git checkout -b feature/$1 --no-track $(git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/||'); }; f"
+	release     = "!f(){ git fetch origin; git checkout -b release/$1 --no-track $(git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/||'); }; f"
 	# merge conflicts
 	resolve-ours   = "!f(){ git checkout --ours \"$1\"; git add \"$1\"; }; f"
 	resolve-theirs = "!f(){ git checkout --theirs \"$1\"; git add \"$1\"; }; f"

@@ -1,0 +1,69 @@
+#!/usr/bin/env php
+<?php
+
+// Get all release branches from remote
+$prevReleasesOutput = `git branch -r -l 'origin/release/*' | sed 's|origin/||' | sed 's|^[[:space:]]*||'` ?? "";
+$prevReleases = array_filter(explode("\n", trim($prevReleasesOutput)));
+
+if(empty($prevReleases)){
+	fprintf(STDERR, "Error: No release branches found.\n");
+	die(1);
+}
+
+// Sort releases naturally (version numbers) in descending order
+usort($prevReleases, function($a, $b){
+	return strnatcmp($b, $a); // descending order
+});
+
+if(count($prevReleases) < 2){
+	fprintf(STDERR, "Error: Need at least 2 release branches to compare.\n");
+	fprintf(STDERR, "Found only: %s\n", $prevReleases[0]);
+	die(1);
+}
+
+$latestRelease = $prevReleases[0];
+$previousRelease = $prevReleases[1];
+
+// Get GitHub repo URL using gh CLI
+$urlJSON = `gh repo view --json "url" --jq ".url"` ?? "";
+$repoUrl = trim($urlJSON);
+
+if(empty($repoUrl)){
+	fprintf(STDERR, "Error: Could not determine GitHub repository URL.\n");
+	die(1);
+}
+
+// Parse owner and repo from URL
+// URL format: https://github.com/owner/repo
+if(!preg_match('#github\.com/([^/]+)/([^/]+)#', $repoUrl, $matches)){
+	fprintf(STDERR, "Error: Could not parse repository URL: %s\n", $repoUrl);
+	die(1);
+}
+
+$owner = $matches[1];
+$repo = $matches[2];
+
+// Get short SHAs for display
+$previousReleaseShortSha = trim(`git rev-parse --short origin/{$previousRelease}` ?? "");
+$latestReleaseShortSha = trim(`git rev-parse --short origin/{$latestRelease}` ?? "");
+
+fprintf(STDERR, "Comparing releases:\n");
+fprintf(STDERR, "  Previous: %s (%s)\n", $previousRelease, $previousReleaseShortSha);
+fprintf(STDERR, "  Latest:   %s (%s)\n\n", $latestRelease, $latestReleaseShortSha);
+
+fprintf(STDERR, "Here is a link to a list of all commits in `%s` that are not in the previous release `%s`:\n", $latestRelease, $previousRelease);
+fprintf(STDERR, "%s/compare/%s...%s\n\n", $repoUrl, $previousRelease, $latestRelease);
+fprintf(STDERR, "If you're looking for a list of all the merged PRs, run this command in terminal (or pipe the output of this script to `sh`):\n");
+
+// Get the SHA for both releases
+$previousReleaseSha = trim(`git rev-parse origin/{$previousRelease}` ?? "");
+$latestReleaseSha = trim(`git rev-parse origin/{$latestRelease}` ?? "");
+
+if(empty($previousReleaseSha) || empty($latestReleaseSha)){
+	fprintf(STDERR, "Error: Could not retrieve commit SHAs for comparison.\n");
+	die(1);
+}
+
+// Output the git log command
+fprintf(STDOUT, "git fetch --all && git log --merges --format=\"%%<(20)%%an | %%><(7)%%h | %%s\" --grep=\"pull request\" %s..%s | sort", $previousReleaseSha, $latestReleaseSha);
+fprintf(STDERR, "\n\n");

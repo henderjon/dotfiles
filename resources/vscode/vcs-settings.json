@@ -213,4 +213,15 @@
     ],
     "todohighlight.maxFilesForSearch": 5120,
     "todohighlight.toggleURI": false,
+
+    // SHUT UP!!
+    "editor.inlineSuggest.enabled": false,
+    // "editor.parameterHints.enabled": false,
+    // "[go]": {
+    // "editor.quickSuggestions": false,
+    // "editor.suggest.showWords": false,
+    // "editor.suggest.showSnippets": false
+    // },
+    "typescript.suggest.enabled": false,
+    "javascript.suggest.enabled": false,
 }

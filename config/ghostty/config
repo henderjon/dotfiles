@@ -63,3 +63,6 @@ window-inherit-working-directory = false
 
 # specifically prevents new tabs from inheriting the working directory of the current tab. This option was introduced in Ghostty 1.3.0 to provide independent control.
 tab-inherit-working-directory = false
+
+keybind = super+shift+ArrowRight=next_tab
+keybind = super+shift+ArrowLeft=previous_tab

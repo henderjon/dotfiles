@@ -63,6 +63,43 @@ grep "foo" <<< "foo bar baz"
 cat <<< "Hello $USER"
 wc -w <<< "one two three"
 
+Yes! Use single quotes instead of double quotes:
+
+# Expands variables (double quotes)
+grep "foo" <<< "Hello $USER"
+
+# Does NOT expand variables (single quotes)
+grep "foo" <<< 'Hello $USER'
+
+Examples
+
+USER="alice"
+
+# With double quotes - expands
+cat <<< "Current user is $USER"
+# Output: Current user is alice
+
+# With single quotes - literal
+cat <<< 'Current user is $USER'
+# Output: Current user is $USER
+
+Summary
+
+┌──────────────┬────────────────────┐
+│    Syntax    │ Variable Expansion │
+├──────────────┼────────────────────┤
+│ <<< "string" │ ✅ Yes             │
+├──────────────┼────────────────────┤
+│ <<< 'string' │ ❌ No              │
+├──────────────┼────────────────────┤
+│ <<< $var     │ ✅ Yes (unquoted)  │
+└──────────────┴────────────────────┘
+
+The key: Same quoting rules as regular bash strings:
+- Double quotes (") → variables expand
+- Single quotes (') → literal/no expansion
+
+
 Here-Document (<<)
 --------------------------------------------------------------------------------
 
@@ -82,15 +119,15 @@ Characteristics:
 
 Examples:
 # Basic here-doc
-cat << EOF
-Hello $USER
-Current directory: $PWD
+  cat << EOF
+  Hello $USER
+  Current directory: $PWD
 EOF
 
 # Literal (no variable expansion)
 cat << 'EOF'
-Hello $USER
-This will print literally
+  Hello $USER
+  This will print literally
 EOF
 
 # Ignore leading tabs (indentation)

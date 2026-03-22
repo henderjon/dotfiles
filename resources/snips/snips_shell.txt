@@ -4,44 +4,194 @@
 
 The test command is a standard POSIX utility that evaluates conditional expressions. It's the same functionality you're using with the square brackets [ ] in bash.
 
-  These are equivalent:
+These are equivalent:
 
-  test -f "$1"
-  [ -f "$1" ]
+test -f "$1"
+[ -f "$1" ]
 
-  The square brackets are actually just syntactic sugar - they're an alias for the test command!
+The square brackets are actually just syntactic sugar - they're an alias for the test command!
 
-  Common test operators:
+Common test operators:
 
-  File tests:
-  - test -e path - true if path exists (file or directory)
-  - test -f path - true if path exists and is a regular file
-  - test -d path - true if path exists and is a directory
-  - test -r path - true if path is readable
-  - test -w path - true if path is writable
-  - test -x path - true if path is executable
-  - test -L path - true if path is a symbolic link
+File tests:
+- test -e path - true if path exists (file or directory)
+- test -f path - true if path exists and is a regular file
+- test -d path - true if path exists and is a directory
+- test -r path - true if path is readable
+- test -w path - true if path is writable
+- test -x path - true if path is executable
+- test -L path - true if path is a symbolic link
 
-  String tests:
-  - test -z string - true if string is empty
-  - test -n string - true if string is not empty
-  - test str1 = str2 - true if strings are equal
+String tests:
+- test -z string - true if string is empty
+- test -n string - true if string is not empty
+- test str1 = str2 - true if strings are equal
 
-  Numeric tests:
-  - test num1 -eq num2 - equal
-  - test num1 -ne num2 - not equal
-  - test num1 -lt num2 - less than
-  - test num1 -gt num2 - greater than
+Numeric tests:
+- test num1 -eq num2 - equal
+- test num1 -ne num2 - not equal
+- test num1 -lt num2 - less than
+- test num1 -gt num2 - greater than
 
-  -h  # Is symbolic link
-  -f  # Is regular file
-  -d  # Is directory
-  -e  # Exists (any type)
-  -r  # Is readable
-  -w  # Is writable
-  -x  # Is executable
+-h  # Is symbolic link
+-f  # Is regular file
+-d  # Is directory
+-e  # Exists (any type)
+-r  # Is readable
+-w  # Is writable
+-x  # Is executable
 
-  Exit status:
+Exit status:
 
-  - Returns 0 (success) if the condition is true
-  - Returns 1 (failure) if the condition is false
+- Returns 0 (success) if the condition is true
+- Returns 1 (failure) if the condition is false
+
+Here-String (<<<)
+--------------------------------------------------------------------------------
+
+Syntax:
+command <<< "single line string"
+
+Characteristics:
+- Single line only
+- Automatically adds a newline at the end
+- Simple and concise for one-liners
+- String is evaluated (variables expanded)
+
+Examples:
+grep "foo" <<< "foo bar baz"
+cat <<< "Hello $USER"
+wc -w <<< "one two three"
+
+Yes! Use single quotes instead of double quotes:
+
+# Expands variables (double quotes)
+grep "foo" <<< "Hello $USER"
+
+# Does NOT expand variables (single quotes)
+grep "foo" <<< 'Hello $USER'
+
+Examples
+
+USER="alice"
+
+# With double quotes - expands
+cat <<< "Current user is $USER"
+# Output: Current user is alice
+
+# With single quotes - literal
+cat <<< 'Current user is $USER'
+# Output: Current user is $USER
+
+Summary
+
+┌──────────────┬────────────────────┐
+│    Syntax    │ Variable Expansion │
+├──────────────┼────────────────────┤
+│ <<< "string" │ ✅ Yes             │
+├──────────────┼────────────────────┤
+│ <<< 'string' │ ❌ No              │
+├──────────────┼────────────────────┤
+│ <<< $var     │ ✅ Yes (unquoted)  │
+└──────────────┴────────────────────┘
+
+The key: Same quoting rules as regular bash strings:
+- Double quotes (") → variables expand
+- Single quotes (') → literal/no expansion
+
+
+Here-Document (<<)
+--------------------------------------------------------------------------------
+
+Syntax:
+command << DELIMITER
+line 1
+line 2
+line 3
+DELIMITER
+
+Characteristics:
+- Multi-line input
+- Delimiter can be any word (commonly EOF, END, etc.)
+- Variables are expanded by default
+- Use <<'DELIMITER' to prevent variable expansion (literal text)
+- Use <<-DELIMITER to ignore leading tabs (for indentation)
+
+Examples:
+# Basic here-doc
+  cat << EOF
+  Hello $USER
+  Current directory: $PWD
+EOF
+
+# Literal (no variable expansion)
+cat << 'EOF'
+  Hello $USER
+  This will print literally
+EOF
+
+# Ignore leading tabs (indentation)
+cat <<- EOF
+    This line can be indented with tabs
+    And they'll be stripped
+EOF
+
+Quick Comparison
+
+┌──────────┬───────────────────┬────────────────────┐
+│ Feature  │ Here-String (<<<) │ Here-Document (<<) │
+├──────────┼───────────────────┼────────────────────┤
+│ Lines    │ Single line       │ Multiple lines     │
+├──────────┼───────────────────┼────────────────────┤
+│ Syntax   │ <<< "text"        │ << EOF ... EOF     │
+├──────────┼───────────────────┼────────────────────┤
+│ Use case │ Quick one-liners  │ Multi-line input   │
+├──────────┼───────────────────┼────────────────────┤
+│ Newline  │ Auto-added        │ As written         │
+└──────────┴───────────────────┴────────────────────┘
+
+Rule of thumb: Use <<< for quick single-line inputs, use << when you need multiple lines or more control.
+
+<<- DOES expand variables by default.
+
+The - in <<- only controls tab stripping (removes leading tabs for indentation). It has nothing to do with variable expansion.
+
+Variable Expansion Control
+
+Variable expansion is controlled by quoting the delimiter, not the <<- syntax:
+
+# Expands variables (no quotes on delimiter)
+cat << EOF
+Hello $USER
+EOF
+
+# Expands variables AND strips leading tabs
+cat <<- EOF
+      Hello $USER
+EOF
+
+# Does NOT expand variables (quoted delimiter)
+cat << 'EOF'
+Hello $USER
+EOF
+
+# Does NOT expand variables AND strips leading tabs
+cat <<- 'EOF'
+      Hello $USER
+EOF
+
+Summary
+
+┌───────────┬────────────────────┬────────────────────────────┐
+│  Syntax   │ Variable Expansion │       Tab Stripping        │
+├───────────┼────────────────────┼────────────────────────────┤
+│ << EOF    │ ✅ Yes             │ ❌ No                      │
+├───────────┼────────────────────┼────────────────────────────┤
+│ <<- EOF   │ ✅ Yes             │ ✅ Yes (leading tabs only) │
+├───────────┼────────────────────┼────────────────────────────┤
+│ << 'EOF'  │ ❌ No              │ ❌ No                      │
+├───────────┼────────────────────┼────────────────────────────┤
+│ <<- 'EOF' │ ❌ No              │ ✅ Yes (leading tabs only) │
+└───────────┴────────────────────┴────────────────────────────┘
+
+The key: Quote the delimiter ('EOF' or "EOF" or \EOF) to disable variable expansion, regardless of whether you use << or <<-.

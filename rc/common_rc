@@ -103,6 +103,9 @@ alias entities='cat "$ENTITIES_FILE" '
 #---------------------------------------- when you forget what bins you have --#
 alias bins='lsl $DOTFILES_DIR/bin $HOME/bin'
 
+#------------------------------------------------------------- readable stat --#
+#alias finfo=$'stat -f "Name: %N\nSize: %z bytes\nPermissions: %Sp (%Op)\nOwner: %Su\nGroup: %Sg\nModified: %Sm\nAccessed: %Sa\nCreated: %SB" -t "%Y-%m-%d %H:%M:%S"'
+
 #---------------------------------------- reload env file when we reload zsh --#
 if [ -f "$HOME/.zshenv" ]; then
 	. "$HOME/.zshenv"

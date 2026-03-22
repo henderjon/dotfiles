@@ -1,0 +1,33 @@
+#!/usr/bin/awk -f
+BEGIN {
+    # Build stat command with all args passed through
+    cmd = "stat -f \"%N|%z|%Sp|%Op|%Su|%Sg|%Sm|%Sa|%SB\" -t \"%Y-%m-%d %H:%M:%S\""
+    for (i = 1; i < ARGC; i++) {
+        cmd = cmd " \"" ARGV[i] "\""
+    }
+
+    # Execute stat and process output
+    while ((cmd | getline line) > 0) {
+        n = split(line, f, "|")
+
+		print ""
+        printf "Name: %s\n", f[1]
+        printf "Size: %s KiB\n", f[2]/1024
+        #permissions
+        printf "Perm: %s (%s)\n", f[3], f[4]
+        #owner
+        printf "Own:  %s\n", f[5]
+        #group
+        printf "Grp:  %s\n", f[6]
+        #modified
+        printf "Mod:  %s\n", f[7]
+        #accessed
+        printf "Acc:  %s\n", f[8]
+        #created
+        printf "Crtd: %s\n", f[9]
+		print ""
+    }
+
+    close(cmd)
+    exit
+}

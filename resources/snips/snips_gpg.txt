@@ -97,7 +97,8 @@ internally
 --------------------------------------------------------------------------------
 
 - You have the option of mounting a temp folder
-    - `$ sudo mount -t tmpfs -o size=64M tmpfs ~/ram`
+    - `$ sudo mkdir -p ~/$TEMPDIR`
+    - `$ sudo mount -t tmpfs -o size=64M[,mode=700] tmpfs ~/$TEMPDIR`
 
 - Create a temp dir and import your master key
     -$` gpg --homedir ~/$TEMPDIR --import $PRIVATE_MASTER_KEY`
@@ -105,6 +106,21 @@ internally
 - Edit the actual keyring using the keys from you $TEMPDIR
     - `$ gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --edit-key $KEY_YOU_WANT_TO_EDIT`
     - `$ gpg --homedir ~/$TEMPDIR --keyring ~/.gnupg/pubring.kbx --no-default-keyring --edit-key $KEY_YOU_WANT_TO_EDIT`
+
+- You have the option of mounting a temp folder
+    - `$ sudo umount ~/$TEMPDIR`
+    - `$ mount | grep $TEMPDIR`; should be empty
+    - `$ sudo rm -rf ~/$TEMPDIR`
+
+## To Use an Offline Master Key (Easier)
+--------------------------------------------------------------------------------
+
+- Edit the actual keyring; --armor exports ASCII
+    - `$ gpg --homedir /path/to/$SECRET_KEY --edit-key $SECRET_KEY`
+    - `$ gpg --homedir /path/to/$SECRET_KEY --export [--armor] $SECRET_KEY > /path/new/public.asc`
+    - `$ gpg --import /path/new/public.asc`
+    - `$ gpg --list-secret-keys`; should have '#' to signal absence of secret key
+    - `gpg --send-keys $SECRET_KEY`
 
 - Delete $TEMPDIR
 

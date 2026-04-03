@@ -50,10 +50,13 @@
 
 theme = monokai22b.ghostty
 font-family = JetBrains Mono
+font-feature = "ss01", "zero"
 cursor-style = block
 shell-integration-features = no-cursor,ssh-terminfo,ssh-env
-macos-icon = xray
-macos-icon-frame =
+# xray
+macos-icon = custom
+macos-custom-icon = ~/dotfiles/config/ghostty/icon-centered-f.png
+macos-icon-frame = beige
 
 # sets the default starting directory for new instances to your home directory.
 working-directory = home

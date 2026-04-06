@@ -241,3 +241,9 @@ K - leave this hunk undecided, see previous hunk
 s - split the current hunk into smaller hunks
 e - manually edit the current hunk
 ? - print help
+
+GHVM
+--------------------------------------------------------------------------------
+When the robots create a bare protected branch, run this on the first PR branch
+
+$ git merge --allow-unrelated-histories origin/dev

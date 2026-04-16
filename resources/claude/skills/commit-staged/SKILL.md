@@ -20,7 +20,7 @@ Commit currently staged changes with a commit message.
 - Use simple words.
 - Be direct.
 - Don't mention Claude.
-- Do not include co-author credits in commit messages.
+- Include co-author credits in commit messages.
 - Avoid under-specific messages like "Update code" or "Fix bug" or "Refactors X". Be specific about what was changed and why.
 
 ### Commit Message Format

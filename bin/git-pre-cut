@@ -94,6 +94,7 @@ function get(string $path, array $headers) : array{
 		checkcURL($ch);
 	}catch(\Exception $e){
 		fprintf(STDERR, "Error: %s\n", $e->getMessage());
+		fprintf(STDERR, "Path: %s\n", $path);
 		fprintf(STDERR, "Response: %s\n", $response);
 		die(1);
 	}

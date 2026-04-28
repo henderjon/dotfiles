@@ -69,3 +69,25 @@ If you want to run PHP-FPM outside Docker, you'd need to:
 3. Adapt the configurations from docker/nginx/vhost.conf and docker/php/php-fpm-www.conf
 4. Start php-fpm: php-fpm -y docker/php/php-fpm-www.conf -c docker/php/php.ini
 5. Start nginx with your adapted config
+
+USING PBPASTE
+--------------------------------------------------------------------------------
+
+1. Direct pipe (for scripts that read from stdin):
+pbpaste | php
+
+2. Process substitution (for scripts with arguments like yours):
+php <(pbpaste) --arg=value --arg2=value
+
+3. Save clipboard to temp file and execute:
+pbpaste > /tmp/script.php && php /tmp/script.php --arg=... --arg=...
+
+4. One-liner with process substitution (cleanest for your use case):
+php <(pbpaste) --arg="..." --arg="..."
+
+The <(pbpaste) syntax uses process substitution - it creates a temporary file descriptor that php can read from, as if it were a regular file. This is perfect for your generate_jwt.php script since it preserves
+the ability to pass command-line arguments.
+
+Example workflow:
+1. Copy the script to clipboard: pbcopy < local/generate_jwt.php
+2. Run from clipboard: php <(pbpaste) --building-id=uuid --username=name

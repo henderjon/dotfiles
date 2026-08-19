@@ -51,8 +51,13 @@ while IFS='|' read -r author short_ref message; do
 done | \
 sort -u -t'|' -k3,3n | \
 while IFS='|' read -r last_name short_ref pr_number; do
-    # Fetch the PR title from GitHub
-    pr_title=$(gh pr view "$pr_number" --json title --jq '.title' 2>/dev/null)
+    # Fetch the PR title from GitHub, retrying on transient failures
+    pr_title=""
+    for attempt in 1 2 3; do
+        pr_title=$(gh pr view "$pr_number" --json title --jq '.title' 2>/dev/null)
+        [ -n "$pr_title" ] && break
+        sleep 1
+    done
 
     if [ -n "$pr_title" ]; then
         printf -- "- %-12s (%-10s) [#%s](https://github.com/capdig/myon/pull/%s) %s\n" "$last_name" "$short_ref" "$pr_number" "$pr_number" "$pr_title"

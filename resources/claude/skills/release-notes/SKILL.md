@@ -1,3 +1,8 @@
+---
+name: release-notes
+description: Generate comprehensive release notes by comparing two git branches following a standardized release notes format.
+---
+
 # Release Notes Generator
 
 Generate comprehensive release notes by comparing two git branches following a standardized release notes format.
@@ -9,8 +14,8 @@ Generate comprehensive release notes by comparing two git branches following a s
 ```
 
 **Examples:**
-- `/release-notes release/4.28.1 release/4.28.2`
-- `/release-notes dev release/4.29.0`
+- `/release-notes release/1.2.0 release/1.2.1`
+- `/release-notes main release/1.3.0`
 
 If no arguments provided, compares current branch against the main development branch.
 
@@ -25,7 +30,7 @@ First, extract repository information from git:
 - Parse the URL to extract the GitHub owner and repository name
   - For SSH: `git@github.com:owner/repo.git` → owner: `owner`, repo: `repo`
   - For HTTPS: `https://github.com/owner/repo.git` → owner: `owner`, repo: `repo`
-- `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'` - Detect the main development branch (fallback to `dev` if not set)
+- `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'` - Detect the main development branch (fallback to `main` or `master` if not set)
 - Store these values to use throughout the release notes generation (for PR links, etc.)
 
 ### 2. Gather Git Information
@@ -44,13 +49,26 @@ For each PR number extracted from merge commits, fetch the actual PR title using
 
 Store these PR titles to use in the Commits section instead of the merge commit messages.
 
-### 2. Analyze Configuration Changes
+### 3. Capture the Verified PR List
 
-Run:
-- `git diff [base]...[compare] -- conf/config.template.ini`
+Run the script bundled with this skill (resolve the path against this skill's base directory, given in the invocation context as "Base directory for this skill"):
+- `[skill-base-dir]/scripts/git-pr-list-md.sh [base] [compare]`
+
+The script auto-detects the GitHub owner/repo from `git remote get-url origin`, so it works in any repository without edits.
+
+Capture its stdout verbatim. This script independently lists merged PRs between two refs — treat its output as a verification cross-check against the Commits section built from the merge-commit and PR-title data gathered elsewhere in this skill, not as raw material to rewrite or reformat.
+
+**IMPORTANT:** Do not edit, re-sort, re-format, or summarize this output in any way. Paste it into the final document byte-for-byte, inside a fenced code block, exactly as printed to stdout (excluding any `>&2` diagnostic lines the command prints to stderr, such as "Comparing releases:").
+
+### 4. Analyze Configuration Changes
+
+If this project keeps a checked-in configuration template or example file (common patterns: `config.template.*`, `.env.example`, `settings.example.*`, `config/*.dist.*`), diff it:
+- `git diff [base]...[compare] -- <config-template-path>`
+
+If you are not sure such a file exists, check `git diff [base]...[compare] --stat` from step 2 for a plausibly-named config file before skipping this section.
 
 Extract any new or modified configuration sections. Include:
-- Section name in brackets (e.g., `[pendo_next]`)
+- Section/key name
 - List of changed settings with example values
 - Code block showing the configuration snippet
 - Use present tense for descriptions (e.g., "Adds new configuration", not "Added new configuration")
@@ -60,24 +78,24 @@ Extract any new or modified configuration sections. Include:
 - **Changes:** Existing configuration settings being modified (value changes, renamed keys, etc.)
 - **Removes:** Configuration settings being removed or deprecated
 
-If no changes for a category, state "- none" under that category's section
+If no changes for a category, state "- none" under that category's section. If the project has no config template file at all, state "- none" for the whole Config Changes section rather than guessing.
 
-### 3. Analyze Database Changes
+### 5. Analyze Database Changes
 
-Run:
-- `git diff [base]...[compare] --name-only -- server/sql/` - Get list of changed SQL files
-- `git diff [base]...[compare] -- server/sql/` - Get full diff to understand changes
+If this project keeps versioned database migration scripts (common locations: `migrations/`, `db/migrate/`, `sql/`, `database/migrations/`), run:
+- `git diff [base]...[compare] --name-only -- <migrations-path>` - Get list of changed migration files
+- `git diff [base]...[compare] -- <migrations-path>` - Get full diff to understand changes
 
 **IMPORTANT:** If there are database changes, you MUST include:
 1. A summary description of what each script does (use present tense)
-2. The relative file path to each SQL script (from repo root)
+2. The relative file path to each migration script (from repo root)
 
 Format:
 ```
   - Description of change (use present tense: "Retires" not "Retired")
-    - `server/sql/047_retire_old_placement_tables.sql`
+    - `migrations/047_retire_old_placement_tables.sql`
   - Description of another change (use present tense: "Adds" not "Added")
-    - `server/sql/account_indexes/001_alter_table_accounts_add_index.sql`
+    - `migrations/account_indexes/001_alter_table_accounts_add_index.sql`
 ```
 
 **Categorize into deployment phases:**
@@ -92,41 +110,40 @@ Summarize:
 
 **IMPORTANT:** Use present tense for all descriptions (e.g., "Creates table", "Adds column", "Renames index")
 
-If no changes for a phase, state "- none" under that phase's Database Changes section
+If no changes for a phase, state "- none" under that phase's Database Changes section. If the project has no migrations directory at all, state "- none" for the whole Database Changes section rather than guessing.
 
-### 4. Analyze Dependency Changes
+### 6. Analyze Dependency Changes
 
-Run:
-- `git diff [base]...[compare] -- composer.lock | grep -A 2 -B 2 '"name"' | head -100`
-- `git diff [base]...[compare] -- package.json`
+Run whichever of these apply to the project's stack:
+- `git diff [base]...[compare] -- <lockfile>` (e.g. `composer.lock`, `package-lock.json`, `yarn.lock`, `poetry.lock`, `Gemfile.lock`, `go.sum`) — filter to lines showing package name/version
+- `git diff [base]...[compare] -- <manifest>` (e.g. `composer.json`, `package.json`, `pyproject.toml`, `Gemfile`, `go.mod`)
 
-Extract version changes for:
-- PHP dependencies (from composer.lock)
-- Node/npm dependencies (from package.json)
-- Format as: `PackageName old-version → new-version`
+Extract version changes and format as: `PackageName old-version → new-version`
 
-Only include notable changes (PHPUnit, static analysis tools, major libraries). Skip patch-level updates of minor dependencies.
+Only include notable changes (test frameworks, static analysis tools, major libraries, anything with a breaking-change note). Skip patch-level updates of minor dependencies.
 
-### 5. Categorize Commits by Type
+### 7. Categorize Commits by Type
 
-Organize merge commits from the commit list into these categories:
+Organize merge commits from the commit list into categories that fit this specific project's domain. Common starting categories, adjust names/groupings to match what the diff actually contains:
 
-**Next UI Features** - PRs with NXLIB- tickets for new Next UI functionality
-**Regulatory Compliance** - Legal, compliance, content filtering features
-**Bug Fixes** - PRs fixing defects (look for "fix" in title or NXLIB- fix tickets)
+**Features** - PRs adding new functionality
+**Bug Fixes** - PRs fixing defects (look for "fix" in title or linked bug tickets)
 **Code Quality** - Refactoring, type improvements, baseline updates, test additions
 **Infrastructure & Tooling** - CI/CD, build tools, deployment, configuration
-**Markdown Rendering** / **[Domain-Specific]** - Group related commits by technical domain
+**Documentation** - README, docs, comments
+**[Domain-Specific]** - Group related commits by technical domain when a project has one that recurs often (e.g. a rendering engine, a compliance module, a payments pipeline)
 
 Format for each category:
 ```
-  - #PRNUM - Description (TICKET-ID if present)
+  - #PRNUM - Description (ticket ID if present)
     - Sub-bullets for multi-part changes
 ```
 
-### 6. Generate Release Notes Document
+### 8. Generate Release Notes Document
 
-Create a markdown file at `local/[version]-release-notes.md` following this template:
+Create `release-notes/` first if it does not exist (`mkdir -p release-notes`) — never write this file to
+the project root. Create a markdown file at `release-notes/[version]-release-notes.md` following
+this template:
 
 ```markdown
 Branch: [branch-name].
@@ -138,7 +155,7 @@ Ref: [short-ref]
 ### Adds
 
 [New configuration settings using PRESENT TENSE, or "- none"]
-[Example: Adds `target_link_uri` configuration for dynamic placement assessment launch URLs]
+[Example: Adds `target_link_uri` configuration for dynamic launch URLs]
 
 ### Changes
 
@@ -163,9 +180,9 @@ Ref: [short-ref]
 [Database migrations that run during deployment using PRESENT TENSE]
 [Example format:]
   - Retires old placement tables by renaming with underscore prefix
-    - `server/sql/047_retire_old_placement_tables.sql`
+    - `migrations/047_retire_old_placement_tables.sql`
   - Adds index for improved anonymized status joins
-    - `server/sql/account_indexes/001_alter_table_accounts_add_index.sql`
+    - `migrations/account_indexes/001_alter_table_accounts_add_index.sql`
 
 [If no changes, state "- none"]
 
@@ -209,7 +226,7 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 
 #### [Category Name]
 
-  - #PR - Description (TICKET)
+  - #PR - Description (ticket ID)
     - Additional context
     - Sub-features
 
@@ -221,9 +238,13 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 
 [For each merge commit only, format as:]
 - Author      (short-hash) [#PR](github-link) PR title (not merge commit message)
+
+### PR List (git-pr-list-md.sh)
+
+[Exact, unmodified stdout of `scripts/git-pr-list-md.sh [base] [compare]` from step 3, wrapped in its own fenced code block per the Format Guidelines below]
 ```
 
-### 7. Format Guidelines
+### 9. Format Guidelines
 
 **Merge Commit List:**
 - **ONLY include merge commits** (obtained using `git log --merges`)
@@ -231,7 +252,7 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 - Short hash (10 chars)
 - Link PRs using the detected repository: `[#12345](https://github.com/{owner}/{repo}/pull/12345)`
 - **Use the actual PR title** (fetched via `gh pr view`), NOT the merge commit message
-- Include "Auto-compiled" merge commits (no PR title for these)
+- Include "Auto-compiled" or other automated merge commits (no PR title for these)
 - Sort alphabetically by author's last name
 
 **Author Formatting (Merge Commits Only):**
@@ -240,7 +261,7 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 - Henderson    (def456abc7) [#14625](link) Actual PR title from GitHub
 - Roeming      (ghi789jkl0) [#14626](link) Actual PR title from GitHub
 - dependabot   (mno012pqr3) [#12345] Actual PR title from GitHub
-- Runner       (stu345vwx6) Auto-compiled release/4.28.2
+- Runner       (stu345vwx6) Auto-compiled release/1.2.1
 ```
 
 **PR Number and Title Extraction:**
@@ -249,7 +270,7 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 - If no PR found (e.g., auto-compiled commits), omit the `[#PR](link)` portion
 
 **Statistics Section:**
-- Count total merge commits (including automated "Cron Runner" merges)
+- Count total merge commits (including automated merges)
 - Count PRs (exclude automated merges)
 - Get files changed and line changes from `git diff --stat` output
 - Format: `- **Label:** value description`
@@ -257,21 +278,26 @@ Keep each highlight to 1-2 lines with ticket references where applicable]
 **Key Highlights Section:**
 - Create 3-5 numbered highlights summarizing the most important changes
 - Focus on high-impact items: major features, important fixes, schema changes, config updates
-- Include ticket references where applicable (e.g., NXLIB-XX)
+- Include ticket references where applicable
 - Keep each highlight to 1-2 lines for scannability
 - Order by importance/impact
 - Use present tense for consistency (e.g., "Adds feature", not "Added feature")
 
 **Notable Changes Section:**
 - Group related PRs together
-- Include ticket IDs (NXLIB-XX, etc.) when present
+- Include ticket IDs when present
 - Use sub-bullets for multi-part features
 - Focus on user/developer-facing changes
 
-### 8. Output
+**PR List (git-pr-list-md.sh) Section:**
+- Wrap the captured stdout from step 3 in a fenced code block (` ``` `) so it renders as literal text
+- Do not touch its contents in any way - no reformatting, re-sorting, re-wrapping, or fixing perceived mistakes. If it looks wrong, that is a signal to fix the bundled `scripts/git-pr-list-md.sh` script itself, not to paper over it here
+- Exclude stderr diagnostic lines (e.g. "Comparing releases:", "From:", "To:") if the command was run with no arguments and printed them - only the stdout PR list lines belong in the block
+
+### 10. Output
 
 After generating the release notes:
-1. Write the file to `local/[version]-release-notes.md` including:
+1. Write the file to `release-notes/[version]-release-notes.md` including:
    - Statistics section with merge commit count, PR count, files changed, and line changes
    - Key Highlights section with 3-5 major points about the release
    - All other sections as defined in the template
@@ -298,8 +324,10 @@ After generating the release notes:
   - **Post-Deploy:** Database changes after deployment (data migrations, cleanup)
   - When in doubt, place DB changes in Time-Sensitive
 - Respect the established formatting patterns exactly
-- Preserve the tone and style of existing release notes
-- Default base branch is automatically detected from `git symbolic-ref refs/remotes/origin/HEAD` (typically `dev`, `main`, `master`, or `develop`)
+- Preserve the tone and style of existing release notes in this repo, if any exist
+- Default base branch is automatically detected from `git symbolic-ref refs/remotes/origin/HEAD` (typically `main`, `master`, or `develop`)
 - PR links are dynamically generated using the repository owner and name extracted from `git remote get-url origin`
 - Skip mentioning trivial changes like whitespace fixes or typo corrections in the Notable Changes section
 - When in doubt about categorization, prefer "Code Quality" or "Bug Fixes"
+- The PR List section exists to cross-check the hand-built Commits section against an independent tool (the bundled `scripts/git-pr-list-md.sh`). Include it verbatim even if it disagrees with the Commits section - do not reconcile the two by editing either one
+- This skill has no dependency on any particular tech stack, ticket tracker, or config format. Sections 4-6 explicitly ask you to detect what the project actually uses rather than assuming a fixed set of paths.

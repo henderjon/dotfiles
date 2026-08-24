@@ -12,6 +12,8 @@ Commit currently staged changes with a commit message.
 
 ## Commit Message Guidelines
 
+- Always include "why" the change was made, ask if it cannot be inferred from the conversation
+- The "why" for the commit/changes should be the first part of the commit message before any list of changes.
 - Max line length 120 characters.
 - Write in very terse Hemingway style.
 - Avoid jargon.
@@ -19,10 +21,10 @@ Commit currently staged changes with a commit message.
 - Avoid conjunctions.
 - Use simple words.
 - Be direct.
-- Don't mention Claude.
-- Include co-author credits in commit messages.
+- Only include co-author credits in commit messages when an agent contributed to the code being committed
+- Only sign or co-sign a commit or a commit message when an agent contributed to the code being committed
 - Avoid under-specific messages like "Update code" or "Fix bug" or "Refactors X". Be specific about what was changed and why.
-- The "why" for the commit/changes should be the first part of the commit message above the lst of changes.
+- Do not push the branch
 
 ### Commit Message Format
 
@@ -40,4 +42,3 @@ The commit should be read as "What it does when applied" rather than "What was d
 Verify the commit with the user before finalizing it.
 
 If there is a bulleted list and a context paragraph, separate them with a blank line.
-

@@ -307,6 +307,15 @@ After generating the release notes:
    - Total merge commit count
    - Number of files changed
 
+## Cross-Repo/Org References
+
+This skill's own links to `{owner}/{repo}` PRs and commits are for the repo being
+compared, and are expected. Beyond that, never name or link to a different repository,
+project, or organization — one other than the one being compared — anywhere in the
+release notes, unless the user has explicitly said to include it in this conversation.
+If such a cross-reference seems useful, ask before adding it — do not add it on your own
+judgment, even as an illustrative example.
+
 ## Notes
 
 - Always use `git diff [base]...[compare]` (three dots) for showing changes since branches diverged

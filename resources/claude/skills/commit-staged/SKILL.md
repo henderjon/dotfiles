@@ -42,3 +42,31 @@ The commit should be read as "What it does when applied" rather than "What was d
 Verify the commit with the user before finalizing it.
 
 If there is a bulleted list and a context paragraph, separate them with a blank line.
+
+## Cross-Repo/Org References
+
+Never name or link to another repository, project, or organization — one other than the
+one this commit is in — anywhere in the commit message, unless the user has explicitly
+said to include it in this conversation. If a cross-reference seems useful, ask before
+adding it — do not add it on your own judgment, even as an illustrative example.
+
+## Repository Templates
+
+- When creating a pull request or issue, always read the repo's actual template file (e.g. `.github/PULL_REQUEST_TEMPLATE.md`, `.github/ISSUE_TEMPLATE/`) before writing it.
+- Never depend on conversation history, memory, or past examples to decide how a pull request or issue should be formatted. Templates change; re-read the current file every time.
+- If the repo has no template, do not invent one from memory of other repos' templates. Use this fallback pull request template instead:
+
+```markdown
+## Why
+
+<!-- Explain the motivation for this change. -->
+
+## Connects
+
+<!-- Add the GitHub issue link, for example: https://github.com/henderjon/php-oidc/issues/123 -->
+
+## Changes
+
+<!-- List the changes clearly and briefly. -->
+-
+```

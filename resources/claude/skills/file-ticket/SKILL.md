@@ -90,6 +90,12 @@ call, or ask the user for the account id directly if lookup doesn't find a clean
 If "Leave unassigned," omit the assignee field from the create call entirely rather than
 passing an empty value.
 
+**Any mention of another repo, project, or org.** Never name or link to a repository,
+package, or organization other than this one in the ticket content unless the user has
+explicitly said to include it in this conversation. If a cross-reference seems useful,
+ask before adding it — do not add it on your own judgment, even as an illustrative
+example.
+
 Everything else below (issue type, story points, acceptance criteria) is something you
 should determine yourself from the gathered description, not ask about.
 

@@ -65,6 +65,13 @@ your repository and adjust:
 - Avoid under-specific messages like "Update code" or "Fix bug" or "Refactors X". Be specific about what was changed and why.
 - Do not push the branch
 
+## Cross-Repo/Org References
+
+Never name or link to another repository, project, or organization — one other than the
+one this PR is in — anywhere in the summary, unless the user has explicitly said to
+include it in this conversation. If a cross-reference seems useful, ask before adding it
+— do not add it on your own judgment, even as an illustrative example.
+
 ## Process
 
 1. **Analyze Branch Changes**

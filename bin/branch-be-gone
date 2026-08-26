@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+git fetch --all --prune
+
+BRANCHES1=$(comm -12 <(git branch -vv | grep -v origin | awk '{print $1}') <(git branch --merged | grep -v '\*' | awk '{print $1}'))
+for B1 in $BRANCHES1; do
+        git branch -d "$B1" || echo "Failed to delete $B"
+        echo ""
+done
+
+BRANCHES=$(git branch -vv | grep -v '\*' | awk '/ gone]/ { print $1}')
+
+for B in $BRANCHES; do
+
+        if grep <<<"$B" -E -q '(prpr|review|release|dependabot)/'; then
+                git branch -D "$B"
+        else
+                git branch -d "$B" || echo "Failed to delete $B"
+                # branch-rb-delete "$B"
+        fi
+
+        echo ""
+
+done

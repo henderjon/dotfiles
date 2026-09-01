@@ -69,3 +69,10 @@ tab-inherit-working-directory = false
 
 keybind = super+shift+ArrowRight=next_tab
 keybind = super+shift+ArrowLeft=previous_tab
+keybind = cmd+enter=unbind
+
+# Reset both discrete (mouse wheel) and precision (trackpad) to default speed
+mouse-scroll-multiplier = 1
+
+# Or specify them individually if needed
+# mouse-scroll-multiplier = precision:0.1,discrete:1

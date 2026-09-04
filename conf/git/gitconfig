@@ -12,6 +12,8 @@
 	pager = cat
 	# editor = /bin/ed -p :  # /usr/bin/vim
 	# editor = code --wait
+[branch]
+	autoSetupMerge = false # this stops tracking the source branch
 [init]
 	defaultBranch = dev
 [gc]
@@ -57,11 +59,13 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [pretty] # date formatting: https://git-scm.com/docs/git-rev-list
 	# tiny           = %><(7)%C(yellow)%h%C(reset):%C(red)%d%Creset %s
-	reflogpg       = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an (%G?)%Creset%C(red)%d%Creset %s
-	reflog         = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an %Creset%C(red)%d%Creset %s
-	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
-	columns        = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
-	difflog        = %<(25)%ai %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
+	reflogpg         = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an (%G?)%Creset%C(red)%d%Creset %s
+	reflogpgtime     = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an (%G?)%Creset %C(green)%<(25)%ci%Creset %C(red)%d%Creset %s
+	reflogpgtimebody = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an (%G?)%Creset %C(green)%<(25)%ci%Creset %C(red)%d%Creset %s%n%b
+	reflog           = %C(yellow)%><(7)%h%Creset %C(blue)%<(15)%an %Creset%C(red)%d%Creset %s
+	columns          = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
+	columns          = %<(32)%ad %>(16)%C(white bold ul)%an%Creset (%G?) | %><(7)%h | %C(red)%d%Creset %s
+	difflog          = %<(25)%ai %>(16)%C(white bold ul)%an%Creset | %><(7)%h | %s
 	# adding "Parents: %p" will show you merge parents
 	showmed        = %Creset%n%C(yellow)commit: %H (%h)%Creset%C(red)%n%-D%Creset%nAuthor: %C(white bold ul)%an%Creset <%ae> | %GK (%G?)%nDate: %ad%nParents: %p%n%n %w(72, 3, 4)%s%n%n%w(72, 4, 4)%-b  %C(brightblack)
 [alias]
@@ -75,6 +79,7 @@
 	rl          = reflog -n 25
 	cld         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=columns -n 20
 	cll         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 10 --reverse
+	clt         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=reflogpgtime -n 20 --reverse
 	cls         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --numstat -n 1
 	clu         = log --date=format:'(%a) %Y-%m-%d %H:%M:%S%z' --pretty=showmed --unified -n 10 --reverse
 	# search log for commits that touch $fname

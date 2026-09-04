@@ -13,6 +13,9 @@ awk -v FILTER=$FILTER 'BEGIN{
 		max = 0;
 	}
 	{
+		if(match($1, "^[0-9][0-9][0-9][0-9]-lte") != 0){ # hard filter: always exclude YYYY-lte branches
+			next
+		}
 
 		if(FILTER == "1"){
 			line[NR] = $1 SUBSEP $2 SUBSEP $3 SUBSEP $4 SUBSEP $5 SUBSEP $6 SUBSEP $7
